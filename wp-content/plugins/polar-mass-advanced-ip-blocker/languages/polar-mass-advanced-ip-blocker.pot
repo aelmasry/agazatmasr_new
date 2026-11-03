@@ -1,0 +1,500 @@
+# Copyright (C) 2025 Polar Mass Advanced IP Blocker
+# This file is distributed under the same license as the Polar Mass Advanced IP Blocker package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Polar Mass Advanced IP Blocker\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: Polar Mass\n"
+"POT-Creation-Date: 2025-05-20 18:16+0000\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: includes/class-admin.php:57
+msgid "Polar Mass Advanced IP Blocker"
+msgstr ""
+
+#: includes/class-admin.php:58
+msgid "PM IP Blocker"
+msgstr ""
+
+#: includes/class-admin.php:208
+msgid "Are you sure you want to run the cron job?"
+msgstr ""
+
+#: includes/class-admin.php:209
+msgid "Are you sure you want to block this IP?"
+msgstr ""
+
+#: includes/class-admin.php:210
+msgid "Are you sure you want to unblock this IP?"
+msgstr ""
+
+#: includes/class-admin.php:211
+msgid "Are you sure you want to sync blocked IPs from Wordfence?"
+msgstr ""
+
+#: includes/class-admin.php:212
+msgid "Operation completed successfully."
+msgstr ""
+
+#: includes/class-admin.php:213
+msgid "An error occurred. Please try again."
+msgstr ""
+
+#: includes/class-admin.php:214
+msgid "Please enter an IP address."
+msgstr ""
+
+#: includes/class-admin.php:245
+msgid "Security check failed. Please try again."
+msgstr ""
+
+#: includes/class-admin.php:282
+msgid "Settings saved successfully."
+msgstr ""
+
+#: includes/class-admin.php:295, includes/class-admin.php:320, includes/class-admin.php:386, includes/class-admin.php:417
+msgid "Unauthorized access."
+msgstr ""
+
+#: includes/class-admin.php:307
+msgid "Cron jobs registered successfully."
+msgstr ""
+
+#: includes/class-admin.php:325, includes/class-admin.php:391
+msgid "Invalid IP address."
+msgstr ""
+
+#. translators: %s: error message
+#: includes/class-admin.php:337
+msgid "Failed to block IP %s."
+msgstr ""
+
+#: includes/class-admin.php:334
+msgid "IP %s blocked successfully."
+msgstr ""
+
+#: includes/class-admin.php:360
+msgid "Invalid nonce."
+msgstr ""
+
+#: includes/class-admin.php:367
+msgid "No logs available."
+msgstr ""
+
+#. translators: %s: error message
+#: includes/class-admin.php:403
+msgid "Failed to unblock IP %s."
+msgstr ""
+
+#: includes/class-admin.php:400
+msgid "IP %s unblocked successfully."
+msgstr ""
+
+#: includes/class-admin.php:427
+msgid "Failed to sync IPs from Wordfence."
+msgstr ""
+
+#: includes/class-admin.php:425
+msgid "Successfully synced IPs from Wordfence."
+msgstr ""
+
+#: includes/class-admin.php:442
+msgid "Please enter a valid email address."
+msgstr ""
+
+#: includes/class-admin.php:448
+msgid "You are already subscribed!"
+msgstr ""
+
+#: includes/class-admin.php:459
+msgid "Thank you for subscribing!"
+msgstr ""
+
+#. translators: %d: interval in minutes
+#. translators: %d: Interval in minutes.
+#: includes/class-installer.php:53, includes/class-installer.php:58, includes/class-plugin.php:184
+msgid "Every %d minutes"
+msgstr ""
+
+#: includes/class-plugin.php:102
+msgid "Polar Mass Advanced IP Blocker requires Wordfence to be installed and activated."
+msgstr ""
+
+#: includes/class-plugin.php:114
+msgid "Polar Mass Advanced IP Blocker requires cron jobs to be registered. Please click the button below to register the cron jobs."
+msgstr ""
+
+#: includes/class-plugin.php:119
+msgid "Register Cron Jobs"
+msgstr ""
+
+#. translators: 1: Required PHP version, 2: Current PHP version
+#: includes/class-plugin.php:134
+msgid "Polar Mass Advanced IP Blocker requires PHP %1$s or higher. Your current PHP version is %2$s."
+msgstr ""
+
+#. translators: 1: Required WordPress version, 2: Current WordPress version
+#: includes/class-plugin.php:148
+msgid "Polar Mass Advanced IP Blocker requires WordPress %1$s or higher. Your current WordPress version is %2$s."
+msgstr ""
+
+#. translators: %s: Uploads directory path
+#: includes/class-plugin.php:162
+msgid "Polar Mass Advanced IP Blocker requires write access to the uploads directory: %s"
+msgstr ""
+
+#: includes/class-plugin.php:190
+msgid "Every minute"
+msgstr ""
+
+#: views/admin-page.php:21
+msgid "General Settings"
+msgstr ""
+
+#: views/admin-page.php:25
+msgid "Plugin Status"
+msgstr ""
+
+#: views/admin-page.php:30
+msgid "Active"
+msgstr ""
+
+#: views/admin-page.php:33
+msgid "Inactive"
+msgstr ""
+
+#: views/admin-page.php:40
+msgid "Cloudflare API Token"
+msgstr ""
+
+#. translators: %s: link to instructions
+#: views/admin-page.php:52
+msgid "Enter your Cloudflare API token. %s"
+msgstr ""
+
+#: views/admin-page.php:53
+msgid "How to get your API token?"
+msgstr ""
+
+#: views/admin-page.php:61
+msgid "Zone ID"
+msgstr ""
+
+#: views/admin-page.php:70
+msgid "Enter your Cloudflare Zone ID. Found in the Overview tab of your domain."
+msgstr ""
+
+#: views/admin-page.php:76
+msgid "Ruleset ID"
+msgstr ""
+
+#: views/admin-page.php:85
+msgid "Enter your Cloudflare Ruleset ID. Found in the WAF > Custom Rules section."
+msgstr ""
+
+#: views/admin-page.php:91
+msgid "Rule ID"
+msgstr ""
+
+#: views/admin-page.php:100
+msgid "Enter your Cloudflare Rule ID. Found in the specific rule settings under WAF > Custom Rules."
+msgstr ""
+
+#: views/admin-page.php:106
+msgid "Scan Interval"
+msgstr ""
+
+#: views/admin-page.php:111
+msgid "5 minutes"
+msgstr ""
+
+#: views/admin-page.php:114
+msgid "15 minutes"
+msgstr ""
+
+#: views/admin-page.php:117
+msgid "30 minutes"
+msgstr ""
+
+#: views/admin-page.php:120
+msgid "60 minutes"
+msgstr ""
+
+#: views/admin-page.php:127
+msgid "Failed Attempts Threshold"
+msgstr ""
+
+#: views/admin-page.php:138
+msgid "Number of failed login attempts before blocking (3-10)"
+msgstr ""
+
+#: views/admin-page.php:144
+msgid "Block Duration"
+msgstr ""
+
+#: views/admin-page.php:149
+msgid "24 Hours"
+msgstr ""
+
+#: views/admin-page.php:152
+msgid "7 Days"
+msgstr ""
+
+#: views/admin-page.php:155
+msgid "Permanent"
+msgstr ""
+
+#: views/admin-page.php:162
+msgid "Maximum Log Entries"
+msgstr ""
+
+#: views/admin-page.php:172
+msgid "Maximum number of log entries to keep"
+msgstr ""
+
+#: views/admin-page.php:182
+msgid "Support Our Development"
+msgstr ""
+
+#: views/admin-page.php:183
+msgid "Help us continue improving and maintaining this plugin for the WordPress community."
+msgstr ""
+
+#: views/admin-page.php:192
+msgid "Get in Touch"
+msgstr ""
+
+#: views/admin-page.php:193
+msgid "Have questions or need assistance? We're here to help!"
+msgstr ""
+
+#: views/admin-page.php:198
+msgid "Email Support"
+msgstr ""
+
+#: views/admin-page.php:199
+msgid "For technical issues and general inquiries"
+msgstr ""
+
+#: views/admin-page.php:205
+msgid "Visit Website"
+msgstr ""
+
+#: views/admin-page.php:206
+msgid "Documentation and resources"
+msgstr ""
+
+#: views/admin-page.php:224
+msgid "Thank you for subscribing to our newsletter!"
+msgstr ""
+
+#: views/admin-page.php:225
+msgid "You'll receive updates and security tips directly in your inbox."
+msgstr ""
+
+#: views/admin-page.php:215
+msgid "Stay Updated"
+msgstr ""
+
+#: views/admin-page.php:216
+msgid "Subscribe to our newsletter for security tips, updates, and special offers."
+msgstr ""
+
+#: views/admin-page.php:218
+msgid "Enter your email address"
+msgstr ""
+
+#: views/admin-page.php:219
+msgid "Subscribe"
+msgstr ""
+
+#: views/admin-page.php:233
+msgid "Manual IP Management"
+msgstr ""
+
+#: views/admin-page.php:235
+msgid "Enter IP address"
+msgstr ""
+
+#: views/admin-page.php:237
+msgid "Block IP"
+msgstr ""
+
+#: views/admin-page.php:240
+msgid "Unblock IP"
+msgstr ""
+
+#: views/admin-page.php:245
+msgid "Sync from Wordfence"
+msgstr ""
+
+#: views/admin-page.php:248
+msgid "Manually sync blocked IPs from Wordfence"
+msgstr ""
+
+#: views/admin-page.php:254
+msgid "Recent Activity Logs"
+msgstr ""
+
+#: views/admin-page.php:257
+msgid "All Levels"
+msgstr ""
+
+#: views/admin-page.php:258
+msgid "Info"
+msgstr ""
+
+#: views/admin-page.php:259
+msgid "Warning"
+msgstr ""
+
+#: views/admin-page.php:260
+msgid "Error"
+msgstr ""
+
+#: views/admin-page.php:263
+msgid "Export Logs"
+msgstr ""
+
+#: views/admin-page.php:277
+msgid "Time"
+msgstr ""
+
+#: views/admin-page.php:278
+msgid "Level"
+msgstr ""
+
+#: views/admin-page.php:279
+msgid "Message"
+msgstr ""
+
+#: views/admin-page.php:272
+msgid "No logs available"
+msgstr ""
+
+#: views/admin-page.php:301
+msgid "How to Configure Cloudflare Integration"
+msgstr ""
+
+#: views/admin-page.php:303
+msgid "Getting Your API Token"
+msgstr ""
+
+#: views/admin-page.php:306, views/admin-page.php:353
+msgid "Log in to your Cloudflare dashboard"
+msgstr ""
+
+#: views/admin-page.php:309
+msgid "Click on \"My Profile\" in the top right corner"
+msgstr ""
+
+#: views/admin-page.php:312
+msgid "Select \"API Tokens\" from the left menu"
+msgstr ""
+
+#: views/admin-page.php:319
+msgid "Click \"Create Token\""
+msgstr ""
+
+#: views/admin-page.php:322
+msgid "Use the \"Create Custom Token\" option"
+msgstr ""
+
+#: views/admin-page.php:328
+msgid "Set the following permissions:"
+msgstr ""
+
+#: views/admin-page.php:330
+msgid "Zone - Zone WAF - Edit"
+msgstr ""
+
+#: views/admin-page.php:334
+msgid "Set Zone Resources to \"All Zones\""
+msgstr ""
+
+#: views/admin-page.php:340
+msgid "Click \"Continue to Summary\" and then \"Create Token\""
+msgstr ""
+
+#: views/admin-page.php:342
+msgid "Copy the generated token and paste it in the field above"
+msgstr ""
+
+#: views/admin-page.php:350
+msgid "Finding Your Zone ID"
+msgstr ""
+
+#: views/admin-page.php:356
+msgid "Select your domain/website"
+msgstr ""
+
+#: views/admin-page.php:363
+msgid "Go to the \"Overview\" tab and scroll down to the \"API\" section"
+msgstr ""
+
+#: views/admin-page.php:369
+msgid "Your Zone ID will be displayed there"
+msgstr ""
+
+#: views/admin-page.php:372
+msgid "Setting Up Custom Rules"
+msgstr ""
+
+#: views/admin-page.php:380
+msgid "In your Cloudflare dashboard, go to Security > WAF > Custom Rules"
+msgstr ""
+
+#: views/admin-page.php:386
+msgid "Click \"Create Rule\""
+msgstr ""
+
+#: views/admin-page.php:387, views/admin-page.php:427
+msgid "Configure the rule:"
+msgstr ""
+
+#: views/admin-page.php:389, views/admin-page.php:429
+msgid "Rule name: \"Block Malicious IPs\""
+msgstr ""
+
+#: views/admin-page.php:391, views/admin-page.php:431
+msgid "Click on Edit Expression, then paste the following expression: (ip.src in {})"
+msgstr ""
+
+#: views/admin-page.php:397, views/admin-page.php:437
+msgid "Action: Block"
+msgstr ""
+
+#: views/admin-page.php:400, views/admin-page.php:440
+msgid "Click on the \"Deploy\" button"
+msgstr ""
+
+#: views/admin-page.php:401, views/admin-page.php:441
+msgid "After creating the rule:"
+msgstr ""
+
+#: views/admin-page.php:403, views/admin-page.php:443
+msgid "The Ruleset ID and Rule ID are shown in the URL when editing the ruleset"
+msgstr ""
+
+#: views/admin-page.php:418
+msgid "In the new Cloudflare dashboard, go to Security > Security Rules"
+msgstr ""
+
+#: views/admin-page.php:425
+msgid "Click \"Create Rule\" and choose \"Custom Rule\""
+msgstr ""
+
+#: views/admin-page.php:453
+msgid "After creating the rule, note the new location for Ruleset ID and Rule ID"
+msgstr ""
+
+#: views/admin-page.php:458
+msgid "Note: Make sure to keep these IDs secure and never share them publicly."
+msgstr ""

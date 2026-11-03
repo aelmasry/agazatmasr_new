@@ -1,0 +1,209 @@
+.icheckbox_square-grey, .iradio_square-grey {margin: 0 0 0 10px}
+
+.widget_tag_cloud .tagcloud a {white-space: nowrap}
+
+/* Date-Time Picker */
+
+.rtl .datepicker thead tr:first-child th.next:before {content: '\e9f1'}
+
+.rtl .datepicker thead tr:first-child th.prev:before {content: '\e9f2'}
+
+/* Menu */
+@media only screen and (min-width: 992px) {
+	.main-menu ul ul ul, .main-menu ul ul .menu-wrapper {right: 100%;min-width: 190px}
+
+	.main-menu ul li.megamenu .menu-wrapper {float: right;left: 0;right: auto}
+}
+
+@media only screen and (max-width: 991px) {
+	.main-menu ul > li a:after{float: left}
+
+	.main-menu ul.sub-menu{border-left: none;border-right: 1px solid #ededed;margin: 0 25px 15px 0}
+
+	.main-menu ul.sub-menu ul{border-right: none;margin:0 15px 15px 0}
+
+	.main-menu{left: auto;right: -100%;-webkit-transition: right 0.8s, opacity 0.5s;-moz-transition: right 0.8s, opacity 0.5s;transition: right 0.8s, opacity 0.5s; z-index:999999;}
+
+	.main-menu.show {left: auto;right: 0}
+	.cmn-toggle-switch {left:20px;right: auto;}
+}
+
+@media only screen and (max-width: 480px) {
+	a#close_in {right: auto;left: 15px}
+	.cmn-toggle-switch {margin-right: 15px}
+}
+
+/* Owl Carousel */
+.owl-carousel .owl-item {float: right}
+
+/* Responsive */
+@media (max-width: 991px) {
+	ul#top_tools, .sticky ul#top_tools{ margin:3px 0 0 45px}
+}
+
+@media (max-width: 767px) {
+	#price_single_main, #price_single_main.hotel{text-align: right}
+}
+
+@media (max-width: 480px) {
+	.img_list img{left: auto;right: 0}
+	ul#top_tools{ margin:0 0 0 25px;}
+	.sticky ul#top_tools{ margin:0 0 0 25px;}
+}
+
+/* Main Style */
+a.btn_1, .btn_1{white-space:nowrap}
+
+ul#top_tools{right: auto;left: 15px}
+
+ul#top_links{float: left;white-space: nowrap}
+ul#top_links li{border-left: none;border-right: 1px solid rgba(255,255,255,0.3);margin-left:5px;margin-right:0;padding-left:0;padding-right:8px;}
+
+header.plain ul#top_links li{border-left:none;border-right: 1px solid rgba(0,0,0,0.1);}
+header.plain ul#top_links li:first-child{border-right:none;}
+
+.dropdown.dropdown-search, .dropdown.dropdown-cart{float:left}
+
+.dropdown.dropdown-cart a.dropdown-toggle{white-space:nowrap}
+
+.dropdown-cart .dropdown-menu, .dropdown-access .dropdown-menu, .dropdown-search .dropdown-menu {float: left;left: 0;right: auto}
+
+.dropdown-cart .dropdown-menu:before, .dropdown-access .dropdown-menu:before, .dropdown-search .dropdown-menu:before {right: auto;left: 10%;margin-right: -7px;margin-left: 0}
+
+ul#cart_items li .image{float: right;margin-left: 10px;margin-right: 0}
+
+ul#cart_items li strong {float:right}
+
+ul#cart_items li a.action {left: 10px;right: auto}
+
+.dropdown-search .dropdown-menu{left: -25px;right: auto}
+
+a#phone, a#email_footer{padding-left: 0; padding-right: 40px}
+
+.tour_container .tour_title h3 {padding-right: 0}
+
+a#phone:before{left: auto;right: 0}
+
+a#email_footer:before{left: auto;right: 0}
+
+.other_tours_price{float:left;margin-left:5px;margin-right: 0}
+
+#nav-search-in #nav-search-in-content {margin: 5px 65px 0 20px}
+
+ul#cat_nav li a:after{content: "\e9ed";left:15px;right: auto}
+
+ul#cat_nav i {margin-left:5px;float:right}
+
+#tools .text-right{text-align:left}
+
+.img_list img{left: auto;right:-10%}
+
+.tour_list_desc{padding:10px 0 0 20px;border-left: 1px solid #ededed;border-right: none}
+
+.price_list{margin-left: 0;margin-right: -15px}
+
+#filters_col .pull-right{float:left !important}
+
+.filter_type ul li .rating{left: auto;right:-7px;white-space:nowrap}
+
+#price_single_main{text-align:left}
+
+.table.table_summary .text-right{text-align:left}
+
+.bs-wizard > .bs-wizard-step:first-child  > .progress {left: auto; right: 50%}
+
+.form_title{padding-left: 0;padding-right:55px}
+
+.form_title h3 strong{left: auto;right: 0}
+
+.step{border-left: none;border-right: 1px solid #ddd;padding:20px 31px 20px 0;margin:0 20px 10px 0;}
+
+input.qty2 {left: auto;}
+
+.thumb_cart{ margin-left:10px;margin-right: 0;float:right;}
+
+.score span{margin-right:5px;margin-left: 0}
+
+.score {float: left;white-space: nowrap}
+
+#score_detail span{margin-left: 5px;margin-right: 0}
+
+.hotel_container .score span{margin-left:5px;margin-right: 0}
+
+.hotel_container .score{left: auto;right: 5px}
+
+.fix_rtl{white-space:nowrap;}
+
+label {white-space:pre}
+
+ul.list_ok li {padding-left: 0; padding-right:25px;}
+ul.list_ok li:before {content: '';}
+ul.list_ok li:after {font-style: normal;font-weight: bold;font-family: "icon_set_1";font-size:14px;content: "\6c";color:#e04f67;position:absolute;right:0;top:0;}
+
+ul.list_order li {padding-left: 0;padding-right:40px;}
+
+ul.list_order li b {left: auto;right: 0}
+
+.styled-select select {padding:7px 15px 5px 5px}
+
+.styled-select {background: #434343 url(../../img/down_arrow_select.png) no-repeat  left center}
+
+.styled-select-filters select {padding:7px 15px 5px 5px;}
+
+.styled-select-filters {background: #fff url(../../img/down_arrow_select_filters.png) no-repeat  left center ;}
+
+.wishlist{left:10px;right: auto}
+
+.short_info {padding:10px 5px 8px 10px; text-align: right;}
+
+.short_info .price{float:left;}
+
+.tooltip-content {text-align: right;}
+
+#position ul li:first-child{padding-left: 0;padding-right:20px;}
+
+#position ul li:first-child:before{left: auto;right: 0}
+
+#position ul li:after{content:"\e9ed"}
+
+#position ul li:last-child:after{content:"\e9ed"}
+
+.banner a{left: 30px;right: auto}
+
+#search .nav-tabs{margin-left: 0;margin-right:10px;}
+
+#search .nav-tabs > li > a {margin-left:5px;}
+
+.dd-selected{padding:0 28px 0 10px !important;}
+
+.question_box {padding-left: 0; padding-right: 40px}
+
+.question_box:before {left: auto;right: 0}
+
+#modify_search .pull-right {float: left !important}
+
+#filters_col, #modify_search {padding: 15px 15px 15px 10px}
+
+a#modify_col_bt .icon_set_1_icon-78 {margin-left: 5px;margin-right: 0}
+
+/* TimeLine */
+
+.cbp_tmtimeline:before {left: auto;right: 20%;margin-left: 0;margin-right: -8px;}
+
+.cbp_tmtimeline > li .cbp_tmtime {padding-left: 100px;padding-right: 0;}
+
+.cbp_tmtimeline > li .cbp_tmtime span {text-align: left;}
+
+img.speaker {margin-left: 0;margin-right:15px;}
+
+.cbp_tmtimeline > li .cbp_tmlabel {margin: 0 25% 15px 0;}
+
+.cbp_tmtimeline > li .cbp_tmicon {left: auto;right: 19.6%;margin: 0 -25px 0 0;}
+
+@media screen and (max-width: 47.2em) {
+	.cbp_tmtimeline > li .cbp_tmtime span {text-align: right;}
+}
+
+@media only screen {
+	.switch-light {white-space: nowrap;direction: ltr}
+}

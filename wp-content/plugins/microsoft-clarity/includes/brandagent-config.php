@@ -1,0 +1,1165 @@
+<?php
+/**
+ * Brand Agent Configuration
+ *
+ * @package MicrosoftClarity
+ * @since 0.10.21
+ */
+
+// Exit if accessed directly
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * Base URL path for all BrandAgent webhooks
+ */
+if ( ! defined( 'BRANDAGENT_WEBHOOK_BASE_URL' ) ) {
+    define( 'BRANDAGENT_WEBHOOK_BASE_URL', '/api/v1/woocommerce/webhooks/' );
+}
+
+/**
+ * Base URL path for BrandAgent WordPress content webhooks (plain-WordPress content sync).
+ * Distinct from BRANDAGENT_WEBHOOK_BASE_URL (WooCommerce): content webhooks are core-hook driven and
+ * do not require WooCommerce. See includes/brandagent-content-webhooks.php.
+ */
+if ( ! defined( 'BRANDAGENT_CONTENT_WEBHOOK_BASE_URL' ) ) {
+    define( 'BRANDAGENT_CONTENT_WEBHOOK_BASE_URL', '/api/v1/wordpress/webhooks/' );
+}
+
+/**
+ * HMAC timestamp validation window in seconds (5 minutes)
+ * Used for replay attack prevention
+ */
+if ( ! defined( 'BRANDAGENT_HMAC_TIMESTAMP_WINDOW' ) ) {
+    define( 'BRANDAGENT_HMAC_TIMESTAMP_WINDOW', 300 );
+}
+
+/**
+ * Cookie name used to store BrandAgent cart attributes in the browser.
+ */
+if ( ! defined( 'BRANDAGENT_ATTRS_COOKIE_NAME' ) ) {
+    define( 'BRANDAGENT_ATTRS_COOKIE_NAME', 'brandagent_attrs' );
+}
+
+/**
+ * Lifetime of the BrandAgent attributes cookie in seconds (2 hours).
+ */
+if ( ! defined( 'BRANDAGENT_ATTRS_COOKIE_TTL' ) ) {
+    define( 'BRANDAGENT_ATTRS_COOKIE_TTL', 2 * HOUR_IN_SECONDS );
+}
+
+/**
+ * Logging helper — writes to wp-content/debug.log and Query Monitor.
+ * Only logs when WP_DEBUG is enabled to avoid information disclosure in production.
+ *
+ * @param string $message The message to log.
+ * @param array  $context Optional structured context to append.
+ */
+function brandagent_log( $message, $context = array() ) {
+    if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
+        return;
+    }
+
+    if ( ! empty( $context ) && is_array( $context ) ) {
+        $sanitized_context = brandagent_sanitize_log_context( $context );
+        $encoded_context = function_exists( 'wp_json_encode' )
+            ? wp_json_encode( $sanitized_context )
+            : json_encode( $sanitized_context );
+
+        if ( $encoded_context ) {
+            $message .= ' ' . $encoded_context;
+        }
+    }
+
+    $path = WP_CONTENT_DIR . '/debug.log';
+    $line = '[' . date( 'c' ) . '] ' . $message . PHP_EOL;
+    @file_put_contents( $path, $line, FILE_APPEND );
+}
+
+/**
+ * Sanitize structured Brand Agent log context before writing to disk.
+ *
+ * @param array $context Context values.
+ * @return array Sanitized context.
+ */
+function brandagent_sanitize_log_context( $context ) {
+    $sanitized = array();
+
+    foreach ( $context as $key => $value ) {
+        $sanitized[ $key ] = brandagent_sanitize_log_value( $key, $value );
+    }
+
+    return $sanitized;
+}
+
+/**
+ * Sanitize a single Brand Agent log value.
+ *
+ * @param string $key   Context key.
+ * @param mixed  $value Context value.
+ * @return mixed Sanitized value.
+ */
+function brandagent_sanitize_log_value( $key, $value ) {
+    $sensitive_key_fragments = array(
+        'authorization',
+        'billing',
+        'body',
+        'clientinformation',
+        'cookie',
+        'customer',
+        'email',
+        'payload',
+        'phone',
+        'secret',
+        'shipping',
+        'signature',
+        'token',
+    );
+
+    $key_lower = strtolower( (string) $key );
+    foreach ( $sensitive_key_fragments as $fragment ) {
+        if ( strpos( $key_lower, $fragment ) !== false ) {
+            return '[redacted]';
+        }
+    }
+
+    if ( is_array( $value ) ) {
+        return brandagent_sanitize_log_context( $value );
+    }
+
+    if ( is_object( $value ) ) {
+        return '[object ' . get_class( $value ) . ']';
+    }
+
+    if ( is_bool( $value ) || is_int( $value ) || is_float( $value ) || $value === null ) {
+        return $value;
+    }
+
+    $string_value = (string) $value;
+    if ( strlen( $string_value ) > 200 ) {
+        return substr( $string_value, 0, 200 ) . '...';
+    }
+
+    return $string_value;
+}
+
+/**
+ * Brand Agent Configuration Class
+ */
+class BrandAgent_Config {
+
+    /**
+     * Clarity server base URL
+     *
+     * @var string
+     */
+    private static $clarity_server_url = 'https://clarity.microsoft.com';
+
+    /**
+     * Cache key for backend URL
+     *
+     * @var string
+     */
+    private static $cache_key = 'brandagent_backend_url';
+
+    /**
+     * Cache duration (24 hours)
+     *
+     * @var int
+     */
+    private static $cache_duration = 86400;
+
+    /**
+     * Fetch backend base URL from Clarity server
+     *
+     * @return string|false Backend base URL or false on failure
+     */
+    private static function fetch_backend_url_from_clarity() {
+        $config_endpoint = self::get_clarity_server_url() . '/woocommerce/brandagent/config';
+        
+        $response = wp_remote_get( $config_endpoint, array(
+            'timeout' => 10,
+            'headers' => array(
+                'Accept' => 'application/json',
+            ),
+        ) );
+
+        if ( is_wp_error( $response ) ) {
+            brandagent_log( 'BrandAgent Config: Failed to fetch from Clarity server: ' . $response->get_error_message() );
+            return false;
+        }
+
+        $status_code = wp_remote_retrieve_response_code( $response );
+        if ( $status_code !== 200 ) {
+            brandagent_log( 'BrandAgent Config: Clarity server returned status ' . $status_code );
+            return false;
+        }
+
+        $body = wp_remote_retrieve_body( $response );
+        $data = json_decode( $body, true );
+
+        if ( ! isset( $data['backendBaseUrl'] ) ) {
+            brandagent_log( 'BrandAgent Config: Invalid response from Clarity server' );
+            return false;
+        }
+
+        brandagent_log( 'BrandAgent Config: Successfully fetched backend URL from Clarity server: ' . $data['backendBaseUrl'] );
+        return $data['backendBaseUrl'];
+    }
+
+    /**
+     * Get backend base URL
+     * Fetches from Clarity server and caches for 24 hours
+     *
+     * @return string Backend base URL
+     */
+    public static function get_backend_base_url() {
+        // Local/dev override: when BRANDAGENT_BACKEND_BASE_URL is defined (e.g. via wp-config
+        // for a local wp-env store), use it directly and skip the dashboard config round-trip.
+        if ( defined( 'BRANDAGENT_BACKEND_BASE_URL' ) && BRANDAGENT_BACKEND_BASE_URL ) {
+            return rtrim( BRANDAGENT_BACKEND_BASE_URL, '/' );
+        }
+
+        // Try to get from cache first. This read is essential: get_backend_base_url() is called on the
+        // hot path of every content webhook (each post publish/update/delete), and without it every call
+        // falls through to fetch_backend_url_from_clarity() — a blocking 10s-timeout HTTP GET — on the
+        // editor's save request. The cache is invalidated by clear_cache(), which runs on plugin
+        // activation and on plugin update (see clarity.php), so a plugin update is the recovery lever
+        // when the backend URL moves.
+        $cached_url = get_transient( self::$cache_key );
+        if ( $cached_url !== false ) {
+            return $cached_url;
+        }
+
+        // Fetch from Clarity server
+        $backend_url = self::fetch_backend_url_from_clarity();
+        
+        if ( $backend_url === false ) {
+            brandagent_log( 'BrandAgent Config: ERROR - Could not fetch backend URL from Clarity server' );
+            // Return empty string - plugin cannot function without this
+            return '';
+        }
+
+        // Cache the result
+        set_transient( self::$cache_key, $backend_url, self::$cache_duration );
+        
+        return $backend_url;
+    }
+
+    /**
+     * Clear the cached backend URL
+     * Useful for testing or forcing a refresh
+     *
+     * @return void
+     */
+    public static function clear_cache() {
+        delete_transient( self::$cache_key );
+    }
+
+    /**
+     * Get Clarity server URL
+     *
+     * @return string Clarity server URL
+     */
+    public static function get_clarity_server_url() {
+        // Local/dev override: BRANDAGENT_CLARITY_SERVER_URL (e.g. via wp-config for a local
+        // wp-env store pointing at a dashboard on host.docker.internal). No-op in production.
+        if ( defined( 'BRANDAGENT_CLARITY_SERVER_URL' ) && BRANDAGENT_CLARITY_SERVER_URL ) {
+            return rtrim( BRANDAGENT_CLARITY_SERVER_URL, '/' );
+        }
+        return self::$clarity_server_url;
+    }
+
+    /**
+     * URL of the frontend widget loader injected into store pages.
+     *
+     * @return string Frontend injection script URL.
+     */
+    public static function get_frontend_injection_url() {
+        // Local/dev override: BRANDAGENT_FRONTEND_INJECTION_URL points the injected loader at a
+        // self-hosted build (e.g. served same-origin from the store) instead of the CDN default.
+        if ( defined( 'BRANDAGENT_FRONTEND_INJECTION_URL' ) && BRANDAGENT_FRONTEND_INJECTION_URL ) {
+            return BRANDAGENT_FRONTEND_INJECTION_URL;
+        }
+        return 'https://adsagentclientafd-b7hqhjdrf3fpeqh2.b01.azurefd.net/frontendInjection.js';
+    }
+}
+
+/**
+ * ============================================================================
+ * Brand Agent Encryption Helper Functions
+ * ============================================================================
+ * Used to encrypt the HMAC secret at rest in wp_options (AES-256-CBC).
+ * The encryption key is derived from wp_salt('auth'), which is defined in
+ * wp-config.php and never stored in the database.
+ */
+
+/**
+ * Derive a 256-bit encryption key from WordPress auth salt.
+ *
+ * @return string 32-byte binary encryption key
+ */
+function brandagent_get_encryption_key() {
+    return hash( 'sha256', wp_salt( 'auth' ), true );
+}
+
+/**
+ * Encrypt a value using AES-256-CBC.
+ *
+ * @param string $plaintext The value to encrypt
+ * @return string|false Encrypted value as "iv_base64:ciphertext_base64", or false on failure
+ */
+function brandagent_encrypt( $plaintext ) {
+    $key = brandagent_get_encryption_key();
+    $iv = openssl_random_pseudo_bytes( 16 );
+    if ( $iv === false ) {
+        brandagent_log( 'BrandAgent Encrypt: ERROR - openssl_random_pseudo_bytes failed' );
+        return false;
+    }
+    $ciphertext = openssl_encrypt( $plaintext, 'aes-256-cbc', $key, OPENSSL_RAW_DATA, $iv );
+    if ( $ciphertext === false ) {
+        brandagent_log( 'BrandAgent Encrypt: ERROR - openssl_encrypt failed: ' . openssl_error_string() );
+        return false;
+    }
+    return base64_encode( $iv ) . ':' . base64_encode( $ciphertext );
+}
+
+/**
+ * Decrypt a value encrypted by brandagent_encrypt().
+ *
+ * @param string $encrypted The encrypted value in "iv_base64:ciphertext_base64" format
+ * @return string|false The decrypted plaintext, or false on failure
+ */
+function brandagent_decrypt( $encrypted ) {
+    $key = brandagent_get_encryption_key();
+    $parts = explode( ':', $encrypted, 2 );
+    if ( count( $parts ) !== 2 ) {
+        brandagent_log( 'BrandAgent Decrypt: ERROR - Invalid encrypted format' );
+        return false;
+    }
+    $iv = base64_decode( $parts[0] );
+    $ciphertext = base64_decode( $parts[1] );
+    if ( $iv === false || $ciphertext === false ) {
+        brandagent_log( 'BrandAgent Decrypt: ERROR - Base64 decoding failed' );
+        return false;
+    }
+    $plaintext = openssl_decrypt( $ciphertext, 'aes-256-cbc', $key, OPENSSL_RAW_DATA, $iv );
+    if ( $plaintext === false ) {
+        brandagent_log( 'BrandAgent Decrypt: ERROR - openssl_decrypt failed: ' . openssl_error_string() );
+        return false;
+    }
+    return $plaintext;
+}
+
+/**
+ * ============================================================================
+ * Brand Agent HMAC Helper Functions
+ * ============================================================================
+ * These functions must be defined here (before clarity-page.php is loaded)
+ * because they are called during the OAuth callback which runs at file load time.
+ */
+
+/**
+ * Generate HMAC signature for WordPress requests
+ * Message format: clientId + timestamp, signed with SHA256
+ *
+ * @param string $client_id The client ID
+ * @param int $timestamp Unix timestamp
+ * @param string $secret_key The HMAC secret key
+ * @return string Base64-encoded HMAC signature
+ */
+function brandagent_generate_hmac_signature( $client_id, $timestamp, $secret_key ) {
+    $message = $client_id . $timestamp;
+    return base64_encode( hash_hmac( 'sha256', $message, $secret_key, true ) );
+}
+
+/**
+ * Whether this store is a WooCommerce store (vs a plain WordPress content store).
+ *
+ * Selects which outbound HMAC scheme the plugin uses when calling the BrandAgent backend proxy
+ * endpoints (api/config/read, api/v1/init): the backend routes on which header family is present
+ * (X-WooCommerce-* vs X-WordPress-*) and each store's merchant secret is keyed by platform, so the
+ * scheme must match how the store was provisioned or auth fails.
+ *
+ * The decision follows the platform recorded alongside the credential itself — brandagent_store_hmac_secret()
+ * writes brandagent_hmac_platform in the same path as the secret, so the two can never disagree — rather than
+ * which plugins happen to be active now. The merchant secret is provisioned once per platform and never
+ * re-keyed, so a runtime plugin change (a plain-WordPress store later activating WooCommerce — the expected
+ * blog-adds-a-shop growth path — or a WooCommerce store deactivating it) must NOT flip the scheme: doing so
+ * would send the other platform's header family and 401 against a secret key that was never written for this
+ * store, silently killing the widget and content sync.
+ *
+ * Delegates to brandagent_get_hmac_platform() rather than reading a separate option: that is the single
+ * source of truth backend routing (brandagent-endpoint.php) already uses, it deliberately does NOT infer
+ * from class_exists( 'woocommerce' ), and it carries its own pre-option backfill. With no credential stored
+ * it returns '' → false, which is safe: brandagent_content_webhooks_enabled() then fails on the missing
+ * secret immediately after.
+ *
+ * @return bool True when this store holds a WooCommerce-issued credential.
+ */
+function brandagent_is_woocommerce_store() {
+    return 'woocommerce' === brandagent_get_hmac_platform();
+}
+
+/**
+ * Normalize store URL for consistent formatting
+ * Matches C# backend normalization logic
+ *
+ * @param string $store_url The store URL to normalize
+ * @return string Normalized store URL
+ */
+function brandagent_normalize_store_url( $store_url ) {
+    $normalized = strtolower( rtrim( $store_url, '/' ) );
+    $normalized = str_replace( array( 'https://', 'http://' ), '', $normalized );
+    // Replace dots, slashes, and colons with hyphens to produce a valid Key Vault / Azure Search
+    // identifier and HMAC client id. Must stay identical to the backend C# NormalizeStoreUrl so
+    // plugin-signed requests verify; the colon only affects host:port dev stores (production
+    // home_url() has no port).
+    return str_replace( array( '.', '/', ':' ), '-', $normalized );
+}
+
+/**
+ * Return the immutable URL identity for the current Brand Agent connection.
+ *
+ * WordPress can filter home_url() by locale, request type, or front-end host. That makes it a
+ * useful display/current-location value, but not a stable credential identifier. The URL accepted
+ * by the backend at Connect is persisted once the secret is stored and is used for every HMAC,
+ * callback, webhook, and teardown operation thereafter.
+ *
+ * Existing installations predate this option. They deliberately retain their legacy home_url()
+ * behavior until either an authenticated callback self-heals the identity or their next successful
+ * connect, rather than guessing which URL their backend credential was registered against.
+ *
+ * @return string Connected store URL, or the canonical current URL before a successful reconnect.
+ */
+function brandagent_get_connected_store_url() {
+    $store_url = get_option( 'brandagent_connected_store_url', '' );
+    if ( is_string( $store_url ) && $store_url !== '' ) {
+        return $store_url;
+    }
+
+    return brandagent_canonicalize_connected_store_url( home_url() );
+}
+
+/**
+ * Determine whether a URL fits the backend credential-name contract.
+ *
+ * @param string      $site_url WordPress URL identity.
+ * @param string|null $platform Credential platform, or null to use the established platform.
+ * @return bool True when the identity can be stored in Azure Key Vault.
+ */
+function brandagent_is_safe_frontend_proxy_credential_identity( $site_url, $platform = null ) {
+    $credential_identity = brandagent_normalize_store_url( $site_url );
+
+    if ( null === $platform ) {
+        $platform = brandagent_get_hmac_platform();
+        // Before the first credential is issued, only the plain WordPress Connect flow reaches the
+        // shared routing check. WooCommerce OAuth passes its platform explicitly below.
+        $platform = '' === $platform ? 'wordpress' : $platform;
+    }
+
+    if ( ! in_array( $platform, array( 'wordpress', 'woocommerce' ), true ) ) {
+        return false;
+    }
+
+    $credential_prefix = 'woocommerce' === $platform
+        ? 'appkeys-woocommerce-'
+        : 'appkeys-wordpress-';
+
+    return (
+        1 === preg_match( '/^[a-z0-9-]+$/', $credential_identity ) &&
+        strlen( $credential_prefix . $credential_identity . '-hmac-secret' ) <= 127
+    );
+}
+
+/**
+ * Parse an absolute WordPress URL and reject unsupported URL components.
+ *
+ * @param string $site_url WordPress URL to parse.
+ * @return array|false Parsed URL parts, or false when unsafe.
+ */
+function brandagent_parse_safe_frontend_proxy_url( $site_url ) {
+    $parts = function_exists( 'wp_parse_url' )
+        ? wp_parse_url( $site_url )
+        : parse_url( $site_url ); // phpcs:ignore WordPress.WP.AlternativeFunctions.parse_url_parse_url -- Required for the declared WordPress 4.0 minimum.
+
+    if (
+        ! is_array( $parts ) ||
+        empty( $parts['scheme'] ) ||
+        ! in_array( strtolower( $parts['scheme'] ), array( 'http', 'https' ), true ) ||
+        empty( $parts['host'] ) ||
+        ! is_string( $parts['host'] ) ||
+        isset( $parts['user'] ) ||
+        isset( $parts['pass'] ) ||
+        isset( $parts['query'] ) ||
+        isset( $parts['fragment'] )
+    ) {
+        return false;
+    }
+
+    return $parts;
+}
+
+/**
+ * Validate the parsed authority for same-origin frontend routing.
+ *
+ * @param string $host Parsed URL host.
+ * @return bool True when structurally safe.
+ */
+function brandagent_is_safe_frontend_proxy_host( $host ) {
+    // Bracketed IPv6 remains structurally checked even though the credential contract excludes it.
+    if ( '[' === $host[0] && ']' === substr( $host, -1 ) ) {
+        return false !== filter_var( substr( $host, 1, -1 ), FILTER_VALIDATE_IP, FILTER_FLAG_IPV6 );
+    }
+
+    if (
+        false !== strpos( $host, ':' ) ||
+        1 === preg_match( '/[%\\\\\/?#@\s\x00-\x1f\x7f]/u', $host )
+    ) {
+        return false;
+    }
+
+    $host_for_labels = '.' === substr( $host, -1 ) ? substr( $host, 0, -1 ) : $host;
+    if ( '' === $host_for_labels ) {
+        return false;
+    }
+
+    foreach ( explode( '.', $host_for_labels ) as $label ) {
+        if (
+            '' === $label ||
+            '-' === $label[0] ||
+            '-' === substr( $label, -1 ) ||
+            1 !== preg_match( '/^[\p{L}\p{N}\p{M}-]+$/u', $label )
+        ) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+/**
+ * Validate the optional port without allowing scheme-confusing combinations.
+ *
+ * @param array $parts Parsed URL parts.
+ * @return bool True when the port is safe.
+ */
+function brandagent_is_safe_frontend_proxy_port( $parts ) {
+    if ( ! isset( $parts['port'] ) ) {
+        return true;
+    }
+
+    return (
+        is_int( $parts['port'] ) &&
+        $parts['port'] >= 1 &&
+        $parts['port'] <= 65535 &&
+        ! ( 'https' === strtolower( $parts['scheme'] ) && 80 === $parts['port'] ) &&
+        ! ( 'http' === strtolower( $parts['scheme'] ) && 443 === $parts['port'] )
+    );
+}
+
+/**
+ * Validate and normalize an installation pathname for frontend routing.
+ *
+ * @param mixed $path Raw URL path.
+ * @return string|false Installation path without a trailing slash, or false when unsafe.
+ */
+function brandagent_get_safe_frontend_proxy_path( $path ) {
+    if (
+        ! is_string( $path ) ||
+        '' === $path ||
+        '/' !== $path[0] ||
+        1 !== preg_match( '//u', $path ) ||
+        1 === preg_match( '/\s/u', $path )
+    ) {
+        return false;
+    }
+
+    // Encoded percent, dot and separator bytes are ambiguous after browser/server normalization.
+    if (
+        false !== strpos( $path, '\\' ) ||
+        false !== strpos( $path, '//' ) ||
+        1 === preg_match( '/%(?![0-9a-f]{2})/i', $path ) ||
+        1 === preg_match( '/%(?:25|2e|2f|5c)/i', $path ) ||
+        1 === preg_match( '/[\x00-\x1f\x7f]/', $path )
+    ) {
+        return false;
+    }
+
+    $decoded_path = rawurldecode( $path );
+    if (
+        1 !== preg_match( '//u', $decoded_path ) ||
+        false !== strpos( $decoded_path, '\\' ) ||
+        false !== strpos( $decoded_path, '//' ) ||
+        false !== strpos( $decoded_path, '?' ) ||
+        false !== strpos( $decoded_path, '#' ) ||
+        1 === preg_match( '/[\x00-\x1f\x7f]/', $decoded_path )
+    ) {
+        return false;
+    }
+
+    foreach ( explode( '/', $decoded_path ) as $segment ) {
+        if ( '.' === $segment || '..' === $segment ) {
+            return false;
+        }
+    }
+
+    return '/' === $path ? '' : rtrim( $path, '/' );
+}
+
+/**
+ * Return a validated installation path from an absolute WordPress URL.
+ *
+ * @param mixed $site_url                    URL to validate.
+ * @param bool        $require_credential_identity Whether the URL must fit the backend credential-name contract.
+ * @param string|null $platform                    Credential platform when the identity check is required.
+ * @return string|false Installation path without a trailing slash, or false when unsafe.
+ */
+function brandagent_get_safe_installation_path_from_url( $site_url, $require_credential_identity = false, $platform = null ) {
+    if (
+        ! is_string( $site_url ) ||
+        ( $require_credential_identity && ! brandagent_is_safe_frontend_proxy_credential_identity( $site_url, $platform ) )
+    ) {
+        return false;
+    }
+
+    $parts = brandagent_parse_safe_frontend_proxy_url( $site_url );
+    if (
+        false === $parts ||
+        ! brandagent_is_safe_frontend_proxy_host( $parts['host'] ) ||
+        ! brandagent_is_safe_frontend_proxy_port( $parts )
+    ) {
+        return false;
+    }
+
+    $path = isset( $parts['path'] ) ? $parts['path'] : '/';
+    return brandagent_get_safe_frontend_proxy_path( $path );
+}
+
+/**
+ * Return the stable WordPress installation path used by the frontend proxy and rewrite matcher.
+ *
+ * The persisted connected URL remains the immutable HMAC/credential identity. It can legitimately
+ * differ from the configured home path when home_url() is filtered by locale, proxy or request
+ * context, so it must never choose the browser's same-origin route. Both URLs still fail closed:
+ * the credential identity must remain usable and the configured home must be a safe route base.
+ *
+ * @param string|null $platform Credential platform, or null to use the established platform.
+ * @return string|false Installation path without a trailing slash, or false when unsafe.
+ */
+function brandagent_get_frontend_proxy_installation_path( $platform = null ) {
+    $missing_store_url = new stdClass();
+    $store_url         = get_option( 'brandagent_connected_store_url', $missing_store_url );
+    if ( $missing_store_url === $store_url ) {
+        $store_url = home_url( '/' );
+    }
+
+    if ( false === brandagent_get_safe_installation_path_from_url( $store_url, true, $platform ) ) {
+        return false;
+    }
+
+    return brandagent_get_safe_installation_path_from_url( get_option( 'home', '' ) );
+}
+
+/**
+ * Return the same-origin proxy base used by the injected Brand Agent frontend.
+ *
+ * @param string|null $platform Credential platform, or null to use the established platform.
+ * @return string|false Absolute-path proxy base, or false when routing state is unsafe.
+ */
+function brandagent_get_frontend_proxy_base_path( $platform = null ) {
+    $installation_path = brandagent_get_frontend_proxy_installation_path( $platform );
+    if ( false === $installation_path ) {
+        return false;
+    }
+
+    // Custom rewrite rules are not generated when plain permalinks are enabled, so there is no
+    // safe path-form proxy to advertise in that mode. PATHINFO/index permalinks do generate the
+    // rule, but the public URL must include WordPress's front controller to reach it on servers
+    // that do not have mod_rewrite available.
+    $permalink_structure = get_option( 'permalink_structure', '' );
+    if ( ! is_string( $permalink_structure ) || '' === $permalink_structure ) {
+        return false;
+    }
+
+    $front_controller = 1 === preg_match( '#^/*index\.php(?:/|$)#', $permalink_structure )
+        ? '/index.php'
+        : '';
+
+    return $installation_path . $front_controller . '/a/msba/';
+}
+
+/**
+ * Match the server's stable connection-URL representation.
+ *
+ * The backend removes surrounding whitespace and a trailing slash before it builds callback URLs,
+ * headers, or HMAC input. Keep path segments intact: `/en` is a distinct connection identity,
+ * while `/en/` is its equivalent spelling.
+ *
+ * @param string $store_url Store URL to canonicalize.
+ * @return string Canonical URL, or an empty string for non-string input.
+ */
+function brandagent_canonicalize_connected_store_url( $store_url ) {
+    if ( ! is_string( $store_url ) ) {
+        return '';
+    }
+
+    return rtrim( trim( $store_url ), '/' );
+}
+
+/**
+ * Whether this site has persisted its Brand Agent connection identity.
+ *
+ * @return bool True after a successful connect or verified legacy callback migration.
+ */
+function brandagent_has_connected_store_url() {
+    $store_url = get_option( 'brandagent_connected_store_url', '' );
+    return is_string( $store_url ) && $store_url !== '';
+}
+
+/**
+ * Prepare the stable URL used for a WooCommerce OAuth handoff.
+ *
+ * A confirmed connection always wins. Before OAuth completes, retain a short-lived candidate so
+ * the dashboard handoff and browser return use the same URL without making an iframe view a
+ * permanent connection identity.
+ *
+ * @return string|WP_Error Stable URL, or an error when setup should be retried.
+ */
+function brandagent_prepare_woocommerce_oauth_url() {
+    if ( false === brandagent_get_frontend_proxy_base_path( 'woocommerce' ) ) {
+        return new WP_Error( 'brandagent_invalid_frontend_routing', 'Connected store URL cannot be used for frontend routing.' );
+    }
+
+    if ( brandagent_has_connected_store_url() ) {
+        return brandagent_get_connected_store_url();
+    }
+
+    // Two admin views can resolve home_url() differently. Share Connect's per-site lock so the
+    // first dashboard handoff wins and a later view cannot replace its pending OAuth URL.
+    if ( ! function_exists( 'brandagent_wordpress_acquire_connect_lock' ) ) {
+        return new WP_Error( 'brandagent_oauth_lock_unavailable', 'Could not prepare Brand Agent setup.' );
+    }
+    $connect_lock = brandagent_wordpress_acquire_connect_lock();
+    if ( false === $connect_lock ) {
+        return new WP_Error( 'brandagent_oauth_lock_busy', 'Brand Agent setup is already in progress. Please try again.' );
+    }
+
+    try {
+        // A direct lock operation may have raced a negative option lookup in this request.
+        wp_cache_delete( 'brandagent_connected_store_url', 'options' );
+        wp_cache_delete( 'notoptions', 'options' );
+        if ( brandagent_has_connected_store_url() ) {
+            return brandagent_get_connected_store_url();
+        }
+
+        $pending_key = 'brandagent_woocommerce_oauth_store_url';
+        $pending_url = get_transient( $pending_key );
+        if ( is_string( $pending_url ) && $pending_url !== '' ) {
+            return brandagent_canonicalize_connected_store_url( $pending_url );
+        }
+
+        $candidate = brandagent_canonicalize_connected_store_url( home_url() );
+        if ( $candidate === '' || ! set_transient( $pending_key, $candidate, HOUR_IN_SECONDS ) ) {
+            return new WP_Error( 'brandagent_oauth_url_persist_failed', 'Could not prepare Brand Agent setup.' );
+        }
+
+        return $candidate;
+    } finally {
+        brandagent_wordpress_release_connect_lock( $connect_lock );
+    }
+}
+
+/**
+ * Return the URL an OAuth callback is permitted to confirm.
+ *
+ * @return string|WP_Error Confirmed or pending URL, never a fresh request-context URL.
+ */
+function brandagent_get_woocommerce_oauth_callback_url() {
+    // Revalidate the configured public home route at callback time. Permalink or installation
+    // changes after the dashboard handoff must fail before a credential is fetched or committed.
+    if ( false === brandagent_get_frontend_proxy_base_path( 'woocommerce' ) ) {
+        return new WP_Error( 'brandagent_invalid_frontend_routing', 'Connected store URL cannot be used for frontend routing.' );
+    }
+
+    $pending_url = brandagent_canonicalize_connected_store_url( get_transient( 'brandagent_woocommerce_oauth_store_url' ) );
+    if ( brandagent_has_connected_store_url() ) {
+        $connected_url = brandagent_get_connected_store_url();
+        if ( $pending_url !== '' && $pending_url !== $connected_url ) {
+            return new WP_Error( 'brandagent_oauth_url_conflict', 'Brand Agent setup conflicts with the established connection.' );
+        }
+        return $connected_url;
+    }
+
+    if ( $pending_url !== '' ) {
+        return $pending_url;
+    }
+
+    return new WP_Error( 'brandagent_oauth_url_missing', 'Brand Agent setup has expired. Return to the Clarity page and try again.' );
+}
+
+/**
+ * Persist a newly connected URL, or atomically claim it for a legacy connection.
+ *
+ * @param string $store_url URL registered with the backend.
+ * @return bool True when this URL is the persisted identity.
+ */
+function brandagent_persist_connected_store_url( $store_url ) {
+    $store_url = brandagent_canonicalize_connected_store_url( $store_url );
+    if ( $store_url === '' ) {
+        return false;
+    }
+
+    if ( brandagent_has_connected_store_url() ) {
+        return $store_url === get_option( 'brandagent_connected_store_url', '' );
+    }
+
+    // add_option() is an UPSERT after its cache-assisted existence check. A stale notoptions cache
+    // would therefore let a second verified callback replace the first URL. Insert-ignore gives
+    // the option-name unique key true first-writer-wins semantics.
+    global $wpdb;
+    $inserted = $wpdb->query( $wpdb->prepare(
+        "INSERT IGNORE INTO `{$wpdb->options}` (`option_name`, `option_value`, `autoload`) VALUES (%s, %s, %s)",
+        'brandagent_connected_store_url',
+        $store_url,
+        'no'
+    ) );
+
+    // This direct write bypasses WordPress's option-cache maintenance. Clear both the per-option
+    // and negative caches before checking the winner, including when another request won.
+    wp_cache_delete( 'brandagent_connected_store_url', 'options' );
+    wp_cache_delete( 'notoptions', 'options' );
+
+    if ( 1 === $inserted ) {
+        return true;
+    }
+
+    return $store_url === get_option( 'brandagent_connected_store_url', '' );
+}
+
+/**
+ * Read a secret from the legacy URL-derived option key without consulting home_url().
+ *
+ * @param string $store_url URL whose credential should be read.
+ * @return string|false Decrypted secret, or false when absent/unreadable.
+ */
+function brandagent_get_hmac_secret_for_store_url( $store_url ) {
+    $normalized_store_url = brandagent_normalize_store_url( $store_url );
+    $option_key           = 'brandagent_secret_key_' . $normalized_store_url;
+    $stored_value         = get_option( $option_key, false );
+
+    if ( $stored_value === false ) {
+        return false;
+    }
+
+    $decrypted = brandagent_decrypt( $stored_value );
+    if ( $decrypted === false ) {
+        brandagent_log( 'BrandAgent: ERROR - Decryption failed for HMAC secret' );
+        return false;
+    }
+
+    return $decrypted;
+}
+
+/**
+ * Get client ID from request URL query parameter
+ *
+ * @return string|false Client ID or false if not found
+ */
+function brandagent_get_client_id() {
+    $client_id = isset( $_GET['clientId'] ) ? sanitize_text_field( $_GET['clientId'] ) : '';
+    if ( empty( $client_id ) ) {
+        return false;
+    }
+    return $client_id;
+}
+
+/**
+ * Store HMAC secret received during OAuth.
+ * The secret is encrypted with AES-256-CBC before being stored in wp_options.
+ *
+ * @param string $hmac_secret The HMAC secret
+ * @param string $platform    Flow that issued this secret: 'woocommerce' or 'wordpress'.
+ * @param string|null $store_url Optional URL captured by Connect or a URL-bound refresh; legacy refreshes
+ *                                may omit it only after connection identity is established.
+ * @return bool True on success
+ */
+function brandagent_store_hmac_secret( $hmac_secret, $platform, $store_url = null ) {
+    // Connect or a verified refresh supplies the URL. Rotations must agree with an existing
+    // identity, never rebind a site because the callback ran in another URL context.
+    $connected_store_url = brandagent_canonicalize_connected_store_url( get_option( 'brandagent_connected_store_url', '' ) );
+    $store_url = null === $store_url ? $connected_store_url : $store_url;
+    $store_url = brandagent_canonicalize_connected_store_url( $store_url );
+    if ( $store_url === '' ) {
+        brandagent_log( 'BrandAgent: ERROR - Secret storage requires an explicit store URL or an established connection identity' );
+        return false;
+    }
+    if ( $connected_store_url !== '' && $store_url !== $connected_store_url ) {
+        brandagent_log( 'BrandAgent: ERROR - Refusing to replace connected store URL during secret storage', array(
+            'connected_store_url' => $connected_store_url,
+            'received_store_url'  => $store_url,
+        ) );
+        return false;
+    }
+    $normalized_store_url = brandagent_normalize_store_url( $store_url );
+    $option_key = 'brandagent_secret_key_' . $normalized_store_url;
+
+    // Clean the HMAC secret
+    $hmac_secret_clean = trim( $hmac_secret );
+    $hmac_secret_clean = str_replace( array( "\r", "\n", " " ), '', $hmac_secret_clean );
+
+    // Encrypt before storing
+    $encrypted = brandagent_encrypt( $hmac_secret_clean );
+    if ( $encrypted === false ) {
+        brandagent_log( 'BrandAgent: ERROR - HMAC secret encryption failed before storage', array( 'store_url' => $store_url ) );
+        return false;
+    }
+
+    update_option( $option_key, $encrypted );
+
+    // Do not claim a connection identity unless the secret it names was stored and is readable.
+    // A later request must never derive its identity from a context-sensitive home_url().
+    if ( get_option( $option_key, false ) !== $encrypted ) {
+        brandagent_log( 'BrandAgent: ERROR - HMAC secret storage did not persist', array( 'store_url' => $store_url ) );
+        return false;
+    }
+    if ( ! brandagent_persist_connected_store_url( $store_url ) ) {
+        brandagent_log( 'BrandAgent: ERROR - Connected store URL did not persist', array( 'store_url' => $store_url ) );
+        return false;
+    }
+
+    // Record which flow issued this credential, in the same write path as the credential itself so
+    // the two can never disagree. Signing has to follow the secret we hold, not the plugins that
+    // happen to be active later.
+    update_option( 'brandagent_hmac_platform', $platform );
+
+    brandagent_log( 'BrandAgent: HMAC secret stored successfully for ' . $store_url );
+    return true;
+}
+
+/**
+ * Get the stored HMAC secret for this store.
+ * Decrypts the AES-256-CBC encrypted value from wp_options.
+ *
+ * @return string|false The HMAC secret key or false if not found
+ */
+function brandagent_get_hmac_secret() {
+    $store_url = brandagent_get_connected_store_url();
+    return brandagent_get_hmac_secret_for_store_url( $store_url );
+}
+
+/**
+ * Get the flow that issued the HMAC secret currently stored for this store.
+ *
+ * The signing scheme must follow the stored credential rather than the current plugin load state.
+ * A store that onboarded through WooCommerce and later deactivates WooCommerce still holds a
+ * WooCommerce-issued secret, and signing that with the WordPress scheme would fail verification.
+ *
+ * @return string 'woocommerce', 'wordpress', or '' when this store has no credential yet.
+ */
+function brandagent_get_hmac_platform() {
+    $platform = get_option( 'brandagent_hmac_platform', '' );
+    if ( $platform === 'woocommerce' || $platform === 'wordpress' ) {
+        return $platform;
+    }
+
+    // No platform recorded yet. WordPress connect ships in the same release that introduced this
+    // option and records both together, so any credential predating the option was necessarily issued
+    // by the WooCommerce flow. The WordPress opt-in marker is not credential provenance: it is written
+    // before the network connect starts and may coexist with a legacy WooCommerce secret after a failed
+    // attempt. Deliberately NOT inferred from current plugin state for the same reason.
+    if ( brandagent_get_hmac_secret() !== false ) {
+        $platform = 'woocommerce';
+        update_option( 'brandagent_hmac_platform', $platform );
+        brandagent_log( 'BrandAgent: HMAC platform backfilled as ' . $platform . ' for pre-existing credential' );
+        return $platform;
+    }
+
+    // No credential stored, so nothing can be signed yet and there is no flow to infer. Onboarding
+    // records the authoritative value; until then the caller fails closed on the missing secret.
+    return '';
+}
+
+/**
+ * Delete the stored HMAC secret for this store.
+ * Removes the encrypted HMAC secret from wp_options.
+ *
+ * @return bool True on success, false on failure
+ */
+function brandagent_delete_hmac_secret() {
+    $store_url = brandagent_get_connected_store_url();
+    $normalized_store_url = brandagent_normalize_store_url( $store_url );
+    $option_key = 'brandagent_secret_key_' . $normalized_store_url;
+
+    $secret_was_present = get_option( $option_key, false ) !== false;
+    $result = delete_option( $option_key );
+    if ( $result || ! $secret_was_present ) {
+        // Clearing an already-absent secret is idempotent. If deletion genuinely failed, retain
+        // the URL and platform so a later teardown attempt can still address the same credential.
+        delete_option( 'brandagent_hmac_platform' );
+        delete_option( 'brandagent_connected_store_url' );
+        delete_transient( 'brandagent_woocommerce_oauth_store_url' );
+    }
+    if ( $result || ! $secret_was_present ) {
+        brandagent_log( 'BrandAgent: HMAC secret deleted successfully for ' . $store_url );
+    } else {
+        brandagent_log( 'BrandAgent: HMAC secret delete skipped or failed', array( 'store_url' => $store_url ) );
+    }
+    return $result || ! $secret_was_present;
+}
+
+/**
+ * Verify HMAC signature from incoming backend request
+ * Used to authenticate requests FROM the BA server TO the WordPress plugin
+ *
+ * @param string $received_signature The signature from the request header
+ * @param string $timestamp Unix timestamp from the request
+ * @param string $request_body The raw request body
+ * @return bool True if signature is valid
+ */
+function brandagent_verify_incoming_hmac_signature( $received_signature, $timestamp, $request_body = '' ) {
+    return brandagent_verify_incoming_hmac_signature_for_store_url(
+        brandagent_get_connected_store_url(),
+        $received_signature,
+        $timestamp,
+        $request_body
+    );
+}
+
+/**
+ * Verify an inbound callback against a specific connection URL.
+ *
+ * Legacy connections did not persist their URL. On the first valid callback, callers may set
+ * $migrate_legacy_identity so the exact backend URL is atomically pinned only after its secret,
+ * timestamp, and HMAC all verify. This avoids trusting an unauthenticated request header.
+ *
+ * @param string $store_url               Callback's X-BA-Store-Url value.
+ * @param string $received_signature      Callback HMAC.
+ * @param string $timestamp               Callback Unix timestamp.
+ * @param string $request_body            Raw signed payload.
+ * @param bool   $migrate_legacy_identity Persist the URL after successful verification.
+ * @return bool True when valid (and migration, if requested, persisted).
+ */
+function brandagent_verify_incoming_hmac_signature_for_store_url( $store_url, $received_signature, $timestamp, $request_body = '', $migrate_legacy_identity = false ) {
+    $secret_key = brandagent_get_hmac_secret_for_store_url( $store_url );
+    if ( ! $secret_key ) {
+        brandagent_log( 'BrandAgent: Cannot verify signature - no HMAC secret stored' );
+        return false;
+    }
+
+    // Validate timestamp (5-minute window for replay attack prevention)
+    $time_difference = abs( time() - intval( $timestamp ) );
+    if ( $time_difference > BRANDAGENT_HMAC_TIMESTAMP_WINDOW ) {
+        brandagent_log( 'BrandAgent: Request timestamp too old: ' . $time_difference . ' seconds' );
+        return false;
+    }
+
+    // Message: store_url + timestamp + sha256(body)
+    $body_hash = hash( 'sha256', $request_body );
+    $message = $store_url . $timestamp . $body_hash;
+
+    $expected_signature = base64_encode( hash_hmac( 'sha256', $message, $secret_key, true ) );
+
+    // Constant-time comparison to prevent timing attacks
+    if ( ! hash_equals( $expected_signature, $received_signature ) ) {
+        return false;
+    }
+
+    if ( $migrate_legacy_identity ) {
+        // Share Connect's lock so a callback cannot pin a legacy identity between Connect's remote
+        // credential rotation and its local secret/identity commit. Connect itself calls the store
+        // helper while it owns this lock, so only the migration path acquires it here.
+        $connect_lock = function_exists( 'brandagent_wordpress_acquire_connect_lock' )
+            ? brandagent_wordpress_acquire_connect_lock()
+            : false;
+        if ( false === $connect_lock ) {
+            brandagent_log( 'BrandAgent: Verified legacy callback deferred while WordPress Connect is in progress', array( 'store_url' => $store_url ) );
+            return false;
+        }
+
+        try {
+            // Connect may have completed a secret rotation after the first verification but before
+            // this callback acquired the shared lock. Re-read the credential and verify again while
+            // ownership is stable; otherwise an old signed callback could pin an identity after the
+            // backend no longer accepts its credential.
+            $secret_option_key = 'brandagent_secret_key_' . brandagent_normalize_store_url( $store_url );
+            // A raw write from the concurrent Connect request can leave this PHP request holding
+            // the secret it used before waiting for the lock. Evict all option cache layers so the
+            // in-lock check reads the durable credential rather than its own stale value.
+            wp_cache_delete( $secret_option_key, 'options' );
+            wp_cache_delete( 'alloptions', 'options' );
+            wp_cache_delete( 'notoptions', 'options' );
+            $secret_key = brandagent_get_hmac_secret_for_store_url( $store_url );
+            $time_difference = abs( time() - intval( $timestamp ) );
+            $expected_signature = $secret_key
+                ? base64_encode( hash_hmac( 'sha256', $message, $secret_key, true ) )
+                : '';
+            if ( $time_difference > BRANDAGENT_HMAC_TIMESTAMP_WINDOW || ! $secret_key || ! hash_equals( $expected_signature, $received_signature ) ) {
+                brandagent_log( 'BrandAgent: Verified legacy callback no longer matches the current HMAC secret', array( 'store_url' => $store_url ) );
+                return false;
+            }
+
+            $pending_key = 'brandagent_woocommerce_oauth_store_url';
+            if ( wp_using_ext_object_cache() ) {
+                // External transients are authoritative storage: force-read, never delete to refresh.
+                $pending_url = wp_cache_get( $pending_key, 'transient', true );
+            } else {
+                wp_cache_delete( '_transient_' . $pending_key, 'options' );
+                wp_cache_delete( '_transient_timeout_' . $pending_key, 'options' );
+                $pending_url = get_transient( $pending_key );
+            }
+            $pending_url = brandagent_canonicalize_connected_store_url( $pending_url );
+            if ( $pending_url !== '' && $pending_url !== brandagent_canonicalize_connected_store_url( $store_url ) ) {
+                brandagent_log( 'BrandAgent: Verified legacy callback deferred while another OAuth URL is pending' );
+                return false;
+            }
+
+            if ( ! brandagent_persist_connected_store_url( $store_url ) ) {
+                brandagent_log( 'BrandAgent: ERROR - Verified legacy callback could not persist connection URL', array( 'store_url' => $store_url ) );
+                return false;
+            }
+        } finally {
+            brandagent_wordpress_release_connect_lock( $connect_lock );
+        }
+    }
+
+    return true;
+}
+
+/**
+ * Sign and send an outbound HTTP request to the BrandAgent backend with HMAC authentication
+ *
+ * @param string $url     The full URL to send the request to
+ * @param string $body    The JSON request body (optional)
+ * @param string $method  HTTP method: 'POST' or 'GET' (default: 'POST')
+ * @param int    $timeout Request timeout in seconds (default: 30)
+ * @return array|WP_Error Response array or WP_Error on failure
+ */
+function brandagent_sign_outbound_request( $url, $body = '', $method = 'POST', $timeout = 30 ) {
+    $store_url  = brandagent_get_connected_store_url();
+    $secret_key = brandagent_get_hmac_secret();
+    if ( ! $secret_key ) {
+        brandagent_log( 'BrandAgent: Cannot sign request - no HMAC secret available' );
+        return new WP_Error( 'hmac_missing', 'HMAC secret not available' );
+    }
+
+    $client_id  = brandagent_normalize_store_url( $store_url );
+    $timestamp  = time();
+    $signature  = brandagent_generate_hmac_signature( $client_id, $timestamp, $secret_key );
+
+    $headers = array(
+        'Content-Type'            => 'application/json',
+        'X-WooCommerce-Client-Id' => $client_id,
+        'X-WooCommerce-Store-Url' => $store_url,
+        'X-WooCommerce-Signature' => $signature,
+        'X-WooCommerce-Timestamp' => (string) $timestamp,
+    );
+
+    $args = array( 'timeout' => $timeout, 'headers' => $headers );
+    if ( ! empty( $body ) ) {
+        $args['body'] = $body;
+    }
+
+    return ( $method === 'GET' )
+        ? wp_remote_get( $url, $args )
+        : wp_remote_post( $url, $args );
+}

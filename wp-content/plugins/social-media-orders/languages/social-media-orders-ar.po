@@ -1,0 +1,5488 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: social-media-orders\n"
+"POT-Creation-Date: 2026-07-24 01:47+0300\n"
+"PO-Revision-Date: 2026-07-24 02:05+0300\n"
+"Last-Translator: Mohannad Qamara <hi@mohannad.online>\n"
+"Language-Team: Mohannad Qamara - hi@mohannad.online\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"X-Generator: Poedit 3.8\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: esc_html__;esc_html;__;_e;_nx;_n;_n_noop;esc_html_e\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: assets\n"
+"X-Poedit-SearchPathExcluded-1: cmb2\n"
+"X-Poedit-SearchPathExcluded-2: css\n"
+"X-Poedit-SearchPathExcluded-3: js\n"
+
+#: social-media-orders.php:39
+msgid "SMO Forms"
+msgstr "نماذج SMO"
+
+#: social-media-orders.php:40
+msgid "Form"
+msgstr "نموذج"
+
+#: social-media-orders.php:41
+msgid "Add New Form"
+msgstr "أضف نموذج جديد"
+
+#: social-media-orders.php:42
+msgid "Edit Form"
+msgstr "تحرير نموذج"
+
+#: social-media-orders.php:51
+msgid "Inquiries"
+msgstr "الطلبات"
+
+#: social-media-orders.php:51
+msgid "Inquiry"
+msgstr "الطلبات"
+
+#: social-media-orders.php:67
+msgid "Settings & Notifications"
+msgstr "الإعدادات والإشعارات"
+
+#: social-media-orders.php:67
+msgid "Settings"
+msgstr "الإعدادات"
+
+#: social-media-orders.php:68
+msgid "Export Data"
+msgstr "تصدير البيانات"
+
+#: social-media-orders.php:68
+msgid "Export"
+msgstr "تصدير"
+
+#: social-media-orders.php:81
+msgid "Settings Saved."
+msgstr "تم حفظ الإعدادات."
+
+#: social-media-orders.php:87
+msgid "Email Notification Settings"
+msgstr "إعدادات تنبيهات البريد الإلكتروني"
+
+#: social-media-orders.php:91
+msgid "Enable Notifications"
+msgstr "تفعيل التنبيهات"
+
+#: social-media-orders.php:95
+msgid "Recipient Email"
+msgstr "إيميل استقبال الطلبات"
+
+#: social-media-orders.php:99
+msgid "Email Subject"
+msgstr "عنوان الرسالة"
+
+#: social-media-orders.php:103
+msgid "Email Body"
+msgstr "محتوى الرسالة"
+
+#: social-media-orders.php:107
+msgid "Available Placeholders:"
+msgstr "عناصر الاستبدال المتاحة:"
+
+#: social-media-orders.php:114
+msgid "Save Settings"
+msgstr "حفظ الإعدادات"
+
+#: social-media-orders.php:125
+msgid "Export Inquiries"
+msgstr "تصدير الطلبات"
+
+#: social-media-orders.php:132
+msgid "Select Form:"
+msgstr "اختر نموذج:"
+
+#: social-media-orders.php:134 social-media-orders.php:434
+msgid "All Forms"
+msgstr "كل النماذج"
+
+#: social-media-orders.php:139
+msgid "Format:"
+msgstr "نوع الملف"
+
+#: social-media-orders.php:140 social-media-orders.php:141
+#: social-media-orders.php:142
+#, php-format
+msgid "File %s"
+msgstr "ملف %s"
+
+#: social-media-orders.php:145
+msgid "Download Export"
+msgstr "تصدير الملف"
+
+#: social-media-orders.php:282
+msgid "Form Builder Configuration"
+msgstr "محرر معلومات النموذج"
+
+#: social-media-orders.php:283
+msgid "Submitted Data"
+msgstr "البيانات المرسلة"
+
+#: social-media-orders.php:294
+msgid "Form Type (نوع الفورم)"
+msgstr "نوع النموذج"
+
+#: social-media-orders.php:296
+msgid "Steps (خطوات)"
+msgstr "خطوات"
+
+#: social-media-orders.php:297
+msgid "Fixed Data (بيانات ثابته)"
+msgstr "بيانات ثابته"
+
+#: social-media-orders.php:299
+msgid ""
+"Fixed Data form collects: Name, Mobile, Individuals, and Source URL without "
+"Step 2."
+msgstr ""
+"يجمع نموذج «البيانات الثابتة» ما يلي: الاسم، ورقم الهاتف المحمول، والأفراد، "
+"وعنوان URL المصدر، دون الحاجة إلى الخطوة 2."
+
+#: social-media-orders.php:303
+msgid "Content Before Step 1 (Optional)"
+msgstr "المحتوى في الخطوة الأولى (اختياري)"
+
+#: social-media-orders.php:305
+msgid "This content will be displayed above the first step of the form."
+msgstr "هذا المحتوى سيظهر قبل الخطوة الأولى في النموذج."
+
+#: social-media-orders.php:309
+msgid "YouTube Video URL (Optional)"
+msgstr "رابط فيديو يوتيوب (اختياري)"
+
+#: social-media-orders.php:311
+msgid "Enter a YouTube video URL to display it after step 1 on the frontend."
+msgstr "أدخل رابط يوتيوب للفيديو، سيعرض قبل الخطوة 2 الخاصة بالأسئلة."
+
+#: social-media-orders.php:320
+msgid "+ Add Question"
+msgstr "+ أضف سؤال"
+
+#: social-media-orders.php:358
+msgid "Question Field"
+msgstr "حقل السؤال"
+
+#: social-media-orders.php:358
+msgid "Remove"
+msgstr "حذف"
+
+#: social-media-orders.php:359
+msgid "Title"
+msgstr "عنوان"
+
+#: social-media-orders.php:360
+msgid "Type"
+msgstr "النوع"
+
+#: social-media-orders.php:362
+msgid "Text"
+msgstr "نص"
+
+#: social-media-orders.php:363
+msgid "Number"
+msgstr "رقم"
+
+#: social-media-orders.php:364
+msgid "Date"
+msgstr "تاريخ"
+
+#: social-media-orders.php:365
+msgid "Text Area"
+msgstr "مساحة نص"
+
+#: social-media-orders.php:366
+msgid "Select Dropdown"
+msgstr "قائمة منسدلة"
+
+#: social-media-orders.php:367
+msgid "Radio Buttons"
+msgstr "إختيار من متعدد"
+
+#: social-media-orders.php:370
+msgid "Options (One per line)"
+msgstr "خيارات (كل واحد في سطر)"
+
+#: social-media-orders.php:405
+msgid "Client Data"
+msgstr "بيانات العميل"
+
+#: social-media-orders.php:422
+msgid "Questions"
+msgstr "الأسئلة"
+
+#: social-media-orders.php:450
+msgid "Form Source"
+msgstr "مصدر البيانات"
+
+#: social-media-orders.php:451 social-media-orders.php:513
+#: social-media-orders.php:542
+msgid "Mobile"
+msgstr "الموبايل"
+
+#: social-media-orders.php:458
+msgid "(Form Deleted)"
+msgstr "(نموذج محذوف)"
+
+#: social-media-orders.php:509 social-media-orders.php:541
+msgid "Name"
+msgstr "الإسم"
+
+#: social-media-orders.php:517
+msgid "Individuals"
+msgstr "الأفراد"
+
+#: social-media-orders.php:521 social-media-orders.php:550
+#: social-media-orders.php:647 social-media-orders.php:671
+msgid "Send"
+msgstr "إرسال"
+
+#: social-media-orders.php:533
+msgid "Great, will be in touch with you shortly."
+msgstr "رائع، هنرجعلك فى اسرع وقت."
+
+#: social-media-orders.php:540
+msgid "Step 1: Info"
+msgstr "خطوة 1: البيانات"
+
+#: social-media-orders.php:543
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+#: social-media-orders.php:555
+msgid "All is Done, we will be in contact soon."
+msgstr "تمام جدا - هانرجع لحضرتك فى اسرع وقت ممكن."
+
+#: social-media-orders.php:556
+msgid ""
+"If possible please provide us with some more details in order to arrange A "
+"very special offer designed for you."
+msgstr "لو ممكن نعرف شويه تفاصيل - علشان نجهز لحضرتك عرض مميز."
+
+#: social-media-orders.php:566
+msgid "Step 2: Details"
+msgstr "خطوة 2: التفاصيل"
+
+#: social-media-orders.php:580 social-media-orders.php:682
+msgid "Submit"
+msgstr "إرسال"
+
+#: social-media-orders.php:585
+msgid ""
+"Great, now we understand your preferences better, will be in touch with you "
+"shortly."
+msgstr "دلوقتى قدرنا نفهم رغبات حضرتك بشكل افضل , هانرجعلك فى اسرع وقت."
+
+#: social-media-orders.php:750 social-media-orders.php:773
+msgid "Spam Protected"
+msgstr "محمي من السبام"
+
+#~ msgid "Request Data"
+#~ msgstr "طلب بيانات"
+
+#~ msgid "Form Questions Builder"
+#~ msgstr "محرر أسئلة النموذج"
+
+#~ msgid "Social Media Orders forms"
+#~ msgstr "نماذج الطلبات من شبكات التواصل الاجتماعي"
+
+#~ msgid "Shortcode"
+#~ msgstr "كود مختصر"
+
+#~ msgid "Need to find something?"
+#~ msgstr "تحتاج البحث عن شيء؟"
+
+#~ msgid "Try searching below."
+#~ msgstr "حاول البحث في النموذج أدناه."
+
+#, php-format
+#~ msgid "One thought on &ldquo;%1$s&rdquo;"
+#~ msgstr "تعليق واحد على &ldquo;%1$s&rdquo;"
+
+#, php-format
+#~ msgid "%1$s thought on &ldquo;%2$s&rdquo;"
+#~ msgstr "%1$s تعليقات على %2$s"
+
+#~ msgid "Comments are closed."
+#~ msgstr "التعليقات مغلقة‫."
+
+#~ msgid "Leave a Reply"
+#~ msgstr "اترك رد"
+
+#~ msgid "Important Links"
+#~ msgstr "روابط مهمة"
+
+#~ msgid "Categories"
+#~ msgstr "الأقسام"
+
+#~ msgid "Main Branch Address"
+#~ msgstr "عنوان الفرع الرئيسي"
+
+#, php-format
+#~ msgid "All Rights Reserved | %d %s"
+#~ msgstr "جميع الحقوق محفوظة | %d %s"
+
+#~ msgid "Top Bar Menu"
+#~ msgstr "القائمة العلوية"
+
+#~ msgid "Main Menu"
+#~ msgstr "القائمة الرئيسية"
+
+#~ msgid "Footer Quick Links"
+#~ msgstr "روابط سريعة في الفوتر"
+
+#~ msgid "Footer Categories"
+#~ msgstr "التصنيفات في الفوتر"
+
+#~ msgid "Site Logo (No Cropping)"
+#~ msgstr "شعار الموقع (بدون قص)"
+
+#~ msgid "General Settings"
+#~ msgstr "الإعدادات العامة"
+
+#~ msgid "Posts Grid Columns (Desktop)"
+#~ msgstr "أعمدة عرض المقالات (ديسكتوب)"
+
+#~ msgid "Number of columns on screens wider than 768px."
+#~ msgstr "عدد المقالات في الصف الواحد للشاشات أعرض من 768 بكسل."
+
+#~ msgid "Posts Grid Columns (Tablet)"
+#~ msgstr "أعمدة عرض المقالات (تابلت)"
+
+#~ msgid "Number of columns on screens between 601px and 768px."
+#~ msgstr "عدد المقالات في الصف الواحد للشاشات بين 768 و 601 بكسل."
+
+#~ msgid "Posts Grid Columns (Mobile)"
+#~ msgstr "أعمدة عرض المقالات (موبايل)"
+
+#~ msgid "Number of columns on screens 600px or smaller."
+#~ msgstr "عدد المقالات في الصف الواحد للشاشات من 600 بكسل وأصغر."
+
+#~ msgid "Show Thumbnail"
+#~ msgstr "عرض الصورة البارزه"
+
+#~ msgid "Show Excerpt/Description"
+#~ msgstr "عرض جزء من المقال"
+
+#~ msgid "Show \"Read More\" Link"
+#~ msgstr "عرض رابط اقرأ المزيد"
+
+#~ msgid "\"View All\" Posts Link"
+#~ msgstr "رابط (عرض الكل)"
+
+#~ msgid ""
+#~ "URL for the \"View All\" button on the homepage blog section. If left "
+#~ "empty, the section will be hidden."
+#~ msgstr ""
+#~ "رابط زر \"عرض الكل\" في قسم مدونة الصفحة الرئيسية. إذا تُرك فارغًا، فسيتم "
+#~ "إخفاء القسم."
+
+#~ msgid ""
+#~ "The ideal online store to experience and review the famous Ahmad Tea "
+#~ "products"
+#~ msgstr "متجر إلكتروني مثالي لتجربة واستعراض منتجات شاي احمد الشهيرة"
+
+#~ msgid "Footer Description Text"
+#~ msgstr "الوصف في الفوتر"
+
+#~ msgid "Address"
+#~ msgstr "العنوان"
+
+#~ msgid "Email Address"
+#~ msgstr "البريد الإلكتروني"
+
+#~ msgid "Instagram URL"
+#~ msgstr "رابط انستجرام"
+
+#~ msgid "X (Twitter) URL"
+#~ msgstr "رابط X تويتر"
+
+#~ msgid "Facebook URL"
+#~ msgstr "رابط فيسبوك"
+
+#~ msgid "TikTok URL"
+#~ msgstr "رابط تيك توك"
+
+#~ msgid "YouTube URL"
+#~ msgstr "رابط يوتيوب"
+
+#~ msgid "Pages Covers"
+#~ msgstr "أغلفة الصفحات"
+
+#~ msgid "Home Page Cover"
+#~ msgstr "غلاف الصفحة الرئيسية"
+
+#~ msgid "Background Color"
+#~ msgstr "لون الخلفية"
+
+#~ msgid "Desktop Background Image"
+#~ msgstr "صورة الخلفية - ديسكتوب"
+
+#~ msgid "Tablet & Mobile Background Image (max-width: 768px)"
+#~ msgstr "صورة الخلفية - تابلت وموبايل (أكبر عرض للشاشة 768 بكسل)"
+
+#~ msgid "The Tea You Need and More"
+#~ msgstr "الشاي الذي تحتاجه وأكثر"
+
+#~ msgid "Now available throughout the Kingdom of Saudi Arabia"
+#~ msgstr "متوفر الآن في جميع أنحاء المملكة العربية السعودية"
+
+#~ msgid "Description"
+#~ msgstr "وصف"
+
+#~ msgid "Order Now"
+#~ msgstr "أطلب الآن"
+
+#~ msgid "Button Text"
+#~ msgstr "نص الزر"
+
+#~ msgid "Button Link"
+#~ msgstr "رابط الزر"
+
+#~ msgid "Post & Page Cover"
+#~ msgstr "غلاف الصفحات والمقالات"
+
+#~ msgid "Settings for single posts and pages."
+#~ msgstr "إعدادات للصفحات الفردية والمقالات."
+
+#~ msgid "Archive & Search Cover"
+#~ msgstr "غلاف صفحات الأرشيف ونتائج البحث"
+
+#~ msgid "Settings for category, tag, author, date, and search result pages."
+#~ msgstr ""
+#~ "إعدادات لصفحات الأرشيف، التصنيفات، الوسوم، الكاتب، التاريخ ونتائج البحث."
+
+#~ msgid "404 Page Cover"
+#~ msgstr "غلاف صفحة 404"
+
+#~ msgid "Theme Options"
+#~ msgstr "خيارات القالب"
+
+#~ msgid "Latest Articles"
+#~ msgstr "جديد المقالات"
+
+#~ msgid "Learn more about Ahmad Tea through the following articles"
+#~ msgstr "اعرف المزيد عن شاي أحمد في المقالات التالية"
+
+#~ msgid "View All"
+#~ msgstr "مشاهدة الكل"
+
+#, php-format
+#~ msgid "Search Results for: %s"
+#~ msgstr "نتائج البحث عن‫: %s"
+
+#~ msgid "Pages:"
+#~ msgstr "الصفحات‫:"
+
+#~ msgid "Placeholder image"
+#~ msgstr "الصورة البديلة"
+
+#~ msgid "Read More"
+#~ msgstr "اقرأ المزيد"
+
+#~ msgid "Oops! That page can&rsquo;t be found."
+#~ msgstr "عفوا! لا يمكن العثور علي هذه الصفحة."
+
+#~ msgid ""
+#~ "It looks like nothing was found at this location. Maybe try a search?"
+#~ msgstr "يبدو أنه لم يتم العثور على شيء في هذا الموقع. ربما جرب البحث؟"
+
+#~ msgid "Footer Settings"
+#~ msgstr "إعدادات الفوتر"
+
+#~ msgid "Error 404"
+#~ msgstr "خطأ 404"
+
+#~ msgid "Home"
+#~ msgstr "الرئيسية"
+
+#~ msgid "Page Not Found!"
+#~ msgstr "الصفحة غير موجودة!"
+
+#~ msgid "No available data in this page.."
+#~ msgstr "لا يوجد محتوى في هذه الصفحة.."
+
+#~ msgid "Go to Home Page"
+#~ msgstr "الذهاب للصفحة الرئيسية"
+
+#~ msgid "Mِِِake Appointment"
+#~ msgstr "احجز الآن"
+
+#~ msgid "Contact us"
+#~ msgstr "اتصل بنا"
+
+#~ msgid "Be Group"
+#~ msgstr "Be Group"
+
+#~ msgid "Sidebar"
+#~ msgstr "القائمة الجانبية"
+
+#~ msgid "Footer 1"
+#~ msgstr "فوتر 1"
+
+#~ msgid "Footer 2"
+#~ msgstr "فوتر 2"
+
+#~ msgid "Posts Sidebar"
+#~ msgstr "القائمة الجانبية للمقالات"
+
+#~ msgid "Search:"
+#~ msgstr "بحث:"
+
+#~ msgid "Page"
+#~ msgstr "صفحة"
+
+#~ msgid "of"
+#~ msgstr "من"
+
+#~ msgid "First Page"
+#~ msgstr "الصفحة الأولى"
+
+#~ msgid "First"
+#~ msgstr "الأولى"
+
+#~ msgid "Current Page"
+#~ msgstr "الصفحة الحالية"
+
+#~ msgid "Last Page"
+#~ msgstr "آخر صفحة"
+
+#~ msgid "Last"
+#~ msgstr "الأخيرة"
+
+#, php-format
+#~ msgid "%1$s"
+#~ msgstr "%1$s"
+
+#~ msgid "Whatsapp"
+#~ msgstr "واتساب"
+
+#~ msgid "Contact Us"
+#~ msgstr "اتصل بنا"
+
+#~ msgid "Saturday"
+#~ msgstr "السبت"
+
+#~ msgid "Sunday"
+#~ msgstr "الأحد"
+
+#~ msgid "Monday"
+#~ msgstr "الإثنين"
+
+#~ msgid "Tuesday"
+#~ msgstr "الثلاثاء"
+
+#~ msgid "Wednesday"
+#~ msgstr "الأربعاء"
+
+#~ msgid "Thursday"
+#~ msgstr "الخميس"
+
+#~ msgid "Friday"
+#~ msgstr "الجمعة"
+
+#~ msgid "From"
+#~ msgstr "من"
+
+#~ msgid "to"
+#~ msgstr "إلى"
+
+#~ msgid "No Contact Form found"
+#~ msgstr "لا يوجد نماذج في إضافة ContactForm7"
+
+#~ msgid "Feature Information"
+#~ msgstr "معلومات الميزة"
+
+#~ msgid "Feature Icon"
+#~ msgstr "أيقونة الميزة"
+
+#~ msgid "Icon Will be used second if came with thumbnail."
+#~ msgstr "سيتم استخدام الأيقونة في حالة عدم وجود صورة."
+
+#~ msgid "Content Type"
+#~ msgstr "نوع المحتوى"
+
+#~ msgid "Gallery Images"
+#~ msgstr "جاليري صور"
+
+#~ msgid "Content Style"
+#~ msgstr "شكل المحتوى"
+
+#~ msgid "Style 1"
+#~ msgstr "شكل 1"
+
+#~ msgid "Style 2"
+#~ msgstr "شكل 2"
+
+#~ msgid "Category Posts"
+#~ msgstr "تصنيف المقالات"
+
+#~ msgid "Sub Title"
+#~ msgstr "عنوان فرعي"
+
+#~ msgid "Page Intro"
+#~ msgstr "مقدمة الصفحة"
+
+#~ msgid "Additional Blocks"
+#~ msgstr "بلوكات إضافية"
+
+#~ msgid "Home Blocks"
+#~ msgstr "بلوكات الرئيسية"
+
+#~ msgid "Block {#}"
+#~ msgstr "بلوك {#}"
+
+#~ msgid "Add Block"
+#~ msgstr "أضف بلوك"
+
+#~ msgid "Remove Block"
+#~ msgstr "حذف"
+
+#~ msgid "Nothing"
+#~ msgstr "لا شيء"
+
+#~ msgid "Text & Image"
+#~ msgstr "نص وصورة"
+
+#~ msgid "Call to Action"
+#~ msgstr "CTA"
+
+#~ msgid "Contact Form"
+#~ msgstr "اتصل بنا"
+
+#~ msgid "Features"
+#~ msgstr "المميزات"
+
+#~ msgid "Posts"
+#~ msgstr "المقالات"
+
+#~ msgid "Services"
+#~ msgstr "الخدمات"
+
+#~ msgid "Gallery"
+#~ msgstr "الجاليري"
+
+#~ msgid "Videos"
+#~ msgstr "فيديوهات"
+
+#~ msgid "Slider"
+#~ msgstr "الشرائح"
+
+#~ msgid "Reviews"
+#~ msgstr "آراء العملاء"
+
+#~ msgid "Branches"
+#~ msgstr "الفروع"
+
+#~ msgid "Our Team"
+#~ msgstr "الفريق الطبي"
+
+#~ msgid "Numeric"
+#~ msgstr "رقمي"
+
+#~ msgid "Specific Posts"
+#~ msgstr "مقالات محددة"
+
+#~ msgid "If you selected posts, we will override category selection."
+#~ msgstr "إذا قمت بتحديد المنشورات، فسنتجاوز اختيار التصنيف."
+
+#~ msgid "Additional Content"
+#~ msgstr "نص اضافي"
+
+#~ msgid "ContactForm7 Forms"
+#~ msgstr "نماذج ContactForm7"
+
+#~ msgid "Map iFrame"
+#~ msgstr "iframe الخريطة"
+
+#~ msgid "Enter Google Maps iFrame code."
+#~ msgstr "أضف كود embed الخاص بخريطة جوجل"
+
+#~ msgid "YT Videos"
+#~ msgstr "فيديوهات يوتيوب"
+
+#~ msgid "Enter Youtube Video Complete Link. <strong>(One Per Line)</strong>"
+#~ msgstr "أدخل روابط يوتيوب كاملة. <strong>(رابط لكل سطر)</strong>"
+
+#~ msgid "Image"
+#~ msgstr "صورة"
+
+#~ msgid "Images Collection"
+#~ msgstr "مجموعة صور"
+
+#~ msgid "Image Width"
+#~ msgstr "عرض الصورة"
+
+#~ msgid "Image Height"
+#~ msgstr "ارتفاع الصورة"
+
+#~ msgid "Posts Count"
+#~ msgstr "عدد المقالات"
+
+#~ msgid "Read More Button Target"
+#~ msgstr "رابط زر اقرأ المزيد"
+
+#~ msgid "Add link to button"
+#~ msgstr "أضف رابط للزر"
+
+#~ msgid "Video"
+#~ msgstr "فيديو"
+
+#~ msgid "Add YouTube Link to Video, Start from http://"
+#~ msgstr "أضف رابط يوتيوب على أن يبدأ بـ https://"
+
+#~ msgid "Icon"
+#~ msgstr "أيقونة"
+
+#~ msgid "Member Information"
+#~ msgstr "معلومات العضو"
+
+#~ msgid "Phone"
+#~ msgstr "موبايل"
+
+#~ msgid "Review Information"
+#~ msgstr "معلومات رأي العميل"
+
+#~ msgid "Client Review"
+#~ msgstr "نص رأي العميل"
+
+#~ msgid "Slide Information"
+#~ msgstr "معلومات الشريحة"
+
+#~ msgid "Slide text"
+#~ msgstr "نص الشريحة"
+
+#~ msgid "Enter the text you need to see inside button."
+#~ msgstr "أدخل النص الذي ترغب بظهوره في الزر."
+
+#~ msgid "Button target"
+#~ msgstr "رابط الزر"
+
+#~ msgid "New Feature"
+#~ msgstr "أضف ميزة"
+
+#~ msgid "Add new Feature"
+#~ msgstr "أضف ميزة جديدة"
+
+#~ msgid "Edit Feature"
+#~ msgstr "تعديل الميزة"
+
+#~ msgid "All Features"
+#~ msgstr "كل المميزات"
+
+#~ msgid "View Feature"
+#~ msgstr "عرض الميزة"
+
+#~ msgid "Search in Features"
+#~ msgstr "البحث في المميزات"
+
+#~ msgid "No Features found"
+#~ msgstr "لا يوجد مميزات متوفرة"
+
+#~ msgid "No Features in trash"
+#~ msgstr "لا يوجد مميزات في سلة المهملات"
+
+#, php-format
+#~ msgid "Updated. <a href=\"%s\">View Feature</a>"
+#~ msgstr "تم التحديث. <a href=\"%s\">عرض الميزة</a>"
+
+#~ msgid "Updated."
+#~ msgstr "تم التحديث."
+
+#~ msgid "Feature Deleted."
+#~ msgstr "تم حذف الميزة."
+
+#~ msgid "Feature Updated."
+#~ msgstr "تم تحديث الميزة."
+
+#, php-format
+#~ msgid "Feature restored %s"
+#~ msgstr "تم استعادة الميزة %s"
+
+#, php-format
+#~ msgid "Published. <a href=\"%s\">View Feature</a>"
+#~ msgstr "تم النشر. <a href=\"%s\">عرض الميزة</a>"
+
+#~ msgid "Feature Saved."
+#~ msgstr "تم حفظ الميزة."
+
+#, php-format
+#~ msgid "Feature Sent. <a target=\"_blank\" href=\"%s\">View Feature</a>"
+#~ msgstr "تم إرسال الميزة. <a href=\"%s\">عرض الميزة</a>"
+
+#, php-format
+#~ msgid ""
+#~ "Dated on: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">View "
+#~ "Feature</a>"
+#~ msgstr ""
+#~ "تم التأريخ للنشر في: <strong>%1$s</strong>. <a target=\"_blank\" "
+#~ "href=\"%2$s\">عرض الميزة</a>"
+
+#~ msgid "M j, Y @ G:i"
+#~ msgstr "M j, Y @ G:i"
+
+#, php-format
+#~ msgid "Saved as Draft. <a target=\"_blank\" href=\"%s\">View Feature</a>"
+#~ msgstr "تم الحفظ كمسودة. <a href=\"%s\">عرض الميزة</a>"
+
+#~ msgid "New Member"
+#~ msgstr "عضو جديد"
+
+#~ msgid "Add new Member"
+#~ msgstr "أضف عضو جديد"
+
+#~ msgid "Edit Member"
+#~ msgstr "تعديل عضو فريق العمل"
+
+#~ msgid "All Our Team"
+#~ msgstr "كل فريقنا"
+
+#~ msgid "View Member"
+#~ msgstr "عرض العضو"
+
+#~ msgid "Search in Our Team"
+#~ msgstr "البحث في فريق العمل"
+
+#~ msgid "No members found"
+#~ msgstr "لا يوجد أعضاء في فريق العمل"
+
+#~ msgid "No members in trash"
+#~ msgstr "لا يوجد أعضاء في سلة المهملات"
+
+#, php-format
+#~ msgid "Updated. <a href=\"%s\">View Member</a>"
+#~ msgstr "تم التحديث. <a href=\"%s\">عرض العضو</a>"
+
+#~ msgid "Member Deleted."
+#~ msgstr "تم حذف العضو."
+
+#~ msgid "Member Updated."
+#~ msgstr "تم تحديث العضو."
+
+#, php-format
+#~ msgid "Member restored %s"
+#~ msgstr "تم استعادة العضو %s"
+
+#, php-format
+#~ msgid "Published. <a href=\"%s\">View Member</a>"
+#~ msgstr "تم النشر. <a href=\"%s\">مشاهدة العضو</a>"
+
+#~ msgid "Member Saved."
+#~ msgstr "تم حفظ العضو."
+
+#, php-format
+#~ msgid "Member Sent. <a target=\"_blank\" href=\"%s\">View Member</a>"
+#~ msgstr ""
+#~ "تم إرسال البيانات. <a target=\"_blank\" href=\"%s\">مشاهدة العضو</a>"
+
+#, php-format
+#~ msgid ""
+#~ "Dated on: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">View "
+#~ "Member</a>"
+#~ msgstr ""
+#~ "تم التأريخ للنشر في: <strong>%1$s</strong>. <a href=\"%2$s\">عرض العضو</a>"
+
+#, php-format
+#~ msgid "Saved as Draft. <a target=\"_blank\" href=\"%s\">View Member</a>"
+#~ msgstr "تم الحفظ كمسودة. <a href=\"%s\">عرض العضو</a>"
+
+#~ msgid "Search in Categories"
+#~ msgstr "البحث في التصنيفات"
+
+#~ msgid "All Categories"
+#~ msgstr "كل الأقسام"
+
+#~ msgid "Parent Category"
+#~ msgstr "القسم الأب"
+
+#~ msgid "Edit Category"
+#~ msgstr "تعديل قسم"
+
+#~ msgid "Update Category"
+#~ msgstr "تحديث قسم"
+
+#~ msgid "Add New Category"
+#~ msgstr "أضف قسم جديد"
+
+#~ msgid "New Name"
+#~ msgstr "اسم جديد"
+
+#~ msgid "New Review"
+#~ msgstr "رأي جديد"
+
+#~ msgid "Add new Review"
+#~ msgstr "اضافة رأي جديد"
+
+#~ msgid "Edit Review"
+#~ msgstr "تعديل الرأي"
+
+#~ msgid "All Reviews"
+#~ msgstr "كل الآراء"
+
+#~ msgid "View Review"
+#~ msgstr "مشاهدة رأي العميل"
+
+#~ msgid "Search in Reviews"
+#~ msgstr "البحث في آراء العملاء"
+
+#~ msgid "No Reviews found"
+#~ msgstr "لا يوجد آراء متوفرة"
+
+#~ msgid "No Reviews in trash"
+#~ msgstr "لا يوجد آراء في سلة المهملات"
+
+#, php-format
+#~ msgid "Updated. <a href=\"%s\">View Review</a>"
+#~ msgstr "تم التحديث. <a href=\"%s\">عرض رأي العميل</a>"
+
+#~ msgid "Review Deleted."
+#~ msgstr "تم حذف رأي العميل."
+
+#~ msgid "Review Updated."
+#~ msgstr "تم تحديث رأي العميل."
+
+#, php-format
+#~ msgid "Review restored %s"
+#~ msgstr "تم استعادة رأي العميل %s"
+
+#, php-format
+#~ msgid "Published. <a href=\"%s\">View Review</a>"
+#~ msgstr "تم النشر. <a href=\"%s\">عرض رأي العميل</a>"
+
+#~ msgid "Review Saved."
+#~ msgstr "تم حفظ رأي العميل."
+
+#, php-format
+#~ msgid "Review Sent. <a target=\"_blank\" href=\"%s\">View Review</a>"
+#~ msgstr ""
+#~ "تم إرسال رأي العميل. <a target=\"_blank\" href=\"%s\">عرض رأي العميل</a>"
+
+#, php-format
+#~ msgid ""
+#~ "Dated on: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">View "
+#~ "Review</a>"
+#~ msgstr ""
+#~ "تم التأريخ للنشر في: <strong>%1$s</strong>. <a href=\"%2$s\">عرض رأي "
+#~ "العميل</a>"
+
+#, php-format
+#~ msgid "Saved as Draft. <a target=\"_blank\" href=\"%s\">View Review</a>"
+#~ msgstr "تم الحفظ كمسودة. <a href=\"%s\">عرض رأي العميل</a>"
+
+#~ msgid "Sliders"
+#~ msgstr "الشرائح"
+
+#~ msgid "New Slider"
+#~ msgstr "شريحة جديدة"
+
+#~ msgid "Add new Slider"
+#~ msgstr "إضافة شريحة جديدة"
+
+#~ msgid "Edit Slider"
+#~ msgstr "تعديل شريحة"
+
+#~ msgid "All Sliders"
+#~ msgstr "كل الشرائح"
+
+#~ msgid "View Slider"
+#~ msgstr "عرض الشريحة"
+
+#~ msgid "Search in Sliders"
+#~ msgstr "البحث في الشرائح"
+
+#~ msgid "No Sliders found"
+#~ msgstr "لا يوجد شرائح متوفرة"
+
+#~ msgid "No Sliders in trash"
+#~ msgstr "لا يوجد شرائح في سلة المهملات"
+
+#, php-format
+#~ msgid "Updated. <a href=\"%s\">View Slider</a>"
+#~ msgstr "تم التحديث. <a href=\"%s\">عرض الشريحة</a>"
+
+#~ msgid "Slider Deleted."
+#~ msgstr "تم حذف الشريحة."
+
+#~ msgid "Slider Updated."
+#~ msgstr "تم تحديث الشريحة."
+
+#, php-format
+#~ msgid "Slider restored %s"
+#~ msgstr "تم استعادة الشريحة %s"
+
+#, php-format
+#~ msgid "Published. <a href=\"%s\">View Slider</a>"
+#~ msgstr "تم النشر. <a href=\"%s\">عرض الشريحة</a>"
+
+#~ msgid "Slider Saved."
+#~ msgstr "تم حفظ الشريحة."
+
+#, php-format
+#~ msgid "Slider Sent. <a target=\"_blank\" href=\"%s\">View Slider</a>"
+#~ msgstr "تم إرسال الشريحة. <a target=\"_blank\" href=\"%s\">عرض الشريحة</a>"
+
+#, php-format
+#~ msgid ""
+#~ "Dated on: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">View "
+#~ "Slider</a>"
+#~ msgstr ""
+#~ "تم التأريخ للنشر في: <strong>%1$s</strong>. <a href=\"%2$s\">عرض الشريحة</"
+#~ "a>"
+
+#, php-format
+#~ msgid "Saved as Draft. <a target=\"_blank\" href=\"%s\">View Slider</a>"
+#~ msgstr "تم الحفظ كمسودة. <a href=\"%s\">عرض الشريحة</a>"
+
+#~ msgid "SEO & Social"
+#~ msgstr "السيو والسوشيال"
+
+#~ msgid "SEO & Social Settings"
+#~ msgstr "إعدادات السيو والسوشيال"
+
+#~ msgid "Enable"
+#~ msgstr "تفعيل"
+
+#~ msgid "Title of Page or Post"
+#~ msgstr "عنوان الصفحة او المقال"
+
+#~ msgid "Page or Post Title only."
+#~ msgstr "اسم الصفحة او المقال فقط."
+
+#~ msgid "Title with website name"
+#~ msgstr "اسم الصفحة او المقال مع اسم الموقع"
+
+#~ msgid "Meta Description"
+#~ msgstr "وصف الميتا"
+
+#~ msgid "Part of content"
+#~ msgstr "جزء من المحتوى"
+
+#~ msgid "About website text"
+#~ msgstr "نص عن الموقع"
+
+#~ msgid "Meta Description words count"
+#~ msgstr "عدد كلمات وصف الميتا"
+
+#~ msgid "Will used if you choose (Part of content) in [Meta Description]."
+#~ msgstr "سيتم استخدامه في حالة اختيارك لـ (جزء من المحتوى) في [وصف الميتا]"
+
+#~ msgid "Will used if you choose it in [Meta Description]."
+#~ msgstr "سيتم استخدامه في حالة اختيارك لـ [وصف الميتا]."
+
+#~ msgid "Meta Image"
+#~ msgstr "صورة الميتا"
+
+#~ msgid ""
+#~ "Will shows up in social shares, Don't use image smaller than "
+#~ "<strong>1200×630 PX</strong>"
+#~ msgstr ""
+#~ "الصورة التي ستظهر في شبكات التواصل عند المشاركة، يجب أن لا تقل ابعاد "
+#~ "الصورة عن <strong>1200 × 630 بكسل</strong>"
+
+#~ msgid "Pages & Posts Image"
+#~ msgstr "صورة الصفحات والمقالات"
+
+#~ msgid "Page or Post Thumbnail."
+#~ msgstr "الصورة الرمزية للصفحة أو المقال."
+
+#~ msgid "Table Of Contents"
+#~ msgstr "جدول المحتوى"
+
+#~ msgid "Site Options"
+#~ msgstr "خيارات الموقع"
+
+#~ msgid "Site Logo"
+#~ msgstr "شعار الموقع"
+
+#~ msgid "Upload an image or enter a URL."
+#~ msgstr "قم رفع صورة او اضف رابط الصورة مباشرة‫."
+
+#~ msgid "Favicon"
+#~ msgstr "أيقونة المتصفح"
+
+#~ msgid "Mِِِake Appointment Button"
+#~ msgstr "زر احجز الآن"
+
+#~ msgid "Facebook"
+#~ msgstr "فيسبوك"
+
+#~ msgid "X"
+#~ msgstr "X"
+
+#~ msgid "Twitter"
+#~ msgstr "تويتر"
+
+#~ msgid "Instagram"
+#~ msgstr "انستجرام"
+
+#~ msgid "YouTube"
+#~ msgstr "يوتيوب"
+
+#~ msgid "Linkedin"
+#~ msgstr "لينكد ان"
+
+#~ msgid "Telegram"
+#~ msgstr "تليجرام"
+
+#~ msgid "Snapchat"
+#~ msgstr "سناب شات"
+
+#~ msgid "Branch {#}"
+#~ msgstr "الفرع {#}"
+
+#~ msgid "Add Another Branch"
+#~ msgstr "إضافة فرع آخر"
+
+#~ msgid "Remove Branch"
+#~ msgstr "إزالة الفرع"
+
+#~ msgid "Branch Name"
+#~ msgstr "اسم الفرع"
+
+#~ msgid "Phones"
+#~ msgstr "أرقام الهاتف"
+
+#~ msgid "Work Time"
+#~ msgstr "مواعيد العمل"
+
+#~ msgid "Work Days"
+#~ msgstr "أيام العمل"
+
+#~ msgid "About us"
+#~ msgstr "من نحن"
+
+#~ msgid "in footer"
+#~ msgstr "في الفوتر"
+
+#~ msgid "Special Widget"
+#~ msgstr "ودجت مخصص"
+
+#~ msgid "Posts Block"
+#~ msgstr "بلوك المقالات"
+
+#~ msgid "Block title"
+#~ msgstr "عنوان البلوك"
+
+#~ msgid "Uncategorized"
+#~ msgstr "غير مصنف"
+
+#~ msgid "Category"
+#~ msgstr "التصنيف"
+
+#~ msgid "Articles count"
+#~ msgstr "عدد المقالات"
+
+#~ msgid "Style One"
+#~ msgstr "شكل 1"
+
+#~ msgid "Style Two"
+#~ msgstr "شكل 2"
+
+#~ msgid "Contact Us Widget"
+#~ msgstr "ودجت اتصل بنا"
+
+#~ msgid "Location"
+#~ msgstr "المكان"
+
+#~ msgid "Search"
+#~ msgstr "بحث"
+
+#~ msgid "Tags:"
+#~ msgstr "الوسوم:"
+
+#~ msgid "Know more"
+#~ msgstr "اعرف المزيد"
+
+#~ msgid "View all services"
+#~ msgstr "عرض كل الخدمات"
+
+#~ msgid "Related posts"
+#~ msgstr "متعلقة"
+
+#~ msgid "Share with your friends"
+#~ msgstr "شاركها مع أصدقائك"
+
+#~ msgid "Section Width"
+#~ msgstr "عرض البلوك"
+
+#~ msgid "Normal"
+#~ msgstr "عادي"
+
+#~ msgid "Wide"
+#~ msgstr "عريض"
+
+#~ msgid "Header Booking Form"
+#~ msgstr "نموذج الحجز في الهيدر"
+
+#~ msgid "Previous Page"
+#~ msgstr "الصفحة السابقة"
+
+#~ msgid "Previous"
+#~ msgstr "السابق"
+
+#~ msgid "Next Page"
+#~ msgstr "الصفحة التالية"
+
+#~ msgid "Next"
+#~ msgstr "التالي"
+
+#~ msgid "All Week"
+#~ msgstr "طوال أيام الأسبوع"
+
+#~ msgid "Either something went wrong or this page doesn't exist anymore."
+#~ msgstr "إما أن هناك خطأ ما أو أن هذه الصفحة لم تعد موجودة."
+
+#~ msgid "Developed and Designed by "
+#~ msgstr "تصميم وتطوير "
+
+#~ msgid "Section Background"
+#~ msgstr "خلفية القسم"
+
+#~ msgid "Light"
+#~ msgstr "فاتح"
+
+#~ msgid "Green"
+#~ msgstr "أخضر"
+
+#~ msgid "Box Style"
+#~ msgstr "شكل البلوك"
+
+#~ msgid "Default"
+#~ msgstr "الافتراضي"
+
+#~ msgid "Center"
+#~ msgstr "منتصف"
+
+#~ msgid "With Map"
+#~ msgstr "مع خريطة"
+
+#~ msgid "Certificates image"
+#~ msgstr "صورة الإعتمادات"
+
+#~ msgid "Prices PDF"
+#~ msgstr "ملف PDF الأسعار"
+
+#~ msgid "No available results for your search.."
+#~ msgstr "لا يوجد نتائج تطابق عملية بحثك.."
+
+#~ msgid "Try another one."
+#~ msgstr "قم بتجربة أخرى."
+
+#~ msgid "Enter Search Keyword..."
+#~ msgstr "ادخل كلمات البحث‫…"
+
+#~ msgid "Our Location Map"
+#~ msgstr "موقعنا على الخريطة"
+
+#~ msgid "Find out the prices of surgeries"
+#~ msgstr "تعرف علي أسعار الجراحات"
+
+#~ msgid "Click Here"
+#~ msgstr "اضغط هنا"
+
+#~ msgid "Egyptian Pound"
+#~ msgstr "جنيه"
+
+#~ msgid "Saudi Riyal"
+#~ msgstr "ريال"
+
+#~ msgid "UAE Dirham"
+#~ msgstr "درهم"
+
+#~ msgid "US Dollar"
+#~ msgstr "دولار"
+
+#~ msgid "You may like.."
+#~ msgstr "قد يعجبك أيضا.."
+
+#~ msgid "Small Image"
+#~ msgstr "صورة صغيرة"
+
+#~ msgid "More"
+#~ msgstr "المزيد"
+
+#~ msgid "Conclusion Quote"
+#~ msgstr "خاتمة المقال (اقتباس)"
+
+#~ msgid "Quote owner "
+#~ msgstr "صاحب الإقتباس "
+
+#~ msgid "Resources"
+#~ msgstr "المصادر"
+
+#~ msgid "Resource {#}"
+#~ msgstr "مصدر {#}"
+
+#~ msgid "Add Another Resource"
+#~ msgstr "إضافة مصدر آخر"
+
+#~ msgid "Remove Resource"
+#~ msgstr "إزالة المصدر"
+
+#~ msgid "Resource Name"
+#~ msgstr "اسم المصدر"
+
+#~ msgid "Resource Link"
+#~ msgstr "رابط المصدر"
+
+#~ msgid "Related Titles"
+#~ msgstr "عناوين ذات صلة"
+
+#~ msgid "Attached Posts"
+#~ msgstr "المقالات المرفقة"
+
+#~ msgid "Article Team"
+#~ msgstr "فريق عمل المقال"
+
+#~ msgid "Publisher"
+#~ msgstr "الناشر"
+
+#~ msgid "By:"
+#~ msgstr "بواسطة:"
+
+#~ msgid "in"
+#~ msgstr "في"
+
+#~ msgid "Edited by:"
+#~ msgstr "تحرير:"
+
+#~ msgid "Last updated on"
+#~ msgstr "أخر تحديث في"
+
+#~ msgid "at"
+#~ msgstr "في"
+
+#~ msgid "Published by:"
+#~ msgstr "تم نشره بواسطة:"
+
+#~ msgid "Contact"
+#~ msgstr "اتصل بنا"
+
+#~ msgid "Contact Information"
+#~ msgstr "بيانات الإتصال"
+
+#~ msgid "Call Us"
+#~ msgstr "اتصل بنا"
+
+#~ msgid "Mail Us"
+#~ msgstr "راسلنا"
+
+#~ msgid "Our Location"
+#~ msgstr "موقعنا"
+
+#~ msgid "Intro"
+#~ msgstr "المقدمة"
+
+#~ msgid "About Section"
+#~ msgstr "من نحن"
+
+#~ msgid "Portfolio"
+#~ msgstr "مكتبة الأعمال"
+
+#~ msgid "Partners"
+#~ msgstr "شركاءنا"
+
+#~ msgid "Images"
+#~ msgstr "صور"
+
+#~ msgid "Partners Categories"
+#~ msgstr "تصنيفات الشركاء"
+
+#~ msgid "Homepage Description"
+#~ msgstr "وصف الصفحة الرئيسية"
+
+#~ msgid "New Partner"
+#~ msgstr "شريك جديد"
+
+#~ msgid "Add new Partner"
+#~ msgstr "اضف شريك جديد"
+
+#~ msgid "Edit Partner"
+#~ msgstr "تحرير الشريك"
+
+#~ msgid "All Partners"
+#~ msgstr "كل الشركاء"
+
+#~ msgid "View Partner"
+#~ msgstr "مشاهدة الشريك"
+
+#~ msgid "Search in Partners"
+#~ msgstr "البحث في الشركاء"
+
+#~ msgid "No Partners found"
+#~ msgstr "لا يوجد شركاء متوفرون"
+
+#~ msgid "No Partners in trash"
+#~ msgstr "لا يوجد شركاء في سلة المهملات"
+
+#, php-format
+#~ msgid "Updated. <a href=\"%s\">View Partner</a>"
+#~ msgstr "تم التحديث. <a href=\"%s\">عرض الشريك</a>"
+
+#~ msgid "Partner Deleted."
+#~ msgstr "تم حذف الشريك."
+
+#~ msgid "Partner Updated."
+#~ msgstr "تم تحديث الشريك."
+
+#, php-format
+#~ msgid "Partner restored %s"
+#~ msgstr "تم استعادة الشريك %s"
+
+#, php-format
+#~ msgid "Published. <a href=\"%s\">View Partner</a>"
+#~ msgstr "تم النشر. <a href=\"%s\">عرض الشريك</a>"
+
+#~ msgid "Partner Saved."
+#~ msgstr "تم حفظ الشريك."
+
+#, php-format
+#~ msgid "Partner Sent. <a target=\"_blank\" href=\"%s\">View Partner</a>"
+#~ msgstr "تم إرسال الشريك. <a target=\"_blank\" href=\"%s\">عرض الشريك</a>"
+
+#, php-format
+#~ msgid ""
+#~ "Dated on: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">View "
+#~ "Partner</a>"
+#~ msgstr ""
+#~ "تم التأريخ للنشر في: <strong>%1$s</strong>. <a href=\"%2$s\">عرض الشريك</"
+#~ "a>"
+
+#, php-format
+#~ msgid "Saved as Draft. <a target=\"_blank\" href=\"%s\">View Partner</a>"
+#~ msgstr "تم الحفظ كمسودة. <a href=\"%s\">عرض الشريك</a>"
+
+#~ msgid "New Item"
+#~ msgstr "مشروع جديد"
+
+#~ msgid "Add new Item"
+#~ msgstr "أضف مشروع جديد"
+
+#~ msgid "Edit Item"
+#~ msgstr "تعديل مشروع"
+
+#~ msgid "All Portfolio"
+#~ msgstr "مكتبة الأعمال"
+
+#~ msgid "View Item"
+#~ msgstr "عرض المشروع"
+
+#~ msgid "Search in Portfolio"
+#~ msgstr "البحث في مكتبة الأعمال"
+
+#~ msgid "No Portfolio found"
+#~ msgstr "لا يوجد أعمال متوفرون"
+
+#~ msgid "No Portfolio in trash"
+#~ msgstr "لا يوجد أعمال في سلة المهملات"
+
+#, php-format
+#~ msgid "Updated. <a href=\"%s\">View Item</a>"
+#~ msgstr "تم التحديث. <a href=\"%s\">عرض العنصر</a>"
+
+#~ msgid "Item Updated."
+#~ msgstr "تم التحديث."
+
+#, php-format
+#~ msgid "Item restored %s"
+#~ msgstr "تم استعادة العنصر %s"
+
+#, php-format
+#~ msgid "Published. <a href=\"%s\">View Item</a>"
+#~ msgstr "تم النشر. <a href=\"%s\">عرض العنصر</a>"
+
+#~ msgid "Item Saved."
+#~ msgstr "تم حفظ العنصر."
+
+#, php-format
+#~ msgid "Item Sent. <a target=\"_blank\" href=\"%s\">View Item</a>"
+#~ msgstr "تم إرسال العنصر. <a href=\"%s\">عرض العنصر</a>"
+
+#, php-format
+#~ msgid ""
+#~ "Dated on: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">View "
+#~ "Item</a>"
+#~ msgstr ""
+#~ "تم التأريخ للنشر في: <strong>%1$s</strong>. <a target=\"_blank\" "
+#~ "href=\"%2$s\">عرض العنصر</a>"
+
+#, php-format
+#~ msgid "Saved as Draft. <a target=\"_blank\" href=\"%s\">View Item</a>"
+#~ msgstr "تم الحفظ كمسودة. <a href=\"%s\">عرض العنصر</a>"
+
+#~ msgid "New Service"
+#~ msgstr "خدمة جديدة"
+
+#~ msgid "Add new Service"
+#~ msgstr "إضافة خدمة جديدة"
+
+#~ msgid "Edit Service"
+#~ msgstr "تعديل الخدمة"
+
+#~ msgid "All Services"
+#~ msgstr "كل الخدمات"
+
+#~ msgid "View Service"
+#~ msgstr "عرض الخدمة "
+
+#~ msgid "Search in Services"
+#~ msgstr "البحث في الخدمات"
+
+#~ msgid "No Services found"
+#~ msgstr "لا يوجد خدمات متوفرة"
+
+#~ msgid "No Services in trash"
+#~ msgstr "لا يوجد خدمات في سلة المهملات"
+
+#, php-format
+#~ msgid "Updated. <a href=\"%s\">View Service</a>"
+#~ msgstr "تم التحديث. <a href=\"%s\">عرض الخدمة</a>"
+
+#~ msgid "Service Deleted."
+#~ msgstr "تم حذف الخدمة."
+
+#~ msgid "Service Updated."
+#~ msgstr "تم تحديث الخدمة."
+
+#, php-format
+#~ msgid "Service restored %s"
+#~ msgstr "تم استعادة الخدمة %s"
+
+#, php-format
+#~ msgid "Published. <a href=\"%s\">View Service</a>"
+#~ msgstr "تم النشر. <a href=\"%s\">عرض الخدمة</a>"
+
+#~ msgid "Service Saved."
+#~ msgstr "تم حفظ الخدمة."
+
+#, php-format
+#~ msgid "Service Sent. <a target=\"_blank\" href=\"%s\">View Service</a>"
+#~ msgstr "تم إرسال الخدمة. <a target=\"_blank\" href=\"%s\">عرض الخدمة</a>"
+
+#, php-format
+#~ msgid ""
+#~ "Dated on: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">View "
+#~ "Service</a>"
+#~ msgstr ""
+#~ "تم التأريخ للنشر في: <strong>%1$s</strong>. <a href=\"%2$s\">عرض الخدمة</"
+#~ "a>"
+
+#, php-format
+#~ msgid "Saved as Draft. <a target=\"_blank\" href=\"%s\">View Service</a>"
+#~ msgstr "تم الحفظ كمسودة. <a href=\"%s\">عرض الخدمة</a>"
+
+#~ msgid "Contact with us now"
+#~ msgstr "اتصل بنا الآن"
+
+#~ msgid "Various articles"
+#~ msgstr "مقالات متنوعة"
+
+#~ msgid "Know More"
+#~ msgstr "اعرف المزيد"
+
+#~ msgid "<span>Success</span> Partners"
+#~ msgstr "<span>شركاء</span> النجاح"
+
+#~ msgid "<span>High quality</span> products <br/> to serve your project."
+#~ msgstr "منتجات <span>عالية الجودة</span> <br/>لخدمة مشروعك."
+
+#~ msgid "Our Work"
+#~ msgstr "أعمالنا"
+
+#~ msgid "Distinctive solutions"
+#~ msgstr "حلول مميزة"
+
+#~ msgid "in one place"
+#~ msgstr "في مكان واحد"
+
+#~ msgid "Intro Features"
+#~ msgstr "مقدمة المميزات"
+
+#~ msgid "About Doctor"
+#~ msgstr "عن الدكتور"
+
+#~ msgid "Facts"
+#~ msgstr "حقائق وأرقام"
+
+#~ msgid "Before / After"
+#~ msgstr "قبل / بعد"
+
+#~ msgid "Featured Post"
+#~ msgstr "مقال مميز"
+
+#~ msgid ""
+#~ "the post will shows up in (Blog page) slider. if you check this option."
+#~ msgstr "سيظهر هذا المقال في سلايدر (صفحة المدونة) في حالة تفعيل هذا الخيار."
+
+#~ msgid "Article Intro"
+#~ msgstr "مقدمة المقال"
+
+#~ msgid "Before & After Cases"
+#~ msgstr "الحالات قبل / بعد"
+
+#~ msgid "View more"
+#~ msgstr "عرض المزيد"
+
+#~ msgid "Quick Call"
+#~ msgstr "اتصال سريع"
+
+#~ msgid "Widgets in this area will be shown on all posts."
+#~ msgstr "الودجات في هذه المنطقة ستظهر في صفحة المقالات."
+
+#~ msgid "Style Three"
+#~ msgstr "شكل 3"
+
+#~ msgid "Mohamed Kenawy"
+#~ msgstr "محمد قناوي"
+
+#~ msgid "Count"
+#~ msgstr "العدد"
+
+#~ msgid "Style 3"
+#~ msgstr "شكل 3"
+
+#~ msgid "Footer 3"
+#~ msgstr "فوتر 3"
+
+#~ msgid "Question Information"
+#~ msgstr "معلومات السؤال"
+
+#~ msgid "Question Answer"
+#~ msgstr "إجابة السؤال"
+
+#~ msgid "Use <code>HTML</code> IMG or SVG or Font Icons i"
+#~ msgstr "استخدم كود <code>HTML</code> لصورة IMG أو SVG أو خط أيقونات i"
+
+#~ msgid "Package Information"
+#~ msgstr "معلومات الباقة"
+
+#~ msgid "Add Line"
+#~ msgstr "أضف سطر"
+
+#~ msgid "One Time"
+#~ msgstr "مرة واحدة"
+
+#~ msgid "Website Link"
+#~ msgstr "رابط الموقع الإلكتروني"
+
+#~ msgid "Testimonial Information"
+#~ msgstr "معلومات التعليق"
+
+#~ msgid "User Position or Title"
+#~ msgstr "المسمى الوظيفي"
+
+#~ msgid "Website"
+#~ msgstr "الموقع الإلكتروني"
+
+#~ msgid "Testimonial Text"
+#~ msgstr "نص التعليق"
+
+#~ msgid "Faq"
+#~ msgstr "س و ج"
+
+#~ msgid "Edit Question"
+#~ msgstr "تعديل السؤال"
+
+#~ msgid "All Faq"
+#~ msgstr "كل س و ج"
+
+#~ msgid "View Question"
+#~ msgstr "عرض السؤال"
+
+#~ msgid "Search in Faq"
+#~ msgstr "البحث في س و ج"
+
+#~ msgid "No Faq found"
+#~ msgstr "لا يوجد أسئلة متوفرة"
+
+#~ msgid "No Faq in trash"
+#~ msgstr "لا يوجد أسئلة في سلة المهملات"
+
+#, php-format
+#~ msgid "Updated. <a href=\"%s\">View Question</a>"
+#~ msgstr "تم التحديث. <a href=\"%s\">عرض السؤال</a>"
+
+#~ msgid "Question Updated."
+#~ msgstr "تم تحديث السؤال."
+
+#, php-format
+#~ msgid "Question restored %s"
+#~ msgstr "تم استعادة السؤال %s"
+
+#, php-format
+#~ msgid "Published. <a href=\"%s\">View Question</a>"
+#~ msgstr "تم النشر. <a href=\"%s\">عرض السؤال</a>"
+
+#~ msgid "Question Saved."
+#~ msgstr "تم حفظ السؤال."
+
+#, php-format
+#~ msgid "Question Sent. <a target=\"_blank\" href=\"%s\">View Question</a>"
+#~ msgstr "تم إرسال السؤال. <a href=\"%s\">عرض السؤال</a>"
+
+#, php-format
+#~ msgid ""
+#~ "Dated on: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">View "
+#~ "Question</a>"
+#~ msgstr ""
+#~ "تم التأريخ للنشر في: <strong>%1$s</strong>. <a target=\"_blank\" "
+#~ "href=\"%2$s\">عرض السؤال</a>"
+
+#, php-format
+#~ msgid "Saved as Draft. <a target=\"_blank\" href=\"%s\">View Question</a>"
+#~ msgstr "تم الحفظ كمسودة. <a href=\"%s\">عرض السؤال</a>"
+
+#~ msgid "Packages"
+#~ msgstr "الباقات"
+
+#~ msgid "New Package"
+#~ msgstr "باقة جديدة"
+
+#~ msgid "Add new Package"
+#~ msgstr "أضف باقة جديدة"
+
+#~ msgid "Edit Package"
+#~ msgstr "تعديل باقة"
+
+#~ msgid "All Packages"
+#~ msgstr "كل الباقات"
+
+#~ msgid "View Package"
+#~ msgstr "عرض باقة"
+
+#~ msgid "Search in Packages"
+#~ msgstr "البحث في الباقات"
+
+#~ msgid "Package Deleted."
+#~ msgstr "تم حذف الباقة."
+
+#~ msgid "Package Updated."
+#~ msgstr "تم تحديث الباقة."
+
+#, php-format
+#~ msgid "Package restored %s"
+#~ msgstr "تم استعادة الباقة %s"
+
+#~ msgid "Package Saved."
+#~ msgstr "تم حفظ الباقة."
+
+#~ msgid "All Items"
+#~ msgstr "كل المشروعات"
+
+#~ msgid "Testimonials"
+#~ msgstr "آراء العملاء"
+
+#~ msgid "New Testimonial"
+#~ msgstr "أضف تعليق جديد"
+
+#~ msgid "Add new Testimonial"
+#~ msgstr "أضف تعليق جديدة"
+
+#~ msgid "Edit Testimonial"
+#~ msgstr "تعديل التعليق"
+
+#~ msgid "All Testimonials"
+#~ msgstr "كل التعليقات"
+
+#~ msgid "View Testimonial"
+#~ msgstr "عرض التعليق"
+
+#~ msgid "Search in Testimonials"
+#~ msgstr "البحث في آراء العملاء"
+
+#~ msgid "No Testimonials found"
+#~ msgstr "لا يوجد عناصر متوفرة"
+
+#~ msgid "No Testimonials in trash"
+#~ msgstr "لا يوجد عناصر في سلة المهملات"
+
+#, php-format
+#~ msgid "Updated. <a href=\"%s\">View Testimonial</a>"
+#~ msgstr "تم التحديث. <a href=\"%s\">عرض العنصر</a>"
+
+#~ msgid "Testimonial Deleted."
+#~ msgstr "تم حذف العنصر."
+
+#~ msgid "Testimonial Updated."
+#~ msgstr "تم تحديث العنصر."
+
+#, php-format
+#~ msgid "Testimonial restored %s"
+#~ msgstr "تم استعادة العنصر %s"
+
+#, php-format
+#~ msgid "Published. <a href=\"%s\">View Testimonial</a>"
+#~ msgstr "تم النشر. <a href=\"%s\">عرض العنصر</a>"
+
+#~ msgid "Testimonial Saved."
+#~ msgstr "تم حفظ العنصر."
+
+#, php-format
+#~ msgid ""
+#~ "Testimonial Sent. <a target=\"_blank\" href=\"%s\">View Testimonial</a>"
+#~ msgstr "تم إرسال العنصر. <a href=\"%s\">عرض العنصر</a>"
+
+#, php-format
+#~ msgid ""
+#~ "Dated on: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">View "
+#~ "Testimonial</a>"
+#~ msgstr ""
+#~ "تم التأريخ للنشر في: <strong>%1$s</strong>. <a target=\"_blank\" "
+#~ "href=\"%2$s\">عرض العنصر</a>"
+
+#, php-format
+#~ msgid ""
+#~ "Saved as Draft. <a target=\"_blank\" href=\"%s\">View Testimonial</a>"
+#~ msgstr "تم الحفظ كمسودة. <a href=\"%s\">عرض العنصر</a>"
+
+#~ msgid "Main Currency"
+#~ msgstr "العملة الرئيسية"
+
+#~ msgid "Services we provide"
+#~ msgstr "خدمات نقدمها"
+
+#~ msgid "Visit Website"
+#~ msgstr "زيارة الموقع"
+
+#~ msgid "Welcome to"
+#~ msgstr "مرحباً بكم في"
+
+#~ msgid "Early detection: your key to defeating cancer"
+#~ msgstr "الكشف المبكر: مفتاحك للانتصار على السرطان"
+
+#~ msgid "Search Intro"
+#~ msgstr "سكشن البحث - المقدمة"
+
+#~ msgid "Pinned Posts"
+#~ msgstr "مقالات مثبتة"
+
+#~ msgid "FAQ"
+#~ msgstr "س و ج"
+
+#~ msgid "Archive Description"
+#~ msgstr "وصف صفحة التصنيف"
+
+#~ msgid "More information"
+#~ msgstr "المزيد من المعلومات"
+
+#~ msgid "Frequently Asked Questions"
+#~ msgstr "الأسئلة الشائعة"
+
+#~ msgid "Best prices and offers"
+#~ msgstr "عروض أسعار وخصومات"
+
+#~ msgid "Our Portfolio"
+#~ msgstr "الأعمال السابقة"
+
+#~ msgid "Egyptian Pount"
+#~ msgstr "جنيه"
+
+#~ msgid "We add extra one for (Explore all services) button."
+#~ msgstr "سنقوم بإضافة مربع إضافي لزر (استكشف كل الخدمات)."
+
+#~ msgid "Sub title"
+#~ msgstr "عنوان فرعي"
+
+#~ msgid "Main title"
+#~ msgstr "العنوان الرئيسي"
+
+#~ msgid "Facts in numbers"
+#~ msgstr "حقائق في أرقام"
+
+#~ msgid "Feature {#}"
+#~ msgstr "ميزة {#}"
+
+#~ msgid "Add Feature"
+#~ msgstr "أضف ميزة جديدة"
+
+#~ msgid "Remove Feature"
+#~ msgstr "إزالة الميزة"
+
+#~ msgid "We add extra one for (Explore all portfolio) button."
+#~ msgstr "سنقوم بإضافة مربع إضافي لزر (استكشف كل الأعمال)."
+
+#~ msgid "SAR"
+#~ msgstr "ريال"
+
+#~ msgid "Comments"
+#~ msgstr "تعليق"
+
+#~ msgid "404"
+#~ msgstr "404"
+
+#~ msgid "Back to home page"
+#~ msgstr "الرجوع إلى الصفحة الرئيسية"
+
+#~ msgid "%s Article"
+#~ msgid_plural "%s Articles"
+#~ msgstr[0] "لم يساهم"
+#~ msgstr[1] "مقال واحد"
+#~ msgstr[2] "مقالان"
+#~ msgstr[3] "%s مقالات"
+#~ msgstr[4] "%s مقال"
+#~ msgstr[5] "%s مقال"
+
+#~ msgid "Soon"
+#~ msgstr "قريبا"
+
+#~ msgid "New content on the way, follow us to stay updated."
+#~ msgstr "جاري العمل على إضافة محتوى جديد.. تابعونا."
+
+#~ msgid "Subscribe to our newsletter"
+#~ msgstr "اشترك في النشرة البريدية"
+
+#~ msgid ""
+#~ "Get the best source for field research and practical policy "
+#~ "recommendations right in your inbox"
+#~ msgstr ""
+#~ "احصل على أفضل مصدر للبحث الميداني وتوصيات السياسة العملية مباشرة في بريدك "
+#~ "الوارد"
+
+#~ msgid "Enter your email address"
+#~ msgstr "ادخل بريدك الإلكتروني"
+
+#~ msgid "Subscribe"
+#~ msgstr "اشترك"
+
+#~ msgid "Topbar"
+#~ msgstr "القائمة العلوية"
+
+#~ msgid "Mega Menu"
+#~ msgstr "القائمة الكاملة"
+
+#~ msgid "Authors"
+#~ msgstr "كتّاب"
+
+#~ msgid "Awesome! You have reached the end of page."
+#~ msgstr "رائع‫!‬ لقد وصلت لنهاية الصفحة‫.‬."
+
+#~ msgid "Menu"
+#~ msgstr "القائمة"
+
+#~ msgid "Academies"
+#~ msgstr "هيئات وأكاديميات"
+
+#~ msgid "Academy"
+#~ msgstr "أكاديمية"
+
+#~ msgid "Add Academy"
+#~ msgstr "أضف أكاديمية"
+
+#~ msgid "Edit Academy"
+#~ msgstr "تعديل الأكاديمية"
+
+#~ msgid "No Academies Found"
+#~ msgstr "لايوجد هيئات أو أكاديميات"
+
+#~ msgid "No Academies items Found in Trash"
+#~ msgstr "لايوجد هيئات أكاديمية في سلة المحذوفات"
+
+#~ msgid "None"
+#~ msgstr "بدون"
+
+#~ msgid "Advisory Body"
+#~ msgstr "الهيئة الإستشارية"
+
+#~ msgid "Advisor"
+#~ msgstr "إستشاري"
+
+#~ msgid "Add Advisor"
+#~ msgstr "أضف إستشاري"
+
+#~ msgid "Edit Advisor"
+#~ msgstr "تحرير إستشاري"
+
+#~ msgid "View Advisor"
+#~ msgstr "مشاهدة الإستشاري"
+
+#~ msgid "Search in Advisory"
+#~ msgstr "البحث في الهيئة الإستشارية"
+
+#~ msgid "No Advisory Found"
+#~ msgstr "لايوجد إستشاريين"
+
+#~ msgid "No Advisory items Found in Trash"
+#~ msgstr "لايوجد إستشاريين في المحذوفات"
+
+#~ msgid "Books"
+#~ msgstr "مكتب الكتب"
+
+#~ msgid "Book"
+#~ msgstr "كتاب"
+
+#~ msgid "Edit Book"
+#~ msgstr "تحرير الكتاب"
+
+#~ msgid "View Book"
+#~ msgstr "مشاهدة الكتاب"
+
+#~ msgid "No Books Found"
+#~ msgstr "لايوجد كتب"
+
+#~ msgid "No Books items Found in Trash"
+#~ msgstr "لايوجد عناصر كتب في سلة المحذوفات"
+
+#~ msgid "Books Tags"
+#~ msgstr "أوسمة الكُتب"
+
+#~ msgid "Books Tag"
+#~ msgstr "وسم الكتاب"
+
+#~ msgid "Search Books Tags"
+#~ msgstr "البحث في أوسمة الكتب"
+
+#~ msgid "Popular Books Tags"
+#~ msgstr "أشهر أوسمة الكتب"
+
+#~ msgid "Parent Books Tag"
+#~ msgstr "الوسم الأب للكتب"
+
+#~ msgid "Parent Books Tag:"
+#~ msgstr "الوسم الأب للكتب‫:"
+
+#~ msgid "Edit Books Tag"
+#~ msgstr "البحث في اوسمة الكتب"
+
+#~ msgid "Update Books Tag"
+#~ msgstr "تحديث وسم الكتب"
+
+#~ msgid "Add New Books Tag"
+#~ msgstr "تحديث وسم الكتب"
+
+#~ msgid "New Books Tag Name"
+#~ msgstr "اضف وسم جديد"
+
+#~ msgid "Separate Books tags with commas"
+#~ msgstr "افصل بين الأوسمة بفاصلة"
+
+#~ msgid "Add or remove Books tags"
+#~ msgstr "اضافة او حذف وسوم الكتب"
+
+#~ msgid "Choose from the most used Books tags"
+#~ msgstr "أختيار من الوسوم الأكثر إستخداماً في الكتب"
+
+#~ msgid "Books Category"
+#~ msgstr "تصنيف الكتب"
+
+#~ msgid "Search Books Categories"
+#~ msgstr "البحث في تصنيفات الكتب"
+
+#~ msgid "Popular Books Categories"
+#~ msgstr "أشهر تصنيفات الكتب"
+
+#~ msgid "All Books Categories"
+#~ msgstr "جميع تصنيفات الكتب"
+
+#~ msgid "Parent Books Category:"
+#~ msgstr "التصنيف الأب للكتب:"
+
+#~ msgid "Edit Books Category"
+#~ msgstr "تعديل تصنيف الكتب"
+
+#~ msgid "New Books Category Name"
+#~ msgstr "اسم تصنيف كتب جديد"
+
+#~ msgid "Separate Books categories with commas"
+#~ msgstr "افصل بين تصنيفات الكتب بفاصله"
+
+#~ msgid "Add or remove Books categories"
+#~ msgstr "اضافة وحذف تصنيفات الكتب"
+
+#~ msgid "Choose from the most used Books categories"
+#~ msgstr "اختيار من التصنيفات الاكثر استخداماً للكتب"
+
+#~ msgid "Tags"
+#~ msgstr "الأوسمة"
+
+#~ msgid "Editions"
+#~ msgstr "إصدارات المجلة"
+
+#~ msgid "Edition"
+#~ msgstr "إصدار"
+
+#~ msgid "Add New Edition"
+#~ msgstr "أضف إصدار جديد"
+
+#~ msgid "No Editions Found"
+#~ msgstr "لايوجد إصدارات"
+
+#~ msgid "No Editions items Found in Trash"
+#~ msgstr "لايوجد إصدارات في المحذوفات"
+
+#~ msgid "Editions Tags"
+#~ msgstr "تعديل وسم الإصدارات"
+
+#~ msgid "Editions Tag"
+#~ msgstr "تعديل وسم الإصدارات"
+
+#~ msgid "Search Editions Tags"
+#~ msgstr "البحث في وسوم الإصدارات"
+
+#~ msgid "Popular Editions Tags"
+#~ msgstr "أشهر أوسمة الإصدارات"
+
+#~ msgid "All Editions Tags"
+#~ msgstr "جميع أوسمة الإصدارات"
+
+#~ msgid "Parent Editions Tag"
+#~ msgstr "الوسم الأب للإصدارات"
+
+#~ msgid "Parent Editions Tag:"
+#~ msgstr "الوسم الأب للإصدارات‫:"
+
+#~ msgid "Edit Editions Tag"
+#~ msgstr "تعديل وسم الإصدارات"
+
+#~ msgid "Update Editions Tag"
+#~ msgstr "تحديث وسم الإصدارات"
+
+#~ msgid "Add New Editions Tag"
+#~ msgstr "اضف وسم جديد للإصدارات"
+
+#~ msgid "New Editions Tag Name"
+#~ msgstr "اسم وسم جديد للإصدارات"
+
+#~ msgid "Separate Editions tags with commas"
+#~ msgstr "افصل بين اوسمة الإصدارات بفصالة"
+
+#~ msgid "Add or remove Editions tags"
+#~ msgstr "اضافة او حذف وسوم الإصدارات"
+
+#~ msgid "Choose from the most used Editions tags"
+#~ msgstr "أختيار من الوسوم الأكثر إستخداماً في الإصدارات"
+
+#~ msgid "Editions Categories"
+#~ msgstr "تصنيفات الإصدارات"
+
+#~ msgid "Popular Editions Categories"
+#~ msgstr "أشهر تصنيفات الإصدارات"
+
+#~ msgid "All Editions Categories"
+#~ msgstr "جميع تصنيفات الإصدارات"
+
+#~ msgid "Parent Editions Category"
+#~ msgstr "التصنيف الأب للإصدارات"
+
+#~ msgid "Parent Editions Category:"
+#~ msgstr "التصنيف الأب للإصدارات:"
+
+#~ msgid "Edit Editions Category"
+#~ msgstr "تعديل تصنيف الإصدارات"
+
+#~ msgid "Update Editions Category"
+#~ msgstr "تحديث تصنيف الإصدارات"
+
+#~ msgid "Add New Editions Category"
+#~ msgstr "اضف تصنيف جديد للإصدارات"
+
+#~ msgid "New Editions Category Name"
+#~ msgstr "اسم تصنيف إصدارات جديد"
+
+#~ msgid "Separate Editions categories with commas"
+#~ msgstr "افصل بين تصنيفات الإصدارات بفاصله"
+
+#~ msgid "Add or remove Editions categories"
+#~ msgstr "اضافة وحذف تصنيفات الإصدارات"
+
+#~ msgid "Choose from the most used Editions categories"
+#~ msgstr "اختيار من التصنيفات الاكثر استخداماً للإصدارات"
+
+#~ msgid "Ethnicities"
+#~ msgstr "الأعراق"
+
+#~ msgid "Ethnicitie"
+#~ msgstr "العرق"
+
+#~ msgid "Search Ethnicities"
+#~ msgstr "البحث في الأعراق"
+
+#~ msgid "Popular Ethnicities"
+#~ msgstr "أشهر الأعراق"
+
+#~ msgid "All Ethnicities"
+#~ msgstr "جميع الأعراق"
+
+#~ msgid "Parent Ethnicitie"
+#~ msgstr "الوسم الأب للأعراق"
+
+#~ msgid "Parent Ethnicitie:"
+#~ msgstr "الوسم الأب للأعراق:"
+
+#~ msgid "Edit Ethnicitie"
+#~ msgstr "تحرير العرق"
+
+#~ msgid "Update Ethnicitie"
+#~ msgstr "تحديث العرق"
+
+#~ msgid "Add New Ethnicitie"
+#~ msgstr "أضف عرق جديد"
+
+#~ msgid "New Ethnicitie Name"
+#~ msgstr "اسم وسم جديد للأعراق"
+
+#~ msgid "Separate Ethnicities with commas"
+#~ msgstr "افصل بين تصنيفات الأعراق بفاصله"
+
+#~ msgid "Add or remove Ethnicities"
+#~ msgstr "اضافة وحذف تصنيفات الأعراق"
+
+#~ msgid "Choose from the most used Ethnicities"
+#~ msgstr "اختيار من التصنيفات الاكثر استخداماً للأعراق"
+
+#~ msgid "ethnicities"
+#~ msgstr "الأعراق"
+
+#~ msgid "Media institutions"
+#~ msgstr "مؤسسات إعلامية"
+
+#~ msgid "Add New institution"
+#~ msgstr "أضف مؤسسة جديدة"
+
+#~ msgid "Edit institution"
+#~ msgstr "تحرير المؤسسة"
+
+#~ msgid "View institution"
+#~ msgstr "عرض المؤسسة"
+
+#~ msgid "Search in Media institutions"
+#~ msgstr "البحث في المؤسسات الإعلامية"
+
+#~ msgid "No Media institutions Found"
+#~ msgstr "لايوجد مؤسسات إعلامية"
+
+#~ msgid "No Media institutions items Found in Trash"
+#~ msgstr "لايوجد مؤسسات إعلامية في سلة المحذوفات"
+
+#~ msgid "Regoins"
+#~ msgstr "المناطق والدول"
+
+#~ msgid "Regoin"
+#~ msgstr "منطقة أو دولة"
+
+#~ msgid "Search Regoins"
+#~ msgstr "البحث في المناطق والدول"
+
+#~ msgid "Popular Regoins"
+#~ msgstr "أشهر المناطق والدول"
+
+#~ msgid "Parent Regoin"
+#~ msgstr "المنطقة الأب"
+
+#~ msgid "Parent Regoin:"
+#~ msgstr "المنطقة الأب‫:"
+
+#~ msgid "Update Regoin"
+#~ msgstr "تحديث المنطقة"
+
+#~ msgid "Add New Regoin"
+#~ msgstr "اضافة منطقة جديدة"
+
+#~ msgid "Separate Regoins with commas"
+#~ msgstr "افصل بين المناطق والدول بفاصلة"
+
+#~ msgid "Add or remove Regoins"
+#~ msgstr "اضافة وحذف المناطق والدول"
+
+#~ msgid "Choose from the most used Regoins"
+#~ msgstr "أختيار من الوسوم الأكثر إستخداماً في المناطق والدول"
+
+#~ msgid "regoins"
+#~ msgstr "الدول"
+
+#~ msgid "Religions"
+#~ msgstr "الأديان"
+
+#~ msgid "Religion"
+#~ msgstr "الديانة"
+
+#~ msgid "Search Religion"
+#~ msgstr "البحث في الديانات"
+
+#~ msgid "Popular Religion"
+#~ msgstr "أشهر الديانات"
+
+#~ msgid "All Religion"
+#~ msgstr "كل الديانات"
+
+#~ msgid "Parent Religion"
+#~ msgstr "الدين الأب"
+
+#~ msgid "Parent Religion:"
+#~ msgstr "الدين الأب‫:"
+
+#~ msgid "Edit Religion"
+#~ msgstr "تحرير الدين"
+
+#~ msgid "Update Religion"
+#~ msgstr "تحديث الدين"
+
+#~ msgid "Add New Religion"
+#~ msgstr "إضافة دين جديدة"
+
+#~ msgid "New Religion Name"
+#~ msgstr "اسم جديد للدين"
+
+#~ msgid "Separate Religion with commas"
+#~ msgstr "افصل بين الديانات بفاصلة"
+
+#~ msgid "Add or remove Religion"
+#~ msgstr "اضافة وحذف الديانات"
+
+#~ msgid "Choose from the most used Religion"
+#~ msgstr "أختيار من الوسوم الأكثر إستخداماً في الديانات"
+
+#~ msgid "religion"
+#~ msgstr "ديانة"
+
+#~ msgid "Research Centers"
+#~ msgstr "مراكز بحثية"
+
+#~ msgid "Add Center"
+#~ msgstr "أضافة مركز"
+
+#~ msgid "No Rescenters Found"
+#~ msgstr "لايوجد مراكز"
+
+#~ msgid "No Rescenters items Found in Trash"
+#~ msgstr "لايوجد مراكز في المحذوفات"
+
+#~ msgid "Continue reading"
+#~ msgstr "أكمل القراءة"
+
+#~ msgid "Editorial Board"
+#~ msgstr "هيئة التحرير"
+
+#~ msgid "Email Addresses"
+#~ msgstr "البريد الإلكتروني"
+
+#~ msgid "Reading Time: "
+#~ msgstr "مدة القراءة: "
+
+#~ msgid "Minute"
+#~ msgstr "دقيقة"
+
+#~ msgid "Download PDF"
+#~ msgstr "تنزيل PDF"
+
+#~ msgid "Share the Article"
+#~ msgstr "شارك الموضوع"
+
+#~ msgid "Author"
+#~ msgstr "الكاتب"
+
+#~ msgid "Videos and Podcasts"
+#~ msgstr "فيديو وبودكاست"
+
+#~ msgid "Follow us on YouTube"
+#~ msgstr "تابعنا على يوتيوب"
+
+#~ msgid "Search for Articles About "
+#~ msgstr "البحث عن مواضيع حول "
+
+#~ msgid "Country location on the map"
+#~ msgstr "موقع البلد على الخريطة"
+
+#~ msgid "Logo"
+#~ msgstr "شعار"
+
+#~ msgid "Flag"
+#~ msgstr "علم"
+
+#~ msgid "Opening speech"
+#~ msgstr "الكلمة الافتتاحية"
+
+#~ msgid "Infographic"
+#~ msgstr "انفوجراف"
+
+#~ msgid "Brief"
+#~ msgstr "نبذة"
+
+#~ msgid "Authors: "
+#~ msgstr "كتّاب"
+
+#~ msgid "Copyrights Area"
+#~ msgstr "منطقة الحقوق"
+
+#~ msgid "Add a menu"
+#~ msgstr "اضف قائمة"
+
+#, fuzzy
+#~| msgid "Post Cards"
+#~ msgid "Most Read Type"
+#~ msgstr "مربعات الأخبار"
+
+#~ msgid "Month"
+#~ msgstr "الشهر"
+
+#, fuzzy
+#~| msgid "Sidebars Select"
+#~ msgid "Posts and Sidebar Section"
+#~ msgstr "اختيار القوائم الجانبية"
+
+#, fuzzy
+#~| msgid "Books Category"
+#~ msgid "Posts Category"
+#~ msgstr "تصنيف الكتب"
+
+#, fuzzy
+#~| msgid "Choose Category to show list of Videos in homepage."
+#~ msgid "Choose category to show it posts in home page."
+#~ msgstr "اختر تصنيف لعرض الفيديو في الصفحة الرئيسية‫."
+
+#, fuzzy
+#~| msgid "Catrgory Color"
+#~ msgid "Dark"
+#~ msgstr "لون التصنيف"
+
+#, fuzzy
+#~| msgid "Continue reading"
+#~ msgid "JC Most Reading"
+#~ msgstr "اكمل القراءة"
+
+#, fuzzy
+#~| msgid "Select Category 1:"
+#~ msgid "JC Same Category Posts"
+#~ msgstr "اختر التصنيف الأول‫:"
+
+#, fuzzy
+#~| msgid "Twitter Profile"
+#~ msgid "View Profile"
+#~ msgstr "حساب تويتر"
+
+#~ msgid ""
+#~ "Sorry, The page you called not fount, you can continue browsing website "
+#~ "of search with this form."
+#~ msgstr ""
+#~ "عذرا، الصفحة التي قمت بطلبها غير متوفرة، يمكنك استكمال تصفح الموقع أو "
+#~ "البحث من خلال النموذج."
+
+#, fuzzy
+#~| msgid "Twitter Profile"
+#~ msgid "Website By:"
+#~ msgstr "حساب تويتر"
+
+#, fuzzy
+#~| msgid "almalnews Settings"
+#~ msgid "Dashboard"
+#~ msgstr "أعدادات جريدة المال"
+
+#, fuzzy
+#~| msgid "Enter Search Keyword..."
+#~ msgid "Enter the keyword..."
+#~ msgstr "ادخل كلمة البحث‫..."
+
+#, fuzzy
+#~| msgid "Author"
+#~ msgid "Author Archive"
+#~ msgstr "الكاتب"
+
+#, fuzzy
+#~| msgid "Single Banners"
+#~ msgid "Blog Archives"
+#~ msgstr "إعلانات الخبر"
+
+#, fuzzy
+#~| msgid "User Profile"
+#~ msgid "User Profile Metabox"
+#~ msgstr "ملف الكاتب"
+
+#, fuzzy
+#~| msgid "Categories"
+#~ msgid "Sub Categories"
+#~ msgstr "تصنيفات"
+
+#~ msgid "We found"
+#~ msgstr "وجدنا"
+
+#~ msgid "comments on "
+#~ msgstr "تعليقات على"
+
+#~ msgid "Comment navigation"
+#~ msgstr "التنقل في التعليقات"
+
+#~ msgid "&larr; Older Comments"
+#~ msgstr "التعليقات الأقدم &larr;"
+
+#~ msgid "Newer Comments &rarr;"
+#~ msgstr "&rarr; التعليقات الأحدث"
+
+#~ msgid "Write a Reply or Comment"
+#~ msgstr "اكتب رد او تعليق"
+
+#, fuzzy
+#~| msgid "Newer Comments"
+#~ msgid "Comment"
+#~ msgstr "التعليقات الأحدث"
+
+#~ msgid "Share"
+#~ msgstr "شارك"
+
+#~ msgid "Error : Unauthorized action"
+#~ msgstr "خطأ: إجراء غير مصرح به"
+
+#~ msgid "Error : Wrong request parameters"
+#~ msgstr "خطأ: عناصر الطلب خاطئة"
+
+#~ msgid "Test Metabox"
+#~ msgstr "اختبار Metabox"
+
+#, fuzzy
+#~| msgid "Page Description"
+#~ msgid "field description (optional)"
+#~ msgstr "وصف الصفحة"
+
+#, fuzzy
+#~| msgid "Choose"
+#~ msgid "Test Text Small"
+#~ msgstr "اختيار"
+
+#, fuzzy
+#~| msgid "Choose"
+#~ msgid "Test Text Medium"
+#~ msgstr "اختيار"
+
+#, fuzzy
+#~| msgid "User Profile"
+#~ msgid "Custom Rendered Field"
+#~ msgstr "ملف الكاتب"
+
+#, fuzzy
+#~| msgid "Choose"
+#~ msgid "Time zone"
+#~ msgstr "اختيار"
+
+#, fuzzy
+#~| msgid "Category"
+#~ msgid "Test Money"
+#~ msgstr "التصنيف"
+
+#, fuzzy
+#~| msgid "Category"
+#~ msgid "Test Text Area"
+#~ msgstr "التصنيف"
+
+#, fuzzy
+#~| msgid "Choose"
+#~ msgid "Test Text Area Small"
+#~ msgstr "اختيار"
+
+#, fuzzy
+#~| msgid "Choose"
+#~ msgid "Test Text Area for Code"
+#~ msgstr "اختيار"
+
+#, fuzzy
+#~| msgid "Choose"
+#~ msgid "Test Title Weeeee"
+#~ msgstr "اختيار"
+
+#, fuzzy
+#~| msgid "Page Description"
+#~ msgid "This is a title description"
+#~ msgstr "وصف الصفحة"
+
+#, fuzzy
+#~| msgid "Select a File"
+#~ msgid "Test Select"
+#~ msgstr "اختر ملف"
+
+#, fuzzy
+#~| msgid "Page Options"
+#~ msgid "Option Two"
+#~ msgstr "خصائص الصفحة"
+
+#, fuzzy
+#~| msgid "Page Options"
+#~ msgid "Option Three"
+#~ msgstr "خصائص الصفحة"
+
+#, fuzzy
+#~| msgid "Category"
+#~ msgid "Test Radio"
+#~ msgstr "التصنيف"
+
+#, fuzzy
+#~| msgid "Services"
+#~ msgid "Test Taxonomy Radio"
+#~ msgstr "الخدمات"
+
+#, fuzzy
+#~| msgid "Maximum Selection"
+#~ msgid "Test Taxonomy Select"
+#~ msgstr "اقصى حد للإختيار"
+
+#, fuzzy
+#~| msgid "Category"
+#~ msgid "Test Taxonomy Multi Checkbox"
+#~ msgstr "التصنيف"
+
+#, fuzzy
+#~| msgid "Category"
+#~ msgid "Test Checkbox"
+#~ msgstr "التصنيف"
+
+#, fuzzy
+#~| msgid "Category"
+#~ msgid "Test Multi Checkbox"
+#~ msgstr "التصنيف"
+
+#, fuzzy
+#~| msgid "Page Options"
+#~ msgid "Check One"
+#~ msgstr "خصائص الصفحة"
+
+#, fuzzy
+#~| msgid "Category"
+#~ msgid "Check Two"
+#~ msgstr "التصنيف"
+
+#, fuzzy
+#~| msgid "Choose"
+#~ msgid "Test Image"
+#~ msgstr "اختيار"
+
+#, fuzzy
+#~| msgid "Select a File"
+#~ msgid "Multiple Files"
+#~ msgstr "اختر ملف"
+
+#, fuzzy
+#~| msgid "Remove Embed"
+#~ msgid "oEmbed"
+#~ msgstr "حذف التضمين"
+
+#, fuzzy
+#~| msgid "Category"
+#~ msgid "About Page Metabox"
+#~ msgstr "التصنيف"
+
+#, fuzzy
+#~| msgid "Select a File"
+#~ msgid "Repeating Field Group"
+#~ msgstr "اختر ملف"
+
+#, fuzzy
+#~| msgid "Category Banners"
+#~ msgid "Entry {#}"
+#~ msgstr "اعلانات القسم"
+
+#, fuzzy
+#~| msgid "Article Updates"
+#~ msgid "Add Another Entry"
+#~ msgstr "تحديثات المقالة"
+
+#, fuzzy
+#~| msgid "Remove Embed"
+#~ msgid "Remove Entry"
+#~ msgstr "حذف التضمين"
+
+#, fuzzy
+#~| msgid "Featured Image"
+#~ msgid "Entry Title"
+#~ msgstr "الصورة البارزة"
+
+#, fuzzy
+#~| msgid "Featured Image"
+#~ msgid "Entry Image"
+#~ msgstr "الصورة البارزة"
+
+#, fuzzy
+#~| msgid "Profile Extra Ifo"
+#~ msgid "Extra Info"
+#~ msgstr "معلومات إضافية للملف الشخصي"
+
+#, fuzzy
+#~| msgid "Twitter Profile"
+#~ msgid "Google+ URL"
+#~ msgstr "حساب تويتر"
+
+#~ msgid "Linkedin URL"
+#~ msgstr "رابط لينكد ان"
+
+#, fuzzy
+#~| msgid "User Profile"
+#~ msgid "User Field"
+#~ msgstr "ملف الكاتب"
+
+#, fuzzy
+#~| msgid "Category"
+#~ msgid "Category Metabox"
+#~ msgstr "التصنيف"
+
+#, fuzzy
+#~| msgid "Remove"
+#~ msgid "Term Image"
+#~ msgstr "حذف"
+
+#, fuzzy
+#~| msgid "Choose"
+#~ msgid "REST Test Box"
+#~ msgstr "اختيار"
+
+#, fuzzy
+#~| msgid "Choose"
+#~ msgid "REST Test Text"
+#~ msgstr "اختيار"
+
+#, fuzzy
+#~| msgid "Choose"
+#~ msgid "REST Editable Test Text"
+#~ msgstr "اختيار"
+
+#~ msgid "Please Try Again"
+#~ msgstr "الرجاء المحاولة مجدداً"
+
+#~ msgid "Remove Embed"
+#~ msgstr "حذف التضمين"
+
+#, fuzzy
+#~| msgid "Add row"
+#~ msgid "Add Group"
+#~ msgstr "اضف جديد"
+
+#~ msgid "Remove Group"
+#~ msgstr "حذف المجموعة"
+
+#, fuzzy
+#~| msgid "Catrgory Color"
+#~ msgid "Current Color"
+#~ msgstr "لون التصنيف"
+
+#, fuzzy
+#~| msgid "Previous"
+#~ msgid "Prev"
+#~ msgstr "السابق"
+
+#, fuzzy
+#~| msgid "Choose"
+#~ msgid "Choose Time"
+#~ msgstr "اختيار"
+
+#, fuzzy
+#~| msgid "Second Edition"
+#~ msgid "Second"
+#~ msgstr "الإصدار الثاني"
+
+#, fuzzy
+#~| msgid "None"
+#~ msgid "Now"
+#~ msgstr "بدون"
+
+#, fuzzy
+#~| msgid "User Profile"
+#~ msgid "Use this file"
+#~ msgstr "ملف الكاتب"
+
+#, fuzzy
+#~| msgid "Remove"
+#~ msgid "Remove Image"
+#~ msgstr "حذف"
+
+#, fuzzy
+#~| msgid "Recent Projects"
+#~ msgid "Select / Deselect All"
+#~ msgstr "مشاريع حديثه"
+
+#, fuzzy
+#~| msgid "Post Cards"
+#~ msgid "Nothing to update."
+#~ msgstr "مربعات الأخبار"
+
+#, fuzzy
+#~| msgid "Add row"
+#~ msgid "Add Row"
+#~ msgstr "اضف جديد"
+
+#, fuzzy
+#~| msgid "Remove row"
+#~ msgid "Remove Row"
+#~ msgstr "حذف"
+
+#, fuzzy
+#~| msgid "No News found in Trash"
+#~ msgid "No field found by that id."
+#~ msgstr "لايوجد أخبار في المحذوفات"
+
+#, fuzzy
+#~| msgid "Add or remove newspaper tags"
+#~ msgid "Add or Upload File"
+#~ msgstr "اضافة او حذف وسوم الجريدة"
+
+#, fuzzy
+#~| msgid "Add or remove newspaper tags"
+#~ msgid "Add or Upload Files"
+#~ msgstr "اضافة او حذف وسوم الجريدة"
+
+#, fuzzy
+#~| msgid "No terms"
+#~ msgid "No terms"
+#~ msgstr "لايوجد تصنيفات"
+
+#, fuzzy
+#~| msgid "Updates"
+#~ msgid "UpdateStatus"
+#~ msgstr "التحديثات"
+
+#~ msgid "Follow the researcher on social media"
+#~ msgstr "تابع الباحث على السوشيال ميديا"
+
+#~ msgid "Full Biography and Contact Details"
+#~ msgstr "السيرة الذاتية كاملة وطرق التواصل"
+
+#~ msgid "Get in Touch with "
+#~ msgstr "التواصل مع "
+
+#~ msgid "Articles And Reserches"
+#~ msgstr "مواضيع ودراسات"
+
+#~ msgid "Regions"
+#~ msgstr "المنطقة أو الدولة"
+
+#~ msgid "All"
+#~ msgstr "الكل"
+
+#~ msgid "Year"
+#~ msgstr "السنة"
+
+#~ msgid "January"
+#~ msgstr "يناير"
+
+#~ msgid "February"
+#~ msgstr "فبراير"
+
+#~ msgid "March"
+#~ msgstr "مارس"
+
+#~ msgid "April"
+#~ msgstr "أبريل"
+
+#~ msgid "May"
+#~ msgstr "مايو"
+
+#~ msgid "June"
+#~ msgstr "يونيو"
+
+#~ msgid "July"
+#~ msgstr "يوليو"
+
+#~ msgid "August"
+#~ msgstr "أغسطس"
+
+#~ msgid "September"
+#~ msgstr "سبتمبر"
+
+#~ msgid "October"
+#~ msgstr "أكتوبر"
+
+#~ msgid "December"
+#~ msgstr "ديسمبر"
+
+#~ msgid "First Edition"
+#~ msgstr "الإصدار الأول"
+
+#~ msgid "Third Edtion"
+#~ msgstr "الإصدار الثالث"
+
+#~ msgid "Fourth Edition"
+#~ msgstr "الإصدار الرابع"
+
+#~ msgid "Oops!"
+#~ msgstr "عذراً!"
+
+#~ msgid "We cant seem to find the content your looking for."
+#~ msgstr "لم نتمكن من العثور على المحتوى الذي تبحث عنه‫."
+
+#~ msgid "Footer Menu"
+#~ msgstr "قائمة الفوتر"
+
+#~ msgid "Please Wait"
+#~ msgstr "برجاء الإنتظار"
+
+#~ msgid "Options"
+#~ msgstr "الخيارات"
+
+#~ msgid "Disable"
+#~ msgstr "تعطيل"
+
+#, fuzzy
+#~| msgid "Back to "
+#~ msgid "Back"
+#~ msgstr "الرجوع إلى "
+
+#, fuzzy
+#~| msgid "Update Content"
+#~ msgid "Import / Export"
+#~ msgstr "محتوى التحديث"
+
+#, fuzzy
+#~| msgid "Translated Page URL"
+#~ msgid "Transparent"
+#~ msgstr "رابط الصفحة المُترجم"
+
+#, fuzzy
+#~| msgid "Site Background Color"
+#~ msgid "Background Repeat"
+#~ msgstr "لون خلفية الموقع"
+
+#, fuzzy
+#~| msgid "Site Background Color"
+#~ msgid "Background Clip"
+#~ msgstr "لون خلفية الموقع"
+
+#, fuzzy
+#~| msgid "Site Background Color"
+#~ msgid "Background Origin"
+#~ msgstr "لون خلفية الموقع"
+
+#, fuzzy
+#~| msgid "Site Background Color"
+#~ msgid "Background Size"
+#~ msgstr "لون خلفية الموقع"
+
+#, fuzzy
+#~| msgid "Site Background Color"
+#~ msgid "Background Attachment"
+#~ msgstr "لون خلفية الموقع"
+
+#, fuzzy
+#~| msgid "Site Background Color"
+#~ msgid "Background Position"
+#~ msgstr "لون خلفية الموقع"
+
+#, fuzzy
+#~| msgid "Upload CV"
+#~ msgid "Upload"
+#~ msgstr "إرفاق السيرة الذاتية"
+
+#, fuzzy
+#~| msgid "Footer About"
+#~ msgid "Bottom"
+#~ msgstr "من نحن في الفوتر"
+
+#, fuzzy
+#~| msgid "Choose"
+#~ msgid "Choose"
+#~ msgstr "اختيار"
+
+#~ msgid "Cancel"
+#~ msgstr "إلغاء"
+
+#, fuzzy
+#~| msgid "Photo Gallery"
+#~ msgid "Add/Edit Gallery"
+#~ msgstr "معرض صور"
+
+#, fuzzy
+#~| msgid "Available %s"
+#~ msgid "Active"
+#~ msgstr "%s المتاحة"
+
+#, fuzzy
+#~| msgid "Year: %s"
+#~ msgid "Username"
+#~ msgstr "السنة: %s"
+
+#, fuzzy
+#~| msgid "Featured Image"
+#~ msgid "Select an item"
+#~ msgstr "الصورة البارزة"
+
+#, fuzzy, php-format
+#~| msgid "New Post"
+#~ msgid "New %s"
+#~ msgstr "خبر جديد"
+
+#~ msgid "URL"
+#~ msgstr "رابط"
+
+#, fuzzy, php-format
+#~| msgid "Add News"
+#~ msgid "Add %s"
+#~ msgstr "أضافة خبر"
+
+#, fuzzy
+#~| msgid "All Events"
+#~ msgid "Font Family"
+#~ msgstr "جميع الأحداث"
+
+#, fuzzy
+#~| msgid "All Events"
+#~ msgid "Font family"
+#~ msgstr "جميع الأحداث"
+
+#, fuzzy
+#~| msgid "Site Background Color"
+#~ msgid "Font style"
+#~ msgstr "لون خلفية الموقع"
+
+#, fuzzy
+#~| msgid "Site Background Color"
+#~ msgid "Font Weight &amp; Style"
+#~ msgstr "لون خلفية الموقع"
+
+#, fuzzy
+#~| msgid "Subscribe"
+#~ msgid "Font subsets"
+#~ msgstr "سجل الأن"
+
+#, fuzzy
+#~| msgid "Subscribe"
+#~ msgid "Font Subsets"
+#~ msgstr "سجل الأن"
+
+#, fuzzy
+#~| msgid "Subscribe"
+#~ msgid "Subsets"
+#~ msgstr "سجل الأن"
+
+#, fuzzy
+#~| msgid "All Events"
+#~ msgid "Font script"
+#~ msgstr "جميع الأحداث"
+
+#, fuzzy
+#~| msgid "Page Description"
+#~ msgid "Text Decoration"
+#~ msgstr "وصف الصفحة"
+
+#, fuzzy
+#~| msgid "All Events"
+#~ msgid "Font Size"
+#~ msgstr "جميع الأحداث"
+
+#, fuzzy
+#~| msgid "All Events"
+#~ msgid "Size"
+#~ msgstr "جميع الأحداث"
+
+#, fuzzy
+#~| msgid "Catrgory Color"
+#~ msgid "Font color"
+#~ msgstr "لون التصنيف"
+
+#, fuzzy
+#~| msgid "Featured Image"
+#~ msgid "Standard Fonts"
+#~ msgstr "الصورة البارزة"
+
+#, fuzzy
+#~| msgid "Options"
+#~ msgid "Optional"
+#~ msgstr "الخيارات"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgid "our documentation"
+#~ msgstr "الموقع"
+
+#~ msgid "Newsletter"
+#~ msgstr "القائمة البريدية"
+
+#, fuzzy, php-format
+#~| msgid "Recent Projects"
+#~ msgid "Welcome to Redux Framework %s"
+#~ msgstr "مشاريع حديثه"
+
+#, fuzzy
+#~| msgid "Remove"
+#~ msgid "Remote Post"
+#~ msgstr "حذف"
+
+#, fuzzy
+#~| msgid "Remove"
+#~ msgid "Remote Get"
+#~ msgstr "حذف"
+
+#, fuzzy
+#~| msgid "Available %s"
+#~ msgid "is available"
+#~ msgstr "%s المتاحة"
+
+#, fuzzy
+#~| msgid "Support"
+#~ msgid "Get Support"
+#~ msgstr "الدعم"
+
+#, fuzzy
+#~| msgid "Processing..."
+#~ msgid "Working..."
+#~ msgstr "جاري التحميل‫…"
+
+#, fuzzy
+#~| msgid "Available %s"
+#~ msgid "Activate Demo Mode"
+#~ msgstr "%s المتاحة"
+
+#, fuzzy
+#~| msgid "Post Cards"
+#~ msgid "Demo Importer"
+#~ msgstr "مربعات الأخبار"
+
+#, fuzzy
+#~| msgid "All newspaper Tags"
+#~ msgid "All done."
+#~ msgstr "كل وسوم الجريدة"
+
+#, fuzzy
+#~| msgid "Leave a comment"
+#~ msgid "Have fun!"
+#~ msgstr "اترك تعليق"
+
+#, fuzzy
+#~| msgid "All authors"
+#~ msgid "Assign Authors"
+#~ msgstr "جميع الكُتاب"
+
+#, fuzzy
+#~| msgid "Update Content"
+#~ msgid "Import Attachments"
+#~ msgstr "محتوى التحديث"
+
+#, fuzzy
+#~| msgid "Post Cards"
+#~ msgid "Import author:"
+#~ msgstr "مربعات الأخبار"
+
+#, fuzzy
+#~| msgid "Select..."
+#~ msgid "- Select -"
+#~ msgstr "اختيار‫…"
+
+#, fuzzy
+#~| msgid "Update Content"
+#~ msgid "Import WordPress"
+#~ msgstr "محتوى التحديث"
+
+#, fuzzy
+#~| msgid "Post Cards"
+#~ msgid "Import Demo"
+#~ msgstr "مربعات الأخبار"
+
+#, fuzzy
+#~| msgid "Post Cards"
+#~ msgid "Demo Imported"
+#~ msgstr "مربعات الأخبار"
+
+#, fuzzy
+#~| msgid "Please Try Again"
+#~ msgid "Please Wait..."
+#~ msgstr "الرجاء المحاولة مجدداً"
+
+#, fuzzy
+#~| msgid "Post Cards"
+#~ msgid "Re-Import"
+#~ msgstr "مربعات الأخبار"
+
+#, fuzzy
+#~| msgid "Edit Edition"
+#~ msgid "Extensions"
+#~ msgstr "تحرير العدد"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgid "Theme Information 2"
+#~ msgstr "الموقع"
+
+#, fuzzy
+#~| msgid "User Profile"
+#~ msgid "Basic Field"
+#~ msgstr "ملف الكاتب"
+
+#, fuzzy
+#~| msgid "Page Description"
+#~ msgid "Example description."
+#~ msgstr "وصف الصفحة"
+
+#, fuzzy
+#~| msgid "User Profile"
+#~ msgid "Basic Fields"
+#~ msgstr "ملف الكاتب"
+
+#, fuzzy
+#~| msgid "User Profile"
+#~ msgid "Text Area Field"
+#~ msgstr "ملف الكاتب"
+
+#, fuzzy
+#~| msgid "Article Settings"
+#~ msgid "Eurasia Options"
+#~ msgstr "إعدادات المقالة"
+
+#~ msgid "<p>Eurasia Settings and Theme Customizations.</p>"
+#~ msgstr "<p>إعدادات الموقع وتخصيص القالب</p>"
+
+#~ msgid "General"
+#~ msgstr "عام"
+
+#, fuzzy
+#~| msgid "Favicons"
+#~ msgid "Favicon 16px"
+#~ msgstr "أيقونة المتصفح"
+
+#, fuzzy
+#~| msgid "Catrgory Color"
+#~ msgid "Colors"
+#~ msgstr "لون التصنيف"
+
+#, fuzzy
+#~| msgid "Catrgory Color"
+#~ msgid "Dark Color"
+#~ msgstr "لون التصنيف"
+
+#, fuzzy
+#~| msgid "Language Switch"
+#~ msgid "Language Flags"
+#~ msgstr "محول اللغة"
+
+#, fuzzy
+#~| msgid "Show/Hide Language select."
+#~ msgid "Show/Hide Language Flags in Navbar."
+#~ msgstr "إظهار/إخفاء محول اللغة‫."
+
+#~ msgid "Social"
+#~ msgstr "الشبكات الإجتماعية"
+
+#, fuzzy
+#~| msgid "Newsletter"
+#~ msgid "Newsletter URL"
+#~ msgstr "القائمة البريدية"
+
+#, fuzzy
+#~| msgid "Newsletter"
+#~ msgid "Newsletter title"
+#~ msgstr "القائمة البريدية"
+
+#~ msgid "Newsletter Subtitle"
+#~ msgstr "العنوان الفرعي للقائمة البريدية"
+
+#, fuzzy
+#~| msgid "Main Menu"
+#~ msgid "Main Pages"
+#~ msgstr "القائمة الرئيسية"
+
+#, fuzzy
+#~| msgid "Footer About Paragraph"
+#~ msgid "Choose About Page"
+#~ msgstr "من نحن في الفوتر"
+
+#, fuzzy
+#~| msgid "Search in Newspaper Editions"
+#~ msgid "Choose Editions Page"
+#~ msgstr "البحث في أعداد الجريدة"
+
+#, fuzzy
+#~| msgid "Books Tag"
+#~ msgid "Books Page"
+#~ msgstr "وسم الكتاب"
+
+#, fuzzy
+#~| msgid "Footer About Paragraph"
+#~ msgid "Choose Books Page"
+#~ msgstr "من نحن في الفوتر"
+
+#, fuzzy
+#~| msgid "Reserchers and Experts"
+#~ msgid "Researchers Page"
+#~ msgstr "الخبراء والباحثين"
+
+#, fuzzy
+#~| msgid "New newspaper Tag Name"
+#~ msgid "Choose Researchers listing Page"
+#~ msgstr "اسم وسم جديد للجريدة"
+
+#, fuzzy
+#~| msgid "Page Settings"
+#~ msgid "Pages Single"
+#~ msgstr "إعدادات الصفحة"
+
+#, fuzzy
+#~| msgid "Page Options"
+#~ msgid "Sub Pages List"
+#~ msgstr "خصائص الصفحة"
+
+#, fuzzy
+#~| msgid "Show/Hide Language select."
+#~ msgid "Show/Hide Sub Pages List."
+#~ msgstr "إظهار/إخفاء محول اللغة‫."
+
+#, fuzzy
+#~| msgid "Regoin"
+#~ msgid "Regoin Single"
+#~ msgstr "منطقة أو دولة"
+
+#~ msgid "Opinion."
+#~ msgstr "رأي‫."
+
+#~ msgid "Facebook Video."
+#~ msgstr "فيديو فيسبوك‫."
+
+#~ msgid "Facebook Video"
+#~ msgstr "فيديو فيسبوك"
+
+#~ msgid "Display most popular news."
+#~ msgstr "عرض الأخبار الاكثر شهرة‫."
+
+#~ msgid "Featured Videos"
+#~ msgstr "أشهر الفيديوهات"
+
+#~ msgid "Newsletter."
+#~ msgstr "القائمة البريدية‫."
+
+#~ msgid ""
+#~ "By signing up, you agree to our Privacy Notice and data transfer policy."
+#~ msgstr "الضغط على “اشترك” تعني الموافقة على سياسة الخصوصية ونقل المعلومات."
+
+#, fuzzy
+#~| msgid "Theme Options"
+#~ msgid "License"
+#~ msgstr "خصائص القالب"
+
+#, fuzzy
+#~| msgid "Update newspaper Tag"
+#~ msgid "Plugins"
+#~ msgstr "تحديث وسم الجريدة"
+
+#, fuzzy
+#~| msgid "Read"
+#~ msgid "Ready"
+#~ msgstr "إقرأ"
+
+#, fuzzy
+#~| msgid "Please Try Again"
+#~ msgid "Please add your license key before attempting to activate one."
+#~ msgstr "الرجاء المحاولة مجدداً"
+
+#, fuzzy
+#~| msgid "Updates"
+#~ msgid "Updating"
+#~ msgstr "التحديثات"
+
+#, fuzzy
+#~| msgid "Remove"
+#~ msgid "Installing"
+#~ msgstr "حذف"
+
+#, fuzzy
+#~| msgid "Success!"
+#~ msgid "Success"
+#~ msgstr "تم بنجاح‫!"
+
+#, fuzzy
+#~| msgid "Single Banners"
+#~ msgid "Invalid content!"
+#~ msgstr "إعلانات الخبر"
+
+#, fuzzy
+#~| msgid "Single Banners"
+#~ msgid "Invalid data!"
+#~ msgstr "إعلانات الخبر"
+
+#, fuzzy
+#~| msgid "Remove"
+#~ msgid "Install"
+#~ msgstr "حذف"
+
+#, fuzzy
+#~| msgid "Latest"
+#~ msgid "Later"
+#~ msgstr "أحدث المواضيع"
+
+#, fuzzy, php-format
+#~| msgid "Available %s"
+#~ msgid "Activate %s"
+#~ msgstr "%s المتاحة"
+
+#, fuzzy
+#~| msgid "Please Try Again"
+#~ msgid "Enter your license key to enable remote updates and theme support."
+#~ msgstr "الرجاء المحاولة مجدداً"
+
+#, fuzzy
+#~| msgid "Theme Options"
+#~ msgid "License key"
+#~ msgstr "خصائص القالب"
+
+#, fuzzy
+#~| msgid "Extra Info"
+#~ msgid "Extras"
+#~ msgstr "معلومات إضافية"
+
+#~ msgid "Add new Ethnicitie"
+#~ msgstr "أضفة عرق جديد"
+
+#~ msgid "Members Area"
+#~ msgstr "منطقة الأعضاء"
+
+#~ msgid "Researchers on this Topic"
+#~ msgstr "باحثين في هذا الموضوع"
+
+#~ msgid "Center on social media"
+#~ msgstr "المركز على الشبكات الإجتماعية"
+
+#~ msgid "Follow the advisor on social media"
+#~ msgstr "تابع الإستشاري على السوشيال ميديا"
+
+#~ msgid "author"
+#~ msgstr "الكاتب"
+
+#~ msgid "Content index"
+#~ msgstr "فهرس المحتوى"
+
+#~ msgid "Search in Books..."
+#~ msgstr "البحث في الكتب‫…"
+
+#~ msgid "Magazine Editions"
+#~ msgstr "إصدارات المجلة"
+
+#~ msgid "Previous Magazine Editions"
+#~ msgstr "إصدارات المجلة السابقة"
+
+#~ msgid "Writers and researchers"
+#~ msgstr "الكتاب والباحثين"
+
+#, php-format
+#~ msgid "By %s"
+#~ msgstr "%s بوسطة"
+
+#~ msgid "View Archive <span aria-hidden=\"true\">&rarr;</span>"
+#~ msgstr "عرض الأرشيف <span aria-hidden=“true”>&rarr;</span>"
+
+#~ msgid "Regional updates"
+#~ msgstr "التحديثات الإقليمية"
+
+#~ msgid "Spotlight"
+#~ msgstr "سبوت لايت"
+
+#~ msgid "Studies and Position Papers"
+#~ msgstr "دراسات وتقدير موقف"
+
+#~ msgid "Experts And Reserchers"
+#~ msgstr "خبراء وباحثين"
+
+#~ msgid "Latest Researches"
+#~ msgstr "احدث الدراسات"
+
+#~ msgid "Search by name..."
+#~ msgstr "البحث بالإسم‫…"
+
+#~ msgid "Experiance"
+#~ msgstr "الخبرات"
+
+#~ msgid "Advisory Tags"
+#~ msgstr "أوسمة الهيئة الإستشارية"
+
+#~ msgid "Advisory Tag"
+#~ msgstr "وسم الهيئة الإستشارية"
+
+#~ msgid "Search Advisory Tags"
+#~ msgstr "البحث في أوسمة الهيئة الإستشارية"
+
+#~ msgid "Popular Advisory Tags"
+#~ msgstr "أشهر أوسمة الهيئة الإستشارية"
+
+#~ msgid "All Advisory Tags"
+#~ msgstr "جميع أوسمة الهيئة الإستشارية"
+
+#~ msgid "Parent Advisory Tag"
+#~ msgstr "الوسم الأب للهيئة الإستشارية"
+
+#~ msgid "Parent Advisory Tag:"
+#~ msgstr "الوسم الأب للهيئة الإستشارية:"
+
+#~ msgid "Edit Advisory Tag"
+#~ msgstr "تعديل وسم الهيئة الإستشارية"
+
+#~ msgid "Update Advisory Tag"
+#~ msgstr "تحديث وسم الهيئة الإستشارية"
+
+#~ msgid "Add New Advisory Tag"
+#~ msgstr "اضف وسم جديد للهيئة الإستشارية"
+
+#~ msgid "New Advisory Tag Name"
+#~ msgstr "اسم وسم جديد للهيئة الإستشارية"
+
+#~ msgid "Separate Advisory tags with commas"
+#~ msgstr "افصل بين الأوسمة بفاصلة"
+
+#~ msgid "Add or remove Advisory tags"
+#~ msgstr "اضافة او حذف وسوم الهيئة الإستشارية"
+
+#, fuzzy
+#~| msgid "Choose from the most used Editions tags"
+#~ msgid "Choose from the most used Advisory tags"
+#~ msgstr "أختيار من الوسوم الأكثر إستخداماً في الإصدارات"
+
+#, fuzzy
+#~| msgid "Editions Categories"
+#~ msgid "Advisory Categories"
+#~ msgstr "تصنيفات الإصدارات"
+
+#, fuzzy
+#~| msgid "Editions Category"
+#~ msgid "Advisory Category"
+#~ msgstr "تعديل تصنيف الإصدارات"
+
+#, fuzzy
+#~| msgid "Search Editions Categories"
+#~ msgid "Search Advisory Categories"
+#~ msgstr "البحث في تصنيفات الإصدارات"
+
+#, fuzzy
+#~| msgid "Popular Editions Categories"
+#~ msgid "Popular Advisory Categories"
+#~ msgstr "أشهر تصنيفات الإصدارات"
+
+#, fuzzy
+#~| msgid "All Editions Categories"
+#~ msgid "All Advisory Categories"
+#~ msgstr "جميع تصنيفات الإصدارات"
+
+#, fuzzy
+#~| msgid "Parent Editions Category"
+#~ msgid "Parent Advisory Category"
+#~ msgstr "التصنيف الأب للإصدارات"
+
+#, fuzzy
+#~| msgid "Parent Editions Category:"
+#~ msgid "Parent Advisory Category:"
+#~ msgstr "التصنيف الأب للإصدارات:"
+
+#, fuzzy
+#~| msgid "Edit Editions Category"
+#~ msgid "Edit Advisory Category"
+#~ msgstr "تعديل تصنيف الإصدارات"
+
+#, fuzzy
+#~| msgid "Update Editions Category"
+#~ msgid "Update Advisory Category"
+#~ msgstr "تحديث تصنيف الإصدارات"
+
+#, fuzzy
+#~| msgid "Add New Editions Category"
+#~ msgid "Add New Advisory Category"
+#~ msgstr "اضف تصنيف جديد للإصدارات"
+
+#, fuzzy
+#~| msgid "New Editions Category Name"
+#~ msgid "New Advisory Category Name"
+#~ msgstr "اسم تصنيف إصدارات جديد"
+
+#, fuzzy
+#~| msgid "Separate Editions categories with commas"
+#~ msgid "Separate Advisory categories with commas"
+#~ msgstr "افصل بين تصنيفات الإصدارات بفاصله"
+
+#, fuzzy
+#~| msgid "Add or remove Editions categories"
+#~ msgid "Add or remove Advisory categories"
+#~ msgstr "اضافة وحذف تصنيفات الإصدارات"
+
+#, fuzzy
+#~| msgid "Choose from the most used Editions categories"
+#~ msgid "Choose from the most used Advisory categories"
+#~ msgstr "اختيار من التصنيفات الاكثر استخداماً للإصدارات"
+
+#, fuzzy
+#~| msgid "Leave a comment"
+#~ msgid "Have a coupon?"
+#~ msgstr "اترك تعليق"
+
+#, fuzzy
+#~| msgid "Click here for more coverage"
+#~ msgid "Click here to enter your code"
+#~ msgstr "انقر هنا لمزيد من التغطية"
+
+#, fuzzy
+#~| msgid "Click here for more coverage"
+#~ msgid "Click here to login"
+#~ msgstr "انقر هنا لمزيد من التغطية"
+
+#, fuzzy
+#~| msgid "Filter By "
+#~ msgid "Filter"
+#~ msgstr "تصفية بـ "
+
+#, fuzzy, php-format
+#~| msgid "Year: %s"
+#~ msgid "Username: %s"
+#~ msgstr "السنة: %s"
+
+#, fuzzy, php-format
+#~| msgid "Older posts"
+#~ msgid "[Order #%s]"
+#~ msgstr "أقدم الأخبار"
+
+#, fuzzy
+#~| msgid "Email Address"
+#~ msgid "Billing address"
+#~ msgstr "بريدك الإلكتروني"
+
+#, fuzzy
+#~| msgid "User Profile"
+#~ msgid "Customer details"
+#~ msgstr "ملف الكاتب"
+
+#, fuzzy
+#~| msgid "For Sale"
+#~ msgid "Sale!"
+#~ msgstr "للبيع"
+
+#, fuzzy
+#~| msgid "Add News"
+#~ msgid "Add"
+#~ msgstr "أضافة خبر"
+
+#, fuzzy
+#~| msgid "Post Cards"
+#~ msgid "Status"
+#~ msgstr "مربعات الأخبار"
+
+#, fuzzy
+#~| msgid "Recent Projects"
+#~ msgid "Recent orders"
+#~ msgstr "مشاريع حديثه"
+
+#, fuzzy, php-format
+#~| msgid "%1$s at %2$s"
+#~ msgid "%1$s ending in %2$s"
+#~ msgstr "%1$s في %2$s"
+
+#, fuzzy
+#~| msgid "Add News"
+#~ msgid "Add a review"
+#~ msgstr "أضافة خبر"
+
+#, fuzzy
+#~| msgid "Category"
+#~ msgid "Multi Checkbox Option"
+#~ msgstr "التصنيف"
+
+#, fuzzy
+#~| msgid "Services"
+#~ msgid "Radio Option"
+#~ msgstr "الخدمات"
+
+#, fuzzy
+#~| msgid "newspaper Tags"
+#~ msgid "Sortable"
+#~ msgstr "وسوم الجريدة"
+
+#, fuzzy
+#~| msgid "Article Settings"
+#~ msgid "Sortable Text Option"
+#~ msgstr "إعدادات المقالة"
+
+#, fuzzy
+#~| msgid "Navigation Label"
+#~ msgid "Multi Text"
+#~ msgstr "عنوان قائمة التصفح"
+
+#, fuzzy
+#~| msgid "Article Settings"
+#~ msgid "Multi Text Option"
+#~ msgstr "إعدادات المقالة"
+
+#, fuzzy
+#~| msgid "Email"
+#~ msgid "Field subtitle"
+#~ msgstr "البريد الإلكتروني"
+
+#, fuzzy
+#~| msgid "Page Description"
+#~ msgid "Field Decription"
+#~ msgstr "وصف الصفحة"
+
+#, fuzzy
+#~| msgid "User Profile"
+#~ msgid "Customizer Only"
+#~ msgstr "ملف الكاتب"
+
+#, fuzzy
+#~| msgid "Videos Tag"
+#~ msgid "Regions Tags"
+#~ msgstr "وسم الفيديو"
+
+#, fuzzy
+#~| msgid "Videos Tag"
+#~ msgid "Regions Tag"
+#~ msgstr "وسم الفيديو"
+
+#, fuzzy
+#~| msgid "Search Partnerships Tags"
+#~ msgid "Search Regions Tags"
+#~ msgstr "البحث في وسوم الشراكه"
+
+#, fuzzy
+#~| msgid "Edit Partnerships Tag"
+#~ msgid "Edit Regions Tag"
+#~ msgstr "تعديل وسم الشراكه"
+
+#, fuzzy
+#~| msgid "Add New Partnerships Tag"
+#~ msgid "Add New Regions Tag"
+#~ msgstr "اضف وسم جديد للشراكه"
+
+#, fuzzy
+#~| msgid "Videos Category"
+#~ msgid "Regions Category"
+#~ msgstr "تصنيف الفيديو"
+
+#, fuzzy
+#~| msgid "Popular Partnerships Categories"
+#~ msgid "Popular Regions Categories"
+#~ msgstr "أشهر تصنيفات الشراكه"
+
+#, fuzzy
+#~| msgid "All Partnerships Categories"
+#~ msgid "All Regions Categories"
+#~ msgstr "جميع تصنيفات الشراكه"
+
+#, fuzzy
+#~| msgid "Parent Partnerships Category"
+#~ msgid "Parent Regions Category"
+#~ msgstr "التصنيف الأب للشراكه"
+
+#, fuzzy
+#~| msgid "Parent Partnerships Category:"
+#~ msgid "Parent Regions Category:"
+#~ msgstr "التصنيف الأب للشراكه:"
+
+#, fuzzy
+#~| msgid "Edit Partnerships Category"
+#~ msgid "Edit Regions Category"
+#~ msgstr "تعديل تصنيف الشراكه"
+
+#, fuzzy
+#~| msgid "Update Partnerships Category"
+#~ msgid "Update Regions Category"
+#~ msgstr "تحديث تصنيف الشراكه"
+
+#, fuzzy
+#~| msgid "Add New Partnerships Category"
+#~ msgid "Add New Regions Category"
+#~ msgstr "اضف تصنيف شراكه جديد"
+
+#, fuzzy
+#~| msgid "New Partnerships Category Name"
+#~ msgid "New Regions Category Name"
+#~ msgstr "اسم تصنيف شراكه جديد"
+
+#, fuzzy
+#~| msgid "Separate Partnerships categories with commas"
+#~ msgid "Separate Regions categories with commas"
+#~ msgstr "افصل بين تصنيفات الشراكه بفاصله"
+
+#, fuzzy
+#~| msgid "Add or remove Partnerships categories"
+#~ msgid "Add or remove Regions categories"
+#~ msgstr "اضافة وحذف تصنيفات الشراكه"
+
+#, fuzzy
+#~| msgid "Choose from the most used Partnerships categories"
+#~ msgid "Choose from the most used Regions categories"
+#~ msgstr "اختيار من التصنيفات الاكثر استخداماً للشراكه"
+
+#~ msgid "Login"
+#~ msgstr "دخول"
+
+#~ msgid "All our latest content delivered to your inbox "
+#~ msgstr "يصلك جميع المحتوى على بريدك الإلكتروني مباشرة "
+
+#~ msgid "Type your Email.."
+#~ msgstr "اكتب بريدك الإلكتروني‫.."
+
+#~ msgid "Ooopps.! The Page you were looking for, couldn't be found."
+#~ msgstr "عذراً‫!‬ الصفحة التي تبحث عنها غير موجودة‫,‬ ربما حدث خطأ‫."
+
+#~ msgid "by"
+#~ msgstr "بقلم"
+
+#, php-format
+#~ msgid "Continue reading <span class=\"screen-reader-text\"> \"%s\"</span>"
+#~ msgstr "اكمل القراءة<span class=“screen-reader-text”> “%s”</span>"
+
+#~ msgid "Coming Soon"
+#~ msgstr "قـــــريــــبـــاً"
+
+#~ msgid "Recommended Stories"
+#~ msgstr "مواضيع مشابهة"
+
+#~ msgid "Recommended Stories Category"
+#~ msgstr "تصنيف المواضيع المشابهة"
+
+#~ msgid "Search Recommended Stories"
+#~ msgstr "البحث في المواضيع المشابهة"
+
+#~ msgid "Popular Recommended Stories"
+#~ msgstr "اشهر تصنيفات المواضيع المشابهة"
+
+#~ msgid "All Recommended Stories"
+#~ msgstr "كل تصنيفات المواضيع المشابهة"
+
+#, fuzzy
+#~| msgid "Recommended Stories Category"
+#~ msgid "Parent Recommended Stories Category"
+#~ msgstr "تصنيف المواضيع المشابهة"
+
+#, fuzzy
+#~| msgid "Recommended Stories Category"
+#~ msgid "Parent Recommended Stories Category:"
+#~ msgstr "تصنيف المواضيع المشابهة"
+
+#~ msgid "Edit Recommended Stories Category"
+#~ msgstr "تعديل تصنيف المواضيع المشابهة"
+
+#, fuzzy
+#~| msgid "Edit Recommended Stories Category"
+#~ msgid "Update Recommended Stories Category"
+#~ msgstr "تعديل تصنيف المواضيع المشابهة"
+
+#, fuzzy
+#~| msgid "Recommended Stories Category"
+#~ msgid "Add New Recommended Stories Category"
+#~ msgstr "تصنيف المواضيع المشابهة"
+
+#, fuzzy
+#~| msgid "Recommended Stories Category"
+#~ msgid "New Recommended Stories Category Name"
+#~ msgstr "تصنيف المواضيع المشابهة"
+
+#, fuzzy
+#~| msgid "Separate Partnerships categories with commas"
+#~ msgid "Separate Recommended Stories categories with commas"
+#~ msgstr "افصل بين تصنيفات الشراكه بفاصله"
+
+#, fuzzy
+#~| msgid "Add or remove Partnerships categories"
+#~ msgid "Add or remove Recommended Stories categories"
+#~ msgstr "اضافة وحذف تصنيفات الشراكه"
+
+#, fuzzy
+#~| msgid "Choose from the most used Partnerships categories"
+#~ msgid "Choose from the most used Recommended Stories categories"
+#~ msgstr "اختيار من التصنيفات الاكثر استخداماً للشراكه"
+
+#~ msgid "recommended"
+#~ msgstr "مواضيع مشابهة"
+
+#~ msgid "Partnerships"
+#~ msgstr "الشراكه"
+
+#~ msgid "Partnerships Category"
+#~ msgstr "تصنيف الشراكه"
+
+#, fuzzy
+#~| msgid "Popular Partnerships Tags"
+#~ msgid "Popular Partnerships"
+#~ msgstr "أشهر وسوم الشراكه"
+
+#~ msgid "Parent Partnerships Category"
+#~ msgstr "التصنيف الأب للشراكه"
+
+#~ msgid "Parent Partnerships Category:"
+#~ msgstr "التصنيف الأب للشراكه:"
+
+#~ msgid "Edit Partnerships Category"
+#~ msgstr "تعديل تصنيف الشراكه"
+
+#~ msgid "Update Partnerships Category"
+#~ msgstr "تحديث تصنيف الشراكه"
+
+#~ msgid "Add New Partnerships Category"
+#~ msgstr "اضف تصنيف شراكه جديد"
+
+#~ msgid "New Partnerships Category Name"
+#~ msgstr "اسم تصنيف شراكه جديد"
+
+#~ msgid "Separate Partnerships categories with commas"
+#~ msgstr "افصل بين تصنيفات الشراكه بفاصله"
+
+#~ msgid "Add or remove Partnerships categories"
+#~ msgstr "اضافة وحذف تصنيفات الشراكه"
+
+#~ msgid "Choose from the most used Partnerships categories"
+#~ msgstr "اختيار من التصنيفات الاكثر استخداماً للشراكه"
+
+#, fuzzy
+#~| msgid "Partnerships"
+#~ msgid "partnerships"
+#~ msgstr "الشراكه"
+
+#, fuzzy
+#~| msgid "Category"
+#~ msgid "Timeline Category"
+#~ msgstr "التصنيف"
+
+#, fuzzy
+#~| msgid "All items loaded"
+#~ msgid "All Timelines"
+#~ msgstr "تم عرض الكل"
+
+#, fuzzy
+#~| msgid "Contributor"
+#~ msgid "Contributors"
+#~ msgstr "كاتب مساهم"
+
+#, fuzzy
+#~| msgid "Contributor"
+#~ msgid "contributor"
+#~ msgstr "كاتب مساهم"
+
+#, fuzzy
+#~| msgid "Contributor"
+#~ msgid "Popular Contributors"
+#~ msgstr "كاتب مساهم"
+
+#, fuzzy
+#~| msgid "Contributor"
+#~ msgid "All Contributors"
+#~ msgstr "كاتب مساهم"
+
+#, fuzzy
+#~| msgid "Latest Contribution"
+#~ msgid "Parent contributor"
+#~ msgstr "اخر المساهمات"
+
+#, fuzzy
+#~| msgid "Latest Contribution"
+#~ msgid "Parent contributor:"
+#~ msgstr "اخر المساهمات"
+
+#, fuzzy
+#~| msgid "Contributor"
+#~ msgid "Edit contributor"
+#~ msgstr "كاتب مساهم"
+
+#, fuzzy
+#~| msgid "Latest Contribution"
+#~ msgid "Update contributor"
+#~ msgstr "اخر المساهمات"
+
+#, fuzzy
+#~| msgid "Contributor"
+#~ msgid "Add New contributor"
+#~ msgstr "كاتب مساهم"
+
+#, fuzzy
+#~| msgid "Contributor"
+#~ msgid "New contributor Name"
+#~ msgstr "كاتب مساهم"
+
+#, fuzzy
+#~| msgid "Separate newspaper tags with commas"
+#~ msgid "Separate Contributors with commas"
+#~ msgstr "افصل بين اوسمة الجريدة بفصالة"
+
+#, fuzzy
+#~| msgid "Add or remove newspaper tags"
+#~ msgid "Add or remove Contributors"
+#~ msgstr "اضافة او حذف وسوم الجريدة"
+
+#, fuzzy
+#~| msgid "Choose from the most used newspaper tags"
+#~ msgid "Choose from the most used Contributors"
+#~ msgstr "أختيار من الوسوم الأكثر إستخداماً في الجريدة"
+
+#, fuzzy
+#~| msgid "Contributor"
+#~ msgid "contributors"
+#~ msgstr "كاتب مساهم"
+
+#~ msgid "Profile Picture"
+#~ msgstr "صورة الملف الشخصي"
+
+#~ msgid "Stories"
+#~ msgstr "مواضيع"
+
+#~ msgid "Filter By "
+#~ msgstr "تصفية بـ "
+
+#~ msgid "This is a password protected post."
+#~ msgstr "هذا الخبر محمي بكلمة مرور‫."
+
+#~ msgid "Copy Article Link"
+#~ msgstr "نسخ رابط الموضوع"
+
+#~ msgid "Copy"
+#~ msgstr "نسخ"
+
+#~ msgid "URL Copied to clipboard"
+#~ msgstr "تم نسخ الرابط"
+
+#~ msgid "Loading..."
+#~ msgstr "جاري التحميل‫…"
+
+#~ msgid "No older posts found"
+#~ msgstr "لايوجد حقول مخصصة‫"
+
+#~ msgid "Watch"
+#~ msgstr "شاهد"
+
+#~ msgid "says:"
+#~ msgstr "يقول‫:"
+
+#~ msgid "Your comment is awaiting moderation."
+#~ msgstr "تعليقك بإنتظار المراجعة‫."
+
+#~ msgid "By Post Author"
+#~ msgstr "كاتب المقال"
+
+#, fuzzy
+#~| msgid "Category"
+#~ msgid "Meta Box"
+#~ msgstr "التصنيف"
+
+#, fuzzy
+#~| msgid "Category"
+#~ msgid "New Meta Box"
+#~ msgstr "التصنيف"
+
+#, fuzzy
+#~| msgid "Category"
+#~ msgid "Update Meta Box"
+#~ msgstr "التصنيف"
+
+#, fuzzy
+#~| msgid "almalnews Settings"
+#~ msgid "Metabox Settings"
+#~ msgstr "أعدادات جريدة المال"
+
+#, fuzzy
+#~| msgid "Main Sidebar"
+#~ msgid "Side"
+#~ msgstr "القائمة الجانبية الرئيسية"
+
+#, fuzzy
+#~| msgid "Remove Group"
+#~ msgid "Repeatable Group"
+#~ msgstr "حذف المجموعة"
+
+#, fuzzy
+#~| msgid "User Profile"
+#~ msgid "Field {#}"
+#~ msgstr "ملف الكاتب"
+
+#, fuzzy
+#~| msgid "Add New Item"
+#~ msgid "Add a field name."
+#~ msgstr "اضف عدد جديد"
+
+#, fuzzy
+#~| msgid "Add Group"
+#~ msgid "Field Type"
+#~ msgstr "اضف مجموعة"
+
+#, fuzzy
+#~| msgid "Services"
+#~ msgid "Taxonomy Radio Buttons Inline"
+#~ msgstr "الخدمات"
+
+#, fuzzy
+#~| msgid "Select a File"
+#~ msgid "Repeatable"
+#~ msgstr "اختر ملف"
+
+#, fuzzy
+#~| msgid "Post Cards"
+#~ msgid "Date Format"
+#~ msgstr "مربعات الأخبار"
+
+#, fuzzy
+#~| msgid "Post Cards"
+#~ msgid "Time Format"
+#~ msgstr "مربعات الأخبار"
+
+#, fuzzy
+#~| msgid "Page Options"
+#~ msgid "Taxonomy Options"
+#~ msgstr "خصائص الصفحة"
+
+#, fuzzy
+#~| msgid "No terms"
+#~ msgid "No Terms Text"
+#~ msgstr "لايوجد تصنيفات"
+
+#, fuzzy
+#~| msgid "Find out more"
+#~ msgid "Find Posts or Pages"
+#~ msgstr "اكتشف المزيد"
+
+#, fuzzy, php-format
+#~| msgid "Attached %s"
+#~ msgid "Attached %s"
+#~ msgstr "%s المرتبطة"
+
+#, fuzzy
+#~| msgid "Select a File"
+#~ msgid "Repeating Field Group using a Grid"
+#~ msgstr "اختر ملف"
+
+#, fuzzy
+#~| msgid "Category"
+#~ msgid "Test Metabox using a Grid"
+#~ msgstr "التصنيف"
+
+#, fuzzy
+#~| msgid "Keywords"
+#~ msgid "Words left"
+#~ msgstr "كلمات مفتاحية"
+
+#, fuzzy
+#~| msgid "Keywords"
+#~ msgid "Words"
+#~ msgstr "كلمات مفتاحية"
+
+#~ msgid "Video Caption"
+#~ msgstr "وصف الفيديةو"
+
+#~ msgid "Recemmonded Stories"
+#~ msgstr "مواضيع مشابهة"
+
+#, fuzzy
+#~| msgid "Featured Video URL"
+#~ msgid "Featured Video"
+#~ msgstr "رابط الفيديو"
+
+#, fuzzy
+#~| msgid "Featured Video URL"
+#~ msgid "Featured Video Option"
+#~ msgstr "رابط الفيديو"
+
+#, fuzzy
+#~| msgid "Remove Embed"
+#~ msgid "Video Embed Type"
+#~ msgstr "حذف التضمين"
+
+#, fuzzy
+#~| msgid "Remove Embed"
+#~ msgid "Select Video Embed Type"
+#~ msgstr "حذف التضمين"
+
+#, fuzzy
+#~| msgid "Youtube URL"
+#~ msgid "Youtube"
+#~ msgstr "رابط يوتيوب"
+
+#, fuzzy
+#~| msgid "Remove Embed"
+#~ msgid "Video Embed"
+#~ msgstr "حذف التضمين"
+
+#~ msgid "Subheading"
+#~ msgstr "عنوان فرعي"
+
+#~ msgid "Alternative Author"
+#~ msgstr "اسم الكاتب البديل"
+
+#, fuzzy
+#~| msgid "Alternative Author"
+#~ msgid "Please Enter Alternative Author"
+#~ msgstr "اسم الكاتب البديل"
+
+#~ msgid "Translated Article URL"
+#~ msgstr "رابط المحتوى المترجم"
+
+#~ msgid "Please Enter Translated Article URL"
+#~ msgstr "ادخل عنوان الموضوع المترجم"
+
+#, fuzzy
+#~| msgid "Featured Posts"
+#~ msgid "Featured Post Option"
+#~ msgstr "المقالات المميزة"
+
+#~ msgid "Recemmonded Stories Category"
+#~ msgstr "تصنيف المواضيع المشابهة"
+
+#~ msgid "Enter Page Description, Appears under title in page heading."
+#~ msgstr "ادخل وصف للصفحة، يظهر أسفل عنوان الصفحة‫."
+
+#~ msgid "Translated Page URL"
+#~ msgstr "رابط الصفحة المُترجم"
+
+#, fuzzy
+#~| msgid "Homepage Vidoes"
+#~ msgid "Homepage Options"
+#~ msgstr "فيديوهات الصفحة الرئيسية"
+
+#, fuzzy
+#~| msgid "Category Banners"
+#~ msgid "Add Banner"
+#~ msgstr "اعلانات القسم"
+
+#, fuzzy
+#~| msgid "Twitter Profile"
+#~ msgid "External URL"
+#~ msgstr "حساب تويتر"
+
+#, fuzzy
+#~| msgid "Read Page"
+#~ msgid "Internal Page"
+#~ msgstr "صفحة اقرأ"
+
+#, fuzzy
+#~| msgid "Select a File"
+#~ msgid "Timeline Taxonomy"
+#~ msgstr "اختر ملف"
+
+#, fuzzy
+#~| msgid "Filter By "
+#~ msgid "Latest Custom Taxonomy"
+#~ msgstr "تصفية بـ "
+
+#, fuzzy
+#~| msgid "Customize the category"
+#~ msgid "Customize the category"
+#~ msgstr "تخصيص التصنيف"
+
+#, fuzzy
+#~| msgid "Featured Video URL"
+#~ msgid "Featured Slider"
+#~ msgstr "رابط الفيديو"
+
+#, fuzzy
+#~| msgid "Featured Posts"
+#~ msgid "Featured Posts Type"
+#~ msgstr "المقالات المميزة"
+
+#, fuzzy
+#~| msgid "Featured Posts"
+#~ msgid "Choose Featured Posts Type"
+#~ msgstr "المقالات المميزة"
+
+#, fuzzy
+#~| msgid "Featured Posts"
+#~ msgid "Featured 3"
+#~ msgstr "المقالات المميزة"
+
+#~ msgid "Drag posts from the left column to the right column"
+#~ msgstr "اسحب الملفات من اليسار إلى اليمين "
+
+#~ msgid "Options."
+#~ msgstr "الخيارات‫."
+
+#~ msgid "Site Favicon"
+#~ msgstr "أيقونة المتصفح"
+
+#~ msgid "Site Favicon."
+#~ msgstr "أيقونة المتصفح‫."
+
+#~ msgid "Progressive Image Loading"
+#~ msgstr "تحميل الصور مؤخراً"
+
+#~ msgid "Enable/Disble Progressive Image Loading."
+#~ msgstr "تفعيل/تعطيل تحميل الصور مؤخراً‫."
+
+#~ msgid "Scroll to Top Button"
+#~ msgstr "زر القفز لأعلى الصفحة"
+
+#~ msgid "Show/Hide Scroll to Top Button."
+#~ msgstr "اخفاء/اظهار زر القفز لأعلى الصفحة‫."
+
+#~ msgid "English Language URL"
+#~ msgstr "رابط اللغة الإنجليزية"
+
+#~ msgid "Enter English Language URL"
+#~ msgstr "ادخل رابط الموقع باللغة الإنجليزية"
+
+#~ msgid "Arabic Language URL"
+#~ msgstr "رابط اللغة العربية"
+
+#~ msgid "Enter Arabic Language URL"
+#~ msgstr "ادخل رابط الموقع باللغة العربية"
+
+#~ msgid "Night Mode Switch"
+#~ msgstr "محول الوضع الليلي"
+
+#~ msgid "Show/Hide Night Mode."
+#~ msgstr "إظهار/إخفاء محول الوضع الليلي‫."
+
+#~ msgid "Enter facebook url"
+#~ msgstr "ادخل رابط الفيسبوك"
+
+#~ msgid "Enter Twitter url"
+#~ msgstr "ادخل رابط تويتر"
+
+#~ msgid "Twitter Username"
+#~ msgstr "اسم حساب تويتر"
+
+#~ msgid "Enter Twitter username without @"
+#~ msgstr "ادخل اسم حساب تويتر بدون @"
+
+#~ msgid "Enter Instagram url"
+#~ msgstr "ادخل رابط انستجرام"
+
+#~ msgid "Enter Linkedin url"
+#~ msgstr "ادخل رابط لينكد ان"
+
+#~ msgid "Enter Youtube url"
+#~ msgstr "ادخل رابط يوتيوب"
+
+#~ msgid "Newsletter Form ID"
+#~ msgstr "معرف نموذج القائمة البريدية"
+
+#~ msgid "Enter Newsletter Form ID"
+#~ msgstr "ادخل المعرف ID لنموذج القائمة البريدية"
+
+#~ msgid "Select newsletter layout"
+#~ msgstr "اختر شكل القائمة البريدية"
+
+#~ msgid "Select Header layout"
+#~ msgstr "اختر شكل الهيدر"
+
+#~ msgid "Colored Navbar Centered Logo"
+#~ msgstr "نافبار ملون والشعار في الوسط"
+
+#~ msgid "Select Watch Page."
+#~ msgstr "اختر صفحة شاهد‫."
+
+#~ msgid "Read Page"
+#~ msgstr "صفحة اقرأ"
+
+#~ msgid "Select Read Page."
+#~ msgstr "اختر صفحة اقرأ‫."
+
+#, fuzzy
+#~| msgid "Sidebars Select"
+#~ msgid "sidebar select"
+#~ msgstr "اختيار القوائم الجانبية"
+
+#, php-format
+#~ msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
+#~ msgstr "اكمل القراءة<span class=“screen-reader-text”> “%s”</span>"
+
+#~ msgid ""
+#~ "Sorry, but nothing matched your search terms. Please try again with some "
+#~ "different keywords."
+#~ msgstr ""
+#~ "عذراّ، لايوجد تصنيفات تطابق بحثك، الرجاء البحث بكلمات مفتاحيه مختلفه‫."
+
+#~ msgid "Recommended stories"
+#~ msgstr "مــــواضـــــــــــــيــــــــــــع مــــشــــــــــابـــــــــــهة"
+
+#~ msgid "Contributor"
+#~ msgstr "كاتب مساهم"
+
+#~ msgid "Opinion"
+#~ msgstr "رأي"
+
+#, fuzzy
+#~| msgid "Content Top"
+#~ msgid "AjaxContentAdded"
+#~ msgstr "المحتوى العلوي"
+
+#~ msgid "Article Update – "
+#~ msgstr "تحديث المقالة – "
+
+#~ msgid "Partnerships Tags"
+#~ msgstr "الوسم الأب للشراكه"
+
+#~ msgid "Partnerships Tag"
+#~ msgstr "الوسم الأب للشراكه"
+
+#~ msgid "Separate Partnerships tags with commas"
+#~ msgstr "افصل بين اوسمة الشراكه بفصالة"
+
+#~ msgid "Choose from the most used Partnerships tags"
+#~ msgstr "أختيار من الوسوم الأكثر إستخداماً في الشراكه"
+
+#, fuzzy
+#~| msgid "Site Background Color"
+#~ msgid "No Repeat"
+#~ msgstr "لون خلفية الموقع"
+
+#, fuzzy
+#~| msgid "Footer About"
+#~ msgid "Left Bottom"
+#~ msgstr "من نحن في الفوتر"
+
+#, fuzzy
+#~| msgid "Main Sidebar"
+#~ msgid "Contain"
+#~ msgstr "القائمة الجانبية الرئيسية"
+
+#, fuzzy
+#~| msgid "Footer About"
+#~ msgid "Bottom Margin"
+#~ msgstr "من نحن في الفوتر"
+
+#, fuzzy
+#~| msgid "Remove Group"
+#~ msgid "Field Groups"
+#~ msgstr "حذف المجموعة"
+
+#, fuzzy
+#~| msgid "Add Group"
+#~ msgid "Add New Field Group"
+#~ msgstr "اضف مجموعة"
+
+#, fuzzy
+#~| msgid "Add Group"
+#~ msgid "Edit Field Group"
+#~ msgstr "اضف مجموعة"
+
+#, fuzzy
+#~| msgid "Search Results"
+#~ msgid "Search Field Groups"
+#~ msgstr "نتائج البحث"
+
+#, fuzzy
+#~| msgid "No icons found"
+#~ msgid "No Field Groups found"
+#~ msgstr "لا يوجد أيقونات"
+
+#, fuzzy
+#~| msgid "No News found in Trash"
+#~ msgid "No Field Groups found in Trash"
+#~ msgstr "لايوجد أخبار في المحذوفات"
+
+#~ msgid "copy"
+#~ msgstr "نسخ"
+
+#, fuzzy
+#~| msgid "Available %s"
+#~ msgid "No toggle fields available"
+#~ msgstr "%s المتاحة"
+
+#, fuzzy
+#~| msgid "More "
+#~ msgid "or"
+#~ msgstr "المزيد "
+
+#, fuzzy
+#~| msgid "Featured Image"
+#~ msgid "Update Image"
+#~ msgstr "الصورة البارزة"
+
+#, fuzzy
+#~| msgid "Edit News"
+#~ msgid "Edit File"
+#~ msgstr "تعديل الخبر"
+
+#, fuzzy
+#~| msgid "Update newspaper Tag"
+#~ msgid "Update File"
+#~ msgstr "تحديث وسم الجريدة"
+
+#, fuzzy
+#~| msgid "Processing..."
+#~ msgid "Loading"
+#~ msgstr "جاري التحميل‫…"
+
+#, fuzzy
+#~| msgid "Values"
+#~ msgid "Value contains"
+#~ msgstr "قيمنا"
+
+#, fuzzy
+#~| msgid "Navigation Label"
+#~ msgid "Validation failed"
+#~ msgstr "عنوان قائمة التصفح"
+
+#, fuzzy, php-format
+#~| msgid "Recent Projects"
+#~ msgid "Select %s"
+#~ msgstr "مشاريع حديثه"
+
+#~ msgid "Apply"
+#~ msgstr "تطبيق"
+
+#, fuzzy
+#~| msgid "Latest News"
+#~ msgid "What's New"
+#~ msgstr "أخر الأخبار"
+
+#, fuzzy
+#~| msgid "Remove Group"
+#~ msgid "Export Field Groups"
+#~ msgstr "حذف المجموعة"
+
+#, fuzzy
+#~| msgid "Remove Group"
+#~ msgid "Import Field Groups"
+#~ msgstr "حذف المجموعة"
+
+#, fuzzy
+#~| msgid "Add Group"
+#~ msgid "Add rule group"
+#~ msgstr "اضف مجموعة"
+
+#, fuzzy
+#~| msgid "Edit News"
+#~ msgid "Edit field"
+#~ msgstr "تعديل الخبر"
+
+#, fuzzy
+#~| msgid "Email"
+#~ msgid "Label"
+#~ msgstr "البريد الإلكتروني"
+
+#, fuzzy
+#~| msgid "Older posts"
+#~ msgid "Position"
+#~ msgstr "أقدم الأخبار"
+
+#, fuzzy
+#~| msgid "Construction Updates"
+#~ msgid "Instruction placement"
+#~ msgstr "تطورات أعمال البناء"
+
+#, fuzzy
+#~| msgid "Content Top"
+#~ msgid "Content Editor"
+#~ msgstr "المحتوى العلوي"
+
+#, fuzzy
+#~| msgid "Available %s"
+#~ msgid "No updates available."
+#~ msgstr "%s المتاحة"
+
+#, fuzzy
+#~| msgid "Page Description"
+#~ msgid "Options Page"
+#~ msgstr "وصف الصفحة"
+
+#, fuzzy
+#~| msgid "Sample heading"
+#~ msgid "Easy Upgrading"
+#~ msgstr "مثال على عنوان"
+
+#, fuzzy
+#~| msgid "User Profile"
+#~ msgid "Link Field"
+#~ msgstr "ملف الكاتب"
+
+#, fuzzy
+#~| msgid "User Profile"
+#~ msgid "Group Field"
+#~ msgstr "ملف الكاتب"
+
+#, fuzzy
+#~| msgid "Remove Embed"
+#~ msgid "oEmbed Field"
+#~ msgstr "حذف التضمين"
+
+#, fuzzy
+#~| msgid "User Profile"
+#~ msgid "Clone Field"
+#~ msgstr "ملف الكاتب"
+
+#, fuzzy
+#~| msgid "More "
+#~ msgid "More AJAX"
+#~ msgstr "المزيد "
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgid "New Form Locations"
+#~ msgstr "الموقع"
+
+#, fuzzy
+#~| msgid "Page Options"
+#~ msgid "Relational"
+#~ msgstr "خصائص الصفحة"
+
+#, fuzzy
+#~| msgid "Values"
+#~ msgid "Value"
+#~ msgstr "قيمنا"
+
+#, fuzzy
+#~| msgid "Enter Search keywords..."
+#~ msgid "Search for address..."
+#~ msgstr "أدخل كلمة البحث …"
+
+#, fuzzy
+#~| msgid "Customize the category"
+#~ msgid "Customize the map height"
+#~ msgstr "تخصيص التصنيف"
+
+#, fuzzy
+#~| msgid "Previous"
+#~ msgid "Preview Size"
+#~ msgstr "السابق"
+
+#, fuzzy
+#~| msgid "Select a File"
+#~ msgid "Select Link"
+#~ msgstr "اختر ملف"
+
+#, fuzzy
+#~| msgid "Linkedin Profile"
+#~ msgid "Link URL"
+#~ msgstr "حسابك على لينكدإن"
+
+#, fuzzy
+#~| msgid "Remove Embed"
+#~ msgid "Embed Size"
+#~ msgstr "حذف التضمين"
+
+#, fuzzy
+#~| msgid "Filter By "
+#~ msgid "Filter by Post Type"
+#~ msgstr "تصفية بـ "
+
+#, fuzzy
+#~| msgid "Daily Archives: %s"
+#~ msgid "Allow Archives URLs"
+#~ msgstr "أرشيف يومي‫:‬ %s"
+
+#, fuzzy
+#~| msgid "Post Cards"
+#~ msgid "Post Object"
+#~ msgstr "مربعات الأخبار"
+
+#, fuzzy
+#~| msgid "Recent Projects"
+#~ msgid "Select post type"
+#~ msgstr "مشاريع حديثه"
+
+#, fuzzy
+#~| msgid "More posts"
+#~ msgid "Minimum posts"
+#~ msgstr "المزيد من الأخبار"
+
+#, fuzzy
+#~| msgid "More posts"
+#~ msgid "Maximum posts"
+#~ msgstr "المزيد من الأخبار"
+
+#, fuzzy
+#~| msgid "Single Banners"
+#~ msgid "Single Value"
+#~ msgstr "إعلانات الخبر"
+
+#, fuzzy
+#~| msgid "Related news"
+#~ msgid "Create Terms"
+#~ msgstr "أخبار ذات صلة"
+
+#, fuzzy
+#~| msgid "Remove"
+#~ msgid "Term ID"
+#~ msgstr "حذف"
+
+#, fuzzy
+#~| msgid "Filter By "
+#~ msgid "Filter by role"
+#~ msgstr "تصفية بـ "
+
+#, fuzzy
+#~| msgid "View Edition"
+#~ msgid "Wysiwyg Editor"
+#~ msgstr "مشاهدة العدد"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgid "Menu Locations"
+#~ msgstr "الموقع"
+
+#, fuzzy
+#~| msgid "Top Menu"
+#~ msgid "Menus"
+#~ msgstr "القائمة العلوية"
+
+#, fuzzy
+#~| msgid "Pages:"
+#~ msgid "Page Type"
+#~ msgstr "الصفحات‫:"
+
+#, fuzzy
+#~| msgid "Post Cards"
+#~ msgid "Post Template"
+#~ msgstr "مربعات الأخبار"
+
+#, fuzzy
+#~| msgid "Add New Edition"
+#~ msgid "Add / Edit"
+#~ msgstr "اضف عدد جديد"
+
+#, fuzzy
+#~| msgid "User Profile"
+#~ msgid "User Role"
+#~ msgstr "ملف الكاتب"
+
+#, fuzzy
+#~| msgid "Available %s"
+#~ msgid "Update Available"
+#~ msgstr "%s المتاحة"
+
+#, fuzzy
+#~| msgid "Add Group"
+#~ msgid "Add layout"
+#~ msgstr "اضف مجموعة"
+
+#, fuzzy
+#~| msgid "Remove"
+#~ msgid "Remove layout"
+#~ msgstr "حذف"
+
+#, fuzzy
+#~| msgid "March"
+#~ msgid "Max"
+#~ msgstr "مارس"
+
+#, fuzzy
+#~| msgid "Menu Locations"
+#~ msgid "Bulk actions"
+#~ msgstr "اماكن القائمة"
+
+#~ msgid "Minimum Selection"
+#~ msgstr "ادنى حد للإختيار"
+
+#~ msgid "Recommended"
+#~ msgstr "مواضيع مشابهه"
+
+#~ msgid "All Recommended"
+#~ msgstr "كل التصنيفات للموصى به"
+
+#~ msgid "Try searching for the best match"
+#~ msgstr "حاول البحث بكلمات اخرى اكثر دقة"
+
+#~ msgid "Monthly Archives: %s"
+#~ msgstr "أرشيف شهري‫:‬ %s"
+
+#~ msgid "Yearly Archives: %s"
+#~ msgstr "أرشيف سنوي: %s"
+
+#~ msgid "404 Error Page"
+#~ msgstr "خطأ 404"
+
+#~ msgid "Events Calendar"
+#~ msgstr "نتيجة الأحداث والفعاليات"
+
+#~ msgid "Shop"
+#~ msgstr "المتجر"
+
+#~ msgid "Newspaper"
+#~ msgstr "الجريدة"
+
+#~ msgid "Search in Newspaper Editions"
+#~ msgstr "البحث في أعداد الجريدة"
+
+#~ msgid "No Newspaper Found"
+#~ msgstr "لايوجد أعداد"
+
+#~ msgid "newspaper Tags"
+#~ msgstr "وسوم الجريدة"
+
+#~ msgid "newspaper Tag"
+#~ msgstr "وسم الجريدة"
+
+#~ msgid "newspaper Categories"
+#~ msgstr "تصنيفات الجريدة"
+
+#~ msgid "More News in "
+#~ msgstr "المزيد من الأخبار في "
+
+#~ msgid "More News"
+#~ msgstr "المزيد من الأخبار"
+
+#~ msgid "Breaking News"
+#~ msgstr "أهم الأخبار"
+
+#~ msgid ""
+#~ "Thanks for signing up. Please check your inbox for a confirmation email."
+#~ msgstr ""
+#~ "شكراً لإشتراكك في تنبيهات المال، رجاء الذهاب لبريدك الإلكتروني لتأكيد "
+#~ "إشتراكك‫."
+
+#~ msgid "Please provide your name, email address and agree to the terms."
+#~ msgstr "رجاء ادخال اسمك، بريدك الإلكتروني والموافقة على شروط الإستخدام‫."
+
+#~ msgid "I have read and agree to the"
+#~ msgstr "قرأت وأوافق على"
+
+#~ msgid "Almal Stories every 24 hours"
+#~ msgstr "قصص المال على مدار 24 ساعة"
+
+#~ msgid "sub item"
+#~ msgstr "عنصر فرعي"
+
+#~ msgid ""
+#~ "Active link for this item if has sub items (works with mobile menu, side "
+#~ "and modern header)"
+#~ msgstr "تفعيل رابط العنصر حتى في حاله احتواءه على عناصر فرعية"
+
+#~ msgid "Hide Navigation Label"
+#~ msgstr "إخفاء العنوان في العنصر"
+
+#~ msgid "Original: %s"
+#~ msgstr "الأصلي: %s"
+
+#, fuzzy
+#~| msgid "Newspaper"
+#~ msgid "Newspaper Menu"
+#~ msgstr "الجريدة"
+
+#~ msgid "Footer About"
+#~ msgstr "من نحن في الفوتر"
+
+#, fuzzy
+#~| msgid "Footer Bar Links"
+#~ msgid "Mobile Footer Links"
+#~ msgstr "روابط شريط الفوتر"
+
+#~ msgid "Select Category 2:"
+#~ msgstr "اختر التصنيف الثاني‫:"
+
+#~ msgid "Select Category 3:"
+#~ msgstr "اختر التصنيف الثالث‫:"
+
+#~ msgid "Select Category 4:"
+#~ msgstr "اختر التصنيف الرابع‫:"
+
+#~ msgid "Select Category 5:"
+#~ msgstr "اختر التصنيف الخامس‫:"
+
+#~ msgid "Select Category 6:"
+#~ msgstr "اختر التصنيف السادس‫:"
+
+#~ msgid "Select Category 7:"
+#~ msgstr "اختر التصنيف السابع‫:"
+
+#~ msgid "Select Category 8:"
+#~ msgstr "اختر التصنيف الثامن‫:"
+
+#~ msgid "Select Category 9:"
+#~ msgstr "اختر التصنيف التاسع‫:"
+
+#~ msgid "Select Category 10:"
+#~ msgstr "اختر التصنيف العاشر‫:"
+
+#~ msgid "Select Category 11:"
+#~ msgstr "اختر التصنيف الحادي عشر‫:"
+
+#~ msgid "Featured News Select"
+#~ msgstr "إختياره كخبر مُميز"
+
+#~ msgid "Featured In Category in homepage"
+#~ msgstr "مُميز في القسم في الصفحة الرئيسية"
+
+#~ msgid "newspaper"
+#~ msgstr "الجريدة"
+
+#~ msgid "edition pdf"
+#~ msgstr "نسخة العدد"
+
+#~ msgid "upload pdf file for edition"
+#~ msgstr "قم برفع ملف العدد للجردية"
+
+#~ msgid "Upload Profile Picture"
+#~ msgstr "ارفع صورة الملف الشخصي"
+
+#~ msgid "Share your Twitter profile"
+#~ msgstr "شارك رابط حسابك بتويتر"
+
+#~ msgid "Linkedin Profile"
+#~ msgstr "حسابك على لينكدإن"
+
+#~ msgid "Share your Linkedin profile"
+#~ msgstr "شارك حسابك على لينكدإن"
+
+#~ msgid "Category Icon"
+#~ msgstr "أيقونة التصنيف"
+
+#~ msgid "Upload SVG icon for category."
+#~ msgstr "ارفع أيقون بصيغة SVG للتصنيف‫."
+
+#~ msgid "Catrgory Color for Background in heading and icons colors."
+#~ msgstr "لون للتصنيف يظهر في الخلفيات في صفحة التصنيف وفي ألوان الأيقونة‫."
+
+#~ msgid "Choose Tag to show list of Videos in homepage."
+#~ msgstr "اختر وسم الفيديو لعرض الفيديوهات في الرئيسية"
+
+#, fuzzy
+#~| msgid "Latest News in "
+#~ msgid "Latest News Title"
+#~ msgstr "أخر الأخبار في  "
+
+#, fuzzy
+#~| msgid "Latest News in "
+#~ msgid "Latest News Title in category."
+#~ msgstr "أخر الأخبار في  "
+
+#, fuzzy
+#~| msgid "almalnews"
+#~ msgid "Almalnews"
+#~ msgstr "جريدة المال"
+
+#, fuzzy
+#~| msgid "Stories"
+#~ msgid "Stories."
+#~ msgstr "قصص المال"
+
+#, fuzzy
+#~| msgid "Show Services Cols in homepage"
+#~ msgid "Show Services Buttons in top of homepage content."
+#~ msgstr "عرض أيقونات الخدمات في الصفحة الرئيسية"
+
+#, fuzzy
+#~| msgid "Post Cards"
+#~ msgid "News Cards"
+#~ msgstr "مربعات الأخبار"
+
+#, fuzzy
+#~| msgid "Author meta"
+#~ msgid "Show Post Author meta."
+#~ msgstr "معلومات الكاتب"
+
+#, fuzzy
+#~| msgid "Homepage Vidoes"
+#~ msgid "Homepage Video Source"
+#~ msgstr "فيديوهات الصفحة الرئيسية"
+
+#, fuzzy
+#~| msgid "Choose Category to show list of Videos in homepage."
+#~ msgid "Choose Source to show videos form."
+#~ msgstr "اختر تصنيف لعرض الفيديو في الصفحة الرئيسية‫."
+
+#, fuzzy
+#~| msgid "Choose Category to show list of Videos in homepage."
+#~ msgid "Choose tag or tags to show videos in homepage."
+#~ msgstr "اختر تصنيف لعرض الفيديو في الصفحة الرئيسية‫."
+
+#, fuzzy
+#~| msgid "Article Options"
+#~ msgid "Advertising options."
+#~ msgstr "خصائص الخبر"
+
+#, fuzzy
+#~| msgid "Category Banners"
+#~ msgid "Banners."
+#~ msgstr "اعلانات القسم"
+
+#, fuzzy
+#~| msgid "Populer News"
+#~ msgid "Ad After Populer news"
+#~ msgstr "أهم الأخبار"
+
+#, fuzzy
+#~| msgid "Newspaper"
+#~ msgid "Ad Beside Newsletter"
+#~ msgstr "الجريدة"
+
+#, fuzzy
+#~| msgid "Single Banners"
+#~ msgid "Single Story Ad"
+#~ msgstr "إعلانات الخبر"
+
+#, fuzzy
+#~| msgid "Page Options"
+#~ msgid "Categories options."
+#~ msgstr "خصائص الصفحة"
+
+#, fuzzy
+#~| msgid "Choose Category to show list of Videos in homepage."
+#~ msgid "Choose Category to show list of Videos."
+#~ msgstr "اختر تصنيف لعرض الفيديو في الصفحة الرئيسية‫."
+
+#, fuzzy
+#~| msgid "Linkedin Profile"
+#~ msgid "Linkedin url"
+#~ msgstr "حسابك على لينكدإن"
+
+#, fuzzy
+#~| msgid "Footer About"
+#~ msgid "footer options."
+#~ msgstr "من نحن في الفوتر"
+
+#~ msgid "Breif About Almalnews"
+#~ msgstr "نبذة مختصرة عن جريدة المال"
+
+#~ msgid "Popular Posts"
+#~ msgstr "أشهر الأخبار"
+
+#~ msgid "News"
+#~ msgstr "الأخبار"
+
+#~ msgid "Sending user info, please wait..."
+#~ msgstr "جاري تسجيل الدخول، رجاء الإنتظار‫…"
+
+#~ msgid "Wrong username or password."
+#~ msgstr "خطأ في إسم المستخدم أو كلمة المرور‫."
+
+#~ msgid "Login successful, redirecting..."
+#~ msgstr "تم تسجيل الدخول بنجاح، جاري إعادة التوجيه‫…"
+
+#~ msgid "Profile "
+#~ msgstr "ملف الكاتب "
+
+#, fuzzy
+#~| msgid "Page Options"
+#~ msgid "X-Frame-Options"
+#~ msgstr "خصائص الصفحة"
+
+#, fuzzy
+#~| msgid "Loaction"
+#~ msgid "form-action:"
+#~ msgstr "الموقع"
+
+#, fuzzy
+#~| msgid "Construction progress photos"
+#~ msgid "Constructor error (%s)."
+#~ msgstr "صور تقدم البناء"
+
+#, fuzzy
+#~| msgid "Theme Options"
+#~ msgid "Theme files export"
+#~ msgstr "خصائص القالب"
+
+#, fuzzy
+#~| msgid "Author"
+#~ msgid "Authorize:"
+#~ msgstr "الكاتب"
+
+#, fuzzy
+#~| msgid "Editor Manager"
+#~ msgid "Manage"
+#~ msgstr "رئيس التحرير"
+
+#, fuzzy
+#~| msgid "Original: %s"
+#~ msgid "Origin Push:"
+#~ msgstr "الأصلي: %s"
+
+#, fuzzy
+#~| msgid "Recent Projects"
+#~ msgid "Select service to use"
+#~ msgstr "مشاريع حديثه"
+
+#, fuzzy
+#~| msgid "Remove"
+#~ msgid "Remove it for me"
+#~ msgstr "حذف"
+
+#, fuzzy
+#~| msgid "Services"
+#~ msgid "Overview"
+#~ msgstr "الخدمات"
+
+#, fuzzy
+#~| msgid "Main Sidebar"
+#~ msgid "Cache sidebar:"
+#~ msgstr "القائمة الجانبية الرئيسية"
+
+#, fuzzy
+#~| msgid "Share this page"
+#~ msgid "Hide this message"
+#~ msgstr "شارك هذة الصفحة"
+
+#, fuzzy
+#~| msgid "newspaper Tags"
+#~ msgid "Enable XMIT:"
+#~ msgstr "وسوم الجريدة"
+
+#, fuzzy
+#~| msgid "Services"
+#~ msgid "Premium Services"
+#~ msgstr "الخدمات"
+
+#, fuzzy
+#~| msgid "Please Try Again"
+#~ msgid "Please enter it again."
+#~ msgstr "الرجاء المحاولة مجدداً"
+
+#, fuzzy
+#~| msgid "Sign Up for Property Alerts."
+#~ msgid "Sort Properties"
+#~ msgstr "اشترك في إشعارات العقارات‫."
+
+#, fuzzy
+#~| msgid "Find out more"
+#~ msgid "Post author pages"
+#~ msgstr "اكتشف المزيد"
+
+#, fuzzy
+#~| msgid "Find out more"
+#~ msgid "Post terms pages"
+#~ msgstr "اكتشف المزيد"
+
+#, fuzzy
+#~| msgid "Post Cards"
+#~ msgid "Post terms feeds"
+#~ msgstr "مربعات الأخبار"
+
+#, fuzzy
+#~| msgid "Daily Archives: %s"
+#~ msgid "Daily archive pages"
+#~ msgstr "أرشيف يومي‫:‬ %s"
+
+#, fuzzy
+#~| msgid "Monthly Archives: %s"
+#~ msgid "Monthly archive pages"
+#~ msgstr "أرشيف شهري‫:‬ %s"
+
+#, fuzzy
+#~| msgid "Yearly Archives: %s"
+#~ msgid "Yearly archive pages"
+#~ msgstr "أرشيف سنوي: %s"
+
+#, fuzzy
+#~| msgid "newspaper Tags"
+#~ msgid "Enabled:"
+#~ msgstr "وسوم الجريدة"
+
+#, fuzzy
+#~| msgid "Technical Support"
+#~ msgid "Technical info"
+#~ msgstr "دفع فني"
+
+#~ msgid "Disk"
+#~ msgstr "الديسك"
+
+#, fuzzy
+#~| msgid "almalnews Settings"
+#~ msgid "Use common settings"
+#~ msgstr "أعدادات جريدة المال"
+
+#, fuzzy
+#~| msgid "Original: %s"
+#~ msgid "SameOrigin"
+#~ msgstr "الأصلي: %s"
+
+#, fuzzy
+#~| msgid "Original: %s"
+#~ msgid "origin"
+#~ msgstr "الأصلي: %s"
+
+#, fuzzy
+#~| msgid "Upload Profile Picture"
+#~ msgid "Upload includes files"
+#~ msgstr "ارفع صورة الملف الشخصي"
+
+#, fuzzy
+#~| msgid "Page Options"
+#~ msgid "Purge action:"
+#~ msgstr "خصائص الصفحة"
+
+#, fuzzy
+#~| msgid "Original: %s"
+#~ msgid "Origin:"
+#~ msgstr "الأصلي: %s"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgid "operation."
+#~ msgstr "الموقع"
+
+#, fuzzy
+#~| msgid "Show Author meta in homepage"
+#~ msgid "Visit author homepage"
+#~ msgstr "عرض معلومات الكاتب ف الصفحة الرئيسية"
+
+#, fuzzy
+#~| msgid "almalnews Settings"
+#~ msgid "Restore Default Settings"
+#~ msgstr "أعدادات جريدة المال"
+
+#, fuzzy
+#~| msgid "Normal Posts"
+#~ msgid "Total posts:"
+#~ msgstr "الأخبار"
+
+#, fuzzy
+#~| msgid "Cancel"
+#~ msgid "Cancelled"
+#~ msgstr "إلغاء"
+
+#~ msgid "Homepage Post Cards"
+#~ msgstr "مربعات الأخبار في الرئيسية"
+
+#~ msgid "Show Author meta in homepage"
+#~ msgstr "عرض معلومات الكاتب ف الصفحة الرئيسية"
+
+#, fuzzy
+#~| msgid "Number of projects to show:"
+#~ msgid "Numbers of videos to show in homepage"
+#~ msgstr "عدد المشاريع التي سيتم عرضها:"
+
+#~ msgid "enter ID for space "
+#~ msgstr "ادخل معرف مساحة الإعلان "
+
+#~ msgid "Category Banners"
+#~ msgstr "اعلانات القسم"
+
+#~ msgid "Category Page Banners"
+#~ msgstr "إعلانات صفحة القسم"
+
+#, fuzzy
+#~| msgid "Category Page Banners"
+#~ msgid "Archive Page Banners"
+#~ msgstr "إعلانات صفحة القسم"
+
+#~ msgid "Single News Banners"
+#~ msgstr "إعلانات صفحة الخبر الداخلية"
+
+#, fuzzy
+#~| msgid "Single Banners"
+#~ msgid "Stories Banners"
+#~ msgstr "إعلانات الخبر"
+
+#, fuzzy
+#~| msgid "Single Banners"
+#~ msgid "Mobile Banners"
+#~ msgstr "إعلانات الخبر"
+
+#~ msgid "Stories Date"
+#~ msgstr "تاريخ القصص"
+
+#~ msgid "<span><i class=\"fas fa-tags\"></i> Tags</span>"
+#~ msgstr "<span><I class=“fas fa-tags”></I> Tags</span>"
+
+#~ msgid "Almal every 24 hours"
+#~ msgstr "المال في 24 ساعة"
+
+#, fuzzy
+#~| msgid "Stories"
+#~ msgid "Series"
+#~ msgstr "قصص المال"
+
+#, fuzzy
+#~| msgid "Populer News"
+#~ msgid "Popular"
+#~ msgstr "أهم الأخبار"
+
+#, fuzzy
+#~| msgid "News"
+#~ msgid "New"
+#~ msgstr "الأخبار"
+
+#, fuzzy
+#~| msgid "Main Menu"
+#~ msgid "Main Menu Aria Label"
+#~ msgstr "القائمة الرئيسية"
+
+#, fuzzy
+#~| msgid "Footer Categories"
+#~ msgid "Footer Callout Aria Label"
+#~ msgstr "الأقسام بالفوتر"
+
+#, fuzzy
+#~| msgid "Cancel"
+#~ msgid "Cancel Reset"
+#~ msgstr "إلغاء"
+
+#, fuzzy
+#~| msgid "Register your interest in"
+#~ msgid "Select your link target window."
+#~ msgstr "سجل اهتمامك ب"
+
+#, fuzzy
+#~| msgid "Footer Categories"
+#~ msgid "Footer Reveal"
+#~ msgstr "الأقسام بالفوتر"
+
+#, fuzzy
+#~| msgid "Select a File"
+#~ msgid "Callout Link"
+#~ msgstr "اختر ملف"
+
+#, fuzzy
+#~| msgid "Search Results"
+#~ msgid "Include in Search Results?"
+#~ msgstr "نتائج البحث"
+
+#, fuzzy
+#~| msgid "newspaper Categories"
+#~ msgid "Enable Categories?"
+#~ msgstr "تصنيفات الجريدة"
+
+#, fuzzy
+#~| msgid "Category"
+#~ msgid "Categories: Label"
+#~ msgstr "التصنيف"
+
+#, fuzzy
+#~| msgid "Category"
+#~ msgid "Categories: Slug"
+#~ msgstr "التصنيف"
+
+#, fuzzy
+#~| msgid "Parent newspaper Tag"
+#~ msgid "Parent Staff Tag"
+#~ msgstr "الوسم الأب للجريدة"
+
+#, fuzzy
+#~| msgid "Parent newspaper Tag:"
+#~ msgid "Parent Staff Tag:"
+#~ msgstr "الوسم الأب للجريدة‫:"
+
+#, fuzzy
+#~| msgid "Edit newspaper Tag"
+#~ msgid "Edit Staff Tag"
+#~ msgstr "تعديل وسم الجريدة"
+
+#, fuzzy
+#~| msgid "New newspaper Tag Name"
+#~ msgid "New Staff Tag Name"
+#~ msgstr "اسم وسم جديد للجريدة"
+
+#, fuzzy
+#~| msgid "Footer Categories"
+#~ msgid "Staff Categories"
+#~ msgstr "الأقسام بالفوتر"
+
+#, fuzzy
+#~| msgid "Business Segment"
+#~ msgid "Business Info"
+#~ msgstr "قطاع الأعمال"
+
+#, fuzzy
+#~| msgid "Learn More"
+#~ msgid "Learn more"
+#~ msgstr "اكتشف المزيد"
+
+#, fuzzy
+#~| msgid "Subscribe"
+#~ msgid "Include Subscribers?"
+#~ msgstr "سجل الأن"
+
+#~ msgid "Head of Department"
+#~ msgstr "رئيس القسم"
+
+#~ msgid "The most recent projects on your site."
+#~ msgstr "اكثر المشاريع شهرة‫."
+
+#~ msgid "Change in increments of 3 (at most 9)"
+#~ msgstr "التغيير في الزيادات من 3 (على الأكثر 9)"
+
+#, fuzzy
+#~| msgid "Visit bloom holding"
+#~ msgid "almalnews Holding URL"
+#~ msgstr "زيارة بلوم القابضة"
+
+#, fuzzy
+#~| msgid "Register your interest of"
+#~ msgid "Register interest Form AR"
+#~ msgstr "سجل إهتمامك بـ"
+
+#, fuzzy
+#~| msgid "Press Releases"
+#~ msgid "Press Releases Filter"
+#~ msgstr "الأخبار الصحفية"
+
+#, fuzzy
+#~| msgid "Who we Are"
+#~ msgid "Who we are"
+#~ msgstr "من نحن"
+
+#, fuzzy
+#~| msgid "What we do"
+#~ msgid "What We do"
+#~ msgstr "ماذا نقدم"
+
+#, fuzzy
+#~| msgid "Construction Updates"
+#~ msgid "Construction interest Form AR"
+#~ msgstr "تحديثات البناء"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgid "Search FAQ"
+#~ msgstr "بحث"
+
+#~ msgid "Word, PDF max size: 2mb"
+#~ msgstr "Word, PDF اقصى حجم: 2mb"
+
+#~ msgid ""
+#~ "Your subscription to our list has been confirmed. Thank you for "
+#~ "subscribing!"
+#~ msgstr "تم تأكيد إشتراك بالقائمة البريدية، شكراً لإشتراكك‫!"
+
+#~ msgid "Follow us on facebook"
+#~ msgstr "تابعنا على فيسبوك"
+
+#~ msgid "Follow us on linkedin"
+#~ msgstr "تابعنا على لينكد ان"
+
+#~ msgid "Follow us on instagram"
+#~ msgstr "تابعنا على انتسجرام"
+
+#~ msgid "Visit bloom holding"
+#~ msgstr "زيارة بلووم القابضة"
+
+#~ msgid "Please drop us a message and we will get in touch shortly"
+#~ msgstr "يرجى ترك لنا رسالة ونحن سوف تحصل على اتصال قريبا"
+
+#~ msgid "What would you like to Search now?"
+#~ msgstr "ماذا تريد أن تبحث الآن؟"
+
+#~ msgid "Sorry, no results found - try a different search selection"
+#~ msgstr "عذراً، لايوجد نتائج ‫-‬ حاول البحث بكلمات اخرى"
+
+#~ msgid "Scheduled completion: "
+#~ msgstr "الموعد المقرر: "
+
+#~ msgid "Floor Plans"
+#~ msgstr "خطط المبنى"
+
+#~ msgid "Signup for Download Brochure"
+#~ msgstr "سجل بياناتك من أجل تحميل الكتيب"
+
+#~ msgid "Download Floor Plan"
+#~ msgstr "تحميل خطط المبنى"
+
+#~ msgid "Register Your Interest"
+#~ msgstr "سجل اهتمامك"
+
+#~ msgid "Back to Press Releases"
+#~ msgstr "الرجوع إلى جميع الأخبار"
+
+#~ msgid "Learn more here"
+#~ msgstr "مزيد من المعلومات هنا"
+
+#~ msgid "I want to"
+#~ msgstr "أريد أن"
+
+#~ msgid "Rent"
+#~ msgstr "استئجار"
+
+#~ msgid "Dubai"
+#~ msgstr "دبي"
+
+#~ msgid "Abu Dhabi"
+#~ msgstr "أبو ظبي"
+
+#~ msgid "Our offices"
+#~ msgstr "مكاتبنا"
+
+#~ msgid "Who we Are"
+#~ msgstr "من نحن"
+
+#~ msgid "Featured Schools and News"
+#~ msgstr "المدارس والأخبار المميزة"
+
+#~ msgid "Read the latest updates."
+#~ msgstr "اقرأ آخر التحديثات."
+
+#~ msgid "Bloom Construction Updates."
+#~ msgstr "تطورات البناء من بلووم العقارية‫."
+
+#~ msgid "Property Alerts"
+#~ msgstr "إشعارات العقارات"
+
+#~ msgid "For Rent"
+#~ msgstr "للإيجار"
+
+#~ msgid "What we do"
+#~ msgstr "ماذا نقدم"
+
+#~ msgid "Register your interest of"
+#~ msgstr "سجل إهتمامك بـ"
+
+#~ msgid "Get updates via e-mail"
+#~ msgstr "احصل على تحديثاتنا عبر البريد الإلكتروني"
+
+#~ msgid "Buy & Rent"
+#~ msgstr "شراء واستئجار"
+
+#~ msgid "We Invite you to explore a career with Bloom"
+#~ msgstr "نحن ندعوك لاستكشاف مهنة مع بلوم"

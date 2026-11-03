@@ -1,0 +1,22 @@
+<wpml-config>
+    <admin-texts>
+        <key name="citytours">
+            <key name="branding_logo_text" />
+			<key name="blog_header_content" />
+			<key name="hotel_thankyou_text_1" />
+            <key name="hotel_thankyou_text_2" />
+            <key name="hotel_header_content" />
+            <key name="hotel_confirm_email_subject" />
+            <key name="hotel_confirm_email_description" />
+            <key name="hotel_admin_email_subject" />
+            <key name="hotel_admin_email_description" />
+            <key name="tour_thankyou_text_1" />
+            <key name="tour_thankyou_text_2" />
+            <key name="tour_header_content" />
+            <key name="tour_confirm_email_subject" />
+            <key name="tour_confirm_email_description" />
+            <key name="tour_admin_email_subject" />
+            <key name="tour_admin_email_description" />
+        </key>
+    </admin-texts>
+</wpml-config>

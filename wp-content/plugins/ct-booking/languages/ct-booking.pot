@@ -1,0 +1,518 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-03 08:25+0800\n"
+"PO-Revision-Date: 2017-05-03 08:25+0800\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Eazy Po 0.9.5.3\n"
+
+#: ct-booking.php:53
+msgctxt "Post Type General Name"
+msgid "Hotels"
+msgstr ""
+
+#: ct-booking.php:54
+msgctxt "Post Type Singular Name"
+msgid "Hotel"
+msgstr ""
+
+#: ct-booking.php:55
+msgid "Hotels"
+msgstr ""
+
+#: ct-booking.php:56
+msgid "All Hotels"
+msgstr ""
+
+#: ct-booking.php:57
+msgid "View Hotel"
+msgstr ""
+
+#: ct-booking.php:58
+msgid "Add New Hotel"
+msgstr ""
+
+#: ct-booking.php:59
+msgid "New Hotel"
+msgstr ""
+
+#: ct-booking.php:60
+msgid "Edit Hotels"
+msgstr ""
+
+#: ct-booking.php:61
+msgid "Update Hotels"
+msgstr ""
+
+#: ct-booking.php:62
+msgid "Search Hotels"
+msgstr ""
+
+#: ct-booking.php:63
+msgid "No Hotels found"
+msgstr ""
+
+#: ct-booking.php:64
+msgid "No Hotels found in Trash"
+msgstr ""
+
+#: ct-booking.php:67
+msgid "hotel"
+msgstr ""
+
+#: ct-booking.php:68
+msgid "Hotel information pages"
+msgstr ""
+
+#: ct-booking.php:100
+msgctxt "Post Type Name"
+msgid "Room Types"
+msgstr ""
+
+#: ct-booking.php:101
+msgctxt "Post Type Singular Name"
+msgid "Room Type"
+msgstr ""
+
+#: ct-booking.php:102
+msgid "Room Types"
+msgstr ""
+
+#: ct-booking.php:103
+msgid "All Room Types"
+msgstr ""
+
+#: ct-booking.php:104
+msgid "View Room Type"
+msgstr ""
+
+#: ct-booking.php:105
+msgid "Add New Room"
+msgstr ""
+
+#: ct-booking.php:106
+msgid "New Room Types"
+msgstr ""
+
+#: ct-booking.php:107
+msgid "Edit Room Types"
+msgstr ""
+
+#: ct-booking.php:108
+msgid "Update Room Types"
+msgstr ""
+
+#: ct-booking.php:109
+msgid "Search Room Types"
+msgstr ""
+
+#: ct-booking.php:110
+msgid "No Room Types found"
+msgstr ""
+
+#: ct-booking.php:111
+msgid "No Room Types found in Trash"
+msgstr ""
+
+#: ct-booking.php:114
+msgid "room types"
+msgstr ""
+
+#: ct-booking.php:115
+msgid "Room Type information pages"
+msgstr ""
+
+#: ct-booking.php:144
+msgctxt "taxonomy general name"
+msgid "Districts"
+msgstr ""
+
+#: ct-booking.php:145
+msgctxt "taxonomy singular name"
+msgid "District"
+msgstr ""
+
+#: ct-booking.php:146
+msgid "Districts"
+msgstr ""
+
+#: ct-booking.php:147
+msgid "All Districts"
+msgstr ""
+
+#: ct-booking.php:150
+msgid "New District"
+msgstr ""
+
+#: ct-booking.php:151
+msgid "Add New District"
+msgstr ""
+
+#: ct-booking.php:152
+msgid "Edit District"
+msgstr ""
+
+#: ct-booking.php:153
+msgid "Update District"
+msgstr ""
+
+#: ct-booking.php:154
+msgid "Separate Districts with commas"
+msgstr ""
+
+#: ct-booking.php:155
+msgid "Search Districts"
+msgstr ""
+
+#: ct-booking.php:156
+msgid "Add or remove Districts"
+msgstr ""
+
+#: ct-booking.php:157
+msgid "Choose from the most used Districts"
+msgstr ""
+
+#: ct-booking.php:158
+msgid "No Districts found."
+msgstr ""
+
+#: ct-booking.php:176
+msgctxt "taxonomy general name"
+msgid "Hotel Facilities"
+msgstr ""
+
+#: ct-booking.php:177
+msgctxt "taxonomy singular name"
+msgid "Hotel Facility"
+msgstr ""
+
+#: ct-booking.php:178
+msgid "Hotel Facilities"
+msgstr ""
+
+#: ct-booking.php:179
+msgid "All Hotel Facilities"
+msgstr ""
+
+#: ct-booking.php:182
+msgid "New Hotel Facility"
+msgstr ""
+
+#: ct-booking.php:183
+msgid "Add New Hotel Facility"
+msgstr ""
+
+#: ct-booking.php:184
+msgid "Edit Hotel Facility"
+msgstr ""
+
+#: ct-booking.php:185
+msgid "Update Hotel Facility"
+msgstr ""
+
+#: ct-booking.php:186
+msgid "Separate hotel facilities with commas"
+msgstr ""
+
+#: ct-booking.php:187
+msgid "Search Hotel Facilities"
+msgstr ""
+
+#: ct-booking.php:188
+msgid "Add or remove hotel facilities"
+msgstr ""
+
+#: ct-booking.php:189
+msgid "Choose from the most used hotel facilities"
+msgstr ""
+
+#: ct-booking.php:190
+msgid "No hotel facilities found."
+msgstr ""
+
+#: ct-booking.php:212
+msgctxt "Post Type General Name"
+msgid "Tours"
+msgstr ""
+
+#: ct-booking.php:213
+msgctxt "Post Type Singular Name"
+msgid "Tour"
+msgstr ""
+
+#: ct-booking.php:214
+msgid "Tours"
+msgstr ""
+
+#: ct-booking.php:215
+msgid "All Tours"
+msgstr ""
+
+#: ct-booking.php:216
+msgid "View Tour"
+msgstr ""
+
+#: ct-booking.php:217
+msgid "Add New Tour"
+msgstr ""
+
+#: ct-booking.php:218
+msgid "New Tour"
+msgstr ""
+
+#: ct-booking.php:219
+msgid "Edit Tours"
+msgstr ""
+
+#: ct-booking.php:220
+msgid "Update Tours"
+msgstr ""
+
+#: ct-booking.php:221
+msgid "Search Tours"
+msgstr ""
+
+#: ct-booking.php:222
+msgid "No Tours found"
+msgstr ""
+
+#: ct-booking.php:223
+msgid "No Tours found in Trash"
+msgstr ""
+
+#: ct-booking.php:226
+msgid "tour"
+msgstr ""
+
+#: ct-booking.php:227 ct-booking.php:341
+msgid "Tour information pages"
+msgstr ""
+
+#: ct-booking.php:259
+msgctxt "taxonomy general name"
+msgid "Tour Types"
+msgstr ""
+
+#: ct-booking.php:260
+msgctxt "taxonomy singular name"
+msgid "Tour Type"
+msgstr ""
+
+#: ct-booking.php:261
+msgid "Tour Types"
+msgstr ""
+
+#: ct-booking.php:262
+msgid "All Tour Types"
+msgstr ""
+
+#: ct-booking.php:265
+msgid "New Tour Type"
+msgstr ""
+
+#: ct-booking.php:266
+msgid "Add New Tour Type"
+msgstr ""
+
+#: ct-booking.php:267
+msgid "Edit Tour Type"
+msgstr ""
+
+#: ct-booking.php:268
+msgid "Update Tour Type"
+msgstr ""
+
+#: ct-booking.php:269
+msgid "Separate tour types with commas"
+msgstr ""
+
+#: ct-booking.php:270
+msgid "Search Tour Types"
+msgstr ""
+
+#: ct-booking.php:271
+msgid "Add or remove tour types"
+msgstr ""
+
+#: ct-booking.php:272
+msgid "Choose from the most used tour types"
+msgstr ""
+
+#: ct-booking.php:273
+msgid "No tour types found."
+msgstr ""
+
+#: ct-booking.php:292
+msgctxt "taxonomy general name"
+msgid "Tour Facilities"
+msgstr ""
+
+#: ct-booking.php:293
+msgctxt "taxonomy singular name"
+msgid "Tour Facility"
+msgstr ""
+
+#: ct-booking.php:294
+msgid "Tour Facilities"
+msgstr ""
+
+#: ct-booking.php:295
+msgid "All Tour Facilities"
+msgstr ""
+
+#: ct-booking.php:298
+msgid "New Tour Facility"
+msgstr ""
+
+#: ct-booking.php:299
+msgid "Add New Tour Facility"
+msgstr ""
+
+#: ct-booking.php:300
+msgid "Edit Tour Facility"
+msgstr ""
+
+#: ct-booking.php:301
+msgid "Update Tour Facility"
+msgstr ""
+
+#: ct-booking.php:302
+msgid "Separate tour facilities with commas"
+msgstr ""
+
+#: ct-booking.php:303
+msgid "Search Tour Facilities"
+msgstr ""
+
+#: ct-booking.php:304
+msgid "Add or remove tour facilities"
+msgstr ""
+
+#: ct-booking.php:305
+msgid "Choose from the most used tour facilities"
+msgstr ""
+
+#: ct-booking.php:306
+msgid "No tour facilities found."
+msgstr ""
+
+#: ct-booking.php:325
+msgctxt "Post Type General Name"
+msgid "FAQs"
+msgstr ""
+
+#: ct-booking.php:326
+msgctxt "Post Type Singular Name"
+msgid "FAQ"
+msgstr ""
+
+#: ct-booking.php:327
+msgid "FAQs"
+msgstr ""
+
+#: ct-booking.php:328
+msgid "All FAQs"
+msgstr ""
+
+#: ct-booking.php:329
+msgid "View FAQ"
+msgstr ""
+
+#: ct-booking.php:330
+msgid "Add New FAQ"
+msgstr ""
+
+#: ct-booking.php:331
+msgid "New FAQ"
+msgstr ""
+
+#: ct-booking.php:332
+msgid "Edit FAQs"
+msgstr ""
+
+#: ct-booking.php:333
+msgid "Update FAQs"
+msgstr ""
+
+#: ct-booking.php:334
+msgid "Search FAQs"
+msgstr ""
+
+#: ct-booking.php:335
+msgid "No FAQs found"
+msgstr ""
+
+#: ct-booking.php:336
+msgid "No FAQs found in Trash"
+msgstr ""
+
+#: ct-booking.php:337
+msgid "FAQ Attributes"
+msgstr ""
+
+#: ct-booking.php:357
+msgctxt "taxonomy general name"
+msgid "FAQ Categories"
+msgstr ""
+
+#: ct-booking.php:358
+msgctxt "taxonomy singular name"
+msgid "FAQ Category"
+msgstr ""
+
+#: ct-booking.php:359
+msgid "FAQ Categories"
+msgstr ""
+
+#: ct-booking.php:360
+msgid "All FAQ Categories"
+msgstr ""
+
+#: ct-booking.php:363
+msgid "New FAQ Category"
+msgstr ""
+
+#: ct-booking.php:364
+msgid "Add New FAQ Category"
+msgstr ""
+
+#: ct-booking.php:365
+msgid "Edit FAQ Category"
+msgstr ""
+
+#: ct-booking.php:366
+msgid "Update FAQ Category"
+msgstr ""
+
+#: ct-booking.php:367
+msgid "Separate FAQ Categories with commas"
+msgstr ""
+
+#: ct-booking.php:368
+msgid "Search FAQ Categories"
+msgstr ""
+
+#: ct-booking.php:369
+msgid "Add or remove FAQ Categories"
+msgstr ""
+
+#: ct-booking.php:370
+msgid "Choose from the most used FAQ Categories"
+msgstr ""
+
+#: ct-booking.php:371
+msgid "No FAQ Categories found."
+msgstr ""

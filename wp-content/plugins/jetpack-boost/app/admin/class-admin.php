@@ -1,0 +1,308 @@
+<?php
+/**
+ * The admin-specific functionality of the plugin.
+ *
+ * @since      1.0.0
+ * @package    automattic/jetpack-boost
+ */
+
+namespace Automattic\Jetpack_Boost\Admin;
+
+use Automattic\Jetpack\Admin_UI\Admin_Menu;
+use Automattic\Jetpack\Assets;
+use Automattic\Jetpack\Boost_Speed_Score\Speed_Score;
+use Automattic\Jetpack\My_Jetpack\Initializer as My_Jetpack_Initializer;
+use Automattic\Jetpack\WP_Build_Polyfills\WP_Build_Polyfills;
+use Automattic\Jetpack_Boost\Lib\Analytics;
+use Automattic\Jetpack_Boost\Lib\Debug;
+use Automattic\Jetpack_Boost\Lib\Environment_Change_Detector;
+use Automattic\Jetpack_Boost\Lib\Premium_Features;
+use Automattic\Jetpack_Boost\Modules\Modules_Setup;
+
+class Admin {
+	/**
+	 * Menu slug.
+	 */
+	const MENU_SLUG = 'jetpack-boost';
+
+	/**
+	 * Filter controlling the modern dashboard; return false to restore the legacy dashboard.
+	 */
+	const MODERNIZATION_FILTER = 'rsm_jetpack_ui_modernization_boost';
+
+	/**
+	 * Whether this request loaded the modern dashboard.
+	 *
+	 * @var bool
+	 */
+	private $modern_dashboard_loaded = false;
+
+	/**
+	 * The screen ID alias_screen_id_for_wp_build() replaced, until it is restored.
+	 *
+	 * @var string|null
+	 */
+	private $wp_build_original_screen_id = null;
+
+	public function init( Modules_Setup $modules ) {
+		Environment_Change_Detector::init();
+
+		// Initiate speed scores.
+		new Speed_Score( $modules->get_ready_active_optimization_modules(), 'boost-plugin' );
+
+		add_action( 'init', array( new Analytics(), 'init' ) );
+		add_filter( 'plugin_action_links_' . JETPACK_BOOST_PLUGIN_BASE, array( $this, 'plugin_page_settings_link' ) );
+		add_action( 'admin_menu', array( $this, 'handle_admin_menu' ), 1 ); // Akismet uses 4, so we use 1 to ensure both menus are added when only they exist.
+	}
+
+	public function handle_admin_menu() {
+		$this->maybe_load_wp_build();
+
+		/**
+		 * Filters the number of problems shown in the Boost sidebar menu
+		 *
+		 * @param int $count the number of problems shown.
+		 *
+		 * @since   1.0.0
+		 */
+		// Only report the count to users who can actually reach the Boost menu
+		// (added below with the 'manage_options' cap). Otherwise the central
+		// menu-badges total would include problems the current user can't see.
+		if ( current_user_can( 'manage_options' ) ) {
+			$total_problems = apply_filters( 'jetpack_boost_total_problem_count', 0 );
+			\Automattic\Jetpack\Menu_Badges\Menu_Badges::init(); // idempotent; wires the renderer.
+			\Automattic\Jetpack\Menu_Badges\Notification_Counts::register(
+				'jetpack-boost',
+				array(
+					'menu_slug' => JETPACK_BOOST_SLUG,
+					'count'     => (int) $total_problems,
+					'type'      => 'count',
+				)
+			);
+		}
+
+		$page_suffix = Admin_Menu::add_menu(
+			__( 'Jetpack Boost - Settings', 'jetpack-boost' ),
+			'Boost', // "Boost" is a product name, do not translate.
+			'manage_options',
+			JETPACK_BOOST_SLUG,
+			$this->modern_dashboard_loaded ? 'jetpack_boost_jetpack_boost_dashboard_wp_admin_render_page' : array( $this, 'render_settings' ),
+			null,
+			array(
+				'product' => 'boost',
+				'key'     => 'jetpack-boost',
+			)
+		);
+		add_action( 'load-' . $page_suffix, array( $this, 'admin_init' ) );
+	}
+
+	/**
+	 * Whether this admin request uses the modern dashboard.
+	 *
+	 * @return bool Whether modernization is enabled for this admin request.
+	 */
+	private static function is_modern_dashboard() {
+		/**
+		 * Filters whether to load the modern Boost dashboard.
+		 *
+		 * Hook `__return_false` to restore the legacy dashboard.
+		 *
+		 * @since 4.7.1
+		 * @since 4.8.0 Defaults to true.
+		 * @param bool $enabled Whether to enable the modern dashboard. Default true.
+		 */
+		return apply_filters( self::MODERNIZATION_FILTER, true ) && is_admin();
+	}
+
+	/**
+	 * Load the modern dashboard only on a Boost admin request that has not filtered it off.
+	 */
+	private function maybe_load_wp_build() {
+		if ( ! self::is_modern_dashboard() ) {
+			return;
+		}
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$page = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
+		if ( JETPACK_BOOST_SLUG !== $page || ! $this->dashboard_build_is_available() ) {
+			return;
+		}
+
+		WP_Build_Polyfills::register(
+			'jetpack-boost',
+			array_merge( WP_Build_Polyfills::SCRIPT_HANDLES, WP_Build_Polyfills::MODULE_IDS )
+		);
+
+		// wp_default_scripts has already fired by admin_menu, so register the init module now.
+		jetpack_boost_register_script_modules(); // @phan-suppress-current-line PhanUndeclaredFunction -- Defined by the generated build and checked in dashboard_build_is_available().
+		$this->modern_dashboard_loaded = true;
+	}
+
+	/**
+	 * Load the generated dashboard, retaining the legacy page when assets are absent.
+	 *
+	 * @return bool Whether the generated dashboard is available.
+	 */
+	private function dashboard_build_is_available() {
+		$build_file = JETPACK_BOOST_DIR_PATH . '/build/build.php';
+		if ( ! file_exists( $build_file ) ) {
+			Debug::log( 'Modern dashboard build is missing; loading the legacy dashboard.' );
+			return false;
+		}
+
+		// Hooked around the require, so only the generated enqueue callback, with its init action and REST preloading, sees the alias.
+		add_action( 'admin_enqueue_scripts', array( $this, 'alias_screen_id_for_wp_build' ) );
+		require_once $build_file;
+		add_action( 'admin_enqueue_scripts', array( $this, 'restore_screen_id_after_wp_build' ) );
+
+		if ( function_exists( 'jetpack_boost_register_script_modules' )
+			&& function_exists( 'jetpack_boost_jetpack_boost_dashboard_wp_admin_render_page' ) ) {
+			return true;
+		}
+
+		remove_action( 'admin_enqueue_scripts', array( $this, 'alias_screen_id_for_wp_build' ) );
+		remove_action( 'admin_enqueue_scripts', array( $this, 'restore_screen_id_after_wp_build' ) );
+		return false;
+	}
+
+	/**
+	 * Match wp-build's enqueue screen without changing the Boost menu URL.
+	 *
+	 * @since 4.7.1
+	 * @since 4.8.0 Reads the current screen itself and records the ID it replaces.
+	 */
+	public function alias_screen_id_for_wp_build() {
+		$screen = get_current_screen();
+		if ( ! $screen ) {
+			return;
+		}
+
+		$this->wp_build_original_screen_id = $screen->id;
+		$screen->id                        = 'jetpack-boost-dashboard';
+	}
+
+	/**
+	 * Undo alias_screen_id_for_wp_build(), since JITM builds its message path from the screen ID.
+	 *
+	 * @since 4.8.0
+	 */
+	public function restore_screen_id_after_wp_build() {
+		$screen = get_current_screen();
+		if ( ! $screen || null === $this->wp_build_original_screen_id ) {
+			return;
+		}
+
+		$screen->id                        = $this->wp_build_original_screen_id;
+		$this->wp_build_original_screen_id = null;
+	}
+
+	/**
+	 * Enqueue scripts and styles for the admin page.
+	 */
+	public function admin_init() {
+		// Clear premium features cache when the plugin settings page is loaded.
+		Premium_Features::clear_cache();
+
+		add_action( 'admin_enqueue_scripts', array( My_Jetpack_Initializer::class, 'enqueue_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+	}
+
+	/**
+	 * Register the JavaScript for the admin area.
+	 *
+	 * @since    1.0.0
+	 */
+	public function enqueue_scripts() {
+		/**
+		 * Filters the internal path to the distributed assets used by the plugin
+		 *
+		 * @param string $path the path to the assets
+		 */
+		$internal_path = apply_filters( 'jetpack_boost_asset_internal_path', 'app/assets/dist/' );
+
+		$admin_js_handle = 'jetpack-boost-admin';
+
+		$admin_js_dependencies = array(
+			'wp-i18n',
+			'wp-components',
+			'my_jetpack_main_app',
+		);
+
+		Assets::register_script(
+			$admin_js_handle,
+			$internal_path . 'jetpack-boost.js',
+			JETPACK_BOOST_PATH,
+			array(
+				'dependencies' => $admin_js_dependencies,
+				'in_footer'    => true,
+				'textdomain'   => 'jetpack-boost',
+				'css_path'     => $internal_path . 'jetpack-boost.css',
+			)
+		);
+
+		wp_localize_script(
+			$admin_js_handle,
+			'Jetpack_Boost',
+			( new Config() )->constants()
+		);
+
+		Assets::enqueue_script( $admin_js_handle );
+
+		if ( $this->modern_dashboard_loaded ) {
+			$this->localize_api_settings( $admin_js_handle );
+			$i18n_loader_registered = wp_script_is( 'wp-jp-i18n-loader', 'registered' );
+			if ( $i18n_loader_registered ) {
+				wp_enqueue_script( 'wp-jp-i18n-loader' );
+			}
+
+			// The webpack handle carries Boost constants and DataSync bootstrap needed before modules run.
+			$prerequisites = wp_scripts()->query( 'jetpack-boost-dashboard-wp-admin-prerequisites', 'registered' );
+			if ( $prerequisites ) {
+				$prerequisites->deps[] = $admin_js_handle;
+				if ( $i18n_loader_registered ) {
+					$prerequisites->deps[] = 'wp-jp-i18n-loader';
+				}
+			} else {
+				Debug::log( 'Modern dashboard prerequisites are not registered; bootstrap dependencies could not be attached.' );
+			}
+		}
+	}
+
+	/**
+	 * Get settings link.
+	 *
+	 * @param array $links the array of links.
+	 */
+	public function plugin_page_settings_link( $links ) {
+		$settings_link = '<a href="' . admin_url( 'admin.php?page=jetpack-boost' ) . '">' . esc_html__( 'Settings', 'jetpack-boost' ) . '</a>';
+		array_unshift( $links, $settings_link );
+
+		return $links;
+	}
+
+	/**
+	 * Localize the REST API settings for a script.
+	 *
+	 * @param string $handle Script handle.
+	 */
+	private function localize_api_settings( $handle ) {
+		wp_localize_script(
+			$handle,
+			'wpApiSettings',
+			array(
+				'root'  => esc_url_raw( rest_url() ),
+				'nonce' => wp_create_nonce( 'wp_rest' ),
+			)
+		);
+	}
+
+	/**
+	 * Generate the settings page.
+	 */
+	public function render_settings() {
+		$this->localize_api_settings( 'jetpack-boost-admin' );
+		?>
+		<div id="jb-admin-settings"></div>
+		<?php
+	}
+}

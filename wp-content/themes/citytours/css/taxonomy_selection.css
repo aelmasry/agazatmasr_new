@@ -1,0 +1,95 @@
+.taxonomy-selection-container {
+    width: 100%;
+}
+
+.taxonomy-selection-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 0 -10px;
+}
+
+.taxonomy-item {
+    flex: 0 0 calc(50% - 20px);
+    background: #f8f8f8;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.taxonomy-item:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transform: translateY(-2px);
+}
+
+.taxonomy-item-inner {
+    padding: 20px;
+}
+
+.taxonomy-label {
+    display: inline-block;
+    background: #e9e9e9;
+    color: #666;
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.term-name {
+    margin: 0 0 15px 0;
+    font-size: 18px;
+}
+
+.term-name a {
+    color: #333;
+    text-decoration: none;
+}
+
+.term-name a:hover {
+    color: #0073aa;
+}
+
+.term-posts {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.term-posts li {
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+.term-posts li:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.term-posts a {
+    color: #666;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.term-posts a:hover {
+    color: #0073aa;
+}
+
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+    .taxonomy-selection-items {
+        display: block;
+    }
+    
+    .taxonomy-item {
+        flex: 0 0 100%;
+        margin-bottom: 10px;
+    }
+    
+    /* These styles will be overridden by JS when initializing Slick */
+}

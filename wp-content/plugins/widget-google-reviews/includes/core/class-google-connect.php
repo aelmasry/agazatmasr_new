@@ -1,0 +1,248 @@
+<?php
+
+namespace WP_Rplg_Google_Reviews\Includes\Core;
+
+class Google_Connect {
+
+    private $api_old;
+    private $utils;
+
+    public function __construct(Google_Api_Old $api_old, Google_Utils $utils) {
+        $this->api_old = $api_old;
+        $this->utils = $utils;
+
+        add_action('wp_ajax_grw_hide_review', array($this, 'hide_review'));
+        add_action('wp_ajax_grw_connect_google', array($this, 'connect_google'));
+        add_action('wp_ajax_grw_place_autocomplete', array($this, 'place_autocomplete'));
+        add_action('wp_ajax_grw_get_place', array($this, 'get_place'));
+    }
+
+    public function hide_review() {
+        global $wpdb;
+
+        if (current_user_can('manage_options')) {
+            if (isset($_POST['grw_wpnonce']) === false) {
+                $error = __('Unable to call request. Make sure you are accessing this page from the Wordpress dashboard.', 'widget-google-reviews');
+                $response = compact('error');
+            } else {
+                check_admin_referer('grw_wpnonce', 'grw_wpnonce');
+
+                $review_id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
+
+                $review = $review_id ? $wpdb->get_row(
+                    $wpdb->prepare(
+                        "SELECT * FROM " . $wpdb->prefix . Database::REVIEW_TABLE .
+                        " WHERE id = %d", $review_id
+                    )
+                ) : null;
+
+                if (!$review) {
+                    header('Content-type: text/javascript');
+                    echo json_encode(array('error' => __('Review not found.', 'widget-google-reviews')));
+                    die();
+                }
+
+                $hide = $review->hide == '' ? 'y' : '';
+                $wpdb->update($wpdb->prefix . Database::REVIEW_TABLE, array('hide' => $hide), array('id' => $review_id));
+
+                Core::clear_feed_cache(isset($_POST['feed_id']) ? $_POST['feed_id'] : null);
+
+                $response = array('hide' => $hide);
+            }
+            header('Content-type: text/javascript');
+            echo json_encode($response);
+            die();
+        }
+    }
+
+    public function connect_google() {
+        if (current_user_can('manage_options')) {
+
+            $response = null;
+
+            if (isset($_POST['grw_wpnonce']) === false) {
+                $error = __('Unable to call request. Make sure you are accessing this page from the Wordpress dashboard.', 'widget-google-reviews');
+                $response = compact('error');
+            } else {
+                check_admin_referer('grw_wpnonce', 'grw_wpnonce');
+
+                if (isset($_POST['key'])) {
+                    $key = sanitize_text_field(wp_unslash($_POST['key']));
+                    if (strlen($key) > 0) {
+                        update_option('grw_google_api_key', $key);
+                    }
+                }
+
+                $lang = empty($_POST['lang']) ? null : sanitize_text_field(wp_unslash($_POST['lang']));
+                $pid = isset($_POST['id']) ? sanitize_text_field(wp_unslash($_POST['id'])) : '';
+                $local_img = $this->utils->local_img($pid, isset($_POST['local_img']) ? filter_var(wp_unslash($_POST['local_img']), FILTER_VALIDATE_BOOLEAN) : true);
+                $key = get_option('grw_google_api_key');
+
+                if ($key && strlen($key) > 0) {
+
+                    $response = $this->utils->call('connect', $pid, $lang, $key, $local_img);
+
+                } else {
+
+                    $token = empty($_POST['token']) ? null : sanitize_text_field(wp_unslash($_POST['token']));
+
+                    if (!empty($token)) {
+                        $siteurl = get_option('siteurl');
+                        $authcode = get_option('grw_auth_code');
+                        $app_url = 'https://app.richplugins.com/public/connect/reviews';
+                        $args = [
+                            'input'    => $pid,
+                            'token'    => $token,
+                            'siteurl'  => $siteurl,
+                            'authcode' => $authcode
+                        ];
+                        if ($lang && strlen($lang) > 0) {
+                            $args['lang'] = $lang;
+                        }
+                        if ($this->is_playground()) {
+                            $app_url = add_query_arg($args, $app_url);
+                            $response = $this->api_old->call($app_url, null, $local_img);
+                        } else {
+                            $response = $this->api_old->post($app_url, $args, null, $local_img);
+                        }
+                    }
+                }
+
+                Core::clear_feed_cache(isset($_POST['feed_id']) ? $_POST['feed_id'] : null);
+            }
+
+            header('Content-type: text/javascript');
+            echo json_encode($response);
+            die();
+        }
+    }
+
+     public function place_autocomplete() {
+        if (current_user_can('manage_options')) {
+            $result = null;
+            if (isset($_POST['grw_nonce']) === false) {
+                $error = __('Unable to call request. Make sure you are accessing this page from the Wordpress dashboard.', 'widget-google-reviews');
+                $result = compact('error');
+            } else {
+                check_admin_referer('grw_wpnonce', 'grw_nonce');
+
+                $key = get_option('grw_google_api_key');
+                if (!empty($key)) {
+                    $input = isset($_POST['input']) ? sanitize_text_field(wp_unslash($_POST['input'])) : '';
+                    $url = add_query_arg(
+                        array(
+                            'input' => rawurlencode($input),
+                            'types' => 'establishment',
+                            'key'   => $key,
+                        ),
+                        GRW_GOOGLE_PLACE_API . 'autocomplete/json'
+                    );
+                    $res = wp_remote_get($url);
+                    $body = wp_remote_retrieve_body($res);
+                    $result = json_decode($body);
+                    $status = isset($result->status) ? $result->status : '';
+                    // Google projects created after March 2025 cannot enable the legacy API
+                    if ($status == 'REQUEST_DENIED') {
+                        $res = wp_remote_post('https://places.googleapis.com/v1/places:autocomplete', array(
+                            'headers' => array('Content-Type' => 'application/json', 'X-Goog-Api-Key' => $key),
+                            'body'    => json_encode(array('input' => $input, 'includedPrimaryTypes' => array('establishment'))),
+                        ));
+                        $result = json_decode(wp_remote_retrieve_body($res));
+                        $status = isset($result->error->status) ? $result->error->status : (is_object($result) ? 'OK' : '');
+                        if ($status == 'OK') {
+                            $predictions = array();
+                            foreach (isset($result->suggestions) ? $result->suggestions : array() as $s) {
+                                $f = $s->placePrediction->structuredFormat;
+                                $predictions[] = array(
+                                    'place_id'              => $s->placePrediction->placeId,
+                                    'structured_formatting' => array('main_text' => $f->mainText->text, 'secondary_text' => isset($f->secondaryText) ? $f->secondaryText->text : ''),
+                                );
+                            }
+                            $result = array('predictions' => $predictions);
+                        }
+                    }
+                    if (in_array($status, array('REQUEST_DENIED', 'OVER_QUERY_LIMIT', 'INVALID_ARGUMENT', 'PERMISSION_DENIED', 'RESOURCE_EXHAUSTED'), true)) {
+                        $reason = isset($result->error->message) ? $result->error->message : (isset($result->error_message) ? $result->error_message : $status);
+                        $result = array('error_message' => 'Google rejected your API key: ' . rtrim($reason, '. ') . '. Check Settings → Google.');
+                    } else if (!in_array($status, array('OK', 'ZERO_RESULTS'), true)) {
+                        $result = array('error_message' => Connect_Helper::failed($res, $result));
+                    }
+                }
+            }
+            header('Content-type: text/json');
+            echo json_encode($result);
+            wp_die();
+        }
+    }
+
+    public function get_place() {
+        if (current_user_can('manage_options')) {
+
+            $response = null;
+
+            if (isset($_POST['grw_nonce']) === false) {
+                $error = __('Unable to call request. Make sure you are accessing this page from the Wordpress dashboard.', 'widget-google-reviews');
+                $response = compact('error');
+            } else {
+                check_admin_referer('grw_wpnonce', 'grw_nonce');
+
+                $lang = empty($_POST['lang']) ? null : sanitize_text_field(wp_unslash($_POST['lang']));
+                $key = get_option('grw_google_api_key');
+
+                if ($key && strlen($key) > 0) {
+
+                    $pid = isset($_POST['pid']) ? sanitize_text_field(wp_unslash($_POST['pid'])) : '';
+                    $response = $this->utils->call('place', $pid, $lang, $key);
+
+                } else {
+
+                    $pid = isset($_POST['pid']) ? sanitize_text_field(wp_unslash($_POST['pid'])) : '';
+                    $token = empty($_POST['token']) ? null : sanitize_text_field(wp_unslash($_POST['token']));
+
+                    if (!empty($token)) {
+                        $siteurl = get_option('siteurl');
+                        $authcode = get_option('grw_auth_code');
+                        $app_url = 'https://app.richplugins.com/connector/place/json';
+                        $args = [
+                            'pid'      => $pid,
+                            'token'    => $token,
+                            'siteurl'  => $siteurl,
+                            'authcode' => $authcode
+                        ];
+                        if ($lang && strlen($lang) > 0) {
+                            $args['lang'] = $lang;
+                        }
+                        if ($this->is_playground()) {
+                            $app_url = add_query_arg($args, $app_url);
+                            $response = $this->api_old->call($app_url, null, false, false);
+                        } else {
+                            $response = $this->api_old->post($app_url, $args, null, false, false);
+                        }
+                    }
+                }
+            }
+
+            header('Content-type: text/json');
+            echo json_encode($response);
+            wp_die();
+        }
+    }
+
+    private function is_playground() {
+        if (isset($_SERVER['SERVER_SOFTWARE']) && stripos($_SERVER['SERVER_SOFTWARE'], 'PHP.wasm') !== false) {
+            return true;
+        }
+        if (isset($_SERVER['HTTP_HOST'])) {
+            $host = $_SERVER['HTTP_HOST'];
+            if (stripos($host, 'playground.wordpress.net') !== false
+                || stripos($host, '.wasm.wordpress.net') !== false
+                || stripos($host, 'playground.test') !== false) {
+                return true;
+            }
+        }
+        if (defined('WP_PLAYGROUND') && WP_PLAYGROUND) {
+            return true;
+        }
+        return false;
+    }
+}

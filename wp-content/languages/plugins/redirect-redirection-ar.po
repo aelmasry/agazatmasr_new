@@ -1,0 +1,978 @@
+# Translation of Plugins - Redirection - Stable (latest release) in Arabic
+# This file is distributed under the same license as the Plugins - Redirection - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2021-10-21 09:48:59+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n == 0) ? 0 : ((n == 1) ? 1 : ((n == 2) ? 2 : ((n % 100 >= 3 && n % 100 <= 10) ? 3 : ((n % 100 >= 11 && n % 100 <= 99) ? 4 : 5))));\n"
+"X-Generator: GlotPress/4.0.0-alpha.4\n"
+"Language: ar\n"
+"Project-Id-Version: Plugins - Redirection - Stable (latest release)\n"
+
+#: redirect-redirection.php:145
+msgid "Are 404s"
+msgstr "يكون 404s"
+
+#: includes/settings/irrp-settings.php:203
+msgid "Add this redirection rule"
+msgstr "أضف قاعدة إعادة التوجيه هذه"
+
+#: includes/settings/irrp-settings.php:202
+msgid "Edit this redirect"
+msgstr "قم بتحرير إعادة التوجيه هذه"
+
+#: includes/settings/irrp-settings.php:201
+msgid "Save this redirect"
+msgstr "احفظ إعادة التوجيه هذه"
+
+#: includes/settings/irrp-settings.php:200
+msgid "Edit this redirection rule"
+msgstr "قم بتحرير قاعدة إعادة التوجيه هذه"
+
+#: includes/settings/irrp-settings.php:199
+msgid "Save this redirection rule"
+msgstr "احفظ قاعدة إعادة التوجيه هذه"
+
+#: includes/settings/irrp-settings.php:196
+msgid "Add this redirect"
+msgstr "أضف إعادة التوجيه هذه"
+
+#: includes/settings/irrp-settings.php:195
+msgid "Target URL can not be empty!"
+msgstr "لا يمكن أن يكون عنوان URL الهدف فارغًا!"
+
+#: includes/settings/irrp-settings.php:194
+msgid "Source URL can not be empty!"
+msgstr "لا يمكن أن يكون عنوان URL الخاص بالمصدر فارغًا!"
+
+#: includes/settings/irrp-settings.php:105
+msgid ""
+"This action will delete the plugin data and tables from the database and deactivate the plugin. \n"
+"\n"
+" Are you sure you want to do this?\n"
+msgstr ""
+"سيؤدي هذا الإجراء إلى حذف بيانات البرنامج المساعد والجداول من قاعدة البيانات وإلغاء تنشيط المكون الإضافي.\n"
+"\n"
+"  هل انت متأكد من أنك تريد أن تفعل هذا؟\n"
+
+#: includes/settings/irrp-settings.php:104
+msgid "Could not find the 'data-selected-dropdown-item-id' attribute in a custom dropdown"
+msgstr "تعذر العثور على السمة \"data-selected-dropdown-item-id\" في القائمة المنسدلة المخصصة"
+
+#: includes/settings/html-settings.php:41
+msgid "This will establish connection to the chat servers"
+msgstr "سيؤدي هذا إلى إنشاء اتصال بخوادم الدردشة"
+
+#: includes/settings/html-settings.php:39
+msgid "Connect with support (click to load)"
+msgstr "تواصل مع الدعم (انقر للتحميل)"
+
+#: redirect-redirection.php:189
+msgid "URLs with removed string"
+msgstr "عناوين URL ذات السلسلة التي تمت إزالتها"
+
+#: redirect-redirection.php:185
+msgid "URLs with new string"
+msgstr "عناوين URL بسلسلة جديدة"
+
+#: redirect-redirection.php:181
+msgid "A Specific URL"
+msgstr "عنوان URL محدد "
+
+#: redirect-redirection.php:174
+msgid "Author and name"
+msgstr "المؤلف والاسم"
+
+#: redirect-redirection.php:170
+msgid "Category and name"
+msgstr "التصنيف والاسم"
+
+#: redirect-redirection.php:166
+msgid "Post name"
+msgstr "اسم المقالة"
+
+#: redirect-redirection.php:162
+msgid "Month and name"
+msgstr "الشهر والاسم"
+
+#: redirect-redirection.php:158
+msgid "Day and name"
+msgstr "اليوم والاسم"
+
+#: includes/settings/irrp-settings.php:101 redirect-redirection.php:141
+#: redirect-redirection.php:197
+msgid "Regex matches"
+msgstr "تطابقات Regex"
+
+#: redirect-redirection.php:137
+msgid "Have permalink structure"
+msgstr "لديك بنية الرابط الدائم"
+
+#: redirect-redirection.php:193
+msgid "New permalink structure"
+msgstr "بنية جديدة للرابط الدائم"
+
+#: includes/settings/layouts/specific-url-redirections/header.php:33
+msgid "Enter the URL you want to redirect to"
+msgstr "أدخل عنوان URL الذي تريد إعادة التوجيه إليه"
+
+#: includes/settings/layouts/specific-url-redirections/header.php:28
+msgid "…to a %1$sspecific URL:​%2$s"
+msgstr "… إلى %1$s عنوان URL محدد: %2$s           "
+
+#: includes/settings/layouts/specific-url-redirections/header.php:17
+msgid "Enter the URL you want to redirect"
+msgstr "أدخل عنوان URL الذي تريد إعادة توجيهه"
+
+#: includes/settings/layouts/specific-url-redirections/header.php:12
+msgid "Redirect from the %1$sspecific URL%2$s…"
+msgstr "إعادة التوجيه من %1$s عنوان URL محدد %2$s…"
+
+#: includes/settings/irrp-settings.php:197
+#: includes/settings/layouts/specific-url-redirections/header.php:7
+msgid "Add a redirect"
+msgstr "أضف إعادة توجيه"
+
+#: includes/settings/layouts/specific-url-redirections.php:35
+msgid "(specific URL redirects only)"
+msgstr "(عمليات إعادة توجيه عناوين URL محددة فقط)"
+
+#: includes/settings/layouts/specific-url-redirections.php:34
+msgid "Your redirects"
+msgstr "عمليات إعادة التوجيه الخاصة بك"
+
+#: includes/settings/layouts/redirection-rules/rules-explanation.php:104
+msgid "Redirects to the new Regex pattern you entered on the right."
+msgstr "يعيد التوجيه إلى نمط Regex الجديد الذي أدخلته على اليمين."
+
+#: includes/settings/layouts/redirection-rules/rules-explanation.php:99
+msgid "(Only shown if “Regex matches” is selected on the left)"
+msgstr "(يظهر فقط إذا تم تحديد \"تطابقات Regex\" على اليسار)"
+
+#: includes/settings/layouts/redirection-rules/rules-explanation.php:96
+msgid "Regex matches:"
+msgstr "تطابقات Regex:"
+
+#: includes/settings/layouts/redirection-rules/rules-explanation.php:88
+msgid "Redirects to the new permalink structure of your choice."
+msgstr "يعيد التوجيه إلى هيكل الرابط الدائم الجديد الذي تختاره."
+
+#: includes/settings/layouts/redirection-rules/rules-explanation.php:83
+msgid "(Only shown if “Have Permalink Structure” is selected on the left)"
+msgstr "(يظهر فقط إذا تم تحديد \"لديك بنية الرابط الدائم\" على اليسار)"
+
+#: includes/settings/layouts/redirection-rules/rules-explanation.php:80
+msgid "New permalink structure:"
+msgstr "بنية جديدة للرابط الدائم:"
+
+#: includes/settings/layouts/redirection-rules/rules-explanation.php:65
+msgid "%1$sExample:%2$s You selected to redirect all URLs which contain the string “old-blog”, and the current url structure is %3$s. With this option your entered string will be removed so %4$s will redirect to %5$s"
+msgstr "%1$s مثال: %2$s لقد حددت إعادة توجيه كافة عناوين URL التي تحتوي على السلسلة \"مدونة قديمة\"، وبنية عنوان URL الحالية هي %3$s. باستخدام هذا الخيار، ستتم إزالة السلسلة التي أدخلتها، لذا سيعيد %4$s التوجيه إلى %5$s"
+
+#: includes/settings/layouts/redirection-rules/rules-explanation.php:56
+msgid "URLs with removed string:"
+msgstr "عناوين URL بسلسلة تمت إزالتها:"
+
+#: includes/settings/layouts/redirection-rules/rules-explanation.php:35
+msgid ""
+"Redirects to URLs which contain the string you entered on the right instead ​of the string you\n"
+"                    entered on the left"
+msgstr ""
+"يعيد التوجيه إلى عناوين URL التي تحتوي على السلسلة التي أدخلتها على اليمين بدلاً من السلسلة التي أدخلتها\n"
+"                    دخلت على اليسار"
+
+#: includes/settings/layouts/redirection-rules/rules-explanation.php:30
+#: includes/settings/layouts/redirection-rules/rules-explanation.php:57
+msgid "(Only shown if “Contain” is selected on the left)"
+msgstr "(يظهر فقط إذا تم تحديد \"إحتواء\" على اليسار)"
+
+#: includes/settings/layouts/redirection-rules/rules-explanation.php:27
+msgid "URLs with new string:"
+msgstr "عناوين URL بسلسلة جديدة:"
+
+#: includes/settings/layouts/redirection-rules/rules-explanation.php:19
+msgid "Redirects all URLs to the stated URL."
+msgstr "يعيد توجيه جميع عناوين URL إلى عنوان URL المحدد."
+
+#: includes/settings/layouts/redirection-rules/rules-explanation.php:14
+msgid "A specific URL:"
+msgstr "عنوان URL محدد:"
+
+#: includes/settings/layouts/redirection-rules/rules-explanation.php:8
+msgid "Redirection to-rules explained​"
+msgstr "إعادة التوجيه إلى القواعد شرح"
+
+#: includes/settings/layouts/redirection-rules/header.php:96
+msgid "Add this redirection rule!"
+msgstr "أضف قاعدة إعادة التوجيه هذه!"
+
+#: includes/settings/layouts/redirection-rules/header.php:88
+msgid "+ Add another criteria"
+msgstr "+ أضف معايير أخرى"
+
+#: includes/settings/irrp-settings.php:102
+#: includes/settings/layouts/redirection-rules/header.php:57
+msgid "Enter the URL"
+msgstr "أدخل العنوان URL"
+
+#: includes/settings/layouts/redirection-rules/header.php:44
+msgid "…to:​"
+msgstr "… إلى:"
+
+#: includes/settings/irrp-settings.php:103
+#: includes/settings/layouts/redirection-rules/header.php:29
+#: includes/settings/layouts/redirection-rules/header.php:77
+msgid "Enter the string"
+msgstr "أدخل السلسلة"
+
+#: includes/settings/irrp-settings.php:198
+#: includes/settings/layouts/redirection-rules/header.php:7
+msgid "Add a redirection rule"
+msgstr "أضف قاعدة إعادة التوجيه"
+
+#: includes/settings/layouts/redirection-rules.php:33
+msgid "Your redirection rules"
+msgstr "قواعد إعادة التوجيه الخاصة بك"
+
+#: includes/settings/layouts/common/single-redirection.php:77
+msgid "To a specific URL"
+msgstr "إلى عنوان URL محدد"
+
+#: includes/settings/layouts/common/single-redirection.php:38
+msgid "Redirect from"
+msgstr "إعادة توجيه من"
+
+#: includes/settings/layouts/common/header-settings-paragraph.php:16
+msgid "tailored settings"
+msgstr "إعدادات مخصصة"
+
+#: includes/settings/layouts/common/header-settings-paragraph.php:15
+msgid "…with your "
+msgstr "…مع الخاص بك"
+
+#: includes/settings/layouts/common/header-settings-paragraph.php:13
+msgid "default settings"
+msgstr "الإعدادات الافتراضية"
+
+#: includes/settings/layouts/common/header-settings-paragraph.php:12
+msgid "…with the "
+msgstr "…مع ال"
+
+#: includes/settings/layouts/common/delete-confirmation-prompt.php:15
+#: includes/settings/layouts/redirection-rules/header.php:99
+#: includes/settings/layouts/specific-url-redirections/header.php:42
+msgid "Cancel"
+msgstr "إلغاء"
+
+#: includes/settings/layouts/common/delete-confirmation-prompt.php:14
+msgid "Yes, delete"
+msgstr "نعم، إحذف"
+
+#: includes/settings/layouts/common/delete-confirmation-prompt.php:12
+msgid "Delete redirect?"
+msgstr "هل تريد حذف إعادة التوجيه؟"
+
+#: includes/settings/layouts/common/delete-confirmation-prompt.php:9
+msgid "trash icon"
+msgstr "رمز سلة المهملات"
+
+#: includes/settings/layouts/specific-url-redirections/header.php:39
+msgid "Add this redirect!"
+msgstr "أضف إعادة التوجيه هذه!"
+
+#: includes/settings/layouts/common/default-settings-modal.php:585
+msgid "Save"
+msgstr "إحفظ "
+
+#: includes/settings/layouts/common/default-settings-modal.php:563
+#: includes/settings/layouts/common/default-settings-modal.php:572
+msgid "Here you can set the browser language that is used to determine the match, in addition to the source URL​"
+msgstr "هنا يمكنك ضبط لغة المتصفح المستخدمة لتحديد المطابقة، بالإضافة إلى عنوان URL المصدر"
+
+#: includes/settings/layouts/common/default-settings-modal.php:509
+msgid "Server:"
+msgstr "الخادم:"
+
+#: includes/settings/layouts/common/default-settings-modal.php:500
+msgid "Server"
+msgstr "الخادم"
+
+#: includes/settings/layouts/common/default-settings-modal.php:463
+#: includes/settings/layouts/common/default-settings-modal.php:472
+msgid "Here you can set the user’s IP address that is used to determine the match, in addition to the source URL​"
+msgstr "هنا يمكنك تعيين عنوان IP الخاص بالمستخدم المستعمل لتحديد المطابقة، بالإضافة إلى عنوان URL المصدر"
+
+#: includes/settings/layouts/common/default-settings-modal.php:513
+#: includes/settings/layouts/common/default-settings-modal.php:522
+msgid "Here you can set the server name that is used to determine the match, in addition to the source URL​"
+msgstr "هنا يمكنك تعيين اسم الخادم المستعمل لتحديد المطابقة، بالإضافة إلى عنوان URL المصدر"
+
+#: includes/settings/layouts/common/default-settings-modal.php:450
+msgid "User’s IP"
+msgstr "عنوان IP الخاص بالمستخدم"
+
+#: includes/settings/layouts/common/default-settings-modal.php:417
+#: includes/settings/layouts/common/default-settings-modal.php:423
+msgid "Here you can set the cookie name and value in addition to the source URL to determine the match. If you want to apply RegEx, tick the checkbox."
+msgstr "هنا يمكنك تعيين اسم ملف تعريف الارتباط وقيمته بالإضافة إلى عنوان URL المصدر لتحديد المطابقة. إذا كنت تريد تطبيق RegEx، فحدد مربع الاختيار."
+
+#: includes/settings/layouts/common/default-settings-modal.php:408
+msgid "Cookie value:​"
+msgstr "قيمة ملفات تعريف الارتباط:"
+
+#: includes/settings/layouts/common/default-settings-modal.php:402
+msgid "Cookie name:​"
+msgstr "اسم ملف تعريف الارتباط:"
+
+#: includes/settings/layouts/common/default-settings-modal.php:394
+msgid "User’s cookie​"
+msgstr "ملف تعريف ارتباط المستخدم"
+
+#: includes/settings/layouts/common/default-settings-modal.php:359
+#: includes/settings/layouts/common/default-settings-modal.php:365
+msgid "Here you can set the user’s browser agent in addition to the source URL to determine the match. It can use browser type, OS, (mobile) platform, etc. If you want to apply RegEx, tick the checkbox."
+msgstr "هنا يمكنك تعيين وكيل متصفح المستخدم بالإضافة إلى عنوان URL المصدر لتحديد التطابق. يمكنه استخدام نوع المتصفح ونظام التشغيل والنظام الأساسي (للجوال) وما إلى ذلك. إذا كنت تريد تطبيق RegEx، فحدد خانة الاختيار."
+
+#: includes/settings/layouts/common/default-settings-modal.php:662
+msgid "308 Permanent Redirect"
+msgstr "308 إعادة توجيه دائم"
+
+#: includes/settings/layouts/common/default-settings-modal.php:656
+msgid "The server sends this response to direct the client to get the requested resource at another URI with same method that was used in the prior request. This has the same semantics as the 302 Found HTTP response code, with the exception that the user agent must not change the HTTP method used: If a POST was used in the first request, a POST must be used in the second request."
+msgstr "يرسل الخادم هذه الاستجابة لتوجيه العميل للحصول على المورد المطلوب في URI آخر بنفس الطريقة التي تم استخدامها في الطلب السابق. هذا له نفس دلالات رمز استجابة HTTP الموجودة 302، باستثناء أنه يجب ألا يغير وكيل المستخدم طريقة HTTP المستخدمة: إذا تم استخدام POST في الطلب الأول، فيجب استخدام POST في الطلب الثاني."
+
+#: includes/settings/layouts/common/default-settings-modal.php:665
+msgid "This means that the resource is now permanently located at another URI, specified by the Location: HTTP Response header. This has the same semantics as the 301 Moved Permanently HTTP response code, with the exception that the user agent must not change the HTTP method used: If a POST was used in the first request, a POST must be used in the second request."
+msgstr "هذا يعني أن المورد موجود الآن بشكل دائم في URI آخر، محدد بواسطة الموقع: رأس استجابة HTTP. هذا له نفس دلالات رمز استجابة HTTP 301 نقل بشكل دائم، باستثناء أنه يجب على وكيل المستخدم ألا يغير طريقة HTTP المستخدمة: إذا تم استخدام POST في الطلب الأول، فيجب استخدام POST في الطلب الثاني."
+
+#: includes/settings/layouts/common/default-settings-modal.php:653
+msgid "307 Temporary Redirect"
+msgstr "307 إعادة توجيه مؤقت"
+
+#: includes/settings/layouts/common/default-settings-modal.php:647
+msgid "This is used for caching purposes. It tells the client that the response has not been modified, so the client can continue to use the same cached version of the response."
+msgstr "يستخدم هذا لأغراض التخزين المؤقت. يخبر العميل أن الاستجابة لم يتم تعديلها، لذلك يمكن للعميل الاستمرار في استخدام نفس النسخة المخبأة من الاستجابة."
+
+#: includes/settings/layouts/common/default-settings-modal.php:644
+msgid "304 Not Modified"
+msgstr "304 غير معدل"
+
+#: includes/settings/layouts/common/default-settings-modal.php:638
+msgid "The server sent this response to direct the client to get the requested resource at another URI with a GET request."
+msgstr "أرسل الخادم هذه الاستجابة لتوجيه العميل للحصول على المورد المطلوب في URI آخر مع طلب GET."
+
+#: includes/settings/layouts/common/default-settings-modal.php:635
+msgid "303 See Other"
+msgstr "303 انظر أخرى"
+
+#: includes/settings/layouts/common/default-settings-modal.php:629
+msgid "This response code means that the URI of requested resource has been changed temporarily. Further changes in the URI might be made in the future. Therefore, this same URI should be used by the client in future requests."
+msgstr "يعني رمز الاستجابة هذا أنه تم تغيير URI للمورد المطلوب مؤقتًا. قد يتم إجراء مزيد من التغييرات في URI في المستقبل. لذلك، يجب أن يستخدم العميل نفس معرف الموارد المنتظم URI في الطلبات المستقبلية."
+
+#: includes/settings/layouts/common/default-settings-modal.php:626
+msgid "302 Found"
+msgstr "302 موجود"
+
+#: includes/settings/layouts/common/default-settings-modal.php:620
+msgid "The URL of the requested resource has been changed permanently. The new URL is given in the response."
+msgstr "تم تغيير عنوان URL للمورد المطلوب بشكل دائم. تم تقديم عنوان URL الجديد في الرد."
+
+#: includes/settings/layouts/common/default-settings-modal.php:617
+msgid "301 Moved Permanently"
+msgstr "301 منقول بشكل دائم"
+
+#: includes/settings/layouts/common/default-settings-modal.php:613
+msgid "Explanation of HTTP codes"
+msgstr "شرح أكواد HTTP"
+
+#: includes/settings/layouts/common/default-settings-modal.php:590
+msgid "You can change your default settings on the %1$sOptions tab​%2$s​"
+msgstr "يمكنك تغيير الإعدادات الافتراضية في%1$s علامة تبويب الخيارات %2$s"
+
+#: includes/settings/layouts/common/default-settings-modal.php:354
+#: includes/settings/layouts/common/default-settings-modal.php:412
+msgid "Regex:"
+msgstr "Regex:"
+
+#: includes/settings/layouts/common/default-settings-modal.php:350
+msgid "User agent:​"
+msgstr "وكيل المستخدم:"
+
+#: includes/settings/layouts/common/default-settings-modal.php:342
+msgid "User’s agent​"
+msgstr "وكيل المستخدم"
+
+#: includes/settings/layouts/common/default-settings-modal.php:304
+#: includes/settings/layouts/common/default-settings-modal.php:313
+msgid "Here you can set the user’s referrer URL (URL from which they are coming) that is used to determine the match, in addition to the source URL."
+msgstr "هنا يمكنك تعيين عنوان URL المُحيل للمستخدم (عنوان URL الذي يأتي منه المستخدم) والذي يُستخدم لتحديد التطابق، بالإضافة إلى عنوان URL المصدر."
+
+#: includes/settings/layouts/common/default-settings-modal.php:300
+msgid "Referrer:"
+msgstr "المرجع:"
+
+#: includes/settings/layouts/common/default-settings-modal.php:291
+msgid "User’s referrer link​"
+msgstr "رابط مرجع المستخدم"
+
+#: includes/settings/layouts/common/default-settings-modal.php:283
+#: includes/settings/layouts/common/default-settings-modal.php:334
+#: includes/settings/layouts/common/default-settings-modal.php:386
+#: includes/settings/layouts/common/default-settings-modal.php:442
+#: includes/settings/layouts/common/default-settings-modal.php:492
+#: includes/settings/layouts/common/default-settings-modal.php:542
+msgid "doesn't match"
+msgstr "لا يتطابق"
+
+#: includes/settings/layouts/common/default-settings-modal.php:279
+#: includes/settings/layouts/common/default-settings-modal.php:330
+#: includes/settings/layouts/common/default-settings-modal.php:382
+#: includes/settings/layouts/common/default-settings-modal.php:438
+#: includes/settings/layouts/common/default-settings-modal.php:488
+#: includes/settings/layouts/common/default-settings-modal.php:538
+msgid "matches"
+msgstr "تطابقات"
+
+#: includes/settings/layouts/common/default-settings-modal.php:257
+msgid "WordPress user role​"
+msgstr "دور مستخدم ووردبريس"
+
+#: includes/settings/layouts/common/default-settings-modal.php:250
+msgid "User who clicks on the link"
+msgstr "المستخدم الذي ينقر على الرابط"
+
+#: includes/settings/layouts/common/default-settings-modal.php:242
+msgid "doesn't have"
+msgstr "لا يملك"
+
+#: includes/settings/layouts/common/default-settings-modal.php:238
+msgid "has"
+msgstr "لديه"
+
+#: includes/settings/layouts/common/default-settings-modal.php:223
+msgid "User who clicks on the link is​"
+msgstr "المستخدم الذي ينقر على الرابط هو"
+
+#: includes/settings/layouts/common/default-settings-modal.php:215
+msgid "not logged in"
+msgstr "لم تقم بتسجيل الدخول"
+
+#: includes/settings/layouts/common/default-settings-modal.php:211
+msgid "logged in"
+msgstr "تسجيل الدخول"
+
+#: includes/settings/layouts/common/default-settings-modal.php:195
+msgid "are not the case"
+msgstr "ليس هذا هو الحال"
+
+#: includes/settings/layouts/common/default-settings-modal.php:179
+msgid "Only redirect if %1$sall%2$s of the following criteria ​"
+msgstr "أعد التوجيه فقط إذا %1$sكل%2$s من المعايير التالية"
+
+#: includes/settings/layouts/redirection-rules/header.php:13
+msgid "Redirect %1$sall%2$s URLs which:"
+msgstr "إعادة توجيه %1$sكل%2$s من عناوين URL التي:"
+
+#: includes/settings/layouts/common/default-settings-modal.php:161
+msgid "Inclusion & exclusion rules​"
+msgstr "قواعد التضمين والاستبعاد"
+
+#: includes/settings/layouts/common/default-settings-modal.php:140
+msgid "308 – Permanent Redirect"
+msgstr "308 - إعادة التوجيه الدائم"
+
+#: includes/settings/layouts/common/default-settings-modal.php:136
+msgid "307 – Temporary Redirect"
+msgstr "307 - إعادة توجيه مؤقت"
+
+#: includes/settings/layouts/common/default-settings-modal.php:132
+msgid "304 – Not Modified"
+msgstr "304 - غير معدل"
+
+#: includes/settings/layouts/common/default-settings-modal.php:128
+msgid "303 – See Other"
+msgstr "303 - انظر أخرى"
+
+#: includes/settings/layouts/common/default-settings-modal.php:124
+msgid "302 – Found"
+msgstr "302 - موجود"
+
+#: includes/settings/layouts/common/default-settings-modal.php:120
+msgid "301 - Moved Permanently"
+msgstr "301 منقول بشكل دائم"
+
+#: includes/settings/layouts/common/default-settings-modal.php:106
+msgid "Redirect HTTP code:​"
+msgstr "إعادة توجيه رمز HTTP:"
+
+#: includes/settings/layouts/common/default-settings-modal.php:72
+msgid "Pass on parameters​"
+msgstr "قم بتمرير المعلمات"
+
+#: includes/settings/layouts/common/default-settings-modal.php:65
+msgid "If checked the cases of your source URL will be ignored, e.g. if you entered /whatever as URL, /WhAteVER will also be redirected."
+msgstr "إذا تم التحقق من حالات عنوان URL المصدر، فسيتم تجاهلها، على سبيل المثال إذا قمت بإدخال/أيًا كان عنوان URL، فسيتم أيضًا إعادة توجيه WhAteVER."
+
+#: includes/settings/layouts/common/default-settings-modal.php:61
+msgid "Ignore lower/upper case​"
+msgstr "تجاهل الأحرف الصغيرة/الكبيرة"
+
+#: includes/settings/layouts/common/default-settings-modal.php:52
+msgid "If checked URLs with parameters will be redirected as well, e.g. if you selected /whatever to get redirected, then /whatever?param will be redirected too."
+msgstr "إذا تم تحديد عناوين URL التي تحتوي على معلمات، فسيتم إعادة توجيهها أيضًا، على سبيل المثال إذا قمت بتحديد/whatever لإعادة توجيهه، فسيتم إعادة توجيه/param?whatever أيضا."
+
+#: includes/settings/layouts/common/default-settings-modal.php:48
+msgid "Ignore parameters​"
+msgstr "تجاهل المعلمات"
+
+#: includes/settings/layouts/common/default-settings-modal.php:41
+msgid "If checked, URLs with “/” at the end and those without it will be redirected."
+msgstr "إذا تم تحديده، فسيتم إعادة توجيه عناوين URL التي تحتوي على \"/\" في النهاية وتلك التي لا تحتوي عليها."
+
+#: includes/settings/layouts/common/default-settings-modal.php:23
+msgid "Source URL"
+msgstr "مصدر URL"
+
+#: includes/settings/layouts/common/default-settings-modal.php:18
+msgid "Advanced options"
+msgstr "خيارات متقدمة"
+
+#: includes/settings/layouts/common/default-settings-modal.php:17
+msgid "cogs icon"
+msgstr "أيقونة cogs"
+
+#: includes/settings/layouts/common/default-settings-modal.php:39
+#: includes/settings/layouts/common/default-settings-modal.php:50
+#: includes/settings/layouts/common/default-settings-modal.php:63
+#: includes/settings/layouts/common/default-settings-modal.php:74
+#: includes/settings/layouts/common/default-settings-modal.php:87
+#: includes/settings/layouts/common/default-settings-modal.php:96
+#: includes/settings/layouts/common/default-settings-modal.php:108
+#: includes/settings/layouts/common/default-settings-modal.php:147
+#: includes/settings/layouts/common/default-settings-modal.php:302
+#: includes/settings/layouts/common/default-settings-modal.php:311
+#: includes/settings/layouts/common/default-settings-modal.php:357
+#: includes/settings/layouts/common/default-settings-modal.php:363
+#: includes/settings/layouts/common/default-settings-modal.php:415
+#: includes/settings/layouts/common/default-settings-modal.php:421
+#: includes/settings/layouts/common/default-settings-modal.php:461
+#: includes/settings/layouts/common/default-settings-modal.php:470
+#: includes/settings/layouts/common/default-settings-modal.php:511
+#: includes/settings/layouts/common/default-settings-modal.php:520
+#: includes/settings/layouts/common/default-settings-modal.php:561
+#: includes/settings/layouts/common/default-settings-modal.php:570
+msgid "info icon"
+msgstr "أيقونة المعلومات"
+
+#: includes/settings/layouts/common/default-settings-modal.php:12
+#: includes/settings/layouts/common/default-settings-modal.php:608
+msgid "close modal's icon"
+msgstr "إغلاق أيقونة المشروط"
+
+#: includes/settings/layouts/common/custom-filter.php:45
+msgid "search button's icon"
+msgstr "أيقونة زر البحث"
+
+#: includes/settings/layouts/common/custom-filter.php:43
+msgid "Search"
+msgstr "بحث"
+
+#: includes/settings/layouts/common/custom-filter.php:39
+msgid "Export list"
+msgstr "قائمة التصدير"
+
+#: includes/settings/layouts/common/custom-filter.php:35
+msgid "Import list"
+msgstr "قائمة الاستيراد"
+
+#: includes/settings/layouts/common/custom-filter.php:21
+msgid "Delete"
+msgstr "حذف"
+
+#: includes/settings/layouts/common/custom-filter.php:16
+msgid "Disable"
+msgstr "إبطال"
+
+#: includes/settings/layouts/common/custom-filter.php:11
+msgid "Enable"
+msgstr "تمكين"
+
+#: includes/settings/layouts/common/custom-filter.php:8
+msgid "For all selected:"
+msgstr "لجميع المختارين:"
+
+#: includes/settings/irrp-settings.php:100
+#: includes/settings/layouts/common/custom-dropdown.php:17
+msgid "Select Option"
+msgstr "حدد خيار"
+
+#: includes/settings/layouts/common/custom-body-data.php:53
+msgid "(also from other pages)"
+msgstr "(أيضًا من صفحات أخرى)"
+
+#: includes/settings/layouts/common/custom-body-data.php:52
+msgid "Select all"
+msgstr "اختر الكل"
+
+#: includes/settings/layouts/common/single-redirection.php:95
+msgid "Date added"
+msgstr "تم إضافة التاريخ"
+
+#: includes/settings/layouts/common/custom-body-data.php:16
+msgid "Redirect from…"
+msgstr "إعادة التوجيه من …"
+
+#: includes/settings/layouts/common/custom-body-data.php:19
+msgid "…to:"
+msgstr "… إلى:"
+
+#: includes/settings/layouts/change-urls.php:8
+msgid "This is currently in progress – stay tuned!"
+msgstr "هذا قيد التقدم حاليًا - ترقبوا!"
+
+#: includes/settings/layouts/change-urls.php:7
+msgid "All the options on the other tabs didn't touch the source URL structures, but only applied redirects. On this tab you can pick options which will change the source URL structure too."
+msgstr "لم تلمس جميع الخيارات الموجودة في علامات التبويب الأخرى هياكل عنوان URL المصدر، ولكن تم تطبيق عمليات إعادة التوجيه فقط. في علامة التبويب هذه، يمكنك اختيار الخيارات التي ستغير بنية عنوان URL المصدر أيضًا."
+
+#: includes/settings/layouts/automatic-redirects.php:63
+msgid "This will add a new redirect automatically on the “Specific URL Redirection”-tab whenever applicable."
+msgstr "سيؤدي هذا إلى إضافة إعادة توجيه جديدة تلقائيًا على علامة التبويب \"إعادة توجيه عنوان URL المحدد\" كلما أمكن ذلك."
+
+#: includes/settings/layouts/redirection-rules/rules-explanation.php:60
+msgid "Redirects to URLs which are identical except they don’t contain the string you entered on the left at all (“&ZeroWidthSpace;<strong>remove</strong>”)."
+msgstr ""
+"عمليات إعادة التوجيه إلى عناوين URL المتطابقة باستثناء أنها لا تحتوي على السلسلة التي أدخلتها على اليسار على الإطلاق (“&ZeroWidthSpace; \n"
+" <strong>remove</strong>”)."
+
+#: includes/settings/layouts/automatic-redirects.php:47
+msgid "Custom posts"
+msgstr "المقالات المخصصة"
+
+#: includes/settings/layouts/automatic-redirects.php:30
+msgid "Page URLs"
+msgstr "عناوين URL للصفحة"
+
+#: includes/settings/layouts/automatic-redirects.php:23
+#: includes/settings/layouts/automatic-redirects.php:40
+#: includes/settings/layouts/automatic-redirects.php:57
+msgid "Coming soon"
+msgstr "قريبا"
+
+#: includes/settings/layouts/automatic-redirects.php:13
+msgid "Posts URLs"
+msgstr "عناوين URL للمقالات"
+
+#: includes/settings/html-settings.php:17
+msgid "Change URLs"
+msgstr "تغيير عناوين URL"
+
+#: includes/settings/html-settings.php:16
+msgid "Automatic Redirects"
+msgstr "عمليات إعادة التوجيه تلقائية"
+
+#: includes/settings/html-settings.php:14
+#: includes/settings/layouts/redirection-and-404-logs/header.php:55
+msgid "Redirection Rules"
+msgstr "قواعد إعادة التوجيه"
+
+#: includes/settings/html-settings.php:13
+msgid "Specific URL Redirections"
+msgstr "عمليات إعادة توجيه URL محددة"
+
+#: includes/settings/html-settings.php:10
+msgid "Welcome to Ultimate Redirect!"
+msgstr "مرحبًا بك في Ultimate Redirect!"
+
+#: includes/irrp-helper-ajax.php:684
+msgid "All %d redirects deselected"
+msgstr "تم إلغاء تحديد كافة %d عمليات إعادة التوجيه"
+
+#: includes/irrp-helper-ajax.php:680
+msgid "All %d redirects selected"
+msgstr "تم تحديد كافة %d عمليات إعادة التوجيه"
+
+#: includes/irrp-helper-ajax.php:636
+msgid "Showing search results"
+msgstr "عرض نتائج البحث"
+
+#: includes/irrp-helper-ajax.php:591 includes/irrp-helper-ajax.php:906
+#: includes/irrp-helper-ajax.php:946
+msgid "Showing page %d data."
+msgstr "إظهار بيانات %d الصفحة."
+
+#: includes/settings/layouts/redirection-rules/rules-explanation.php:43
+msgid "%1$sExample:%2$s You selected to redirect all URLs which contain the string “old-blog”. If you enter here “new-blog” then a redirect from %3$s to %4$s will be applied for all your pages/posts on the old URLs."
+msgstr "%1$s مثال: %2$s لقد حددت إعادة توجيه كافة عناوين URL التي تحتوي على السلسلة \"مدونة قديمة\". إذا قمت بإدخال \"مدونة جديدة\" هنا ، فسيتم تطبيق إعادة توجيه من %3$s إلى %4$s لجميع صفحاتك / مقالاتك على عناوين URL القديمة."
+
+#: includes/settings/layouts/common/default-settings-modal.php:191
+msgid "are the case"
+msgstr "هذا هو الحال"
+
+#: includes/settings/layouts/common/default-settings-modal.php:76
+msgid "If checked parameters will be passed on, e.g. if you selected to redirect /whatever to /whatever-new, then when a user enters /whatever?param he will be redirected to /whatever-new?param."
+msgstr "إذا تم التحقق من المعلمات سيتم تمريرها، على سبيل المثال إذا اخترت إعادة التوجيه/أي شيء إلى/أيًا كان جديدًا ، فعندئذٍ عندما يقوم المستخدم بإدخال/أيًا كان؟معامل ، سيتم إعادة توجيهه إلى أيا كان جديدًا؟معامل."
+
+#: includes/settings/layouts/common/default-settings-modal.php:37
+msgid "Ignore trailing slashes​"
+msgstr "تجاهل الخطوط المائلة"
+
+#: includes/settings/layouts/automatic-redirects.php:19
+#: includes/settings/layouts/automatic-redirects.php:36
+#: includes/settings/layouts/automatic-redirects.php:53
+#: includes/settings/layouts/common/default-settings-modal.php:168
+#: includes/settings/layouts/common/single-redirection.php:18
+#: includes/settings/layouts/common/single-redirection.php:33
+msgid "Off"
+msgstr "غير فعال"
+
+#: includes/settings/layouts/automatic-redirects.php:18
+#: includes/settings/layouts/automatic-redirects.php:35
+#: includes/settings/layouts/automatic-redirects.php:52
+#: includes/settings/layouts/common/default-settings-modal.php:167
+#: includes/settings/layouts/common/single-redirection.php:17
+#: includes/settings/layouts/common/single-redirection.php:32
+msgid "On"
+msgstr "فعال"
+
+#: includes/settings/layouts/automatic-redirects.php:7
+msgid "If you change the permalink of a post/page, do you want the old permalink automatically redirect to the new one? If yes, please switch it on for the pages/posts you want it:"
+msgstr "إذا قمت بتغيير الرابط الدائم لمقالة/صفحة، فهل تريد أن يقوم الرابط الدائم القديم بإعادة التوجيه تلقائيًا إلى المقالة الجديدة؟ إذا كانت الإجابة بنعم، فيرجى تشغيلها للصفحات/المقالات التي تريدها:"
+
+#: includes/settings/layouts/common/custom-body-data.php:13
+msgid "Status"
+msgstr "الحالة"
+
+#: includes/settings/layouts/common/custom-body-data.php:25
+#: includes/settings/layouts/common/single-redirection.php:103
+#: includes/settings/layouts/redirection-and-404-logs/data-table.php:14
+msgid "Type"
+msgstr "النوع"
+
+#: includes/settings/layouts/common/custom-filter.php:26
+msgid "Go!"
+msgstr "بدء!"
+
+#: includes/settings/layouts/common/default-settings-modal.php:110
+#: includes/settings/layouts/common/default-settings-modal.php:149
+msgid "Click to see an explanation of HTTP codes"
+msgstr "أنقر لمشاهدة شرح أكواد HTTP"
+
+#: includes/settings/layouts/common/default-settings-modal.php:596
+#: includes/settings/layouts/redirection-rules/rules-explanation.php:111
+msgid "Close"
+msgstr "إغلاق"
+
+#: includes/settings/layouts/common/default-settings-modal.php:459
+msgid "IP:"
+msgstr "الـ IP:"
+
+#: includes/settings/layouts/common/default-settings-modal.php:550
+msgid "Language"
+msgstr "اللغة"
+
+#: includes/settings/layouts/common/default-settings-modal.php:559
+msgid "Language:"
+msgstr "اللغة:"
+
+#: includes/settings/layouts/common/single-redirection.php:130
+msgid "close row"
+msgstr "إغلاق الصف"
+
+#: includes/settings/layouts/common/single-redirection.php:125
+msgid "edit row"
+msgstr "تحرير الصف"
+
+#: includes/settings/layouts/common/single-redirection.php:120
+msgid "Actions"
+msgstr "إجراءات"
+
+#: redirect-redirection.php:129
+msgid "Contain"
+msgstr "احتواء"
+
+#: includes/settings/layouts/redirection-rules/rules-explanation.php:37
+msgid "replace"
+msgstr "استبدال"
+
+#: redirect-redirection.php:133
+msgid "Start with"
+msgstr "ابدأ بـ"
+
+#: redirect-redirection.php:205
+msgid "Explain those options"
+msgstr "شرح تلك الخيارات"
+
+#: redirect-redirection.php:286
+msgid "Required minimum version of PHP is : "
+msgstr "الحد الأدنى المطلوب لنسخة PHP هو:"
+
+#: redirect-redirection.php:282
+msgid "Required minimum version of WordPress is : "
+msgstr "الحد الأدنى المطلوب لنسخة ووردبريس هو:"
+
+#: includes/settings/irrp-settings.php:302
+msgid "Settings updated"
+msgstr "تم تحديث الإعدادات"
+
+#: includes/settings/irrp-settings.php:282
+msgid "Error while loading default settings"
+msgstr "خطأ أثناء تحميل الإعدادات الافتراضية"
+
+#: includes/settings/irrp-settings.php:275
+msgid "Redirection data loaded"
+msgstr "تم تحميل بيانات إعادة التوجيه"
+
+#: includes/settings/irrp-settings.php:242
+msgid "Tab content loaded"
+msgstr "تم تحميل محتوى علامة التبويب"
+
+#: includes/settings/irrp-settings.php:68
+#: includes/settings/irrp-settings.php:69
+msgid "Redirection"
+msgstr "إعادة التوجيه"
+
+#: includes/irrp-helper-ajax.php:855
+msgid "Redirection rule data can not be empty!"
+msgstr "لا يمكن أن تكون بيانات قاعدة إعادة التوجيه فارغة!"
+
+#: includes/irrp-helper-ajax.php:840
+msgid "Redirection rule added successfully"
+msgstr "تمت إضافة قاعدة إعادة التوجيه بنجاح"
+
+#: includes/irrp-helper-ajax.php:774
+msgid "Something went wrong, please ensure the entry is valid!"
+msgstr "حدث خطأ ما، يرجى التأكد من صحة الإدخال!"
+
+#: includes/irrp-helper-ajax.php:849
+msgid "Something went wrong, can not add redirection rule!"
+msgstr "حدث خطأ ما، لا يمكن إضافة قاعدة إعادة التوجيه!"
+
+#: includes/irrp-helper-ajax.php:756
+msgid "Redirection rule edited successfully"
+msgstr "تم تحرير قاعدة إعادة التوجيه بنجاح"
+
+#: includes/irrp-helper-ajax.php:647
+msgid "Search text can not be empty!"
+msgstr "لا يمكن أن يكون نص البحث فارغًا!"
+
+#: includes/irrp-helper-ajax.php:640 includes/irrp-helper-ajax.php:690
+msgid "No redirects found"
+msgstr "لم يتم العثور على عمليات إعادة توجيه"
+
+#: includes/irrp-helper-ajax.php:533
+msgid "redirects have been deleted"
+msgstr "تم حذف عمليات إعادة التوجيه"
+
+#: includes/irrp-helper-ajax.php:535
+msgid "redirect has been deleted"
+msgstr "تم حذف عملية إعادة التوجيه"
+
+#: includes/irrp-helper-ajax.php:465
+msgid "Redirect status can not be empty"
+msgstr "لا يمكن أن تكون حالة إعادة التوجيه فارغة"
+
+#: includes/irrp-helper-ajax.php:459
+msgid "redirect has been edited"
+msgstr "تم تحرير إعادة التوجيه"
+
+#: includes/irrp-helper-ajax.php:457
+msgid "redirects have been edited"
+msgstr "تم تحرير عمليات إعادة التوجيه"
+
+#: includes/irrp-helper-ajax.php:429
+msgid "Current page must be INTEGER > 0!"
+msgstr "يجب أن تكون الصفحة الحالية INTEGER > 0! "
+
+#: includes/irrp-helper-ajax.php:384
+msgid "Redirection deleted successfully"
+msgstr "تم حذف إعادة التوجيه بنجاح"
+
+#: includes/irrp-helper-ajax.php:353
+msgid "Redirect settings can not be empty!"
+msgstr "لا يمكن أن تكون إعدادات إعادة التوجيه فارغة!"
+
+#: includes/irrp-helper-ajax.php:351 includes/irrp-helper-ajax.php:427
+msgid "Redirection ID must be INTEGER > 0!"
+msgstr "يجب أن يكون معرف ID لإعادة التوجيه INTEGER > 0!"
+
+#: includes/irrp-helper-ajax.php:326
+msgid "Redirect settings updated"
+msgstr "تم تحديث إعدادات إعادة التوجيه"
+
+#: includes/irrp-helper-ajax.php:304
+msgid "Redirect ID must be positive number!"
+msgstr "يجب أن يكون معرف إعادة التوجيه رقمًا موجبًا!"
+
+#: includes/irrp-helper-ajax.php:283
+msgid "Redirection settings loaded"
+msgstr "تم تحميل إعدادات إعادة التوجيه"
+
+#: includes/irrp-helper-ajax.php:259
+msgid "New value can not be empty!"
+msgstr "لا يمكن أن تكون القيمة الجديدة فارغة!"
+
+#: includes/irrp-helper-ajax.php:257
+msgid "Database error, unknown table column!"
+msgstr "خطأ في قاعدة البيانات، عمود جدول غير معروف!"
+
+#: includes/irrp-helper-ajax.php:255
+msgid "Redirect not found by given ID!"
+msgstr "لم يتم العثور على إعادة التوجيه بواسطة المعرف المقدم!"
+
+#: includes/irrp-helper-ajax.php:249 includes/irrp-helper-ajax.php:299
+#: includes/irrp-helper-ajax.php:345 includes/irrp-helper-ajax.php:379
+msgid "Redirection not exists"
+msgstr "إعادة التوجيه غير موجود"
+
+#: includes/irrp-helper-ajax.php:168 includes/irrp-helper-ajax.php:177
+#: includes/irrp-helper-ajax.php:261 includes/irrp-helper-ajax.php:420
+#: includes/irrp-helper-ajax.php:431 includes/irrp-helper-ajax.php:541
+#: includes/irrp-helper-ajax.php:595 includes/irrp-helper-ajax.php:888
+#: includes/settings/irrp-settings.php:260
+#: includes/settings/irrp-settings.php:310
+msgid "Something went wrong, please try again"
+msgstr "حدث خطأ ما، أعد المحاولة من فضلك"
+
+#: includes/irrp-helper-ajax.php:118
+msgid "Redirection added successfully"
+msgstr "تمت إضافة إعادة التوجيه بنجاح"
+
+#: includes/irrp-helper-ajax.php:101 includes/irrp-helper-ajax.php:208
+#: includes/irrp-helper-ajax.php:244 includes/irrp-helper-ajax.php:768
+msgid "Something went wrong, can not update a db row"
+msgstr "حدث خطأ، لا يمكن تحديث صف ديسيبل"
+
+#: includes/irrp-helper-ajax.php:90 includes/irrp-helper-ajax.php:240
+msgid "Redirection edited successfully"
+msgstr "تم تحرير إعادة التوجيه بنجاح"
+
+#: includes/irrp-helper-ajax.php:75 includes/irrp-helper-ajax.php:175
+#: includes/settings/irrp-settings.php:192
+msgid "Please ensure your entry is valid!"
+msgstr "يرجى التأكد من صحة دخولك!"
+
+#. Author URI of the plugin
+msgid "https://inisev.com"
+msgstr "https://inisev.com"
+
+#. Author of the plugin
+msgid "Inisev"
+msgstr "Inisev"
+
+#. Description of the plugin
+msgid "Create specific URL redirections and redirection rules super-easily on a beautiful, user-friendly interface of the Redirect Redirection plugin."
+msgstr "قم بإنشاء عمليات إعادة توجيه URL محددة وقواعد إعادة التوجيه بسهولة فائقة على واجهة جميلة وسهلة الاستخدام من المكون الإضافي Redirect Redirection."
+
+#. Plugin URI of the plugin
+msgid "https://inisev.com/"
+msgstr "https://inisev.com/"
+
+#. Plugin Name of the plugin
+msgid "Redirect Redirection"
+msgstr "Redirect Redirection"
+
+#: redirect-redirection.php:292
+msgid "Manage"
+msgstr "إدارة"

@@ -1,0 +1,601 @@
+@font-face {
+	font-family: 'Glyphicons Halflings';
+	src: url('../../../fonts/glyphicons-halflings-regular.eot');
+	src: url('../../../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../../../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../../../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../../../fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+}
+
+.wp-list-table .column-id{
+	width: 5%;
+}
+.wp-list-table .column-rooms,
+.wp-list-table .column-price_per_day,
+.wp-list-table .column-price_per_day_child
+{
+	width: 7%;
+}
+.ct_admin_table {
+	margin: 20px 0;
+        line-height:35px;
+}
+.ct_admin_table th {
+	/* line-height: 40px; */
+	text-align: left;
+}
+.ct_admin_table td {
+	padding-left: 20px;
+}
+.ct_admin_table td > span:not(.select2-container) {
+	padding-left: 20px;
+}
+.ct_admin_table td > input, .ct_admin_table td > textarea {
+	width: 250px;
+}
+.ct_admin_table tr.child_ages td input {
+	width:45px;
+}
+.ct_admin_table tr.child_cost, .ct_admin_table tr.end_date, .ct_admin_table tr.child_price {
+	display: none;
+}
+.ct_order_manage_table th {
+	width: 120px;
+}
+.one-half {
+	width: 48%;
+	float: left;
+}
+.child_cost .clone-field input[type="number"] {
+	width: 50px;
+}
+.child_cost .clone-field td:first-child {
+	padding-left: 0;
+}
+.add-clone {
+	float: right;
+}
+.button.remove-clone {
+	margin-left: 20px;
+}
+
+#the-list .author-detail {
+	float: left;
+}
+#the-list .gravatar {
+	float: left;
+	margin-right: 10px;
+}
+table.reviews th#author_info, table.reviews th#hotel_name {
+	width: 20%;
+}
+.five-stars-container {
+	display: inline-block;
+	position: relative;
+	font-family: 'Glyphicons Halflings';
+	font-size: 14px;
+	text-align: left;
+	/*cursor: default;*/
+	white-space: nowrap;
+	line-height: 1.2em;
+	color: #dbdbdb;
+}
+.five-stars-container:before {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 1px;
+	content: "\e006\e006\e006\e006\e006";
+	z-index: 0;
+}
+.five-stars-container .five-stars, .five-stars-container.editable-rating .ui-slider-range {
+	display: block;
+	overflow: hidden;
+	position: relative;
+	background: #fff;
+	padding-left: 1px;
+}
+.five-stars-container .five-stars:before, .five-stars-container.editable-rating .ui-slider-range:before {
+	content: "\e006\e006\e006\e006\e006";
+	color: #fdb714;
+}
+.schedule_type_wrapper.hide {
+	display: none;
+}
+.row:after {
+	content: "";
+	clear: both;
+	display: block;
+}
+.row.postbox {
+	padding:12px;
+}
+
+
+/*----------------------------------------- Citytours Welcome Page ---------------------------------------------*/
+.citytours-wrap.about-wrap .nav-tab-wrapper {
+	padding-top: 20px;
+	margin-bottom: 30px;
+}
+
+.citytours-wrap.about-wrap table {
+	margin-bottom: 15px;
+}
+
+.citytours-wrap.about-wrap table th {
+	font-weight: bold;
+}
+
+.citytours-wrap.about-wrap tbody tr td:first-child {
+	width: 35%;
+}
+
+.citytours-wrap.about-wrap mark {
+	background: transparent;
+}
+
+.citytours-wrap.about-wrap .error {
+	color: #ff0000;
+}
+
+.citytours-wrap.about-wrap .header-section {
+	margin: 40px 0;
+}
+
+.citytours-wrap.about-wrap .header-section h2 {
+	font-size: 28px;
+	font-weight: normal;
+	float: left;
+	margin: 0 40px 0 0;
+}
+
+.citytours-wrap.about-wrap .header-section .demo-tab-switch {
+	text-decoration: none;
+	font-size: 13px;
+	padding: 8px 15px;
+	float: left;
+	margin: 1px 20px 0 0;
+	border: solid 1px transparent;
+	box-shadow: none;
+}
+
+.citytours-wrap.about-wrap .header-section .demo-tab-switch.active  {
+	color: #666;
+	background: #fff;
+	border-color: #e4e4e4;
+	border-radius: 15px;
+}
+.citytours-wrap.about-wrap .header-section .demo-tab-switch.active.error {
+	color: #ff0000;
+}
+
+.citytours-install-plugins .theme-browser {
+	margin: 0 -15px;
+}
+
+.citytours-install-plugins .theme-browser.rendered .theme:hover .theme-screenshot img {
+	opacity: 1;
+}
+
+.citytours-install-plugins .theme-browser .theme {
+	padding: 0 15px;
+	margin: 0 0 30px 0;
+	width: 33.33%;
+	cursor: default;
+	border: none;
+}
+
+.citytours-install-plugins .theme-browser .theme:nth-child(3n+1) {
+	clear: both;
+}
+
+.citytours-install-plugins .plugin-info {
+	font-size: 13px;
+	font-weight: bold;
+	position: absolute;
+	text-align: center;
+	bottom: 5px;
+	width: 100%;
+}
+
+.citytours-install-plugins .theme-browser .theme-actions {
+	top: auto !important;
+	bottom: 0;
+	transform: none !important;
+}
+
+.citytours-install-plugins .theme-browser .theme-wrapper {
+	position: relative;
+	border: 1px solid #ccc;
+}
+
+.citytours-install-plugins .plugin-required, .citytours-install-plugins .plugin-update {
+	font-size: 14px;
+	background: #81b536;
+	color: #fff;
+	font-weight: 500;
+	padding: 7px 15px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-radius: 5px;
+}
+
+.citytours-wrap.about-wrap .import-success {
+	background: #fff;
+	border-left: 4px solid #46b450;
+	box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+	margin: 10px 10px 20px 0;
+	padding: 1px 38px 1px 12px;
+	font-size: 13px;
+	line-height: 20px;
+}
+
+.citytours-wrap.about-wrap .import-success p, .citytours-wrap.about-wrap .import-error p {
+	padding: 2px;
+	margin: 7px 0;
+}
+
+.citytours-wrap.about-wrap .import-error {
+	background: #fff;
+	border-left: 4px solid #dc3232;
+	box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+	margin: 0 0 50px 0;
+	padding: 1px 0 1px 12px;
+	font-size: 13px;
+	line-height: 20px;
+}
+
+.citytours-theme-demo {
+	float: left;
+	width: 100%;
+	border-top: 1px solid #ccc;
+	margin-top: 60px;
+	margin-bottom: 100px;
+}
+
+.citytours-theme-demo .demo-importer-loader {
+	background: rgba(255, 255, 255, .7);
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	text-align: center;
+	display: none;
+}
+
+.citytours-theme-demo #import-status {
+	margin-bottom: 20px;
+}
+
+.citytours-theme-demo .demo-tab .demo {
+	width: 48%;
+	float: left;
+	position: relative;
+	margin-bottom: 20px;
+}
+
+.citytours-theme-demo .demo-tab .demo .demo-screenshot {
+	position: relative;
+}
+
+.citytours-theme-demo .demo-tab .demo .demo-screenshot:hover .demo-info {
+	visibility: visible;
+	opacity: 1;
+}
+
+.citytours-theme-demo .demo-tab .demo .demo-info {
+	font-size: 18px;
+	color: #fff;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	padding: 60px 50px;
+	line-height: 30px;
+	box-sizing: border-box;
+	background: rgba(0,0,0,.5);
+	visibility: hidden;
+	opacity: 0;
+	transition: all .3s;
+}
+
+.citytours-theme-demo .demo-tab .demo .demo-actions {
+	position: absolute;
+	bottom: 35px;
+	right: 35px;
+	z-index: 9;
+}
+
+.citytours-theme-demo .demo-tab .demo .demo-actions a {
+	margin-left: 10px;
+}
+
+.citytours-theme-demo .demo-tab .demo .demo-disabled {
+    font-size: 18px;
+    color: #FFF;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding: 60px 50px;
+    line-height: 30px;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.5);
+    transition: all .3s;
+    z-index: 999;
+}
+
+.citytours-theme-demo #citytours-install-options {
+	display: inline-block;
+	margin-bottom: 40px;
+}
+
+.citytours-theme-demo #citytours-install-options h3 {
+	margin-top: 0;
+}
+
+.citytours-theme-demo #citytours-install-options label {
+	display: block;
+	padding: 10px 0;
+}
+
+.citytours-theme-demo .import-progress-bar {
+	margin-top: 10px;
+	background: #cccccc;
+	width: 100%;
+	height: 20px;
+	border: 1px solid #cccccc;
+}
+
+.citytours-theme-demo .import-progress-bar div {
+	background: #08c;
+	height: 20px;
+}
+
+.demo-tab.status-holder mark.yes span {
+	color: #49b246;
+}
+.demo-tab.status-holder mark.error {
+	color: #db3431;
+	font-weight: bold;
+}
+
+
+/*------------ Responsive ( Media Query ) ---------- */
+@media (max-width: 1280px){
+	.one-half {
+		width: 100%;
+	}
+}
+
+.label {
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+}
+a.label:hover,
+a.label:focus {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+.label:empty {
+  display: none;
+}
+.btn .label {
+  position: relative;
+  top: -1px;
+}
+.label-default {
+  background-color: #777;
+}
+.label-default[href]:hover,
+.label-default[href]:focus {
+  background-color: #5e5e5e;
+}
+.label-primary {
+  background-color: #337ab7;
+}
+.label-primary[href]:hover,
+.label-primary[href]:focus {
+  background-color: #286090;
+}
+.label-success {
+  background-color: #5cb85c;
+}
+.label-success[href]:hover,
+.label-success[href]:focus {
+  background-color: #449d44;
+}
+.label-info {
+  background-color: #5bc0de;
+}
+.label-info[href]:hover,
+.label-info[href]:focus {
+  background-color: #31b0d5;
+}
+.label-warning {
+  background-color: #f0ad4e;
+}
+.label-warning[href]:hover,
+.label-warning[href]:focus {
+  background-color: #ec971f;
+}
+.label-danger {
+  background-color: #d9534f;
+}
+.label-danger[href]:hover,
+.label-danger[href]:focus {
+  background-color: #c9302c;
+}
+.members-cap-tabs .members-tab-nav li a .label{color: black;}
+span.select2-dropdown.select2-dropdown--below{ right:auto !important}
+/* For Start Time Bulk */
+#form-bulk-edit,
+#form-bulk-starttime-edit,
+#flight-form-bulk-edit {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: rgba(0, 0, 0, .7);
+    display: none
+}
+
+
+#form-bulk-edit.fixed,
+#flight-form-bulk-edit.fixed {
+    position: fixed;
+}
+
+#form-bulk-edit .form-container,
+#form-bulk-starttime-edit .form-container,
+#flight-form-bulk-edit .form-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    background: #fff;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    border: 1px solid #242323;
+    padding: 15px;
+    max-width: 90%;
+    width: 950px
+}
+
+#form-bulk-edit.form-bulk-edit-activity-tour {
+    overflow-y: auto !important;
+}
+
+#form-bulk-edit.form-bulk-edit-activity .form-container {
+    top: 0 !important;
+    -webkit-transform: translateX(-50%) translateY(0%) !important;
+    -ms-transform: translateX(-50%) translateY(0%) !important;
+    transform: translateX(-50%) translateY(0%) !important;
+}
+
+#form-bulk-edit .form-container h3,
+#form-bulk-edit .form-container h4,
+#form-bulk-starttime-edit .form-container h3,
+#form-bulk-starttime-edit .form-container h4,
+#flight-form-bulk-edit .form-container h3,
+#flight-form-bulk-edit .form-container h4 {
+    margin: 0;
+    padding: 0
+}
+
+#form-bulk-edit .form-container .form-title,
+#form-bulk-starttime-edit .form-container .form-title,
+#flight-form-bulk-edit .form-container .form-title {
+    padding-bottom: 15px;
+    border-bottom: 1px solid #CCC
+}
+
+#form-bulk-edit .form-container .form-footer,
+#form-bulk-starttime-edit .form-container .form-footer,
+#flight-form-bulk-edit .form-container .form-footer {
+    padding-top: 15px;
+    border: 0;
+    border-top: 1px solid #CCC;
+    background: none;
+    border-radius: 0;
+    margin: 0;
+}
+
+#form-bulk-edit .form-container .form-content,
+#form-bulk-starttime-edit .form-container .form-content,
+#flight-form-bulk-edit .form-container .form-content {
+    padding-top: 15px;
+    padding-bottom: 15px
+}
+
+#form-bulk-edit .form-container .form-content .form-group,
+#form-bulk-starttime-edit .form-container .form-content .form-group,
+#flight-form-bulk-edit .form-container .form-content .form-group {
+    width: auto !important;
+    margin-left: 5px;
+    margin-right: 5px;
+    float: left;
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px solid #CCC;
+    margin-bottom: 10px
+}
+
+#form-bulk-edit .form-container .form-content .form-group label,
+#form-bulk-starttime-edit .form-container .form-content .form-group label,
+#flight-form-bulk-edit .form-container .form-content .form-group label {
+    display: inline-block;
+    margin-right: 5px;
+    margin-bottom: 5px
+}
+
+#form-bulk-edit .form-container .form-content .form-group label.block,
+#form-bulk-starttime-edit .form-container .form-content .form-group label.block,
+#flight-form-bulk-edit .form-container .form-content .form-group label.block {
+    display: block;
+    margin-bottom: 5px
+}
+
+@media (max-width: 1750px) {
+    #form-bulk-edit .form-container,
+    #form-bulk-starttime-edit .form-container,
+    #flight-form-bulk-edit .form-container {
+        max-height: 550px;
+        overflow-y: scroll
+    }
+}
+
+@media (max-width: 1040px) {
+    #form-bulk-edit .form-container,
+    #form-bulk-starttime-edit .form-container,
+    #flight-form-bulk-edit .form-container {
+        max-height: 480px;
+        overflow-y: scroll
+    }
+}
+
+#form-bulk-edit .overlay,
+#form-bulk-starttime-edit .overlay,
+#flight-form-bulk-edit .overlay {
+    display: none;
+    z-index: 10;
+    background: rgba(255, 255, 255, .7)
+}
+
+#form-bulk-edit .overlay.open,
+#form-bulk-starttime-edit .overlay.open,
+#flight-form-bulk-edit .overlay.open {
+    display: block
+}
+
+/* Thoai fix */
+#form-bulk-edit.form-bulk-edit-activity-tour .form-container{
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    z-index: 1;
+    background: #fff;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    border: 1px solid #242323;
+    padding: 15px;
+    max-width: 90%;
+    width: 950px;
+    transform: translateX(-50%);
+}
+#elementor-panel-state-loading {
+	display:none !important;
+}

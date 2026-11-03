@@ -1,0 +1,369 @@
+# Translation of Plugins - Rich Showcase for Google Reviews - Stable (latest release) in English (UK)
+# This file is distributed under the same license as the Plugins - Rich Showcase for Google Reviews - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2026-09-13 18:54:56+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/4.1.0\n"
+"Language: en_GB\n"
+"Project-Id-Version: Plugins - Rich Showcase for Google Reviews - Stable (latest release)\n"
+
+#: includes/class-view.php:272 includes/class-view.php:320
+#: assets/7.1/js/public-main.js:53
+msgid "Top rated"
+msgstr "Top rated"
+
+#: includes/class-view.php:322 assets/7.1/js/public-main.js:55
+msgid "%1 of the last %2 reviews are 5 stars"
+msgstr "%1 of the last %2 reviews are 5 stars"
+
+#: includes/class-plugin-badge.php:99
+msgid "Displayed on the site"
+msgstr "Displayed on the site"
+
+#: includes/class-view.php:321 assets/7.1/js/public-main.js:55
+msgid "Latest review %s"
+msgstr "Latest review %s"
+
+#: includes/class-plugin-badge.php:87
+msgid "Search Badges"
+msgstr "Search Badges"
+
+#: includes/class-plugin-badge.php:86
+msgid "Badges"
+msgstr "Badges"
+
+#: includes/class-feed-page.php:31
+msgid "Create Widget"
+msgstr "Create Widget"
+
+#: includes/class-plugin-badge.php:88
+msgid "No badges found"
+msgstr "No badges found"
+
+#: includes/class-feed-page.php:31
+msgid "Create Badge"
+msgstr "Create Badge"
+
+#: includes/class-view.php:324 includes/class-view.php:340
+msgid "%1 reviews"
+msgstr "%1 reviews"
+
+#: includes/class-view.php:323 includes/class-view.php:339
+msgid "%1 reviews on %2"
+msgstr "%1 reviews on %2"
+
+#: includes/class-view.php:325 assets/7.1/js/public-main.js:56
+msgid "%1 left %2 review"
+msgstr "%1 left %2 review"
+
+#: includes/core/class-google-connect.php:41
+msgid "Review not found."
+msgstr "Review not found."
+
+#: block.json
+msgctxt "block keyword"
+msgid "google reviews"
+msgstr "google reviews"
+
+#: includes/class-view.php:391
+msgid "powered by Google"
+msgstr "powered by Google"
+
+#: includes/class-view.php:549
+msgid "%s ago"
+msgstr "%s ago"
+
+#: includes/class-view.php:510 assets/7.1/js/public-main.js:22
+msgid "Photo from customer review"
+msgstr "Photo from customer review"
+
+#: includes/class-view.php:440 includes/class-view.php:484
+msgid "%s profile picture"
+msgstr "%s profile picture"
+
+#: includes/class-view.php:348
+msgid "%s place picture"
+msgstr "%s place picture"
+
+#. Plugin Name of the plugin
+#: grw.php
+msgid "Rich Showcase for Google Reviews"
+msgstr "Rich Showcase for Google Reviews"
+
+#: includes/class-view.php:383
+msgid "Rating: %s out of 5"
+msgstr "Rating: %s out of 5"
+
+#: includes/class-view.php:564
+msgid "opens in a new window"
+msgstr "opens in a new window"
+
+#: includes/class-view.php:445 includes/class-view.php:491
+msgid "%s user profile"
+msgstr "%s user profile"
+
+#: includes/class-view.php:421
+msgid "All reviews"
+msgstr "All reviews"
+
+#: includes/class-view.php:371
+msgid "review us on Google"
+msgstr "review us on Google"
+
+#: includes/class-view.php:358
+msgid "%s place profile"
+msgstr "%s place profile"
+
+#: includes/class-view.php:519
+msgid "Response from the owner"
+msgstr "Response from the owner"
+
+#. Plugin URI of the plugin
+#: grw.php
+msgid "https://wordpress.org/plugins/widget-google-reviews/"
+msgstr "https://en-gb.wordpress.org/plugins/widget-google-reviews/"
+
+#: includes/class-view.php:185 includes/class-view.php:417
+msgid "More reviews"
+msgstr "More reviews"
+
+#: block.json
+msgctxt "block keyword"
+msgid "block"
+msgstr "block"
+
+#: block.json
+msgctxt "block keyword"
+msgid "reviews"
+msgstr "reviews"
+
+#: block.json
+msgctxt "block keyword"
+msgid "google"
+msgstr "google"
+
+#: block.json
+msgctxt "block description"
+msgid "Block for Google map reviews. Easy way to show your Google place reviews on WordPress pages!"
+msgstr "Block for Google map reviews. Easy way to show your Google place reviews on WordPress pages!"
+
+#: block.json
+msgctxt "block title"
+msgid "Google Reviews Block"
+msgstr "Google Reviews Block"
+
+#: grw.php:57
+msgid "Rate plugin"
+msgstr "Rate plugin"
+
+#: includes/class-view.php:369
+msgid "review us on"
+msgstr "review us on"
+
+#: includes/class-post-types.php:39
+msgid "Not found in Trash"
+msgstr "Not found in Bin"
+
+#: includes/class-post-types.php:52
+msgid "Reviews Feed"
+msgstr "Reviews Feed"
+
+#: includes/class-post-types.php:48
+msgid "Filter items list"
+msgstr "Filter items list"
+
+#: includes/class-post-types.php:47
+msgid "Reviews Feeds list navigation"
+msgstr "Reviews Feeds list navigation"
+
+#: includes/class-post-types.php:46
+msgid "Reviews Feeds list"
+msgstr "Reviews Feeds list"
+
+#: includes/class-post-types.php:45
+msgid "Uploaded to this item"
+msgstr "Uploaded to this item"
+
+#: includes/class-post-types.php:44
+msgid "Insert into item"
+msgstr "Insert into item"
+
+#: includes/class-post-types.php:43
+msgid "Use as featured image"
+msgstr "Use as featured image"
+
+#: includes/class-post-types.php:42
+msgid "Remove featured image"
+msgstr "Remove featured image"
+
+#: includes/class-post-types.php:41
+msgid "Set featured image"
+msgstr "Set featured image"
+
+#: includes/class-post-types.php:40
+msgid "Featured Image"
+msgstr "Featured Image"
+
+#: includes/class-post-types.php:38
+msgid "Not found"
+msgstr "Not found"
+
+#: includes/class-post-types.php:37
+msgid "Search Reviews Widgets"
+msgstr "Search Reviews Widgets"
+
+#: includes/class-post-types.php:36
+msgid "View Reviews Feeds"
+msgstr "View Reviews Feeds"
+
+#: includes/class-post-types.php:35
+msgid "View Reviews Feed"
+msgstr "View Reviews Feed"
+
+#: includes/class-post-types.php:34
+msgid "Update Reviews Feed"
+msgstr "Update Reviews Feed"
+
+#: includes/class-post-types.php:33
+msgid "Edit Reviews Feed"
+msgstr "Edit Reviews Feed"
+
+#: includes/class-post-types.php:32
+msgid "New Reviews Feed"
+msgstr "New Reviews Feed"
+
+#: includes/class-post-types.php:31
+msgid "Add Reviews Feed"
+msgstr "Add Reviews Feed"
+
+#: includes/class-post-types.php:30
+msgid "Add New Reviews Feed"
+msgstr "Add New Reviews Feed"
+
+#: includes/class-post-types.php:29
+msgid "Widgets"
+msgstr "Widgets"
+
+#: includes/class-post-types.php:28
+msgid "Parent Reviews Feed:"
+msgstr "Parent Reviews Feed:"
+
+#: includes/class-post-types.php:27
+msgid "Reviews Feed Attributes"
+msgstr "Reviews Feed Attributes"
+
+#: includes/class-post-types.php:26
+msgid "Reviews Feed Archives"
+msgstr "Reviews Feed Archives"
+
+#: includes/class-post-types.php:25
+msgid "Reviews widget"
+msgstr "Reviews widget"
+
+#: includes/class-post-types.php:24
+msgid "Reviews widgets"
+msgstr "Reviews widgets"
+
+#: includes/class-post-types.php:23
+msgctxt "Post Type Singular Name"
+msgid "Reviews widget"
+msgstr "Reviews widget"
+
+#: includes/class-post-types.php:22
+msgctxt "Post Type General Name"
+msgid "Reviews widgets"
+msgstr "Reviews widgets"
+
+#: includes/class-plugin-support.php:40
+msgid "Welcome"
+msgstr "Welcome"
+
+#: includes/class-feed-widget.php:102
+msgid "Feed:"
+msgstr "Feed:"
+
+#: includes/class-feed-widget.php:90
+msgid "Title:"
+msgstr "Title:"
+
+#: includes/admin/class-admin-feed-columns.php:59
+msgid "Date"
+msgstr "Date"
+
+#: includes/admin/class-admin-feed-columns.php:57
+msgid "Theme"
+msgstr "Theme"
+
+#: includes/admin/class-admin-feed-columns.php:56
+msgid "ID"
+msgstr "ID"
+
+#: includes/core/class-google-connect.php:25
+#: includes/core/class-google-connect.php:64
+#: includes/core/class-google-connect.php:138
+#: includes/core/class-google-connect.php:171
+msgid "Unable to call request. Make sure you are accessing this page from the Wordpress dashboard."
+msgstr "Unable to call request. Make sure you are accessing this page from the WordPress dashboard."
+
+#: includes/class-feed-widget.php:23
+msgid "Display Google Places Reviews on your website."
+msgstr "Display Google Places Reviews on your website."
+
+#: includes/class-plugin-support.php:46
+msgid "Support"
+msgstr "Support"
+
+#: includes/class-plugin-support.php:43
+msgid "Full Installation Guide"
+msgstr "Full Installation Guide"
+
+#: includes/admin/class-admin-feed-columns.php:58
+msgid "Shortcode"
+msgstr "Shortcode"
+
+#: includes/class-view.php:99 assets/7.1/js/public-main.js:18
+msgid "read more"
+msgstr "read more"
+
+#: includes/class-view.php:421
+msgid "See All Reviews"
+msgstr "See All Reviews"
+
+#: includes/class-view.php:428 includes/class-view.php:483
+msgid "Google User"
+msgstr "Google User"
+
+#: includes/class-view.php:386 assets/7.1/js/public-main.js:44
+msgid "Based on %s reviews"
+msgstr "Based on %s reviews"
+
+#: includes/class-plugin-support.php:49
+msgid "Advance Options"
+msgstr "Advance Options"
+
+#: includes/admin/class-admin-feed-columns.php:55
+msgid "Title"
+msgstr "Title"
+
+#. Author URI of the plugin
+#: grw.php
+msgid "https://richplugins.com"
+msgstr "https://richplugins.com"
+
+#. Author of the plugin
+#: grw.php
+msgid "RichPlugins <support@richplugins.com>"
+msgstr "RichPlugins <support@richplugins.com>"
+
+#: includes/class-feed-widget.php:20
+msgid "Google Reviews Widget"
+msgstr "Google Reviews Widget"
+
+#. Description of the plugin
+#: grw.php
+msgid "Instantly display Google reviews on your website to increase user confidence and sales."
+msgstr "Instantly display Google reviews on your website to increase user confidence and sales."

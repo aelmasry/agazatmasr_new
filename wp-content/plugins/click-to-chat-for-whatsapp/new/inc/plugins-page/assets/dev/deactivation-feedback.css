@@ -1,0 +1,597 @@
+/**
+ * Deactivation feedback modal
+ */
+
+.ht-ctc-df-overlay[hidden] {
+  display: none;
+}
+
+.ht-ctc-df-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(15, 23, 42, 0.55);
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu,
+    Cantarell, "Helvetica Neue", sans-serif;
+  animation: ht-ctc-df-fade 0.15s ease-out;
+}
+
+body.ht-ctc-df-open {
+  overflow: hidden;
+}
+
+.ht-ctc-df-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  max-height: calc(100vh - 48px);
+  max-height: calc(100dvh - 48px);
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 24px 60px -12px rgba(15, 23, 42, 0.4);
+  overflow: hidden;
+  animation: ht-ctc-df-rise 0.18s ease-out;
+}
+
+/* Head */
+.ht-ctc-df-head {
+  padding: 22px 52px 16px 24px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.ht-ctc-df-title {
+  margin: 0 0 6px !important;
+  padding: 0 !important;
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+  color: #0f172a !important;
+}
+
+.ht-ctc-df-sub {
+  margin: 0 !important;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #475569;
+}
+
+.ht-ctc-df-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+}
+
+.ht-ctc-df-close:hover,
+.ht-ctc-df-close:focus {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.ht-ctc-df-close:focus-visible {
+  outline: 2px solid #128c7e;
+  outline-offset: 0;
+}
+
+/* Body */
+.ht-ctc-df-body {
+  padding: 16px 24px 4px;
+  overflow-y: auto;
+}
+
+.ht-ctc-df-fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.ht-ctc-df-reasons {
+  margin: 0 0 12px !important;
+  padding: 0;
+  list-style: none;
+}
+
+.ht-ctc-df-reason {
+  position: relative;
+  margin: 0;
+}
+
+/* "Talk to us" at the end of a row help could fix, once it is chosen.
+   It sits in room the row always keeps for it, so showing it moves nothing. */
+.ht-ctc-df-reason:has(.ht-ctc-df-reason-help) .ht-ctc-df-reason-label {
+  padding-inline-end: 88px;
+}
+
+.ht-ctc-df-reason-help {
+  display: none;
+  position: absolute;
+  top: 6px;
+  inset-inline-end: 12px;
+  font-size: 0.82rem;
+  /* The label's line box, so the link sits on its first line. */
+  line-height: calc(0.92rem * 1.45);
+  color: #0f766e;
+}
+
+.ht-ctc-df-reason:has(input:checked) .ht-ctc-df-reason-help {
+  display: block;
+}
+
+.ht-ctc-df-reason-help:hover,
+.ht-ctc-df-reason-help:focus {
+  color: #115e59;
+}
+
+.ht-ctc-df-reason-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: #1e293b;
+  cursor: pointer;
+}
+
+.ht-ctc-df-reason-label:hover {
+  background: #f8fafc;
+}
+
+.ht-ctc-df-reason-label:has(input:checked) {
+  background: #f0fdf9;
+  color: #0f172a;
+  font-weight: 500;
+}
+
+.ht-ctc-df-reason-label:focus-within {
+  outline: 2px solid #128c7e;
+  outline-offset: -2px;
+}
+
+/* Keyboard focus only, where :has() is supported. */
+.ht-ctc-df-reason-label:focus-within:not(:has(input:focus-visible)) {
+  outline: none;
+}
+
+.ht-ctc-df-reason-label input[type="radio"] {
+  margin: 2px 0 0 !important;
+  flex-shrink: 0;
+}
+
+/* Keyboard focus shows the row's outline, so the radio's own ring would be
+   a second indicator for the same thing. Only then: when the dialog opens
+   from a mouse click, the first reason's focus is not :focus-visible, the
+   row outline stays off, and the radio's own (WordPress) ring is what
+   shows where focus is. The id outranks WordPress's input[type=radio]:focus. */
+#ht-ctc-df-modal .ht-ctc-df-reason-label input[type="radio"]:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.ht-ctc-df-detail {
+  margin: 0 0 14px;
+  padding: 0 10px;
+}
+
+.ht-ctc-df-detail textarea {
+  width: 100%;
+  min-height: 64px;
+  font-family: inherit;
+  padding: 9px 11px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  resize: vertical;
+}
+
+.ht-ctc-df-detail textarea:focus {
+  border-color: #128c7e;
+  box-shadow: 0 0 0 1px #128c7e;
+  outline: 2px solid transparent;
+}
+
+/* Contact & Privacy */
+.ht-ctc-df-contact {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  /* Plain row, inset like the reasons so the checkbox lines up with the radios. */
+  padding: 0 10px;
+  margin-bottom: 12px;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: #334155;
+}
+
+/* Only the box and its words toggle; the address beside them edits. */
+.ht-ctc-df-contact label,
+.ht-ctc-df-contact input[type="checkbox"] {
+  cursor: pointer;
+}
+
+.ht-ctc-df-contact input[type="checkbox"] {
+  margin: 1px 0 0 !important;
+  flex-shrink: 0;
+}
+
+/* The address and its pencil are one button: either starts editing. */
+.ht-ctc-df-email-edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  max-width: 100%;
+  /* The padding only gives the hover background room; the negative margin
+     keeps the address where plain text would sit. */
+  margin: 0 -3px;
+  padding: 0 3px;
+  vertical-align: bottom;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  font: inherit;
+  line-height: inherit;
+  color: #0f172a;
+  text-align: start;
+  cursor: text;
+}
+
+.ht-ctc-df-email-edit strong {
+  min-width: 0;
+  font-weight: inherit;
+  overflow-wrap: anywhere;
+}
+
+.ht-ctc-df-email-edit .dashicons {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+  line-height: 1;
+  color: #64748b;
+}
+
+.ht-ctc-df-email-edit:hover,
+.ht-ctc-df-email-edit:focus-visible {
+  background: #e2e8f0;
+}
+
+.ht-ctc-df-email-edit:hover .dashicons,
+.ht-ctc-df-email-edit:focus-visible .dashicons {
+  color: #0f172a;
+}
+
+.ht-ctc-df-email-edit:focus-visible {
+  outline: 2px solid #128c7e;
+  outline-offset: 0;
+}
+
+.ht-ctc-df-email-edit[hidden],
+.ht-ctc-df-contact-email[hidden] {
+  display: none;
+}
+
+/* Reads as the address it replaces: no box, just a line under the text that
+   turns teal while editing. Scoped to the dialog id so WordPress's own
+   input[type="email"] rule (box, 30px height, blue ring) does not win. */
+#ht-ctc-df-modal .ht-ctc-df-contact-email {
+  box-sizing: border-box;
+  width: 17em;
+  max-width: 100%;
+  height: 21px;
+  min-height: 0;
+  margin: 0;
+  padding: 0 1px;
+  font: inherit;
+  line-height: 20px;
+  vertical-align: bottom;
+  border: 0;
+  border-bottom: 1px solid #94a3b8;
+  border-radius: 0;
+  background: transparent;
+  color: #0f172a;
+  box-shadow: none;
+}
+
+@supports (field-sizing: content) {
+  #ht-ctc-df-modal .ht-ctc-df-contact-email {
+    width: auto;
+    min-width: 12ch;
+    field-sizing: content;
+  }
+}
+
+#ht-ctc-df-modal .ht-ctc-df-contact-email::placeholder {
+  color: #94a3b8;
+}
+
+/* Thicker teal line on focus, drawn by the shadow so nothing moves. */
+#ht-ctc-df-modal .ht-ctc-df-contact-email:focus {
+  border-bottom-color: #128c7e;
+  box-shadow: 0 1px 0 0 #128c7e;
+  outline: 2px solid transparent;
+}
+
+.ht-ctc-df-policy a {
+  color: #0f766e;
+}
+
+.ht-ctc-df-policy a:hover,
+.ht-ctc-df-policy a:focus {
+  color: #115e59;
+}
+
+/* The always-visible disclosure line is itself the toggle: a chevron in
+   front of it, quiet grey with a thin dotted underline (a solid one under a
+   whole sentence reads heavy), a little darker on hover. Opens what is
+   sent, the snooze choice and the privacy link. */
+.ht-ctc-df-more {
+  margin: 8px 0 12px;
+  /* Same inset as the reasons, comment and checkbox: one left edge. */
+  padding: 0 10px;
+  font-size: 0.79rem;
+  line-height: 1.5;
+  color: #64748b;
+}
+
+.ht-ctc-df-more > summary {
+  display: block;
+  padding: 2px 0;
+  padding-inline-start: 10px;
+  border-radius: 4px;
+  color: #64748b;
+  text-decoration: underline dotted;
+  text-decoration-color: #94a3b8;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.ht-ctc-df-more > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Hanging chevron: it sits in the start padding, so a wrapped second line
+   lines up with the text. vertical-align: middle centres it on the lowercase
+   letters; the -0.09em lifts it to the capitals' centre, which is what the eye
+   reads it against. A rotated chevron's stroke starts at its box's centre, so
+   the box starts 3.25px early to put the stroke on the checkbox's left edge.
+   The margins cancel out (-13.25 + 6.5 + 6.75 = 0): the text starts at 10px. */
+.ht-ctc-df-more > summary::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-inline-start: -13.25px;
+  margin-inline-end: 6.75px;
+  vertical-align: middle;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-0.09em) rotate(-45deg);
+  transition: transform 0.15s ease-out;
+}
+
+body.rtl .ht-ctc-df-more > summary::before {
+  transform: translateY(-0.09em) rotate(135deg);
+}
+
+/* Pointing down, the shape hangs below and left of where the right-pointing
+   one sat: move it back, so the chevron turns in place. */
+.ht-ctc-df-more[open] > summary::before {
+  transform: translate(32%, calc(-37% - 0.09em)) rotate(45deg);
+}
+
+/* Must out-rank the body.rtl rule above, or it never turns down in RTL. */
+body.rtl .ht-ctc-df-more[open] > summary::before {
+  transform: translate(-32%, calc(-37% - 0.09em)) rotate(45deg);
+}
+
+.ht-ctc-df-more > summary:hover {
+  color: #334155;
+  text-decoration-color: #64748b;
+}
+
+.ht-ctc-df-more > summary:focus {
+  outline: none;
+}
+
+.ht-ctc-df-more > summary:focus-visible {
+  outline: 2px solid #128c7e;
+  outline-offset: 2px;
+}
+
+.ht-ctc-df-more-body {
+  margin-top: 6px;
+  padding: 2px 14px 12px;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #475569;
+}
+
+.ht-ctc-df-more h3 {
+  margin: 10px 0 2px !important;
+  font-size: 0.79rem !important;
+  font-weight: 600;
+  color: #334155;
+}
+
+.ht-ctc-df-more ul {
+  margin: 0 !important;
+  padding-inline-start: 18px;
+  list-style: disc;
+}
+
+.ht-ctc-df-more li {
+  margin: 0 0 2px;
+}
+
+.ht-ctc-df-snooze-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  margin: 0 !important;
+}
+
+.ht-ctc-df-snooze-row select {
+  min-height: 28px;
+  font-size: 0.82rem;
+}
+
+.ht-ctc-df-policy {
+  margin: 10px 0 0 !important;
+}
+
+/* Footer */
+.ht-ctc-df-foot {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 14px 24px;
+  border-top: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+/* .wp-core-ui .button-link (WordPress's blue link) outranks a two-class
+   rule on the real Plugins screen; the dialog id wins. */
+#ht-ctc-df-modal .ht-ctc-df-foot .ht-ctc-df-skip {
+  margin-right: auto;
+  padding: 0;
+  color: #475569;
+  text-decoration: underline;
+  box-shadow: none;
+}
+
+#ht-ctc-df-modal .ht-ctc-df-foot .ht-ctc-df-skip:hover,
+#ht-ctc-df-modal .ht-ctc-df-foot .ht-ctc-df-skip:focus {
+  color: #0f172a;
+}
+
+.ht-ctc-df-foot .button {
+  min-height: 32px;
+}
+
+.ht-ctc-df-foot .button.button-primary {
+  background: #0f766e;
+  border-color: #0f766e;
+  color: #ffffff;
+}
+
+.ht-ctc-df-foot .button.button-primary:hover,
+.ht-ctc-df-foot .button.button-primary:focus {
+  background: #115e59;
+  border-color: #115e59;
+  color: #ffffff;
+}
+
+.ht-ctc-df-foot .button[disabled] {
+  opacity: 0.7;
+  cursor: default;
+}
+
+/* RTL */
+body.rtl .ht-ctc-df-close {
+  right: auto;
+  left: 14px;
+}
+
+body.rtl .ht-ctc-df-head {
+  padding: 22px 24px 16px 52px;
+}
+
+body.rtl #ht-ctc-df-modal .ht-ctc-df-foot .ht-ctc-df-skip {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+/* Responsive */
+@media screen and (max-width: 600px) {
+  .ht-ctc-df-overlay {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .ht-ctc-df-dialog {
+    max-width: none;
+    max-height: 92vh;
+    max-height: 92dvh;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .ht-ctc-df-foot {
+    flex-wrap: wrap;
+  }
+
+  .ht-ctc-df-foot .button {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+}
+
+/* Short screens (small laptops): less outer margin and a shorter comment
+   box, so the whole dialog fits without the body scrolling. */
+@media screen and (min-width: 601px) and (max-height: 720px) {
+  .ht-ctc-df-overlay {
+    padding: 12px 24px;
+  }
+
+  .ht-ctc-df-dialog {
+    max-height: calc(100vh - 24px);
+    max-height: calc(100dvh - 24px);
+  }
+
+  .ht-ctc-df-head {
+    padding-top: 16px;
+    padding-bottom: 12px;
+  }
+
+  .ht-ctc-df-detail textarea {
+    min-height: 52px;
+  }
+}
+
+/* Animation */
+@keyframes ht-ctc-df-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes ht-ctc-df-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ht-ctc-df-overlay,
+  .ht-ctc-df-dialog {
+    animation: none;
+  }
+
+  .ht-ctc-df-more > summary::before {
+    transition: none;
+  }
+}

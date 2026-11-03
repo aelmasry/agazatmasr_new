@@ -1,0 +1,116 @@
+[container class="margin_60"]
+    <div class="main_title">
+        <h2>Paris <b>Top</b> Tours</h2>
+        <p>Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.</p>
+    </div>
+    [tours type="popular"]
+    <p class="text-center add_bottom_30">
+        <a href="http://www.soaptheme.net/wordpress/citytours/tour/" class="btn_1 medium"><i class="icon-eye-7"></i>View all tours</a>
+    </p>
+    <hr>
+    <div class="main_title">
+        <h2>Paris <b>Top</b> Hotels</h2>
+        <p>Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.</p>
+    </div>
+    [hotels type="popular"]
+    <p class="text-center add_bottom_30">
+        <a href="http://www.soaptheme.net/wordpress/citytours/hotel/" class="btn_1 medium"><i class="icon-eye-7"></i>View all hotels</a>
+    </p>
+[/container]
+
+<div class="white_bg">
+    [container class="margin_60"]
+        <div class="main_title">
+            <h2>Other <b>Popular</b> tours</h2>
+            <p>Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.</p>
+        </div>
+        [row class="add_bottom_45"]
+            [column md="4"][tours style="simple"][/column]
+            [column md="4"][tours style="simple"][/column]
+            [column md="4"][tours style="simple"][/column]
+        [/row]
+
+        [banner style="colored"]
+        <h4>Discover our Top tours <b>from $34</b></h4>
+        <p>Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in.</p>
+        <a href="single_tour.html" class="btn_1 white">Read more</a>
+        [/banner]
+
+        [row]
+        [column md="3" sm="6" class="text-center"]
+        <p><a href="#"><img src="http://www.soaptheme.net/wordpress/citytours/wp-content/uploads/2015/11/bus.jpg" alt="Pic" class="img-responsive"></a></p>
+        <h4><b>Sightseen tour</b> booking</h4>
+        <p>Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex.</p>
+        [/column]
+        [column md="3" sm="6" class="text-center"]
+        <p><a href="#"><img src="http://www.soaptheme.net/wordpress/citytours/wp-content/uploads/2015/11/bus.jpg" alt="Pic" class="img-responsive"></a></p>
+        <h4><b>Sightseen tour</b> booking</h4>
+        <p>Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex.</p>
+        [/column]
+        [column md="3" sm="6" class="text-center"]
+        <p><a href="#"><img src="http://www.soaptheme.net/wordpress/citytours/wp-content/uploads/2015/11/bus.jpg" alt="Pic" class="img-responsive"></a></p>
+        <h4><b>Sightseen tour</b> booking</h4>
+        <p>Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex.</p>
+        [/column]
+        [column md="3" sm="6" class="text-center"]
+        <p><a href="#"><img src="http://www.soaptheme.net/wordpress/citytours/wp-content/uploads/2015/11/bus.jpg" alt="Pic" class="img-responsive"></a></p>
+        <h4><b>Sightseen tour</b> booking</h4>
+        <p>Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex.</p>
+        [/column]
+        [/row]
+    [/container]
+</div><!-- End white_bg -->
+
+[parallax_block bg_image="http://www.soaptheme.net/wordpress/citytours/wp-content/uploads/2015/11/home_bg_1.jpg"]
+<div>
+    <h3>BELONG ANYWHERE</h3>
+    <p>Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex.</p>
+    <a href="https://www.youtube.com/watch?v=Zz5cu72Gv5Y" class="video"><i class="icon-play-circled2-1"></i></a>
+</div>
+[/parallax_block]
+
+[container class="margin_60"]
+    <div class="main_title">
+        <h2>Some <b>good</b> reasons</h2>
+        <p>Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.</p>
+    </div>
+
+    [row]
+        [column md="4" class="wow zoomIn" data-wow-delay="0.2s"]
+            <div class="feature_home">
+                <i class="icon_set_1_icon-41"></i>
+                <h3><b>+120</b> Premium tours</h3>
+                <p>Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset.</p><a href="#" class="btn_1 outline">Read more</a></div>
+        [/column]
+
+        [column md="4" class="wow zoomIn" data-wow-delay="0.2s"]
+            <div class="feature_home">
+                <i class="icon_set_1_icon-30"></i>
+                <h3><b>+1000</b> Customers</h3>
+                <p>Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset.</p><a href="#" class="btn_1 outline">Read more</a></div>
+        [/column]
+
+        [column md="4" class="wow zoomIn" data-wow-delay="0.2s"]
+            <div class="feature_home">
+                <i class="icon_set_1_icon-57"></i>
+                <h3><b>H24 </b> Support</h3>
+                <p>Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset.</p><a href="#" class="btn_1 outline">Read more</a></div>
+        [/column]
+    [/row]
+
+    <hr>
+
+    [row]
+        [column md="8" sm="6" xshide="yes"]<img src="http://www.soaptheme.net/wordpress/citytours/wp-content/uploads/2015/11/laptop.png" alt="Laptop" class="img-responsive laptop">[/column]
+        [column md="4" sm="6"]
+            <h3><b>Get started</b> with CityTours</h3>
+            <p>Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset.</p>
+            <ul class="list_order">
+                <li><b>1</b>Select your preferred tours</li>
+                <li><b>2</b>Purchase tickets and options</li>
+                <li><b>3</b>Pick them directly from your office</li>
+            </ul>
+            <a href="#" class="btn_1">Start now</a>
+        [/column]
+    [/row]
+[/container]

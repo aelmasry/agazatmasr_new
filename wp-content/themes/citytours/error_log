@@ -1,0 +1,20 @@
+[01-Aug-2025 20:32:18 UTC] PHP Fatal error:  Uncaught ValueError: mt_rand(): Argument #2 ($max) must be greater than or equal to argument #1 ($min) in /home/agazatmasr/public_html/wp-content/themes/citytours/simple-php-captcha.php:130
+Stack trace:
+#0 /home/agazatmasr/public_html/wp-content/themes/citytours/simple-php-captcha.php(130): mt_rand(0, -1)
+#1 {main}
+  thrown in /home/agazatmasr/public_html/wp-content/themes/citytours/simple-php-captcha.php on line 130
+[01-Aug-2025 20:39:55 UTC] PHP Fatal error:  Uncaught ValueError: mt_rand(): Argument #2 ($max) must be greater than or equal to argument #1 ($min) in /home/agazatmasr/public_html/wp-content/themes/citytours/simple-php-captcha.php:130
+Stack trace:
+#0 /home/agazatmasr/public_html/wp-content/themes/citytours/simple-php-captcha.php(130): mt_rand(0, -1)
+#1 {main}
+  thrown in /home/agazatmasr/public_html/wp-content/themes/citytours/simple-php-captcha.php on line 130
+[01-Aug-2025 20:40:59 UTC] PHP Fatal error:  Uncaught ValueError: mt_rand(): Argument #2 ($max) must be greater than or equal to argument #1 ($min) in /home/agazatmasr/public_html/wp-content/themes/citytours/simple-php-captcha.php:130
+Stack trace:
+#0 /home/agazatmasr/public_html/wp-content/themes/citytours/simple-php-captcha.php(130): mt_rand(0, -1)
+#1 {main}
+  thrown in /home/agazatmasr/public_html/wp-content/themes/citytours/simple-php-captcha.php on line 130
+[01-Aug-2025 20:41:46 UTC] PHP Fatal error:  Uncaught ValueError: mt_rand(): Argument #2 ($max) must be greater than or equal to argument #1 ($min) in /home/agazatmasr/public_html/wp-content/themes/citytours/simple-php-captcha.php:130
+Stack trace:
+#0 /home/agazatmasr/public_html/wp-content/themes/citytours/simple-php-captcha.php(130): mt_rand(0, -1)
+#1 {main}
+  thrown in /home/agazatmasr/public_html/wp-content/themes/citytours/simple-php-captcha.php on line 130

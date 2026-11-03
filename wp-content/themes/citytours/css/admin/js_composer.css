@@ -1,0 +1,25 @@
+.select2-container--open .select2-dropdown--below { z-index: 100001 }
+
+.vc_custom_search-field .vc_custom_search { margin: 0; background: #fff; border: 1px solid #dfdfdf; padding: 2px; cursor: text; min-height: 24px; }
+
+.vc_custom_search-field .vc_custom_search li { margin-bottom: 0; }
+.vc_custom_search-field .vc_custom_search li.vc_custom_search-label { border-radius: 2px; padding: 0 0 0 8px; margin: 1px; position: relative; cursor: pointer; }
+.vc_custom_search-field .vc_custom_search li.vc_custom_search-label .vc_custom_search-remove { color: #aec4d8; display: block; cursor: pointer; position: absolute; top: 5px; right: 7px; width: 9px; height: 9px; line-height: 9px; font-size: 18px; text-align: center; }
+.vc_custom_search-field .vc_custom_search li.vc_custom_search-label a { color: #fff; }
+.vc_custom_search-field .vc_custom_search li.vc_data { background: #0b4b81; color: #fff; border: 1px solid #0b4b81; }
+.vc_custom_search-field .vc_custom_search li.vc_custom_search-input { padding: 0 3px; box-sizing: border-box; }
+.vc_custom_search-field .vc_custom_search li.vc_custom_search-input input { width: 100%; border: 0; padding: 5px 0; margin: 0; }
+.vc_custom_search-field .vc_custom_search li.vc_custom_search-input .ui-helper-hidden-accessible { left: 0; }
+.vc_custom_search-field .vc_custom_search li.vc_custom_search-clear { clear: both; float: none; }
+
+.vc_custom_search-inline > li.vc_data.vc_custom_search-label { display: block; padding: 0 20px 0 8px; width: auto; float: left; }
+.vc_custom_search-inline > .vc_custom_search-input { display: block; float: none; overflow: hidden; min-width: 200px; width: auto; }
+
+.vc_custom_search-field .vc_custom_search li.vc_custom_search-input input:focus { box-shadow: none; }
+.vc_ui-custom_search { max-height: 200px; overflow-y: auto; }
+
+.vc_el-container .citytours-js-composer:not([data-is-container=true]), .wpb_element_title .citytours-js-composer, .vc_element-icon.citytours-js-composer {
+    background: url(../../img/js-composer.png) no-repeat;
+    background-position: center center;
+    background-size: 100% auto;
+}

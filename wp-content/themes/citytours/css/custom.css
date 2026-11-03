@@ -1,0 +1,36 @@
+@charset "UTF-8";
+.tooltip-inner{white-space:pre;max-width:none}
+@media (max-width: 767px) {
+    .table.single-hotel tr td h4 {
+        font-size:16px;
+    }
+    .table.single-hotel td {
+        padding-left:0px !important;
+        font-size: 16px;
+        text-align:center;
+    }
+    .table.single-hotel ul.add_info {
+        display:inherit !important;
+    }
+    .table.single-hotel #booking_box_2 p {
+        font-size:14px;
+        font-weight: normal !important;
+    }
+    .table.single-hotel .room-price {
+        font-size:16px !important;
+        font-weight:bold !important;
+        text-align:center;
+        float: none !important;
+    }
+    .table.single-hotel td select {
+        font-size:16px !important;
+        width: 90px !important;
+        margin:0 37% !important
+    }
+
+    .table.cart.hotel td,
+    .table.cart.tour td {
+        text-align: center;
+        width: 100%;
+    }
+}

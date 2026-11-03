@@ -1,0 +1,21 @@
+#hotel_options .options_group, #tour_options .options_group { padding: 0 10% }
+#hotel_options label, #hotel_options input[type=text], #hotel_options input[type=number], #tour_options label, #tour_options input[type=text], #tour_options input[type=number] { float: none; display: inline-block; margin: 0 }
+#hotel_options input, #tour_options input { color: black }
+#hotel_options th, #hotel_options td, #tour_options th, #tour_options td { padding: 10px 0; font-size: 1.1em }
+#hotel_options table th, #hotel_options table td, #tour_options table th, #tour_options table td { border-bottom: 1px solid #cdcdcd }
+
+#hotel_options .thumb_cart, #tour_options .thumb_cart { border: 1px solid #ddd; overflow: hidden; width: 60px; height: 60px; margin-right: 10px; float: left }
+#hotel_options .item_cart a, #tour_options .item_cart a { text-transform: capitalize }
+
+.booking-date-container	{ margin: 20px 0 }
+.booking-date-container:after { content: ' '; display: block; clear: both }
+.booking-date { width: 50%; float: left; }
+.booking-date label { width: 100px; font-size: 1.1em; font-weight: bold }
+.booking-date input[type=text] { width: initial }
+.rooms-container, .tour-container { text-align: center; border-collapse: collapse; vertical-align: middle; margin: 20px 0 } 
+.rooms-container input[type=number], .rooms-container input[type=text], .tour-container input[type=number], .tour-container input[type=text] { width: 100%; text-align: center; border: none }
+
+.service-container { width: 100%; text-align: left; margin: 20px 0 }
+.service-container i { font-size: 2.5em }
+#hotel_options .service-container th, #tour_options .service-container th { padding-left: 20px }
+.service-container label, .service-container input[type=text], .service-container input[type=number] { width: initial }

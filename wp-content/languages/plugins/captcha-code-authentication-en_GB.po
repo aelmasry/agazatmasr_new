@@ -1,0 +1,128 @@
+# Translation of Plugins - Captcha Code - Stable (latest release) in English (UK)
+# This file is distributed under the same license as the Plugins - Captcha Code - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2023-12-22 20:12:58+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/4.0.0-beta.2\n"
+"Language: en_GB\n"
+"Project-Id-Version: Plugins - Captcha Code - Stable (latest release)\n"
+
+#: general_options.php:105 general_options.php:114 general_options.php:123
+#: general_options.php:132 general_options.php:141
+msgid "No"
+msgstr "No"
+
+#: general_options.php:104 general_options.php:113 general_options.php:122
+#: general_options.php:131 general_options.php:140
+msgid "Yes"
+msgstr "Yes"
+
+#: general_options.php:13
+msgid "Options saved."
+msgstr "Options saved."
+
+#: wpCaptcha.php:242 wpCaptcha.php:249 wpCaptcha.php:258 wpCaptcha.php:265
+msgid "ERROR"
+msgstr "ERROR"
+
+#: general_options.php:7
+msgid "CAPTCHA"
+msgstr "CAPTCHA"
+
+#. Plugin Name of the plugin
+msgid "Captcha Code"
+msgstr "Captcha Code"
+
+#: wpCaptcha.php:249 wpCaptcha.php:265
+msgid "That CAPTCHA was incorrect."
+msgstr "That CAPTCHA was incorrect."
+
+#: wpCaptcha.php:242 wpCaptcha.php:258 wpCaptcha.php:296
+msgid "Please complete the CAPTCHA."
+msgstr "Please complete the CAPTCHA."
+
+#: wpCaptcha.php:204
+msgid "CAPTCHA cannot be empty."
+msgstr "CAPTCHA cannot be empty."
+
+#: wpCaptcha.php:104
+msgid "Captcha confirmation error!"
+msgstr "Captcha confirmation error!"
+
+#: wpCaptcha.php:81 wpCaptcha.php:149 wpCaptcha.php:168 wpCaptcha.php:227
+#: wpCaptcha.php:282
+msgid "Captcha"
+msgstr "Captcha"
+
+#: general_options.php:137
+msgid "Hide Captcha for logged in users"
+msgstr "Hide Captcha for logged in users"
+
+#: general_options.php:128
+msgid "Enable Captcha for Comments form"
+msgstr "Enable Captcha for Comments form"
+
+#: general_options.php:119
+msgid "Enable Captcha for Lost Password form"
+msgstr "Enable Captcha for Lost Password form"
+
+#: general_options.php:110
+msgid "Enable Captcha for Register form"
+msgstr "Enable Captcha for Register form"
+
+#: general_options.php:101
+msgid "Enable Captcha for Login form"
+msgstr "Enable Captcha for Login form"
+
+#: general_options.php:98
+msgid "Captcha display Options"
+msgstr "Captcha display Options"
+
+#: general_options.php:84
+msgid "Total number of Captcha Characters"
+msgstr "Total number of Captcha Characters"
+
+#: general_options.php:79
+msgid "Numbers only"
+msgstr "Numbers only"
+
+#: general_options.php:78
+msgid "Alphabets only"
+msgstr "Alphabets only"
+
+#: general_options.php:77
+msgid "Alphanumeric"
+msgstr "Alphanumeric"
+
+#: general_options.php:74
+msgid "Select a Captcha type"
+msgstr "Select a Captcha type"
+
+#: general_options.php:69
+msgid "Capital & Small letters"
+msgstr "Capital & Small letters"
+
+#: general_options.php:68
+msgid "Small letters only"
+msgstr "Small letters only"
+
+#: general_options.php:67
+msgid "Capital letters only"
+msgstr "Capital letters only"
+
+#: general_options.php:64
+msgid "Select Captcha letters type"
+msgstr "Select Captcha letters type"
+
+#: wpCaptcha.php:115
+msgid "Incorrect captcha confirmation!"
+msgstr "Incorrect captcha confirmation!"
+
+#: wpCaptcha.php:91 wpCaptcha.php:152 wpCaptcha.php:171 wpCaptcha.php:230
+#: wpCaptcha.php:285
+msgid "Type the text displayed above"
+msgstr "Type the text displayed above"

@@ -1,0 +1,145 @@
+<h1>h1. Heading 1</h1>
+<p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
+<h2>h2. Heading 2</h2>
+<p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
+<h3>h3. Heading 3</h3>
+<p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
+<h4>h4. Heading 4</h4>
+<p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
+<h5>h5. Heading 5</h5>
+<p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
+<h6>h6. Heading 6</h6>
+<p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
+<br>
+
+<hr>
+
+<h3>Blockquotes</h3>
+<p>To include a blockquote, wrap <code>&lt;blockquote class="styled"&gt;</code> around any <abbr title="HyperText Markup Language">HTML</abbr> as the quote. For straight quotes we recommend a <code>&lt;p&gt;</code>.
+Include an optional <code>&lt;small&gt;</code> element to cite your source and you'll get an em dash <code>&amp;mdash;</code> before it for styling purposes.</p>
+[blockquote]
+<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
+<small>Someone famous in <cite title="">Body of work</cite></small>
+[/blockquote]
+<br>
+
+<p>To float your blockquote to the right, add <code>class="styled pull-right"</code>:</p>
+[blockquote class="styled pull-right"]
+<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
+<small>Someone famous in <cite title="">Body of work</cite></small>
+[/blockquote]
+
+<hr>
+
+<h3>Buttons</h3>
+[button]Button[/button]  [button style="outline"]Button[/button] [button style="white"]Button[/button]
+[button style="green"]Button[/button] [button size="medium"]Button[/button]  <br><br>
+[button size="full"]Button[/button]  [button size="full" style="outline"]Button[/button]
+
+<hr>
+
+<h3>Banners</h3>
+[banner style="colored"]
+<h4>Discover our Top tours <span>from $34</span></h4>
+<p>Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in.</p>
+<a href="#" class="btn_1 white">Read more</a>
+[/banner]
+[banner]
+<h4>Discover our Top tours <span>from $34</span></h4>
+<p>Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in.</p>
+<a href="#" class="btn_1 white">Read more</a>
+[/banner]
+
+<hr>
+
+[row]
+[one_half]
+<h3>Your list</h3>
+[checklist]
+<ul>
+<li><strong>Certified</strong> and expert teachers</li>
+<li><strong>Extensive</strong> doumentation provided</li>
+<li><strong>Money back</strong> garantee</li>
+<li><strong>Became an exeprt</strong> in only 6 days</li>
+</ul>
+[/checklist]
+[/one_half]
+
+[one_half]
+<h3>Your list with links</h3>
+[checklist]
+<ul>
+<li><a href="#">Ceteros mediocritatem</a></li>
+<li><a href="#">Labore nostrum</a></li>
+<li><a href="#">Primis bonorum</a></li>
+</ul>
+[/checklist]
+[/one_half]
+[/row]
+
+<hr>
+
+<h3>Containers</h3>
+[row]
+[one_half]
+
+[icon_box]
+<i class="icon_set_1_icon-57"></i>
+<h4>Need <span>Help?</span></h4>
+<a href="tel://004542344599" class="phone">+45 423 445 99</a>
+<small>Monday to Friday 9.00am - 7.30pm</small>     
+[/icon_box]
+
+[/one_half]
+[one_half]
+
+[icon_box style="style2"]
+<i class="icon_set_1_icon-90"></i>
+<h4><span>Book</span> by phone</h4>
+<a href="tel://004542344599" class="phone">+45 423 445 99</a>
+<small>Monday to Friday 9.00am - 7.30pm</small>     
+[/icon_box]
+
+[/one_half]
+[/row]
+
+<hr>
+
+<h3>Html Tabs</h3>
+[tabs]
+[tab title="Home"]Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Nullam mollis.. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapiPhasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapi[/tab]
+[tab title="Profile"]Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapi[/tab]
+[tab title="Messages"]Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Nullam mollis. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapi[/tab]
+[tab title="Settings"]Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapi[/tab]
+[/tabs]
+
+<hr>
+
+<h3>Tooltips</h3>
+[row]
+[one_half]
+<ul>
+<li>[tooltip title="Default tooltip" position="top"]Tooltip on top[/tooltip]</li>
+<li>[tooltip title="Default tooltip" position="right"]Tooltip on right[/tooltip]</li>
+<li>[tooltip title="Default tooltip" position="bottom"]Tooltip on bottom[/tooltip]</li>
+<li>[tooltip title="Default tooltip" position="left"]Tooltip on left[/tooltip]</li>
+</ul>
+[/one_half]
+[one_half]
+<ul>
+<li>[tooltip style="advanced" title="Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi." effect="1"]Effect 1[/tooltip]</li>
+<li>[tooltip style="advanced" title="Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi." effect="2"]Effect 2[/tooltip]</li>
+<li>[tooltip style="advanced" title="Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi." effect="3"]Effect 3[/tooltip]</li>
+<li>[tooltip style="advanced" title="Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi." effect="4"]Effect 4[/tooltip]</li>
+</ul>
+[/one_half]
+[/row]
+
+<hr>
+
+<h3>Collapse</h3>
+[toggles]
+[toggle title="Anim pariatur cliche reprehenderit?"]Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.[/toggle]
+[toggle title="Parsnip lotus root celery?"]Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.[/toggle]
+[toggle title="Beet greens peanut salad?"]Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.[/toggle]
+[/toggles]
