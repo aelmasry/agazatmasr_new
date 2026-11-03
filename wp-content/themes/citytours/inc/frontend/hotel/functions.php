@@ -128,12 +128,6 @@ if (!function_exists('ct_hotel_get_available_rooms'))
             }
         }
 
-        // get available hotel room_type_id and price based on date
-        // initiate variables
-        $check_dates = array();
-        $availability_data = array();
-
-        // prepare date for loop
         if(!empty($from_date))
             $from_date_obj = new DateTime('@'.ct_strtotime($from_date));
         else
@@ -146,45 +140,73 @@ if (!function_exists('ct_hotel_get_available_rooms'))
 
         $date_interval = DateInterval::createFromDateString('1 day');
         $period = new DatePeriod($from_date_obj, $date_interval, $to_date_obj);
-
+        $sql_check_date_parts = array();
         foreach ($period as $dt)
         {
-            $check_date = esc_sql($dt->format("Y-m-d"));
-            $check_dates[] = $check_date;
+            $sql_check_date_parts[] = "SELECT '" . esc_sql($dt->format("Y-m-d")) . "' AS check_date";
+        }
+        $days = count($sql_check_date_parts);
+        if ($days < 1)
+        {
+            return esc_html__('Invalid date. Please check your booking date again.', 'citytours');
+        }
 
-            $sql = "SELECT vacancies.room_type_id, vacancies.rooms - IFNULL(bookings.rooms,0) as available_rooms
-					FROM (SELECT room_type_id, rooms, price_per_room, price_per_person, price_per_child
-							FROM " . CT_HOTEL_VACANCIES_TABLE . "
-							WHERE 1=1 AND hotel_id='" . $hotel_id . "' AND room_type_id IN (" . implode(',', $bookable_room_ids) . ") AND date_from <= '" . $check_date . "'  AND date_to >= '" . $check_date . "' ) AS vacancies
-					LEFT JOIN (SELECT hotel_booking.room_type_id, SUM(hotel_booking.rooms) AS rooms
-							FROM " . CT_HOTEL_BOOKINGS_TABLE . " AS hotel_booking
-							INNER JOIN " . CT_ORDER_TABLE . " as hotel_order on hotel_order.id = hotel_booking.order_id
-							WHERE 1=1 AND hotel_order.status!='cancelled' AND hotel_order.post_id='" . $hotel_id . "' AND hotel_order.date_to > '" . $check_date . "'  AND hotel_order.date_from <= '" . $check_date . "'" . " GROUP BY hotel_booking.room_type_id
-					) AS bookings ON vacancies.room_type_id = bookings.room_type_id
-					WHERE vacancies.rooms - IFNULL(bookings.rooms,0) >= 1;";
-
-            $results = $wpdb->get_results($sql); // object (room_type_id, price_per_room, price_per_person, price_per_child, available_rooms)
-  
-            if (empty($results))
-            { //if no available rooms on selected date
-                return esc_html__('No Rooms Available. Please have another look at booking date.', 'citytours');
-            }
-
-            $day_on_room_ids = array();
-
-            foreach ($results as $result)
+        $room_ids = array();
+        foreach ($bookable_room_ids as $room_id)
+        {
+            $room_id = (int) $room_id;
+            if ($room_id > 0)
             {
-                $day_on_room_ids[] = $result->room_type_id;
-                $availability_data[$result->room_type_id][$check_date] = $result->available_rooms;
+                $room_ids[] = $room_id;
             }
+        }
+        $room_ids = array_values(array_unique($room_ids));
+        if (empty($room_ids))
+        {
+            return esc_html__('No Rooms Available In This Hotel.', 'citytours');
+        }
 
-            $bookable_room_ids = $day_on_room_ids;
+        $stay_from = esc_sql($from_date_obj->format('Y-m-d'));
+        $stay_to = esc_sql($to_date_obj->format('Y-m-d'));
+        $sql_check_date = implode(' UNION ', $sql_check_date_parts);
+        $sql = "SELECT daily.room_type_id, MIN(daily.available_rooms) AS available_rooms
+				FROM (
+					SELECT vacancies.id, vacancies.room_type_id, check_dates.check_date,
+						vacancies.rooms - IFNULL(SUM(bookings.rooms), 0) AS available_rooms
+					FROM ({$sql_check_date}) AS check_dates
+					INNER JOIN " . CT_HOTEL_VACANCIES_TABLE . " AS vacancies
+						ON vacancies.hotel_id = '" . $hotel_id . "'
+						AND vacancies.room_type_id IN (" . implode(',', $room_ids) . ")
+						AND vacancies.date_from <= check_dates.check_date
+						AND vacancies.date_to >= check_dates.check_date
+					LEFT JOIN (
+						SELECT hotel_booking.room_type_id, hotel_booking.rooms, hotel_order.date_from, hotel_order.date_to
+						FROM " . CT_HOTEL_BOOKINGS_TABLE . " AS hotel_booking
+						INNER JOIN " . CT_ORDER_TABLE . " AS hotel_order ON hotel_order.id = hotel_booking.order_id
+						WHERE hotel_order.status != 'cancelled'
+							AND hotel_order.post_id = '" . $hotel_id . "'
+							AND hotel_order.date_from < '" . $stay_to . "'
+							AND hotel_order.date_to > '" . $stay_from . "'
+					) AS bookings
+						ON bookings.room_type_id = vacancies.room_type_id
+						AND bookings.date_from <= check_dates.check_date
+						AND bookings.date_to > check_dates.check_date
+					GROUP BY vacancies.id, vacancies.room_type_id, check_dates.check_date, vacancies.rooms
+					HAVING available_rooms >= 1
+				) AS daily
+				GROUP BY daily.room_type_id
+				HAVING COUNT(DISTINCT daily.check_date) = " . (int) $days;
+
+        $results = $wpdb->get_results($sql);
+        if (empty($results))
+        {
+            return esc_html__('No Rooms Available. Please have another look at booking date.', 'citytours');
         }
 
         $return_value = array();
-        foreach ($bookable_room_ids as $room_id)
+        foreach ($results as $result)
         {
-            $return_value[$room_id] = min($availability_data[$room_id]);
+            $return_value[$result->room_type_id] = $result->available_rooms;
         }
         return $return_value;
     }
@@ -208,12 +230,8 @@ if (!function_exists('ct_hotel_calc_room_price'))
         if ($room_hotel_id != $hotel_id)
             return esc_html__('Room Type Id is not matched.', 'citytours');
 
-        $max_adults = get_post_meta($room_type_id, '_room_max_adults', true);
-        if (empty($max_adults))
-            $max_adults = 0;
-        $max_kids = get_post_meta($room_type_id, '_room_max_kids', true);
-        if (empty($max_adults))
-            $max_kids = 0;
+        $max_adults = (int) get_post_meta($room_type_id, '_room_max_adults', true);
+        $max_kids = (int) get_post_meta($room_type_id, '_room_max_kids', true);
         $avg_adults = ceil($adults / $rooms);
         $avg_kids = ceil($kids / $rooms);
 
@@ -244,30 +262,64 @@ if (!function_exists('ct_hotel_calc_room_price'))
 
         $price_data = array();
         $total_price = 0;
+        $check_dates = array();
 
         $hotel_id = esc_sql($hotel_id);
         $room_type_id = esc_sql($room_type_id);
-        $rooms = esc_sql($rooms);
         $adults = esc_sql($adults);
         $kids = esc_sql($kids);
+        $rooms_needed = (int) $rooms;
 
+        $night_dates = array();
         foreach ($period as $dt)
         {
-            $check_date = esc_sql($dt->format("Y-m-d"));
+            $night_dates[] = $dt->format("Y-m-d");
+        }
+        $sql_check_date_parts = array();
+        foreach ($night_dates as $night_date)
+        {
+            $sql_check_date_parts[] = "SELECT '" . esc_sql($night_date) . "' AS check_date";
+        }
+        if (empty($sql_check_date_parts))
+        {
+            return esc_html__('Wrong Booking Date. Please check again.', 'citytours');
+        }
+        $stay_from = esc_sql($from_date_obj->format('Y-m-d'));
+        $stay_to = esc_sql($to_date_obj->format('Y-m-d'));
+        $except_sql = ( empty($except_booking_no) || empty($pin_code) ) ? "" : ( " AND NOT ( hotel_order.booking_no = '" . $except_booking_no . "' AND hotel_order.pin_code = '" . $pin_code . "' )" );
+        $sql = "SELECT check_dates.check_date, vacancies.price_per_room, vacancies.price_per_person, vacancies.price_per_child, vacancies.price_per_child2, vacancies.active, vacancies.promotion
+				FROM (" . implode(' UNION ', $sql_check_date_parts) . ") AS check_dates
+				INNER JOIN " . CT_HOTEL_VACANCIES_TABLE . " AS vacancies
+					ON vacancies.hotel_id = '" . $hotel_id . "'
+					AND vacancies.room_type_id = '" . $room_type_id . "'
+					AND vacancies.date_from <= check_dates.check_date
+					AND vacancies.date_to >= check_dates.check_date
+					AND vacancies.active = 1
+				LEFT JOIN (
+					SELECT hotel_booking.rooms, hotel_order.date_from, hotel_order.date_to
+					FROM " . CT_HOTEL_BOOKINGS_TABLE . " AS hotel_booking
+					INNER JOIN " . CT_ORDER_TABLE . " AS hotel_order ON hotel_order.id = hotel_booking.order_id
+					WHERE hotel_order.status != 'cancelled'
+						AND hotel_order.post_id = '" . $hotel_id . "'
+						AND hotel_booking.room_type_id = '" . $room_type_id . "'
+						AND hotel_order.date_from < '" . $stay_to . "'
+						AND hotel_order.date_to > '" . $stay_from . "'" . $except_sql . "
+				) AS bookings
+					ON bookings.date_from <= check_dates.check_date
+					AND bookings.date_to > check_dates.check_date
+				GROUP BY vacancies.id, check_dates.check_date, vacancies.rooms, vacancies.price_per_room, vacancies.price_per_person, vacancies.price_per_child, vacancies.price_per_child2, vacancies.active, vacancies.promotion
+				HAVING vacancies.rooms - IFNULL(SUM(bookings.rooms), 0) >= " . $rooms_needed;
+        $rows_by_date = array();
+        foreach ($wpdb->get_results($sql) as $row)
+        {
+            $rows_by_date[$row->check_date][] = $row;
+        }
+
+        foreach ($night_dates as $check_date)
+        {
+            $check_date = esc_sql($check_date);
             $check_dates[] = $check_date;
-
-            $sql = "SELECT vacancies.room_type_id, vacancies.price_per_room , vacancies.price_per_person, vacancies.price_per_child, vacancies.price_per_child2, vacancies.active, vacancies.promotion
-                                    FROM (SELECT room_type_id, rooms, price_per_room, price_per_person, price_per_child, price_per_child2, date_from, date_to, active, promotion
-                                                    FROM " . CT_HOTEL_VACANCIES_TABLE . "
-                                                    WHERE 1=1 AND hotel_id='" . $hotel_id . "' AND room_type_id = '" . $room_type_id . "' AND date_from <= '" . $check_date . "'  And date_to >= '" . $check_date . "' And active = 1) AS vacancies
-                                    LEFT JOIN (SELECT hotel_booking.room_type_id, SUM(hotel_booking.rooms) AS rooms
-                                                    FROM " . CT_HOTEL_BOOKINGS_TABLE . " AS hotel_booking
-                                                    INNER JOIN " . CT_ORDER_TABLE . " as hotel_order on hotel_order.id = hotel_booking.order_id
-                                                    WHERE 1=1 AND hotel_order.status!='cancelled' AND hotel_order.post_id='" . $hotel_id . "' AND hotel_booking.room_type_id = '" . $room_type_id . "' AND hotel_order.date_to > '" . $check_date . "' AND hotel_order.date_from <= '" . $check_date . "'" . ( ( empty($except_booking_no) || empty($pin_code) ) ? "" : ( " AND NOT ( hotel_order.booking_no = '" . $except_booking_no . "' AND hotel_order.pin_code = '" . $pin_code . "' )" ) ) . "
-                                    ) AS bookings ON vacancies.room_type_id = bookings.room_type_id
-                                    WHERE vacancies.rooms - IFNULL(bookings.rooms,0) >= " . $rooms . ";";
-
-            $result = $wpdb->get_results($sql); // object (room_type_id, price_per_room, price_per_person, price_per_child)
+            $result = isset($rows_by_date[$check_date]) ? $rows_by_date[$check_date] : array();
 //   echo "<pre>";
 //                     print_r($result);exit;
             if (empty($result))
@@ -1060,24 +1112,57 @@ if (!function_exists('ct_hotel_calc_price_per_room'))
 
         $hotel_id = esc_sql($hotel_id);
         $room_type_id = esc_sql($room_type_id);
-
+        $rooms_needed = (int) $rooms;
+        $check_dates = array();
+        $night_dates = array();
         foreach ($period as $dt)
         {
-            $check_date = esc_sql($dt->format("Y-m-d"));
+            $night_dates[] = $dt->format("Y-m-d");
+        }
+        $sql_check_date_parts = array();
+        foreach ($night_dates as $night_date)
+        {
+            $sql_check_date_parts[] = "SELECT '" . esc_sql($night_date) . "' AS check_date";
+        }
+        $stay_from = esc_sql($from_date_obj->format('Y-m-d'));
+        $stay_to = esc_sql($to_date_obj->format('Y-m-d'));
+        $except_sql = ( empty($except_booking_no) || empty($pin_code) ) ? "" : ( " AND NOT ( hotel_order.booking_no = '" . $except_booking_no . "' AND hotel_order.pin_code = '" . $pin_code . "' )" );
+        $rows_by_date = array();
+        if (!empty($sql_check_date_parts))
+        {
+            $sql = "SELECT check_dates.check_date, vacancies.price_per_room, vacancies.price_per_person, vacancies.price_per_child, vacancies.promotion
+					FROM (" . implode(' UNION ', $sql_check_date_parts) . ") AS check_dates
+					INNER JOIN " . CT_HOTEL_VACANCIES_TABLE . " AS vacancies
+						ON vacancies.hotel_id = '" . $hotel_id . "'
+						AND vacancies.room_type_id = '" . $room_type_id . "'
+						AND vacancies.date_from <= check_dates.check_date
+						AND vacancies.date_to >= check_dates.check_date
+						AND vacancies.active = 1
+					LEFT JOIN (
+						SELECT hotel_booking.rooms, hotel_order.date_from, hotel_order.date_to
+						FROM " . CT_HOTEL_BOOKINGS_TABLE . " AS hotel_booking
+						INNER JOIN " . CT_ORDER_TABLE . " AS hotel_order ON hotel_order.id = hotel_booking.order_id
+						WHERE hotel_order.status != 'cancelled'
+							AND hotel_order.post_id = '" . $hotel_id . "'
+							AND hotel_booking.room_type_id = '" . $room_type_id . "'
+							AND hotel_order.date_from < '" . $stay_to . "'
+							AND hotel_order.date_to > '" . $stay_from . "'" . $except_sql . "
+					) AS bookings
+						ON bookings.date_from <= check_dates.check_date
+						AND bookings.date_to > check_dates.check_date
+					GROUP BY vacancies.id, check_dates.check_date, vacancies.rooms, vacancies.price_per_room, vacancies.price_per_person, vacancies.price_per_child, vacancies.promotion
+					HAVING vacancies.rooms - IFNULL(SUM(bookings.rooms), 0) >= " . $rooms_needed;
+            foreach ($wpdb->get_results($sql) as $row)
+            {
+                $rows_by_date[$row->check_date][] = $row;
+            }
+        }
+
+        foreach ($night_dates as $check_date)
+        {
+            $check_date = esc_sql($check_date);
             $check_dates[] = $check_date;
-
-            $sql = "SELECT vacancies.room_type_id, vacancies.price_per_room , vacancies.price_per_person, vacancies.price_per_child, vacancies.promotion
-                                    FROM (SELECT room_type_id, rooms, price_per_room, price_per_person, price_per_child, date_from, date_to, promotion
-                                                    FROM " . CT_HOTEL_VACANCIES_TABLE . "
-                                                    WHERE 1=1 AND hotel_id='" . $hotel_id . "' AND room_type_id = '" . $room_type_id . "' AND date_from <= '" . $check_date . "'  And date_to >= '" . $check_date . "' and active = 1) AS vacancies
-                                    LEFT JOIN (SELECT hotel_booking.room_type_id, SUM(hotel_booking.rooms) AS rooms
-                                                    FROM " . CT_HOTEL_BOOKINGS_TABLE . " AS hotel_booking
-                                                    INNER JOIN " . CT_ORDER_TABLE . " as hotel_order on hotel_order.id = hotel_booking.order_id
-                                                    WHERE 1=1 AND hotel_order.status!='cancelled' AND hotel_order.post_id='" . $hotel_id . "' AND hotel_booking.room_type_id = '" . $room_type_id . "' AND hotel_order.date_to > '" . $check_date . "' AND hotel_order.date_from <= '" . $check_date . "'" . ( ( empty($except_booking_no) || empty($pin_code) ) ? "" : ( " AND NOT ( hotel_order.booking_no = '" . $except_booking_no . "' AND hotel_order.pin_code = '" . $pin_code . "' )" ) ) . "
-                                    ) AS bookings ON vacancies.room_type_id = bookings.room_type_id
-                                    WHERE vacancies.rooms - IFNULL(bookings.rooms,0) >= " . $rooms . ";";
-
-            $result = $wpdb->get_results($sql); // object (room_type_id, price_per_room, price_per_person, price_per_child)
+            $result = isset($rows_by_date[$check_date]) ? $rows_by_date[$check_date] : array();
 
             if (empty($result))
             { //if no available rooms on selected date
@@ -1286,54 +1371,77 @@ if (!function_exists('ct_hotel_average_price'))
         $price_data = array();
 
         $hotel_id = esc_sql($hotel_id);
-
+        $rooms_needed = (int) $rooms;
         $price = array();
-
+        $night_dates = array();
         foreach ($period as $dt)
         {
-            $check_date = esc_sql($dt->format("Y-m-d"));
-            $check_dates[] = $check_date;
+            $night_dates[] = $dt->format('Y-m-d');
+        }
+        if (empty($night_dates))
+        {
+            return 0;
+        }
 
-            $sql = "SELECT vacancies.room_type_id, vacancies.price_per_room , vacancies.price_per_person, vacancies.price_per_child, vacancies.promotion
-                                    FROM (SELECT room_type_id, rooms, price_per_room, price_per_person, price_per_child, date_from, date_to, promotion
-                                                    FROM " . CT_HOTEL_VACANCIES_TABLE . "
-                                                    WHERE 1=1 AND hotel_id='" . $hotel_id . "' AND date_from <= '" . $check_date . "'  And date_to >= '" . $check_date . "' and active = 1) AS vacancies
-                                    LEFT JOIN (SELECT hotel_booking.room_type_id, SUM(hotel_booking.rooms) AS rooms
-                                                    FROM " . CT_HOTEL_BOOKINGS_TABLE . " AS hotel_booking
-                                                    INNER JOIN " . CT_ORDER_TABLE . " as hotel_order on hotel_order.id = hotel_booking.order_id
-                                                    WHERE 1=1 AND hotel_order.status!='cancelled' AND hotel_order.post_id='" . $hotel_id . "' AND hotel_order.date_to > '" . $check_date . "' AND hotel_order.date_from <= '" . $check_date . "'" . ( ( empty($except_booking_no) || empty($pin_code) ) ? "" : ( " AND NOT ( hotel_order.booking_no = '" . $except_booking_no . "' AND hotel_order.pin_code = '" . $pin_code . "' )" ) ) . "
-                                    ) AS bookings ON vacancies.room_type_id = bookings.room_type_id
-                                    WHERE vacancies.rooms - IFNULL(bookings.rooms,0) >= " . $rooms . ";";
-            // echo($sql);
-            $result = $wpdb->get_results($sql); // object (room_type_id, price_per_room, price_per_person, price_per_child)
+        $stay_from = esc_sql($from_date_obj->format('Y-m-d'));
+        $stay_to = esc_sql($to_date_obj->format('Y-m-d'));
+        $except_sql = ( empty($except_booking_no) || empty($pin_code) ) ? '' : ( " AND NOT ( hotel_order.booking_no = '" . $except_booking_no . "' AND hotel_order.pin_code = '" . $pin_code . "' )" );
+        $sql_check_date_parts = array();
+        foreach ($night_dates as $night_date)
+        {
+            $sql_check_date_parts[] = "SELECT '" . esc_sql($night_date) . "' AS check_date";
+        }
+        $sql = "SELECT check_dates.check_date, vacancies.room_type_id, vacancies.price_per_room, vacancies.price_per_person, vacancies.price_per_child, vacancies.promotion
+				FROM (" . implode(' UNION ', $sql_check_date_parts) . ") AS check_dates
+				INNER JOIN " . CT_HOTEL_VACANCIES_TABLE . " AS vacancies
+					ON vacancies.hotel_id = '" . $hotel_id . "'
+					AND vacancies.date_from <= check_dates.check_date
+					AND vacancies.date_to >= check_dates.check_date
+					AND vacancies.active = 1
+				LEFT JOIN (
+					SELECT hotel_booking.room_type_id, hotel_booking.rooms, hotel_order.date_from, hotel_order.date_to
+					FROM " . CT_HOTEL_BOOKINGS_TABLE . " AS hotel_booking
+					INNER JOIN " . CT_ORDER_TABLE . " AS hotel_order ON hotel_order.id = hotel_booking.order_id
+					WHERE hotel_order.status != 'cancelled'
+						AND hotel_order.post_id = '" . $hotel_id . "'
+						AND hotel_order.date_from < '" . $stay_to . "'
+						AND hotel_order.date_to > '" . $stay_from . "'" . $except_sql . "
+				) AS bookings
+					ON bookings.room_type_id = vacancies.room_type_id
+					AND bookings.date_from <= check_dates.check_date
+					AND bookings.date_to > check_dates.check_date
+				GROUP BY vacancies.id, check_dates.check_date, vacancies.room_type_id, vacancies.rooms, vacancies.price_per_room, vacancies.price_per_person, vacancies.price_per_child, vacancies.promotion
+				HAVING vacancies.rooms - IFNULL(SUM(bookings.rooms), 0) >= " . $rooms_needed . "
+				ORDER BY check_dates.check_date, vacancies.id";
+        $rows_by_date = array();
+        foreach ($wpdb->get_results($sql) as $row)
+        {
+            $rows_by_date[$row->check_date][] = $row;
+        }
+
+        foreach ($night_dates as $check_date)
+        {
+            $result = isset($rows_by_date[$check_date]) ? $rows_by_date[$check_date] : array();
             if (empty($result))
             {
                 return 0;
-               // return esc_html__('Sorry, The room you are booking now is just taken by another customer. Please have another look.', 'citytours');
             }
-            else
-            {
-                if (is_array($result))
-                {
-                    $price_per_room = 0;
-                    $promotion = 0;
-                    foreach ($result as $row)
-                    {
-                        if ($row->promotion == 1)
-                        {
-                            $result = $row;
-                            $promotion = $row->promotion;
-                            $price_per_room = $row->price_per_room;
-                        }
-                        elseif ($row->price_per_room > $price_per_room && $promotion == 0)
-                        {
-                            $result = $row;
-                            $price_per_room = $row->price_per_room;
-                        }
 
-                        $price[$row->room_type_id] = $price_per_room;
-                    }
+            $price_per_room = 0;
+            $promotion = 0;
+            foreach ($result as $row)
+            {
+                if ($row->promotion == 1)
+                {
+                    $promotion = $row->promotion;
+                    $price_per_room = $row->price_per_room;
                 }
+                elseif ($row->price_per_room > $price_per_room && $promotion == 0)
+                {
+                    $price_per_room = $row->price_per_room;
+                }
+
+                $price[$row->room_type_id] = $price_per_room;
             }
         }
 
