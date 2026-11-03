@@ -4,3 +4,7 @@ wp-content/cache/
 wp-content/upgrade/
 wp-content/debug.log
 *.log
+wp-content/plugins/**
+wp-content/themes/**
+
+!wp-content/themes/citytours/

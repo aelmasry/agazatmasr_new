@@ -8,7 +8,9 @@ function featured_tour_type_shortcode($atts)
         'posts_per_page' => $atts['posts_per_page'] ?? 4,
     ), $atts);
 
-    // Get tour_type terms
+    $cache_key = 'featured_tour_types_' . md5(serialize($atts));
+    $tourTypes = get_transient($cache_key);
+    if (false === $tourTypes) {
     $tourTypes = get_terms(array(
         'taxonomy' => 'tour_type',
         'hide_empty' => false,
@@ -21,6 +23,10 @@ function featured_tour_type_shortcode($atts)
             ),
         ),
     ));
+        if (!is_wp_error($tourTypes)) {
+            set_transient($cache_key, $tourTypes, HOUR_IN_SECONDS);
+        }
+    }
 
     if (is_wp_error($tourTypes) || empty($tourTypes)) {
         return '<p>No tour_type found.</p>';

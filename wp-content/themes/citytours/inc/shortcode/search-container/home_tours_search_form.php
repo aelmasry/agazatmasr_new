@@ -8,7 +8,15 @@
                     <?php esc_html_e('tour search terms', 'citytours') ?>
                 </label>
                 <?php
-                $all_tour_types = get_terms('tour_type', array('hide_empty' => 0, 'parent' => 0, 'orderby' => 'term_order', 'order' => 'ASC'));
+                $all_tour_types = get_transient('ct_home_search_tour_types');
+                if (!is_array($all_tour_types)) {
+                    $all_tour_types = get_terms('tour_type', array('hide_empty' => 0, 'parent' => 0, 'orderby' => 'term_order', 'order' => 'ASC'));
+                    if (!is_wp_error($all_tour_types)) {
+                        set_transient('ct_home_search_tour_types', $all_tour_types, 6 * HOUR_IN_SECONDS);
+                    } else {
+                        $all_tour_types = array();
+                    }
+                }
                 if (!empty($all_tour_types)) :
                 ?>
                     <select class="form-control" name="type" id="tour_types">

@@ -898,11 +898,17 @@ if (!class_exists('CTShortcodes')) :
                 'post_ids' => $post_ids
             )));
             
-            // Try to get cached data first
-            $hotels = wp_cache_get($cache_key);
-            
-            if (false === $hotels) {
-                $hotels = array();
+            $cache_key .= '_' . date('Y-m-d');
+            $cached_hotel_ids = get_transient($cache_key);
+            $hotels = array();
+            if (is_array($cached_hotel_ids)) {
+                foreach ($cached_hotel_ids as $cached_hotel_id) {
+                    $cached_hotel = get_post((int) $cached_hotel_id);
+                    if ($cached_hotel) {
+                        $hotels[] = $cached_hotel;
+                    }
+                }
+            } else {
                 if ($type == 'selected') {
                     $hotels = ct_hotel_get_hotels_from_id($post_ids);
                 } elseif ($type == 'hot') {
@@ -910,9 +916,16 @@ if (!class_exists('CTShortcodes')) :
                 } else {
                     $hotels = ct_hotel_get_special_hotels($type, $count, array(), $district);
                 }
-                
-                // Cache the results for 12 hours
-                wp_cache_set($cache_key, $hotels, '', HOUR_IN_SECONDS * 12);
+                if (!is_array($hotels)) {
+                    $hotels = array();
+                }
+                $hotel_ids = array();
+                foreach ($hotels as $hotel_post) {
+                    if (!empty($hotel_post->ID)) {
+                        $hotel_ids[] = (int) $hotel_post->ID;
+                    }
+                }
+                set_transient($cache_key, $hotel_ids, HOUR_IN_SECONDS);
             }
 
             if ($style == 'simple') {
@@ -1101,11 +1114,17 @@ if (!class_exists('CTShortcodes')) :
                 'post_ids' => $post_ids
             )));
             
-            // Try to get cached data first
-            $tours = wp_cache_get($cache_key);
-            
-            if (false === $tours) {
-                $tours = array();
+            $cache_key .= '_' . date('Y-m-d');
+            $cached_tour_ids = get_transient($cache_key);
+            $tours = array();
+            if (is_array($cached_tour_ids)) {
+                foreach ($cached_tour_ids as $cached_tour_id) {
+                    $cached_tour = get_post((int) $cached_tour_id);
+                    if ($cached_tour) {
+                        $tours[] = $cached_tour;
+                    }
+                }
+            } else {
                 if ($type == 'selected') {
                     $tours = ct_tour_get_tours_from_id($post_ids);
                 } elseif ($type == 'hot') {
@@ -1113,9 +1132,16 @@ if (!class_exists('CTShortcodes')) :
                 } else {
                     $tours = ct_tour_get_special_tours($type, $count, array(), $tour_type);
                 }
-                
-                // Cache the results for 12 hours
-                wp_cache_set($cache_key, $tours, '', HOUR_IN_SECONDS * 12);
+                if (!is_array($tours)) {
+                    $tours = array();
+                }
+                $tour_ids = array();
+                foreach ($tours as $tour_post) {
+                    if (!empty($tour_post->ID)) {
+                        $tour_ids[] = (int) $tour_post->ID;
+                    }
+                }
+                set_transient($cache_key, $tour_ids, HOUR_IN_SECONDS);
             }
 
             if ($style == 'simple') {

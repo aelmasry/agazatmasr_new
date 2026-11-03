@@ -8,18 +8,18 @@ if (!defined('ABSPATH')) {
 
 global $title, $post_count, $order, $paged;
 
-$posts_per_page = $post_count;
-$arg_str = 'post_type=post&post_status=publish&posts_per_page=' . $posts_per_page . '&paged=' . $paged;
-// Initialize variables if they are not already defined
-
+$home_query_args = array(
+    'post_type' => 'post',
+    'post_status' => 'publish',
+    'posts_per_page' => max(1, (int) $post_count),
+    'orderby' => 'date',
+    'order' => ($order === 'ASC') ? 'ASC' : 'DESC',
+    'no_found_rows' => true,
+);
 if (!empty($cat)) {
-    $arg_str .= '&cat=' . $cat;
+    $home_query_args['cat'] = (int) $cat;
 }
-if (!empty($order)) {
-    $arg_str .= '&order=' . $order;
-}
-
-query_posts($arg_str);
+$home_posts = new WP_Query($home_query_args);
 
 ?>
 <div class="">
@@ -30,10 +30,10 @@ query_posts($arg_str);
         </div>
             <div class="items">
                 <?php
-                if (have_posts()) :
+                if ($home_posts->have_posts()) :
                     $index = 0;
 
-                    while (have_posts()): the_post();
+                    while ($home_posts->have_posts()): $home_posts->the_post();
 //                        if (0 != $index) {
 //                        
 //                        }
@@ -75,4 +75,4 @@ query_posts($arg_str);
     </div>
 </div>
 <?php
-wp_reset_query();
+wp_reset_postdata();

@@ -39,10 +39,8 @@ if (have_posts()) {
 //        $date_to = (!empty($_GET['date_to']) ) ? ct_get_phptime($_GET['date_to']) : date("Y-m-d", strtotime($date_from . ' +' . $minimum_stay . 'day'));
 
         $days = ct_get_day_interval($date_from, $date_to);
-
-        $person_price = ct_hotel_average_price($post_id, $date_from, $date_to);
-        if (empty($person_price))
-            $person_price = 0;
+        $room_stay_prices = array();
+        $person_price = 0;
 
         if (!empty($hotel_pos)) {
             $hotel_pos = explode(',', $hotel_pos);
@@ -51,11 +49,29 @@ if (have_posts()) {
         $available_rooms = ct_hotel_get_available_rooms($post_id, $date_from, $date_to);
 
         if (is_array($available_rooms) && !empty($available_rooms)) {
-            $keys = array_keys($available_rooms);
-            $sql = "SELECT * FROM " . $wpdb->posts . " posts
-                    INNER JOIN " . $wpdb->postmeta . " postmeta ON postmeta.post_id = posts.ID
-                    WHERE posts.ID IN (" . implode(',', $keys) . ") group by posts.ID";
-            $room_types = $wpdb->get_results($sql);
+            $keys = array_values(array_filter(array_map('intval', array_keys($available_rooms))));
+            if (!empty($keys)) {
+                $sql = "SELECT * FROM " . $wpdb->posts . " posts
+                        INNER JOIN " . $wpdb->postmeta . " postmeta ON postmeta.post_id = posts.ID
+                        WHERE posts.ID IN (" . implode(',', $keys) . ") group by posts.ID";
+                $room_types = $wpdb->get_results($sql);
+                if (!empty($room_types)) {
+                    $stay_prices = ct_hotel_calc_stay_prices($post_id, $keys, $date_from, $date_to);
+                    $room_stay_prices = $stay_prices['prices'];
+                    if (!empty($stay_prices['nights'])) {
+                        $days = (int) $stay_prices['nights'];
+                    }
+                    $positive_totals = array();
+                    foreach ($room_stay_prices as $stay_price) {
+                        if (is_numeric($stay_price) && $stay_price > 0) {
+                            $positive_totals[] = (float) $stay_price;
+                        }
+                    }
+                    if ($days > 0 && $positive_totals) {
+                        $person_price = min($positive_totals) / $days;
+                    }
+                }
+            }
         }
 
         $header_img_scr = ct_get_header_image_src($post_id);
@@ -198,12 +214,12 @@ if (have_posts()) {
                                     <tbody>
                                         <?php
                                         $is_first = true;
-                                        $price = 0;
                                         foreach ($room_types as $key => $post) : setup_postdata($post);
                                             $availableRooms = ($available_rooms[$post->ID] < 9 ) ? $available_rooms[$post->ID] : 9;
                                             $max_adults = get_post_meta($post->ID, '_room_max_adults', true);
                                             $max_kids = get_post_meta($post->ID, '_room_max_kids', true);
-                                            $price = ct_hotel_calc_price_per_room($post_id, $post->ID, $date_from, $date_to);
+                                            $price = isset($room_stay_prices[$post->ID]) ? $room_stay_prices[$post->ID] : null;
+                                            $price_ready = is_numeric($price) && (float) $price > 0;
 
                                         ?>
                                         <input type="hidden" name="room_type_id[]" value="<?php echo esc_attr($post->ID) ?>">
@@ -237,13 +253,16 @@ if (have_posts()) {
                                             </td>
                                             <td>
                                                 <p class="nightClass"> <?php printf(esc_html__('Price per room for %s nights', 'citytours'), $days); ?> </p>
-                                                <input type="hidden" name="price[<?php echo esc_attr($post->ID) ?>]" value="<?php echo esc_attr($price) ?>">
-                                                <div class="room-price" style="overflow-wrap:break-word;"><?php echo ct_price($price, 'special') ?></div>
+                                                <input type="hidden" name="price[<?php echo esc_attr($post->ID) ?>]" value="<?php echo $price_ready ? esc_attr($price) : ''; ?>">
+                                                <div class="room-price" style="overflow-wrap:break-word;"><?php echo $price_ready ? ct_price($price, 'special') : esc_html('غير متوفر'); ?></div>
                                             </td>
                                             <td>
                                                 <p class="roomsClass"> عدد الغرف </p>
-                                                <select class="form-control" name="rooms[<?php echo esc_attr($post->ID) ?>]">
-                                                    <?php for ($x = 0; $x <= $availableRooms; $x++): ?>
+                                                <select class="form-control" name="rooms[<?php echo esc_attr($post->ID) ?>]" data-max="<?php echo (int) $availableRooms; ?>" <?php echo $price_ready ? '' : 'disabled'; ?>>
+                                                    <?php
+                                                    $room_choices = $price_ready ? (int) $availableRooms : 0;
+                                                    for ($x = 0; $x <= $room_choices; $x++) :
+                                                    ?>
                                                         <option value="<?php echo $x ?>"><?php echo $x ?></option>
                                                     <?php endfor; ?>
                                                 </select>
@@ -615,6 +634,48 @@ if (have_posts()) {
                 </div>
 
             <?php endif; ?>
+            <?php
+            $hotel_open_ranges = array();
+            $vacancy_rows = $wpdb->get_results($wpdb->prepare(
+                "SELECT date_from, date_to FROM " . CT_HOTEL_VACANCIES_TABLE . " WHERE hotel_id = %d AND active = 1 AND rooms >= 1 AND date_to >= %s ORDER BY date_from ASC, date_to ASC",
+                (int) ct_hotel_org_id($post_id),
+                date('Y-m-d')
+            ));
+            if (is_array($vacancy_rows)) {
+                foreach ($vacancy_rows as $vacancy_row) {
+                    $range_from = $vacancy_row->date_from;
+                    $range_to = $vacancy_row->date_to;
+                    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', (string) $range_from) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', (string) $range_to) || $range_from === '0000-00-00' || $range_to < $range_from) {
+                        continue;
+                    }
+                    if (empty($hotel_open_ranges)) {
+                        $hotel_open_ranges[] = array('from' => $range_from, 'to' => $range_to);
+                        continue;
+                    }
+                    $last_index = count($hotel_open_ranges) - 1;
+                    $last_to = $hotel_open_ranges[$last_index]['to'];
+                    if ($range_from <= date('Y-m-d', strtotime($last_to . ' +1 day'))) {
+                        if ($range_to > $last_to) {
+                            $hotel_open_ranges[$last_index]['to'] = $range_to;
+                        }
+                    } else {
+                        $hotel_open_ranges[] = array('from' => $range_from, 'to' => $range_to);
+                    }
+                }
+            }
+            ?>
+            <style>
+                .datepicker table tr td.disabled,
+                .datepicker table tr td.disabled:hover {
+                    color: #c5c5c5;
+                    cursor: not-allowed;
+                    background: transparent;
+                }
+                .datepicker table tr td.in-stay {
+                    background: #d9ebff;
+                    color: #063d7d;
+                }
+            </style>
             <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8ODJCdUgA8i2kcDOSL_SP3lMMSCwTtIk&callback=initMap"></script>
             <script type="text/javascript">
 
@@ -647,10 +708,160 @@ if (have_posts()) {
                 $(document).ready(function () {
 
                     $('#search-hotel-form input').val('');
-                    $('input.date-pick').datepicker({
+                    $('input.date-pick').not('#booking-form input').datepicker({
                         startDate: "today",
                         language: lang
                     });
+
+                    var hotelDatesLive = false;
+                    var hotelPriceTimer = null;
+                    var hotelPriceRequest = null;
+                    var initialFrom = '';
+                    var initialTo = '';
+                    var hotelNightLabel = <?php echo wp_json_encode(__('Price per room for %s nights', 'citytours')); ?>;
+                    var hotelFromLabel = <?php echo wp_json_encode(__('from/per night', 'citytours')); ?>;
+                    var hotelMinNights = <?php echo max(1, (int) $minimum_stay); ?>;
+                    var hotelOpenRanges = <?php echo wp_json_encode($hotel_open_ranges); ?>;
+                    var $checkIn = $('#booking-form input[name="date_from"]');
+                    var $checkOut = $('#booking-form input[name="date_to"]');
+
+                    function hotelYmd(date) {
+                        var month = date.getMonth() + 1;
+                        var day = date.getDate();
+                        return date.getFullYear() + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
+                    }
+
+                    function ymdToDate(ymd) {
+                        var parts = ymd.split('-');
+                        return new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+                    }
+
+                    function addDaysYmd(ymd, days) {
+                        var date = ymdToDate(ymd);
+                        date.setDate(date.getDate() + days);
+                        return hotelYmd(date);
+                    }
+
+                    function pickerYmd($input) {
+                        var picked = $input.data('datepicker') ? $input.datepicker('getDate') : null;
+                        if (picked) {
+                            return hotelYmd(picked);
+                        }
+                        var value = $input.val();
+                        return /^\d{4}-\d{2}-\d{2}$/.test(value) ? value : '';
+                    }
+
+                    function nightOpen(ymd) {
+                        if (!hotelOpenRanges.length) {
+                            return true;
+                        }
+                        for (var i = 0; i < hotelOpenRanges.length; i++) {
+                            if (ymd >= hotelOpenRanges[i].from && ymd <= hotelOpenRanges[i].to) {
+                                return true;
+                            }
+                        }
+                        return false;
+                    }
+
+                    function checkoutLimit(fromYmd) {
+                        if (!hotelOpenRanges.length) {
+                            return '';
+                        }
+                        var night = fromYmd;
+                        var guard = 0;
+                        while (nightOpen(night) && guard < 500) {
+                            night = addDaysYmd(night, 1);
+                            guard++;
+                        }
+                        return night;
+                    }
+
+                    function stayClass(ymd) {
+                        var fromYmd = pickerYmd($checkIn);
+                        var toYmd = pickerYmd($checkOut);
+                        if (fromYmd && toYmd && ymd > fromYmd && ymd < toYmd) {
+                            return 'in-stay';
+                        }
+                        return '';
+                    }
+
+                    $checkIn.attr('type', 'text').datepicker({
+                        startDate: "today",
+                        language: lang,
+                        autoclose: true,
+                        beforeShowDay: function (date) {
+                            var ymd = hotelYmd(date);
+                            if (!nightOpen(ymd)) {
+                                return {enabled: false};
+                            }
+                            var limit = checkoutLimit(ymd);
+                            if (limit && addDaysYmd(ymd, hotelMinNights) > limit) {
+                                return {enabled: false};
+                            }
+                            return {enabled: true, classes: stayClass(ymd)};
+                        }
+                    });
+                    $checkOut.attr('type', 'text').datepicker({
+                        startDate: "today",
+                        language: lang,
+                        autoclose: true,
+                        beforeShowDay: function (date) {
+                            var ymd = hotelYmd(date);
+                            var fromYmd = pickerYmd($checkIn);
+                            if (!fromYmd) {
+                                return {enabled: false};
+                            }
+                            var earliest = addDaysYmd(fromYmd, hotelMinNights);
+                            if (ymd < earliest) {
+                                return {enabled: false};
+                            }
+                            var limit = checkoutLimit(fromYmd);
+                            if (limit && ymd > limit) {
+                                return {enabled: false};
+                            }
+                            return {enabled: true, classes: stayClass(ymd)};
+                        }
+                    });
+
+                    function setPickerDate($input, ymd) {
+                        $input.datepicker('setDate', ymdToDate(ymd));
+                    }
+
+                    $('#booking-form input.date-pick').each(function () {
+                        var currentValue = $(this).val();
+                        if (/^\d{4}-\d{2}-\d{2}$/.test(currentValue)) {
+                            setPickerDate($(this), currentValue);
+                        }
+                    });
+
+                    function syncCheckout() {
+                        var fromYmd = pickerYmd($checkIn);
+                        if (!fromYmd) {
+                            return;
+                        }
+                        var earliest = addDaysYmd(fromYmd, hotelMinNights);
+                        var limit = checkoutLimit(fromYmd);
+                        $checkOut.datepicker('setStartDate', ymdToDate(earliest));
+                        if (limit && limit >= earliest) {
+                            $checkOut.datepicker('setEndDate', ymdToDate(limit));
+                        } else {
+                            $checkOut.datepicker('setEndDate', '');
+                        }
+                        var toYmd = pickerYmd($checkOut);
+                        if (!toYmd || toYmd < earliest || (limit && toYmd > limit)) {
+                            setPickerDate($checkOut, earliest);
+                        }
+                        $checkIn.datepicker('update');
+                    }
+
+                    syncCheckout();
+                    initialFrom = $checkIn.val();
+                    initialTo = $checkOut.val();
+                    setTimeout(function () {
+                        initialFrom = $checkIn.val();
+                        initialTo = $checkOut.val();
+                        hotelDatesLive = true;
+                    }, 200);
 
                     //$('input[name="date_from"]').datepicker( 'setDate', 'today' );
                     //$('input[name="date_to"]').datepicker( 'setDate', '+1d' );
@@ -667,8 +878,8 @@ if (have_posts()) {
         }
         ?>
 
-                        date_from = $('input[name="date_from"]').datepicker('getDate').getTime();
-                        date_to = $('input[name="date_to"]').datepicker('getDate').getTime();
+                        date_from = hotelDateMs($('#booking-form input[name="date_from"]'));
+                        date_to = hotelDateMs($('#booking-form input[name="date_to"]'));
                         one_day = 1000 * 60 * 60 * 24;
 
                         if (date_from + one_day * minimum_stay > date_to) {
@@ -693,52 +904,113 @@ if (have_posts()) {
                         additionalMarginTop: 80
                     });
 
-                    update_cart = function () {
-                        $('#overlay').fadeIn();
-                        date_from = $('input[name="date_from"]').val()
-                        date_to = $('input[name="date_to"]').val()
-                        hotel_id = $('input[name="hotel_id"]').val()
-                        $('input[name="room_type_id[]"]').each(function() {
-                            var room_type_id = $(this).val();
-                            $.ajax({
-                                url: ajaxurl,
-                                type: "POST",
-                                data: {
-                                    'action': 'ct_hotel_calc_price_per_room_ajax',
-                                    hotel_id, room_type_id, date_from, date_to
-                                },
-                                success: function (response) {
-                                    if (response.success == 1) {
-                                        var day_start = new Date(date_from)
-                                        var day_end = new Date(date_to)
-                                        var total_days = parseInt((day_end - day_start) / (1000 * 60 * 60 * 24))
-                                        $('.nights').text("سعر الغرفة لـ "+total_days+" ليلة");
-                                        $('.nightClass').text("سعر الغرفة لـ "+total_days+" ليلة");
-                                        $('input[name="price['+room_type_id+']"]').val(response.data['price'])
-                                        $("tr[id='"+room_type_id+"']").find(".room-price").html(response.data['price_format']);
-                                    } else {
-                                        alert(response.message);
-                                    }
-                                }
-                            });
-                        })
-
-                        $('#overlay').fadeOut();
+                    function hotelDateMs($input) {
+                        if ($input.data('datepicker')) {
+                            var picked = $input.datepicker('getDate');
+                            if (picked) {
+                                return picked.getTime();
+                            }
+                        }
+                        var value = $input.val();
+                        if (/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+                            return new Date(value + 'T00:00:00').getTime();
+                        }
+                        return new Date(value).getTime();
                     }
 
-//                    $('.update-cart-btn').click(funtion() {
-//                        update_cart()
-//                    });
+                    function hotelNightText(nights) {
+                        return hotelNightLabel.replace('%s', nights).replace('%d', nights);
+                    }
 
-                    $('input[name="date_from"]').change(function() {
-                        $('#hotel-cart input[name="date_from"]').val($(this).val())
-                        update_cart()
-                    })
+                    update_cart = function () {
+                        if (!hotelDatesLive) {
+                            return;
+                        }
+                        var date_from = $('#booking-form input[name="date_from"]').val();
+                        var date_to = $('#booking-form input[name="date_to"]').val();
+                        if (!date_from || !date_to || date_from === initialFrom && date_to === initialTo) {
+                            return;
+                        }
+                        clearTimeout(hotelPriceTimer);
+                        hotelPriceTimer = setTimeout(function () {
+                            fetch_room_prices(date_from, date_to);
+                        }, 300);
+                    }
 
-                    $('input[name="date_to"]').change(function() {
-                        $('#hotel-cart input[name="date_to"]').val($(this).val())
-                        update_cart()
-                    })
+                    function fetch_room_prices(date_from, date_to) {
+                        if (hotelDateMs($('#booking-form input[name="date_from"]')) >= hotelDateMs($('#booking-form input[name="date_to"]'))) {
+                            return;
+                        }
+                        var room_type_ids = [];
+                        $('input[name="room_type_id[]"]').each(function () {
+                            room_type_ids.push($(this).val());
+                        });
+                        if (!room_type_ids.length) {
+                            return;
+                        }
+                        $('#hotel-cart input[name="date_from"]').val(date_from);
+                        $('#hotel-cart input[name="date_to"]').val(date_to);
+                        if (hotelPriceRequest) {
+                            hotelPriceRequest.abort();
+                        }
+                        $('#overlay').stop(true, true).fadeIn(150);
+                        hotelPriceRequest = $.ajax({
+                            url: ajaxurl,
+                            type: "POST",
+                            data: {
+                                action: 'ct_hotel_calc_room_prices_ajax',
+                                hotel_id: $('#hotel-cart input[name="hotel_id"]').val(),
+                                date_from: date_from,
+                                date_to: date_to,
+                                room_type_ids: room_type_ids
+                            },
+                            success: function (response) {
+                                if (!response || !response.success || !response.data) {
+                                    return;
+                                }
+                                var label = hotelNightText(response.data.nights);
+                                $('.nights, .nightClass').text(label);
+                                $.each(response.data.prices, function (roomId, item) {
+                                    var $row = $("tr[id='" + roomId + "']");
+                                    var $select = $row.find('select');
+                                    if (item.available && parseFloat(item.price) > 0) {
+                                        var maxRooms = parseInt($select.attr('data-max'), 10) || 0;
+                                        var options = '';
+                                        for (var roomCount = 0; roomCount <= maxRooms; roomCount++) {
+                                            options += '<option value="' + roomCount + '">' + roomCount + '</option>';
+                                        }
+                                        $select.html(options).prop('disabled', false);
+                                        $('input[name="price[' + roomId + ']"]').val(item.price);
+                                        $row.find('.room-price').html(item.price_format);
+                                    } else {
+                                        $('input[name="price[' + roomId + ']"]').val('');
+                                        $row.find('.room-price').text(item.message || 'غير متوفر');
+                                        $select.html('<option value="0">0</option>').val('0').prop('disabled', true);
+                                    }
+                                });
+                                if (response.data.from_per_night_format) {
+                                    $('#price_single_main').html(hotelFromLabel + ' ' + response.data.from_per_night_format);
+                                }
+                                initialFrom = date_from;
+                                initialTo = date_to;
+                            },
+                            complete: function (xhr, status) {
+                                if (status !== 'abort') {
+                                    $('#overlay').stop(true, true).fadeOut(150);
+                                }
+                            }
+                        });
+                    }
+
+                    $checkIn.on('changeDate', function () {
+                        syncCheckout();
+                    });
+                    $checkOut.on('changeDate', function () {
+                        $checkIn.datepicker('update');
+                    });
+                    $checkIn.add($checkOut).on('change changeDate', function () {
+                        update_cart();
+                    });
 
                     $('.book-now').click(function (e) {
                         e.preventDefault();

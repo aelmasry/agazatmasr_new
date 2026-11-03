@@ -23,6 +23,9 @@ add_action( 'wp_ajax_nopriv_ct_hotel_ajax_search', 'ct_hotel_ajax_search' );
 add_action( 'wp_ajax_ct_hotel_calc_price_per_room_ajax',        'ct_hotel_calc_price_per_room_ajax' );
 add_action( 'wp_ajax_nopriv_ct_hotel_calc_price_per_room_ajax', 'ct_hotel_calc_price_per_room_ajax' );
 
+add_action( 'wp_ajax_ct_hotel_calc_room_prices_ajax',        'ct_hotel_calc_room_prices_ajax' );
+add_action( 'wp_ajax_nopriv_ct_hotel_calc_room_prices_ajax', 'ct_hotel_calc_room_prices_ajax' );
+
 add_action( 'wp_ajax_ct_get_hotel_list',        'ct_get_hotel_list' );
 add_action( 'wp_ajax_nopriv_ct_get_hotel_list', 'ct_get_hotel_list' );
 

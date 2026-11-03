@@ -12,13 +12,9 @@ function featured_districts_shortcode($atts)
     // Generate a unique cache key based on the attributes
     $cache_key = 'featured_districts_' . md5(serialize($atts));
     
-    // Try to get cached results
-    $districts = wp_cache_get($cache_key, 'home_featured_districts');
+    $districts = get_transient($cache_key);
     
     if (false === $districts) {
-        wp_cache_delete($cache_key, 'home_featured_districts');
-        // wp_cache_flush();
-        // Get district terms
         $districts = get_terms(array(
             'taxonomy' => 'district',
             'hide_empty' => false,
@@ -34,7 +30,7 @@ function featured_districts_shortcode($atts)
 
         // Cache the results for 1 hour if they are successfully fetched
         if (!is_wp_error($districts)) {
-            wp_cache_set($cache_key, $districts, 'home_featured_districts', HOUR_IN_SECONDS);
+            set_transient($cache_key, $districts, HOUR_IN_SECONDS);
         }
     }
 

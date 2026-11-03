@@ -613,7 +613,8 @@ if (!function_exists('ct_tour_get_hot_tours'))
     {
         $args = array(
             'post_type' => 'tour',
-            'orderby' => 'rand',
+            'orderby' => 'modified',
+            'order' => 'DESC',
             'posts_per_page' => $count,
             'suppress_filters' => 0,
             'post_status' => 'publish',
@@ -707,7 +708,8 @@ if (!function_exists('ct_tour_get_special_tours'))
         if ($type == 'featured')
         {
             $args = array_merge($args, array(
-                'orderby' => 'rand',
+                'orderby' => 'modified',
+                'order' => 'DESC',
                 'meta_key' => '_tour_featured',
                 'meta_value' => '1',
                     ));

@@ -1018,7 +1018,8 @@ if (!function_exists('ct_hotel_get_special_hotels'))
         if ($type == 'featured')
         {
             $args = array_merge($args, array(
-                'orderby' => 'rand',
+                'orderby' => 'modified',
+                'order' => 'DESC',
                 'meta_key' => '_hotel_featured',
                 'meta_value' => '1',
             ));
@@ -1204,6 +1205,175 @@ if (!function_exists('ct_hotel_calc_price_per_room'))
 }
 
 /*
+ * Stay totals for every listed room in one query.
+ * Each night uses the same choice as ct_hotel_calc_price_per_room:
+ * a promotion row wins, otherwise the highest price_per_room, then the nights are summed.
+ */
+if (!function_exists('ct_hotel_calc_stay_prices'))
+{
+    function ct_hotel_calc_stay_prices($hotel_id, $room_type_ids, $from_date, $to_date, $rooms = 1)
+    {
+        global $wpdb;
+
+        $requested_ids = array();
+        foreach ((array) $room_type_ids as $room_type_id)
+        {
+            $room_type_id = (int) $room_type_id;
+            if ($room_type_id > 0)
+            {
+                $requested_ids[] = $room_type_id;
+            }
+        }
+        $requested_ids = array_values(array_unique($requested_ids));
+
+        $prices = array();
+        $empty = array(
+            'nights' => 0,
+            'prices' => $prices,
+        );
+        if (empty($requested_ids))
+        {
+            return $empty;
+        }
+
+        $hotel_id = ct_hotel_org_id($hotel_id);
+        $hotel_id = esc_sql($hotel_id);
+        $rooms_needed = (int) $rooms;
+
+        if (!empty($from_date))
+            $from_date_obj = new DateTime('@' . ct_strtotime($from_date));
+        else
+            $from_date_obj = new DateTime(ct_strtotime($from_date));
+
+        if (!empty($to_date))
+            $to_date_obj = new DateTime('@' . ct_strtotime($to_date));
+        else
+            $to_date_obj = new DateTime(ct_strtotime($to_date));
+
+        $date_interval = DateInterval::createFromDateString('1 day');
+        $period = new DatePeriod($from_date_obj, $date_interval, $to_date_obj);
+        $night_dates = array();
+        foreach ($period as $dt)
+        {
+            $night_dates[] = $dt->format('Y-m-d');
+        }
+
+        $org_ids = array();
+        $org_by_requested = array();
+        foreach ($requested_ids as $requested_id)
+        {
+            $org_id = (int) ct_room_org_id($requested_id);
+            $org_by_requested[$requested_id] = $org_id;
+            if ($org_id > 0)
+            {
+                $org_ids[] = $org_id;
+            }
+        }
+        $org_ids = array_values(array_unique($org_ids));
+
+        if (empty($night_dates) || empty($org_ids))
+        {
+            foreach ($requested_ids as $requested_id)
+            {
+                $prices[$requested_id] = 0;
+            }
+            return array(
+                'nights' => count($night_dates),
+                'prices' => $prices,
+            );
+        }
+
+        $stay_from = esc_sql($from_date_obj->format('Y-m-d'));
+        $stay_to = esc_sql($to_date_obj->format('Y-m-d'));
+        $sql_check_date_parts = array();
+        foreach ($night_dates as $night_date)
+        {
+            $sql_check_date_parts[] = "SELECT '" . esc_sql($night_date) . "' AS check_date";
+        }
+        $room_list = implode(',', $org_ids);
+        $sql = "SELECT check_dates.check_date, vacancies.room_type_id, vacancies.price_per_room, vacancies.price_per_person, vacancies.price_per_child, vacancies.promotion
+				FROM (" . implode(' UNION ', $sql_check_date_parts) . ") AS check_dates
+				INNER JOIN " . CT_HOTEL_VACANCIES_TABLE . " AS vacancies
+					ON vacancies.hotel_id = '" . $hotel_id . "'
+					AND vacancies.room_type_id IN (" . $room_list . ")
+					AND vacancies.date_from <= check_dates.check_date
+					AND vacancies.date_to >= check_dates.check_date
+					AND vacancies.active = 1
+				LEFT JOIN (
+					SELECT hotel_booking.room_type_id, hotel_booking.rooms, hotel_order.date_from, hotel_order.date_to
+					FROM " . CT_HOTEL_BOOKINGS_TABLE . " AS hotel_booking
+					INNER JOIN " . CT_ORDER_TABLE . " AS hotel_order ON hotel_order.id = hotel_booking.order_id
+					WHERE hotel_order.status != 'cancelled'
+						AND hotel_order.post_id = '" . $hotel_id . "'
+						AND hotel_booking.room_type_id IN (" . $room_list . ")
+						AND hotel_order.date_from < '" . $stay_to . "'
+						AND hotel_order.date_to > '" . $stay_from . "'
+				) AS bookings
+					ON bookings.room_type_id = vacancies.room_type_id
+					AND bookings.date_from <= check_dates.check_date
+					AND bookings.date_to > check_dates.check_date
+				GROUP BY vacancies.id, check_dates.check_date, vacancies.room_type_id, vacancies.rooms, vacancies.price_per_room, vacancies.price_per_person, vacancies.price_per_child, vacancies.promotion
+				HAVING vacancies.rooms - IFNULL(SUM(bookings.rooms), 0) >= " . $rooms_needed;
+
+        $rows_by_room_date = array();
+        foreach ($wpdb->get_results($sql) as $row)
+        {
+            $rows_by_room_date[(int) $row->room_type_id][$row->check_date][] = $row;
+        }
+
+        foreach ($requested_ids as $requested_id)
+        {
+            $org_id = $org_by_requested[$requested_id];
+            $total_price = 0;
+            $missing_night = false;
+            foreach ($night_dates as $check_date)
+            {
+                $result = isset($rows_by_room_date[$org_id][$check_date]) ? $rows_by_room_date[$org_id][$check_date] : array();
+                if (empty($result))
+                {
+                    $missing_night = true;
+                    break;
+                }
+
+                $price_per_room = 0;
+                $promotion = 0;
+                $selected = null;
+                foreach ($result as $row)
+                {
+                    if ($row->promotion == 1)
+                    {
+                        $selected = $row;
+                        $promotion = $row->promotion;
+                        $price_per_room = $row->price_per_room;
+                    }
+                    elseif ($row->price_per_room > $price_per_room && $promotion == 0)
+                    {
+                        $selected = $row;
+                        $price_per_room = $row->price_per_room;
+                    }
+                }
+
+                $total_price += ($selected === null) ? 0 : (float) $selected->price_per_room;
+            }
+
+            if ($missing_night)
+            {
+                $prices[$requested_id] = esc_html__('Sorry, The room you are booking now is just taken by another customer. Please have another look.', 'citytours');
+            }
+            else
+            {
+                $prices[$requested_id] = $total_price;
+            }
+        }
+
+        return array(
+            'nights' => count($night_dates),
+            'prices' => $prices,
+        );
+    }
+}
+
+/*
  * Calculate the price of selected hotel room and return price array data
  */
 if (!function_exists('ct_hotel_calc_price_per_room_ajax'))
@@ -1216,12 +1386,67 @@ if (!function_exists('ct_hotel_calc_price_per_room_ajax'))
         $to_date = ct_get_phptime($_POST['date_to']);
 
         $data['price'] = ct_hotel_calc_price_per_room($hotel_id, $room_type_id, $from_date, $to_date);
+        if (!is_numeric($data['price']))
+        {
+            wp_send_json_error(array('message' => wp_strip_all_tags($data['price'])));
+        }
 
         $data['price_format'] = ct_price($data['price'], "special");
 
         wp_send_json_success($data);
     }
 
+}
+
+/*
+ * One response for every room on the hotel page, so the table updates once.
+ */
+if (!function_exists('ct_hotel_calc_room_prices_ajax'))
+{
+    function ct_hotel_calc_room_prices_ajax()
+    {
+        $hotel_id = isset($_POST['hotel_id']) ? absint($_POST['hotel_id']) : 0;
+        $from_date = ct_get_phptime(isset($_POST['date_from']) ? sanitize_text_field(wp_unslash($_POST['date_from'])) : '');
+        $to_date = ct_get_phptime(isset($_POST['date_to']) ? sanitize_text_field(wp_unslash($_POST['date_to'])) : '');
+        $room_type_ids = isset($_POST['room_type_ids']) ? (array) $_POST['room_type_ids'] : array();
+        $room_type_ids = array_slice($room_type_ids, 0, 50);
+
+        $stay = ct_hotel_calc_stay_prices($hotel_id, $room_type_ids, $from_date, $to_date);
+        $prices = array();
+        $min_total = null;
+        foreach ($stay['prices'] as $room_id => $raw_price)
+        {
+            if (is_numeric($raw_price) && (float) $raw_price > 0)
+            {
+                $prices[$room_id] = array(
+                    'available' => true,
+                    'price' => $raw_price,
+                    'price_format' => ct_price($raw_price, 'special'),
+                );
+                if ($min_total === null || $raw_price < $min_total)
+                {
+                    $min_total = $raw_price;
+                }
+            }
+            else
+            {
+                $prices[$room_id] = array(
+                    'available' => false,
+                    'price' => '',
+                    'message' => 'غير متوفر',
+                );
+            }
+        }
+
+        $nights = (int) $stay['nights'];
+        $from_per_night = ($nights > 0 && $min_total !== null) ? $min_total / $nights : 0;
+
+        wp_send_json_success(array(
+            'prices' => $prices,
+            'nights' => $nights,
+            'from_per_night_format' => ct_price($from_per_night, 'special'),
+        ));
+    }
 }
 
 

@@ -24,7 +24,15 @@ if (ct_strtotime($date_from) >= ct_strtotime($date_to)) {
 //$price = get_post_meta($post_id, '_hotel_price', true);
 // ct_hotel_average_price
 
-$price = ct_hotel_average_price($post_id, $date_from, $date_to);
+$use_card_price_cache = empty($_REQUEST['date_from']) && empty($_REQUEST['date_to']);
+$price_cache_key = 'ct_hotel_card_' . (int) $post_id . '_' . $date_from . '_' . $date_to;
+$price = $use_card_price_cache ? get_transient($price_cache_key) : false;
+if ($price === false) {
+    $price = ct_hotel_average_price($post_id, $date_from, $date_to);
+    if ($use_card_price_cache) {
+        set_transient($price_cache_key, $price, HOUR_IN_SECONDS);
+    }
+}
     
 if (empty($price))
     $price = 0;

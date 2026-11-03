@@ -5,7 +5,15 @@
         <input type="hidden" name="post_type" value="hotel">
         <div class="row top-part">
             <?php
-            $districts = get_terms('district', array('hide_empty' => false));
+            $districts = get_transient('ct_home_search_districts');
+            if (!is_array($districts)) {
+                $districts = get_terms('district', array('hide_empty' => false));
+                if (!is_wp_error($districts)) {
+                    set_transient('ct_home_search_districts', $districts, 6 * HOUR_IN_SECONDS);
+                } else {
+                    $districts = array();
+                }
+            }
             if (!empty($districts)) :
             ?>
             <div class="form-group">
