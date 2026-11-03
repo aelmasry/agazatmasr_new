@@ -438,6 +438,10 @@ if (!function_exists('ct_tour_get_search_result'))
             $order_by = '';
         if (!in_array($order, $order_array))
             $order = 'ASC';
+        $adults = max(0, (int) $adults);
+        $kids = max(0, (int) $kids);
+        $last_no = max(0, (int) $last_no);
+        $per_page = max(1, (int) $per_page);
 
         $tbl_posts = esc_sql($wpdb->posts);
         $tbl_postmeta = esc_sql($wpdb->postmeta);
@@ -452,6 +456,7 @@ if (!function_exists('ct_tour_get_search_result'))
         // search filter
         if (!empty($s))
         {
+            $s = esc_sql($wpdb->esc_like($s));
             $s_query .= " AND ((post_s1.post_title LIKE '%{$s}%') OR (post_s1.post_content LIKE '%{$s}%') )";
         }
 

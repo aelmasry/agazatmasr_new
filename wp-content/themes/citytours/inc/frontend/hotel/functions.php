@@ -699,6 +699,11 @@ if (!function_exists('ct_hotel_get_search_result'))
             $order_by = '';
         if (!in_array($order, $order_array))
             $order = 'ASC';
+        $rooms = max(1, (int) $rooms);
+        $adults = max(0, (int) $adults);
+        $kids = max(0, (int) $kids);
+        $last_no = max(0, (int) $last_no);
+        $per_page = max(1, (int) $per_page);
 
         $tbl_posts = esc_sql($wpdb->posts);
         $tbl_postmeta = esc_sql($wpdb->postmeta);
@@ -1605,6 +1610,7 @@ if (!function_exists('ct_hotel_average_price'))
         }
         if (empty($night_dates))
         {
+            wp_cache_set($cache_key, 0, 'hotel_prices', MINUTE_IN_SECONDS);
             return 0;
         }
 
@@ -1649,6 +1655,7 @@ if (!function_exists('ct_hotel_average_price'))
             $result = isset($rows_by_date[$check_date]) ? $rows_by_date[$check_date] : array();
             if (empty($result))
             {
+                wp_cache_set($cache_key, 0, 'hotel_prices', MINUTE_IN_SECONDS);
                 return 0;
             }
 
@@ -1676,8 +1683,7 @@ if (!function_exists('ct_hotel_average_price'))
             $final_price = min($price);
         }
 
-        // Cache the result for 1 hour
-        wp_cache_set($cache_key, $final_price, 'hotel_prices', 3600);
+        wp_cache_set($cache_key, $final_price, 'hotel_prices', MINUTE_IN_SECONDS);
 
         return $final_price;
     }

@@ -1141,7 +1141,7 @@ if (!class_exists('CTShortcodes')) :
                         $tour_ids[] = (int) $tour_post->ID;
                     }
                 }
-                set_transient($cache_key, $tour_ids, HOUR_IN_SECONDS);
+                set_transient($cache_key, $tour_ids, MINUTE_IN_SECONDS);
             }
 
             if ($style == 'simple') {

@@ -43,7 +43,10 @@ if (have_posts()) {
         $person_price = 0;
 
         if (!empty($hotel_pos)) {
-            $hotel_pos = explode(',', $hotel_pos);
+            $hotel_pos = array_map('trim', explode(',', $hotel_pos));
+            if (!isset($hotel_pos[0], $hotel_pos[1]) || !is_numeric($hotel_pos[0]) || !is_numeric($hotel_pos[1])) {
+                $hotel_pos = array();
+            }
         }
 
         $available_rooms = ct_hotel_get_available_rooms($post_id, $date_from, $date_to);
@@ -676,7 +679,7 @@ if (have_posts()) {
                     color: #063d7d;
                 }
             </style>
-            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8ODJCdUgA8i2kcDOSL_SP3lMMSCwTtIk&callback=initMap"></script>
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8ODJCdUgA8i2kcDOSL_SP3lMMSCwTtIk&libraries=marker&callback=initMap"></script>
             <script type="text/javascript">
 
                 $ = jQuery.noConflict();
@@ -684,25 +687,24 @@ if (have_posts()) {
                 lang = lang.replace('_', '-');
 
                 function initMap() {
-                    var lati = <?php echo $hotel_pos[0] ?>;
-                    var long = <?php echo $hotel_pos[1] ?>;
-                            
-                    const map = new google.maps.Map(document.getElementById('map'), {
+                    <?php if (!empty($hotel_pos)) : ?>
+                    var lati = <?php echo $hotel_pos[0]; ?>;
+                    var long = <?php echo $hotel_pos[1]; ?>;
+                    var mapNode = document.getElementById('map');
+                    if (!mapNode) {
+                        return;
+                    }
+                    const map = new google.maps.Map(mapNode, {
                         center: {lat: lati, lng: long},
                         zoom: 17,
                         mapId: 'DEMO_MAP_ID',
                     });
 
-                    const marker = new google.maps.marker.AdvancedMarkerElement({
-                        map,
+                    new google.maps.marker.AdvancedMarkerElement({
+                        map: map,
                         position: {lat: lati, lng: long},
                     });
-
-                    marker.addListener('click', ({domEvent, latLng}) => {
-                        const {target} = domEvent;
-                        // Handle the click event.
-                        // ...
-                    });
+                    <?php endif; ?>
                 }
 
                 $(document).ready(function () {

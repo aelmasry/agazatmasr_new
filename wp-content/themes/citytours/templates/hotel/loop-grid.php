@@ -30,7 +30,7 @@ $price = $use_card_price_cache ? get_transient($price_cache_key) : false;
 if ($price === false) {
     $price = ct_hotel_average_price($post_id, $date_from, $date_to);
     if ($use_card_price_cache) {
-        set_transient($price_cache_key, $price, HOUR_IN_SECONDS);
+        set_transient($price_cache_key, $price, MINUTE_IN_SECONDS);
     }
 }
     
