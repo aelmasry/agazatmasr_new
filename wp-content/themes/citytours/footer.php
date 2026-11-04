@@ -5,7 +5,9 @@ if (!defined('ABSPATH')) {
 }
 
 global $ct_options;
-
+?>
+</main>
+<?php
 $page_template = basename(get_page_template());
 
 if ($page_template != "template-full-width-no-footer.php") :
@@ -42,7 +44,7 @@ if ($page_template != "template-full-width-no-footer.php") :
                         <input name="email_newsletter_2" id="email_newsletter_2" type="email" value="<?php echo $epm_default_email_value ?>" placeholder="البريد الخاص بك" class="form-control email">
                         <input type="hidden" name="epm_submit" id="epm_submit" value="true">
                         <input type="hidden" name="epm_list_id" id="epm_list_id" value="<?php echo $list ?? ''; ?>">
-                        <input type="submit" name="epm-submit-chimp" value="اشترك" data-wait-text="انتظر من فضلك..." tabindex="10" class="newsletter-btn btn epm-sign-up-button epm-submit-chimp">
+                        <input type="submit" name="epm-submit-chimp" value="اشترك" data-wait-text="انتظر من فضلك..." class="newsletter-btn btn epm-sign-up-button epm-submit-chimp">
                     </form>
                 </div>
             </div>
@@ -61,13 +63,22 @@ if ($page_template != "template-full-width-no-footer.php") :
 
                     <ul class="social-links">
                         <?php
-                        $social_links = array('facebook', 'twitter', 'google', 'instagram', 'pinterest', 'vimeo', 'youtube-play', 'linkedin');
+                        $social_links = array(
+                            'facebook' => 'Facebook',
+                            'twitter' => 'Twitter',
+                            'google' => 'Google',
+                            'instagram' => 'Instagram',
+                            'pinterest' => 'Pinterest',
+                            'vimeo' => 'Vimeo',
+                            'youtube-play' => 'YouTube',
+                            'linkedin' => 'LinkedIn',
+                        );
 
-                        foreach ($social_links as $social_link) :
+                        foreach ($social_links as $social_link => $social_name) :
                             if (!empty($ct_options[$social_link])) :
                         ?>
                                 <li>
-                                    <a href="<?php echo esc_url($ct_options[$social_link]) ?>" target="_black"><span class="fa fa-<?php echo esc_attr($social_link) ?>"></span></a>
+                                    <a href="<?php echo esc_url($ct_options[$social_link]) ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr($social_name); ?>"><span class="fa fa-<?php echo esc_attr($social_link) ?>" aria-hidden="true"></span></a>
                                 </li>
                         <?php
                             endif;
@@ -75,10 +86,10 @@ if ($page_template != "template-full-width-no-footer.php") :
                         ?>
                        
                         <li>
-                            <a href="https://api.whatsapp.com/send/?phone=201225993443&text&type=phone_number&app_absent=0"  target="_black"><span class="fa fa-whatsapp" target="_black"></span></a>
+                            <a href="https://api.whatsapp.com/send/?phone=201225993443&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><span class="fa fa-whatsapp" aria-hidden="true"></span></a>
                         </li>
                         <li>
-                            <a styel="background-color: #19cb77f5" href="tel:+201225993443"><span class="fa fa-phone" target="_black"></span></a>
+                            <a style="background-color: #19cb77f5" href="tel:+201225993443" aria-label="<?php esc_attr_e('اتصل بنا', 'citytours'); ?>"><span class="fa fa-phone" aria-hidden="true"></span></a>
                         </li>
 
                     </ul>

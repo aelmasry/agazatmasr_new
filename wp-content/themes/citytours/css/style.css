@@ -4618,7 +4618,7 @@ li.menu-item-has-children > a:after {
   }
 }
 @media only screen and (max-width: 480px) {
-  a#close_in {
+  button#close_in {
     right: auto;
     left: 15px;
   }

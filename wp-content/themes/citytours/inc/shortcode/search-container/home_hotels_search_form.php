@@ -17,7 +17,7 @@
             if (!empty($districts)) :
             ?>
             <div class="form-group">
-                <label>
+                <label for="cities">
                     <?php esc_html_e('Preferred city area', 'citytours') ?>
                 </label>
                 <select class="form-control" name="districts" id="cities" >
@@ -38,24 +38,24 @@
             <?php endif; ?>
 
             <div class="form-group">
-                <label>
+                <label for="hotel_name">
                     <?php esc_html_e('Hotel name', 'citytours') ?>
                 </label>
                 <input type="text" class="form-control" id="hotel_name" name="s" placeholder="<?php esc_attr_e('Optionally type hotel name', 'citytours') ?>" autocomplete="on">
             </div>
     <div class="form-group">
-                <label>
-                    <i class="icon-calendar-7"></i>
+                <label for="hotel-check-in">
+                    <i class="icon-calendar-7" aria-hidden="true"></i>
                     <?php esc_html_e('Check in', 'citytours') ?>
                 </label>
-                <input class="date-pick form-control" data-date-format="<?php echo ct_get_date_format('html'); ?>" type="date" name="date_from" value="" autocomplete="off">
+                <input id="hotel-check-in" class="date-pick form-control" data-date-format="<?php echo ct_get_date_format('html'); ?>" type="date" name="date_from" value="" autocomplete="off">
             </div>
    <div class="form-group">
-                <label>
-                    <i class="icon-calendar-7"></i>
+                <label for="hotel-check-out">
+                    <i class="icon-calendar-7" aria-hidden="true"></i>
                     <?php esc_html_e('Check out', 'citytours') ?>
                 </label>
-                <input class="date-pick form-control" data-date-format="<?php echo ct_get_date_format('html'); ?>" type="date" name="date_to" value="" autocomplete="off">
+                <input id="hotel-check-out" class="date-pick form-control" data-date-format="<?php echo ct_get_date_format('html'); ?>" type="date" name="date_to" value="" autocomplete="off">
             </div>
  <button class="btn_1 green" style="width:20%;    height: 45px;
     margin-top: 20px;">

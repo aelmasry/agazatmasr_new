@@ -1,15 +1,29 @@
+<?php
+
+/*
+  Template Name: Template Home Elementor
+ */
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+get_header();
+
+?>
 <style>
 .wp-call-button {
 	left:5px !important;
 	bottom:70px !important
 }
 
+.destination-card {
+    overflow: hidden;
+}
 .destination-card img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
-    width: 100%;
-    height: 100% !important;
+    object-fit: cover;
 }
 
 #slider-pro-458{
@@ -135,18 +149,6 @@ display:none;
 display:none !important;
 }
 </style>
-<?php
-
-/*
-  Template Name: Template Home Elementor
- */
-if (!defined('ABSPATH')) {
-    exit;
-}
-
-get_header();
-
-?>
 <div class="elementor-container elementor-page elementor-page-458">
     <?php the_content(); ?>
     <!-- end post -->

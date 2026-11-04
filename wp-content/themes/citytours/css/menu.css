@@ -138,7 +138,7 @@ a.dropdown-toggle.icon-search{display:inline-block;}
 	.cmn-toggle-switch__htx.active span::after{bottom:0;-webkit-transform:rotate(-45deg);-ms-transform:rotate(-45deg);transform:rotate(-45deg);}
 	.cmn-toggle-switch__htx.active span::before,.cmn-toggle-switch__htx.active span::after{-webkit-transition-delay:0,0.3s;transition-delay:0,0.3s;}
 	.main-menu{width:100%;}
-	a#close_in{display:block;position:absolute;right: auto;top: 15px;width:20px;height:20px;left: 20px !important;}
+	button#close_in{display:block;position:absolute;right:auto;top:15px;width:20px;height:20px;left:20px !important;background:transparent;border:0;padding:0;line-height:1;}
 	#close_in i{color:#555!important;font-size:14px;}
 	.main-menu > ul > li:hover > a::before, .main-menu > ul > li.current-menu-item > a::before{display: none;}
 

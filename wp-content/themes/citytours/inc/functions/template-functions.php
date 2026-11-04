@@ -880,9 +880,6 @@ if (!function_exists('ct_enqueue_scripts'))
         // custom css
         wp_add_inline_style('ct_style_main', $custom_css);
         wp_enqueue_style('ct_style_fontawesome');
-        wp_register_script('html5shiv', CT_TEMPLATE_DIRECTORY_URI . '/js/html5shiv.min.js');
-        wp_register_script('respond', CT_TEMPLATE_DIRECTORY_URI . '/js/respond.min.js');
-
         // main js
         wp_register_script('ct_script_common', CT_TEMPLATE_DIRECTORY_URI . '/js/common_scripts' . $suffix . '.js', array('jquery'), '', true);
         wp_register_script('ct_theme_script', CT_TEMPLATE_DIRECTORY_URI . '/js/functions' . $suffix . '.js', array('jquery'), '2.2.4', true);
@@ -925,10 +922,10 @@ if (!function_exists('ct_enqueue_scripts'))
         // map
         if (!empty($ct_options['map_api_key']))
         {
-            wp_register_script('ct_script_google_map', 'https://maps.googleapis.com/maps/api/js?ver=4.9.7&key=' . $ct_options['map_api_key'] . '&sensor=false&callback=initMap#asyncload', array(), '', true);
+            wp_register_script('ct_script_google_map', 'https://maps.googleapis.com/maps/api/js?key=' . $ct_options['map_api_key'], array(), '', true);
         } else
         {
-            wp_register_script('ct_script_google_map', 'https://maps.googleapis.com/maps/api/js?ver=4.9.7', array(), '', true);
+            wp_register_script('ct_script_google_map', 'https://maps.googleapis.com/maps/api/js', array(), '', true);
         }
         
         wp_register_script('ct_script_infobox', CT_TEMPLATE_DIRECTORY_URI . '/js/infobox' . $suffix . '.js', array(), '', true);
@@ -949,9 +946,6 @@ if (!function_exists('ct_enqueue_scripts'))
         wp_register_script('ct_script_owl', CT_TEMPLATE_DIRECTORY_URI . '/js/owl.carousel.min.js', array(), '', true);
         wp_register_script('ct_cat_nav_mobile', CT_TEMPLATE_DIRECTORY_URI . '/js/cat_nav_mobile' . $suffix . '.js', array(), '', true);
 
-        wp_enqueue_script('html5shiv');
-        wp_enqueue_script('respond');
-
         wp_enqueue_script('ct_script_common');
         wp_enqueue_script('ct_script_jquery_validate');
         wp_enqueue_script('ct_script_datepicker');
@@ -965,10 +959,12 @@ if (!function_exists('ct_enqueue_scripts'))
             wp_enqueue_script('ct_script_localization2');
         }
 
-        wp_enqueue_script('ct_script_google_map');
-        wp_enqueue_script('ct_script_map');
-        wp_enqueue_script('ct_script_infobox');
         wp_enqueue_script('ct_script_owl');
+        $needs_map = is_singular(array('hotel', 'tour')) || is_post_type_archive(array('hotel', 'tour')) || is_page_template('contact.php');
+        if ($needs_map) {
+            wp_enqueue_script('ct_script_map');
+            wp_enqueue_script('ct_script_infobox');
+        }
 
         if (is_singular(array('tour', 'hotel')))
         {

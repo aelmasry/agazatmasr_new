@@ -185,31 +185,12 @@ global $ct_options;
     <!-- End row -->
 </div>
 <!-- End container -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8ODJCdUgA8i2kcDOSL_SP3lMMSCwTtIk&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8ODJCdUgA8i2kcDOSL_SP3lMMSCwTtIk" async defer></script>
 
 <script type="text/javascript">
     $ = jQuery.noConflict();
     var lang = '<?php echo get_locale() ?>';
     lang = lang.replace('_', '-');
-
-    function initMap() {
-        // const map = new google.maps.Map(document.getElementById('map'), {
-        //     center: {lat: 37.4239163, lng: -122.0947209},
-        //     zoom: 17,
-        //     mapId: 'DEMO_MAP_ID',
-        // });
-
-        // const marker = new google.maps.marker.AdvancedMarkerElement({
-        //     map,
-        //     position: {lat: 37.4239163, lng: -122.0947209},
-        // });
-
-        // marker.addListener('click', ({domEvent, latLng}) => {
-        //     const {target} = domEvent;
-        //     // Handle the click event.
-        //     // ...
-        // });
-    }
 
     $(document).ready(function(e) {
 
@@ -289,7 +270,14 @@ global $ct_options;
         // var _center = [48.865633, 2.321236];
         // 30.0783811,31.32831,15.51z
         var _center = [lati, long];
-        renderMap(_center, markersData, 14, google.maps.MapTypeId.ROADMAP, false);
+        function drawContactMap() {
+            if (typeof renderMap !== 'function' || !(window.google && google.maps)) {
+                return;
+            }
+            renderMap(_center, markersData, 14, google.maps.MapTypeId.ROADMAP, false);
+        }
+        drawContactMap();
+        window.addEventListener('load', drawContactMap);
     })
 </script>
 <?php

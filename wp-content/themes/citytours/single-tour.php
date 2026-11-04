@@ -664,7 +664,7 @@ if (have_posts()) {
                     $tour_end_date_milli_sec = strtotime($tour_end_date) * 1000;
                 }
                 ?>
-                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8ODJCdUgA8i2kcDOSL_SP3lMMSCwTtIk&callback=initMap"></script>
+                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8ODJCdUgA8i2kcDOSL_SP3lMMSCwTtIk"></script>
                 <script type="text/javascript">
                     $ = jQuery.noConflict();
                     $('#ssearch-tour-form input').val('');

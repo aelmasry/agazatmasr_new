@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /* Main Header Template */
 if (!defined('ABSPATH')) {
     exit;
@@ -16,7 +16,7 @@ global $ct_options;
     <!-- Meta Tags -->
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="<?php echo esc_url(CT_IMAGE_URL . '/favicon.ico'); ?>">
     <link rel="shortcut icon" href="<?php echo esc_url(CT_IMAGE_URL . '/favicon.ico'); ?>" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="57x57" href="<?php echo esc_url(CT_IMAGE_URL . '/apple-icon-57x57.png'); ?>">
@@ -162,14 +162,14 @@ global $ct_options;
                 </div>
 
                 <nav class="col-md-9 col-sm-9 col-xs-12 mobile-block">
-                    <a class="cmn-toggle-switch cmn-toggle-switch__htx open_close" href="javascript:void(0);"><span><?php _e('Menu mobile', 'citytours') ?></span></a>
+                    <button type="button" class="cmn-toggle-switch cmn-toggle-switch__htx open_close" aria-expanded="false" aria-controls="mobile-menu" aria-label="<?php esc_attr_e('Menu mobile', 'citytours'); ?>"><span><?php _e('Menu mobile', 'citytours') ?></span></button>
 
-                    <div class="main-menu">
+                    <div class="main-menu" id="mobile-menu">
                         <div id="header_menu">
-                            <img src="<?php echo esc_url(ct_logo_sticky_url()) ?>" width="<?php echo esc_attr(ct_get_header_logo_width()) ?>" height="<?php echo esc_attr(ct_get_header_logo_height()) ?>" alt="City tours" data-retina="true">
+                            <img src="<?php echo esc_url(ct_logo_sticky_url()) ?>" width="<?php echo esc_attr(ct_get_header_logo_width()) ?>" height="<?php echo esc_attr(ct_get_header_logo_height()) ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>">
                         </div>
 
-                        <a href="#" class="open_close" id="close_in"><i class="icon_set_1_icon-77"></i></a>
+                        <button type="button" class="open_close" id="close_in" aria-label="<?php esc_attr_e('إغلاق', 'citytours'); ?>"><i class="icon_set_1_icon-77" aria-hidden="true"></i></button>
                         <?php
                         if (has_nav_menu('header-menu')) {
                             wp_nav_menu(array('theme_location' => 'header-menu', 'container' => '', 'menu_class' => '', 'menu_id' => ''));
@@ -231,3 +231,4 @@ global $ct_options;
             </div>
         </div><!-- container -->
     </header><!-- End Header -->
+<main id="main">
