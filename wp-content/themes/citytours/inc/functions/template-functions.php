@@ -1365,13 +1365,17 @@ if (!function_exists('ct_breadcrumbs'))
 
                 if (is_archive())
                 {
-                    if ('tour' == $post->post_type)
+                    $archive_post_type = ($post instanceof WP_Post) ? $post->post_type : get_query_var('post_type');
+                    if (is_array($archive_post_type)) {
+                        $archive_post_type = reset($archive_post_type);
+                    }
+                    if ('tour' == $archive_post_type)
                     {
                         echo '<li><a href="' . get_post_type_archive_link('tour') . '" title="' . __('Tours', 'citytours') . '">' . __('Tours', 'citytours') . '</a></li>';
-                    } elseif ('hotel' == $post->post_type)
+                    } elseif ('hotel' == $archive_post_type)
                     {
                         echo '<li><a href="' . get_post_type_archive_link('hotel') . '" title="' . __('Hotels', 'citytours') . '">' . __('Hotels', 'citytours') . '</a></li>';
-                    } elseif ('visa' == $post->post_type)
+                    } elseif ('visa' == $archive_post_type)
                     {
                         echo '<li><a href="' . get_post_type_archive_link('visa') . '" title="' . esc_attr__('Visas', 'citytours') . '">' . esc_html__('Visas', 'citytours') . '</a></li>';
                     }

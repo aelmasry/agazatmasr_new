@@ -957,7 +957,7 @@ if (!class_exists('CTShortcodes')) :
                 }
 
                 if ($map) {
-                    echo '<div class="container-fluid"';
+                    echo '<div class="container-fluid">';
                     echo '<div class="row">';
                     echo '<div class="col-md-7 content-left">';
 
@@ -1215,7 +1215,7 @@ if (!class_exists('CTShortcodes')) :
                 ob_start();
 
                 if ($map) {
-                    echo '<div class="container-fluid"';
+                    echo '<div class="container-fluid">';
                     echo '<div class="row">';
                     echo '<div class="col-md-7 content-left">';
                     if (!empty($title)) {

@@ -826,7 +826,7 @@ if (!function_exists('ct_hotel_get_search_result'))
             }
             else
             {
-                $sql = "SELECT t4.hotel_id, SUM(t4.rooms) AS rooms, SUM(IFNULL(t4.max_adults,0) * t4.rooms) as hotel_max_adults, SUM(IFNULL(t4.max_kids,0) * t4.min_rooms) as hotel_max_kids, price FROM ({$v_query}) AS t4
+                $sql = "SELECT t4.hotel_id, SUM(t4.rooms) AS rooms, SUM(IFNULL(t4.max_adults,0) * t4.rooms) as hotel_max_adults, SUM(IFNULL(t4.max_kids,0) * t4.rooms) as hotel_max_kids, price FROM ({$v_query}) AS t4
 					WHERE ((t4.minimum_stay IS NULL) OR (t4.minimum_stay <= {$days}))
 					GROUP BY t4.hotel_id
 					HAVING rooms >= {$rooms} AND hotel_max_adults >= {$adults} AND hotel_max_kids >= {$kids}";
@@ -1050,14 +1050,26 @@ if (!function_exists('ct_hotel_get_special_hotels'))
             $sql = 'SELECT hotel_id, COUNT(*) AS booking_count FROM ' . CT_HOTEL_BOOKINGS_TABLE . ' AS booking
 			INNER JOIN ' . CT_ORDER_TABLE . ' as _order ON _order.id = booking.order_id';
             $where = ' WHERE (_order.status <> "cancelled") AND (_order.created > %s)';
-            if (!empty($district))
-            {
-                $sql .= " INNER JOIN {$tbl_term_relationships} AS tr ON tr.object_id = t1.hotel_id
-						INNER JOIN {$tbl_term_taxonomy} AS tt ON tt.term_taxonomy_id = tr.term_taxonomy_id";
-                $where .= " AND tt.taxonomy = 'district' AND tt.term_id =" . esc_sql($district) . ")";
+            $district_id = 0;
+            if (!empty($district)) {
+                $district_id = (int) (is_array($district) ? reset($district) : $district);
             }
-            $sql .= $where . ' GROUP BY booking.hotel_id ORDER BY booking_count desc LIMIT %d';
-            $popular_hotel = $wpdb->get_results($wpdb->prepare($sql, $date, $count));
+            if ($district_id > 0)
+            {
+                $sql .= " INNER JOIN {$tbl_term_relationships} AS tr ON tr.object_id = booking.hotel_id
+						INNER JOIN {$tbl_term_taxonomy} AS tt ON tt.term_taxonomy_id = tr.term_taxonomy_id";
+                $where .= " AND tt.taxonomy = 'district' AND tt.term_id = %d";
+                $sql .= $where . ' GROUP BY booking.hotel_id ORDER BY booking_count DESC LIMIT %d';
+                $popular_hotel = $wpdb->get_results($wpdb->prepare($sql, $date, $district_id, $count));
+            }
+            else
+            {
+                $sql .= $where . ' GROUP BY booking.hotel_id ORDER BY booking_count DESC LIMIT %d';
+                $popular_hotel = $wpdb->get_results($wpdb->prepare($sql, $date, $count));
+            }
+            if (!is_array($popular_hotel)) {
+                $popular_hotel = array();
+            }
             $result = array();
             if (!empty($popular_hotel))
             {

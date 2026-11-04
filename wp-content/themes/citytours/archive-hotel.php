@@ -10,10 +10,13 @@ get_header();
 
 $district = get_query_var('district');
 $districts = array();
+$country = 0;
 if (!empty($district)) {
-    $district = get_term_by('slug', $district, 'district');
-    $districts[0] = $district->term_id;
-    $country = $district->parent;
+    $district_term = get_term_by('slug', $district, 'district');
+    if ($district_term && !is_wp_error($district_term)) {
+        $districts[0] = (int) $district_term->term_id;
+        $country = (int) $district_term->parent;
+    }
 }
 
 $order_array = array('ASC', 'DESC');
@@ -49,8 +52,16 @@ $districts = (isset($_REQUEST['districts'])) ? (is_array($_REQUEST['districts'])
 $price_filter = (isset($_REQUEST['price_filter']) && is_array($_REQUEST['price_filter'])) ? $_REQUEST['price_filter'] : array();
 $star_filter = (isset($_REQUEST['star_filter']) && is_array($_REQUEST['star_filter'])) ? $_REQUEST['star_filter'] : array();
 $rating_filter = (isset($_REQUEST['rating_filter']) && is_array($_REQUEST['rating_filter'])) ? $_REQUEST['rating_filter'] : array();
-$facility_filter = (isset($_REQUEST['facilities']) && is_array($_REQUEST['facilities'])) ? $_REQUEST['facilities'] : array();
-$country = (isset($_REQUEST['country'])) ? (is_array($_REQUEST['country']) ? $_REQUEST['country'] : $_REQUEST['country']) : $country ?? [];
+if (isset($_REQUEST['facility_filter']) && is_array($_REQUEST['facility_filter'])) {
+    $facility_filter = array_values(array_filter(array_map('absint', $_REQUEST['facility_filter'])));
+} elseif (isset($_REQUEST['facilities']) && is_array($_REQUEST['facilities'])) {
+    $facility_filter = array_values(array_filter(array_map('absint', $_REQUEST['facilities'])));
+} else {
+    $facility_filter = array();
+}
+if (isset($_REQUEST['country']) && $_REQUEST['country'] !== '') {
+    $country = is_array($_REQUEST['country']) ? (int) reset($_REQUEST['country']) : (int) $_REQUEST['country'];
+}
 
 if (isset($_REQUEST['view']) && !empty($_REQUEST['view'])) {
     $current_view = sanitize_text_field($_REQUEST['view']);
@@ -60,8 +71,14 @@ if (isset($_REQUEST['view']) && !empty($_REQUEST['view'])) {
     $current_view = 'list';
 }
 
-// $page = (isset($_REQUEST['page']) && (is_numeric($_REQUEST['page'])) && ($_REQUEST['page'] >= 1)) ? sanitize_text_field($_REQUEST['page']) : get_query_var('paged') ?? 1;
-$page = (get_query_var('paged')) ? get_query_var('paged') : 1;
+$page = (int) get_query_var('paged');
+if ($page < 1 && isset($_REQUEST['paged']) && is_numeric($_REQUEST['paged'])) {
+    $page = (int) $_REQUEST['paged'];
+}
+if ($page < 1 && isset($_REQUEST['page']) && is_numeric($_REQUEST['page'])) {
+    $page = (int) $_REQUEST['page'];
+}
+$page = max(1, $page);
 $per_page = (isset($ct_options['hotel_posts']) && is_numeric($ct_options['hotel_posts'])) ? $ct_options['hotel_posts'] : 6;
 
 if (empty($districts[0]) && !empty($country)) {
@@ -77,8 +94,10 @@ $map_zoom = empty($ct_options['hotel_list_zoom']) ? 14 : $ct_options['hotel_list
 
 $pageTitle = esc_html__('All Hotels', 'citytours');
 if (!empty($districts[0])) {
-    $district = get_term($districts[0]);
-    $pageTitle = sprintf(esc_html__('Hotels of %s', 'citytours'), $district->name);
+    $district_term = get_term((int) $districts[0], 'district');
+    if ($district_term && !is_wp_error($district_term)) {
+        $pageTitle = sprintf(esc_html__('Hotels of %s', 'citytours'), $district_term->name);
+    }
 }
 
 $header_img_scr = ct_get_header_image_src('hotel');
@@ -121,7 +140,7 @@ if (!empty($header_img_scr)) {
 
                     <div id="modify_search">
 
-                        <a data-toggle="collapse" href="#collapseModify_search" aria-expanded="true" aria-controls="collapseModify_search" id="filters_col_bt" class="">
+                        <a data-toggle="collapse" href="#collapseModify_search" aria-expanded="true" aria-controls="collapseModify_search" id="modify_search_bt" class="">
                             <i class="icon_set_1_icon-78"></i><?php _e('Modify Search', 'citytours') ?> <i class="icon-plus-1 pull-right"></i>
                         </a>
 
@@ -162,10 +181,12 @@ if (!empty($header_img_scr)) {
                                                         <option value="" selected><?php esc_html_e('Select city', 'citytours'); ?></option>
                                                         <?php
                                                         else :
-                                                        if(is_array($country)) {
-                                                            $country = implode(', ', $country);
-                                                        }
-                                                        $cities = $wpdb->get_results(" SELECT t.term_id, t.name, tt.taxonomy FROM " . $wpdb->prefix . "terms AS t INNER JOIN " . $wpdb->prefix . "term_taxonomy AS tt ON t.term_id = tt.term_id WHERE tt.taxonomy IN ('district') AND tt.parent = '".$country."' ORDER BY t.name ASC ");
+                                                        global $wpdb;
+                                                        $country_id = is_array($country) ? (int) reset($country) : (int) $country;
+                                                        $cities = ($country_id > 0) ? $wpdb->get_results($wpdb->prepare(
+                                                            "SELECT t.term_id, t.name, tt.taxonomy FROM {$wpdb->terms} AS t INNER JOIN {$wpdb->term_taxonomy} AS tt ON t.term_id = tt.term_id WHERE tt.taxonomy = 'district' AND tt.parent = %d ORDER BY t.name ASC",
+                                                            $country_id
+                                                        )) : array();
                                                         if (!empty($cities)) :
                                                         ?>
                                                             <option value="" selected><?php esc_html_e('Select city', 'citytours'); ?></option>
@@ -185,7 +206,7 @@ if (!empty($header_img_scr)) {
                                     </div>
 
                                     <div class="form-group">
-                                        <label><?php echo esc_html_e('Hotel name', 'citytours') ?></label>
+                                        <label for="hotel_name"><?php esc_html_e('Hotel name', 'citytours') ?></label>
                                         <input type="text" class="form-control" id="hotel_name" name="s" placeholder="<?php esc_attr_e('Optionally type hotel name', 'citytours') ?>" value="<?php echo esc_attr($s) ?>">
                                     </div>
 
@@ -433,117 +454,47 @@ if (!empty($header_img_scr)) {
                 })
 
                 getHotelList = function(href) {
-                    
-                    let data = {
-                        action: 'ct_get_hotel_list'
+                    if (href) {
+                        window.location = href;
+                        return;
                     }
 
-                    <?php if(!empty($districts[0]) && $districts[0] != '') : ?>
-                    data['districts'] = '<?php echo $districts[0]  ?>';
-                    <?php endif;?>
+                    var params = new URLSearchParams();
+                    params.set('post_type', 'hotel');
 
-                    if ($('#sort_price').val() == "lower") {
-                        data['order_by'] = 'price'
-                        data['order'] = 'ASC'
-                    } else if ($('#sort_price').val() == "higher") {
-                        data['order_by'] = 'price'
-                        data['order'] = 'DESC'
+                    var country = $('#countries').val();
+                    var city = $('#cities').val();
+                    var keyword = $('#hotel_name').val();
+                    var dateFrom = $('input[name="date_from"]').val();
+                    var dateTo = $('input[name="date_to"]').val();
+
+                    if (country) params.set('country', country);
+                    if (city) params.set('districts', city);
+                    if (keyword) params.set('s', keyword);
+                    if (dateFrom) params.set('date_from', dateFrom);
+                    if (dateTo) params.set('date_to', dateTo);
+
+                    if ($('#sort_price').val() === 'lower') {
+                        params.set('order_by', 'price');
+                        params.set('order', 'ASC');
+                    } else if ($('#sort_price').val() === 'higher') {
+                        params.set('order_by', 'price');
+                        params.set('order', 'DESC');
+                    } else if ($('#sort_rating').val() === 'lower') {
+                        params.set('order_by', 'rating');
+                        params.set('order', 'ASC');
+                    } else if ($('#sort_rating').val() === 'higher') {
+                        params.set('order_by', 'rating');
+                        params.set('order', 'DESC');
                     }
 
-                    if ($('#sort_rating').val() == "lower") {
-                        data['order_by'] = 'rating'
-                        data['order'] = 'ASC'
-                    } else if ($('#sort_rating').val() == "higher") {
-                        data['order_by'] = 'rating'
-                        data['order'] = 'DESC'
-                    }
-
-                    if ($('#countries').val() != '') {
-                        data['country'] = $('#countries').val()
-                    }
-
-                    if ($('#cities').val() != '') {
-                        data['districts'] = $('#cities').val()
-                    }
-
-                    if ($('input[name^="date_from"]').val() != '') {
-                        data['date_from'] = $('input[name^="date_from"]').val()
-                    }
-
-                    if ($('input[name^="date_to"]').val() != '') {
-                        data['date_to'] = $('input[name^="date_to"]').val()
-                    }
-
-                    if ($('input[name^="star_filter[]"]').is(':checked')) {
-                        data['star_filter'] = []
-                        $('input[name^="star_filter[]"]').each(function() {
-                            if ($(this).is(':checked')) {
-                                data['star_filter'].push($(this).val())
-                            }
+                    ['star_filter[]', 'price_filter[]', 'rating_filter[]', 'facility_filter[]'].forEach(function(name) {
+                        $('input[name="' + name + '"]:checked').each(function() {
+                            params.append(name, $(this).val());
                         });
-                    }
+                    });
 
-                    if ($('input[name^="price_filter[]"]').is(':checked')) {
-                        data['price_filter'] = []
-                        $('input[name^="price_filter[]"]').each(function() {
-                            if ($(this).is(':checked')) {
-                                data['price_filter'].push($(this).val())
-                            }
-                        });
-                    }
-
-                    if ($('input[name^="rating_filter[]"]').is(':checked')) {
-                        data['rating_filter'] = []
-                        $('input[name^="rating_filter[]"]').each(function() {
-                            if ($(this).is(':checked')) {
-                                data['rating_filter'].push($(this).val())
-                            }
-                        });
-                    }
-
-                    if ($('input[name^="facility_filter[]"]').is(':checked')) {
-                        data['facility_filter'] = []
-                        $('input[name^="facility_filter[]"]').each(function() {
-                            if ($(this).is(':checked')) {
-                                data['facility_filter'].push($(this).val())
-                            }
-                        });
-                    }
-
-                    if (href != '' && href != undefined) {
-                        let page = 1;
-                        let queryString = href.split('?')[1];
-                        if(queryString) {
-                            const pageParam = queryString.split('&').find(param => param.startsWith('page='));
-                            page = decodeURIComponent(pageParam.split('=')[1]);
-                        }else {
-                            let queryString = href.split('page/')[1];
-                            page = decodeURIComponent(queryString.split('/')[0]);
-                        }
-                        // console.log("@page ", page);
-                        data['page'] = page;
-                        for (var i = 1; i < page.length; i++) {
-                            params = page[i].split('=');
-                            data['' + params[0] + ''] = params[1];
-                        }
-                    }
-
-                    $.ajax({
-                            type: "POST",
-                            dataType: "html",
-                            url: ajaxurl,
-                            data: data
-                        })
-                        .done(function(resp) {
-                            $('html, body').animate({
-                                scrollTop: $('.hotel-list').offset().top
-                            }, 2000);
-                            resp = resp.substring(0, resp.length - 1);
-                            $(".hotel-list").empty().html(resp);
-                        })
-                        .fail(function(jqXHR, ajaxOptions, thrownError) {
-                            alert('No response from server');
-                        });
+                    window.location = <?php echo wp_json_encode(home_url('/')); ?> + '?' + params.toString();
                 }
                 if ($('input.date-pick').length) {  
                     $('input.date-pick').datepicker({

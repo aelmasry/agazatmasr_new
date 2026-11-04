@@ -11,9 +11,11 @@ global $ct_options, $post_list, $current_view;
 $tourtype = get_query_var('type', get_query_var('tour_type', null));
 
 $tour_type = array();
-if (!empty($tourtype)) {
-    $tourtype = get_term_by('slug', $tourtype, 'tour_type');
-    $tour_type[0] = $tourtype->term_id;
+if (!empty($tourtype) && is_string($tourtype)) {
+    $tourtype_term = get_term_by('slug', $tourtype, 'tour_type');
+    if ($tourtype_term && !is_wp_error($tourtype_term)) {
+        $tour_type[0] = (int) $tourtype_term->term_id;
+    }
 }
 
 
@@ -35,11 +37,27 @@ $kids = isset($_REQUEST['kids']) ? sanitize_text_field($_REQUEST['kids']) : '';
 
 $order_by = (isset($_REQUEST['order_by']) && array_key_exists($_REQUEST['order_by'], $order_by_array)) ? sanitize_text_field($_REQUEST['order_by']) : '';
 $order = (isset($_REQUEST['order']) && in_array($_REQUEST['order'], $order_array)) ? sanitize_text_field($_REQUEST['order']) : 'ASC';
-$tour_type = (isset($_REQUEST['type'])) ? (is_array($_REQUEST['type']) ? $_REQUEST['type'] : array($_REQUEST['type'])) : $tour_type;
+if (isset($_REQUEST['type']) && $_REQUEST['type'] !== '') {
+    $requested_type = is_array($_REQUEST['type']) ? $_REQUEST['type'] : array($_REQUEST['type']);
+    $requested_ids = array_values(array_filter(array_map('absint', $requested_type)));
+    if ($requested_ids) {
+        $tour_type = $requested_ids;
+    }
+}
 $price_filter = (isset($_REQUEST['price_filter']) && is_array($_REQUEST['price_filter'])) ? $_REQUEST['price_filter'] : array();
 $rating_filter = (isset($_REQUEST['rating_filter']) && is_array($_REQUEST['rating_filter'])) ? $_REQUEST['rating_filter'] : array();
-$facility_filter = (isset($_REQUEST['facilities']) && is_array($_REQUEST['facilities'])) ? $_REQUEST['facilities'] : array();
-$tour_city = (isset($_REQUEST['city'])) ? (is_array($_REQUEST['city']) ? $_REQUEST['city'] : array($_REQUEST['city'])) : array();
+if (isset($_REQUEST['facility_filter']) && is_array($_REQUEST['facility_filter'])) {
+    $facility_filter = array_values(array_filter(array_map('absint', $_REQUEST['facility_filter'])));
+} elseif (isset($_REQUEST['facilities']) && is_array($_REQUEST['facilities'])) {
+    $facility_filter = array_values(array_filter(array_map('absint', $_REQUEST['facilities'])));
+} else {
+    $facility_filter = array();
+}
+$tour_city = array();
+if (isset($_REQUEST['city']) && $_REQUEST['city'] !== '') {
+    $requested_city = is_array($_REQUEST['city']) ? $_REQUEST['city'] : array($_REQUEST['city']);
+    $tour_city = array_values(array_filter(array_map('absint', $requested_city)));
+}
 
 if (isset($_REQUEST['view']) && !empty($_REQUEST['view'])) {
     $current_view = sanitize_text_field($_REQUEST['view']);
@@ -59,9 +77,11 @@ $map_zoom = empty($ct_options['tour_list_zoom']) ? 14 : $ct_options['tour_list_z
 
 $pageTitle = esc_html__('All tours', 'citytours');
 
-if (!empty($tour_type)) {
-    $tourType = get_term($tour_type[0]);
-    $pageTitle = $tourType->name;
+if (!empty($tour_type[0])) {
+    $tour_term = get_term((int) $tour_type[0], 'tour_type');
+    if ($tour_term && !is_wp_error($tour_term)) {
+        $pageTitle = $tour_term->name;
+    }
 }
 
 $header_img_scr = ct_get_header_image_src('tour');
@@ -114,14 +134,15 @@ if (!empty($header_img_scr)) {
                                     <input type="hidden" name="post_type" value="tour">
 
                                     <div class="form-group">
-                                        <label> <?php esc_html_e('tour search terms', 'citytours') ?></label>
-                                        <?php $all_tour_types = get_terms('tour_type', array('hide_empty' => false, 'parent' => 0));
-                                        if (!empty($all_tour_types)) :
+                                        <label for="tour_types"> <?php esc_html_e('tour search terms', 'citytours') ?></label>
+                                        <?php
+                                        $city_temp_array = array();
+                                        $all_tour_types = get_terms('tour_type', array('hide_empty' => false, 'parent' => 0));
+                                        if (!is_wp_error($all_tour_types) && !empty($all_tour_types)) :
                                         ?>
                                             <select class="form-control" name="type" id="tour_types">
                                                 <option value="" selected><?php esc_html_e('Select a country', 'citytours') ?></option>
                                                 <?php
-                                                $city_temp_array = array();
                                                 $i = 0;
                                                 foreach ($all_tour_types as $each_tour_type) {
                                                     $term_id = $each_tour_type->term_id;
@@ -135,13 +156,20 @@ if (!empty($header_img_scr)) {
                                         <?php endif; ?>
                                     </div>
                                     <div class="form-group">
-                                        <label><?php esc_html_e('Things to do', 'citytours') ?></label>
-                                        <?php if (count($tour_type) >= 1) {
-                                            $all_tour_city_arry[0] = get_terms('tour_type', array('hide_empty' => false, 'parent' => $tour_type[0]));
-                                        }else {
-                                            for($i=0;$i<count($city_temp_array);$i++)
-                                            {
-                                                $all_tour_city_arry[$i] = get_terms('tour_type', array('hide_empty' => false, 'parent' => $city_temp_array[$i]));
+                                        <label for="tour_city"><?php esc_html_e('Things to do', 'citytours') ?></label>
+                                        <?php
+                                        $all_tour_city_arry = array();
+                                        if (count($tour_type) >= 1 && !empty($tour_type[0])) {
+                                            $child_terms = get_terms('tour_type', array('hide_empty' => false, 'parent' => (int) $tour_type[0]));
+                                            if (!is_wp_error($child_terms)) {
+                                                $all_tour_city_arry[0] = $child_terms;
+                                            }
+                                        } else {
+                                            foreach ($city_temp_array as $parent_id) {
+                                                $child_terms = get_terms('tour_type', array('hide_empty' => false, 'parent' => (int) $parent_id));
+                                                if (!is_wp_error($child_terms)) {
+                                                    $all_tour_city_arry[] = $child_terms;
+                                                }
                                             }
                                         }
                                         ?>
@@ -163,8 +191,8 @@ if (!empty($header_img_scr)) {
                                     </div>
 
                                     <div class="form-group">
-                                        <label>للبحـث</label>
-                                        <input type="text" class="form-control" id="search_terms" name="s" placeholder="<?php echo esc_html_e('Type your search terms', 'citytours') ?>" value="<?php echo esc_attr($s) ?>">
+                                        <label for="search_terms">للبحـث</label>
+                                        <input type="text" class="form-control" id="search_terms" name="s" placeholder="<?php esc_attr_e('Type your search terms', 'citytours') ?>" value="<?php echo esc_attr($s) ?>">
                                     </div>
 
                                     <div class="form-group">
@@ -396,125 +424,45 @@ if (!empty($header_img_scr)) {
                 });
 
                 getTourList = function(href) {
-
-                    var data = {
-                        action: 'ct_get_tour_list'
+                    if (href) {
+                        window.location = href;
+                        return;
                     }
 
-                    if ($('#sort_price').val() == "lower") {
-                        data['order_by'] = 'price'
-                        data['order'] = 'ASC'
-                    } else if ($('#sort_price').val() == "higher") {
-                        data['order_by'] = 'price'
-                        data['order'] = 'DESC'
+                    var params = new URLSearchParams();
+                    params.set('post_type', 'tour');
+
+                    var type = $('#tour_types').val();
+                    var city = $('#tour_city').val();
+                    var keyword = $('#search_terms').val();
+                    var date = $('input[name="date"]').val();
+
+                    if (type) params.set('type', type);
+                    if (city) params.set('city', city);
+                    if (keyword) params.set('s', keyword);
+                    if (date) params.set('date', date);
+
+                    if ($('#sort_price').val() === 'lower') {
+                        params.set('order_by', 'price');
+                        params.set('order', 'ASC');
+                    } else if ($('#sort_price').val() === 'higher') {
+                        params.set('order_by', 'price');
+                        params.set('order', 'DESC');
+                    } else if ($('#sort_rating').val() === 'lower') {
+                        params.set('order_by', 'rating');
+                        params.set('order', 'ASC');
+                    } else if ($('#sort_rating').val() === 'higher') {
+                        params.set('order_by', 'rating');
+                        params.set('order', 'DESC');
                     }
 
-                    if ($('#sort_rating').val() == "lower") {
-                        data['order_by'] = 'rating'
-                        data['order'] = 'ASC'
-                    } else if ($('#sort_rating').val() == "higher") {
-                        data['order_by'] = 'rating'
-                        data['order'] = 'DESC'
-                    }
-
-                    if ($('#countries').val() != '') {
-                        data['country'] = $('#countries').val()
-                    }
-
-                    if ($('#cities').val() != '') {
-                        data['districts'] = $('#cities').val()
-                    }
-
-                    if ($('#tour_city').val() != '') {
-                        data['city'] = $('#tour_city').val()
-                    }
-
-                    if ($('input[name^="date_from"]').val() != '') {
-                        data['date_from'] = $('input[name^="date_from"]').val()
-                    }
-
-                    if ($('input[name^="date_to"]').val() != '') {
-                        data['date_to'] = $('input[name^="date_to"]').val()
-                    }
-
-                    // if ($('input[name^="tour_types[]"]').is(':checked')) {
-                    //     data['tour_types'] = []
-                    //     $('input[name^="tour_types[]"]').each(function() {
-                    //         if ($(this).is(':checked')) {
-                    //             data['tour_types'].push($(this).val())
-                    //         }
-                    //     });
-                    // }
-
-                    let tourTypesArray = []
-                    $('#tour_types').each(function() {
-                        if ($(this).find('option').length > 0) {
-                            tourTypesArray.push($(this).val())
-                        }
+                    ['price_filter[]', 'rating_filter[]', 'facility_filter[]'].forEach(function(name) {
+                        $('input[name="' + name + '"]:checked').each(function() {
+                            params.append(name, $(this).val());
+                        });
                     });
-                    
-                    data['tour_type'] = tourTypesArray
-                    if ($('input[name^="price_filter[]"]').is(':checked')) {
-                        data['price_filter'] = []
-                        $('input[name^="price_filter[]"]').each(function() {
-                            if ($(this).is(':checked')) {
-                                data['price_filter'].push($(this).val())
-                            }
-                        });
-                    }
 
-                    if ($('input[name^="rating_filter[]"]').is(':checked')) {
-                        data['rating_filter'] = []
-                        $('input[name^="rating_filter[]"]').each(function() {
-                            if ($(this).is(':checked')) {
-                                data['rating_filter'].push($(this).val())
-                            }
-                        });
-                    }
-
-                    if ($('input[name^="facility_filter[]"]').is(':checked')) {
-                        data['facilities'] = []
-                        $('input[name^="facility_filter[]"]').each(function() {
-                            if ($(this).is(':checked')) {
-                                data['facilities'].push($(this).val())
-                            }
-                        });
-                    }
-
-                    if (href != '' && href != undefined) {
-                        let page = 1;
-                        let queryString = href.split('?')[1];
-                        if(queryString) {
-                            const pageParam = queryString.split('&').find(param => param.startsWith('page='));
-                            page = decodeURIComponent(pageParam.split('=')[1]);
-                        }else {
-                            let queryString = href.split('page/')[1];
-                            page = decodeURIComponent(queryString.split('/')[0]);
-                        }
-                        // console.log("@page ", page);
-                        data['page'] = page;
-                        for (var i = 1; i < page.length; i++) {
-                            params = page[i].split('=');
-                            data['' + params[0] + ''] = params[1];
-                        }
-                    }
-
-                    $.ajax({
-                            type: "POST",
-                            dataType: "html",
-                            url: ajaxurl,
-                            data: data
-                        })
-                        .done(function(resp) {
-                            $('html, body').animate({
-                                scrollTop: $('.tour-list').offset().top
-                            }, 2000);
-                            resp = resp.substring(0, resp.length - 1);
-                            $(".tour-list").empty().html(resp);
-                        })
-                        .fail(function(jqXHR, ajaxOptions, thrownError) {
-                            alert('No response from server');
-                        });
+                    window.location = <?php echo wp_json_encode(home_url('/')); ?> + '?' + params.toString();
                 }
 
                 jQuery('#collapseMap').on('shown.bs.collapse', function(e) {

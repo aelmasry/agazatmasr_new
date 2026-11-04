@@ -745,18 +745,29 @@ if (!function_exists('ct_tour_get_special_tours'))
 					INNER JOIN ' . CT_ORDER_TABLE . ' as _order ON _order.id = booking.order_id';
             $where = ' WHERE (_order.status <> "cancelled") AND (_order.created > %s)';
 
-            if (!empty($tour_type))
-            {
-                $sql .= " INNER JOIN {$tbl_term_relationships} AS tr ON tr.object_id = t1.tour_id
-						INNER JOIN {$tbl_term_taxonomy} AS tt ON tt.term_taxonomy_id = tr.term_taxonomy_id";
-                $where .= " AND tt.taxonomy = 'tour_type' AND tt.term_id =" . esc_sql($tour_type) . ")";
+            $tour_type_id = 0;
+            if (!empty($tour_type)) {
+                $tour_type_id = (int) (is_array($tour_type) ? reset($tour_type) : $tour_type);
             }
-
-            $sql .= $where . ' GROUP BY booking.tour_id ORDER BY booking_count desc LIMIT %d';
-            $sql = $wpdb->prepare($sql, $date, $count);
+            if ($tour_type_id > 0)
+            {
+                $sql .= " INNER JOIN {$tbl_term_relationships} AS tr ON tr.object_id = booking.tour_id
+						INNER JOIN {$tbl_term_taxonomy} AS tt ON tt.term_taxonomy_id = tr.term_taxonomy_id";
+                $where .= " AND tt.taxonomy = 'tour_type' AND tt.term_id = %d";
+                $sql .= $where . ' GROUP BY booking.tour_id ORDER BY booking_count DESC LIMIT %d';
+                $sql = $wpdb->prepare($sql, $date, $tour_type_id, $count);
+            }
+            else
+            {
+                $sql .= $where . ' GROUP BY booking.tour_id ORDER BY booking_count DESC LIMIT %d';
+                $sql = $wpdb->prepare($sql, $date, $count);
+            }
 
             $popular_tour = $wpdb->get_results($sql);
 
+            if (!is_array($popular_tour)) {
+                $popular_tour = array();
+            }
             $result = array();
             if (!empty($popular_tour))
             {

@@ -23,7 +23,7 @@ function featured_tour_type_shortcode($atts)
             ),
         ),
     ));
-        if (!is_wp_error($tourTypes)) {
+        if (!is_wp_error($tourTypes) && !empty($tourTypes)) {
             set_transient($cache_key, $tourTypes, HOUR_IN_SECONDS);
         }
     }

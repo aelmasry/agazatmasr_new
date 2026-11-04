@@ -29,7 +29,7 @@ function featured_districts_shortcode($atts)
         ));
 
         // Cache the results for 1 hour if they are successfully fetched
-        if (!is_wp_error($districts)) {
+        if (!is_wp_error($districts) && !empty($districts)) {
             set_transient($cache_key, $districts, HOUR_IN_SECONDS);
         }
     }
