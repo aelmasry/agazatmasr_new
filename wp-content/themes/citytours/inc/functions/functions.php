@@ -824,6 +824,84 @@ if (!function_exists('ct_template_chooser'))
 }
 
 /*
+ * Same trip type is stored once under each country, so the search list repeats the name.
+ */
+if (!function_exists('ct_tour_type_name_key')) {
+    function ct_tour_type_name_key($name) {
+        $name = trim(preg_replace('/\s+/u', ' ', wp_strip_all_tags((string) $name)));
+        if ($name === '') {
+            return '';
+        }
+        $parts = explode(' ', $name);
+        foreach ($parts as $index => $part) {
+            $parts[$index] = preg_replace('/^ال/u', '', $part);
+        }
+        return implode(' ', $parts);
+    }
+}
+
+if (!function_exists('ct_unique_tour_types_by_name')) {
+    function ct_unique_tour_types_by_name($terms) {
+        if (is_wp_error($terms) || empty($terms) || !is_array($terms)) {
+            return array();
+        }
+        $seen = array();
+        $unique = array();
+        foreach ($terms as $term) {
+            if (!is_object($term) || empty($term->name)) {
+                continue;
+            }
+            $key = ct_tour_type_name_key($term->name);
+            if ($key === '' || isset($seen[$key])) {
+                continue;
+            }
+            $seen[$key] = true;
+            $unique[] = $term;
+        }
+        return $unique;
+    }
+}
+
+if (!function_exists('ct_expand_tour_type_ids')) {
+    function ct_expand_tour_type_ids($term_ids, $parent_ids = array()) {
+        $parent_ids = array_values(array_filter(array_map('absint', (array) $parent_ids)));
+        $terms = get_terms(array(
+            'taxonomy' => 'tour_type',
+            'hide_empty' => false,
+        ));
+        if (is_wp_error($terms) || empty($terms)) {
+            return array_values(array_filter(array_map('absint', (array) $term_ids)));
+        }
+
+        $expanded = array();
+        foreach ((array) $term_ids as $term_id) {
+            $term_id = absint($term_id);
+            if (!$term_id) {
+                continue;
+            }
+            $term = get_term($term_id, 'tour_type');
+            if (!$term || is_wp_error($term)) {
+                $expanded[] = $term_id;
+                continue;
+            }
+            $key = ct_tour_type_name_key($term->name);
+            foreach ($terms as $candidate) {
+                if (ct_tour_type_name_key($candidate->name) !== $key) {
+                    continue;
+                }
+                if ($parent_ids && !in_array((int) $candidate->parent, $parent_ids, true)) {
+                    continue;
+                }
+                $expanded[] = (int) $candidate->term_id;
+            }
+        }
+
+        $expanded = array_values(array_unique(array_filter($expanded)));
+        return $expanded ? $expanded : array_values(array_filter(array_map('absint', (array) $term_ids)));
+    }
+}
+
+/*
  * get review count for hotel and tour
  */
 if (!function_exists('ct_get_review_count'))
@@ -1302,6 +1380,7 @@ if (!function_exists('get_tour_type_cities'))
         $tour_type = esc_sql($_POST['tour_type']);
         
         $districts = get_terms('tour_type', array('hide_empty' => 0, 'parent' => $tour_type, 'cache_domain' => $tour_type));
+        $districts = ct_unique_tour_types_by_name($districts);
 
         if (!empty($districts))
         {

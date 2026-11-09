@@ -95,9 +95,12 @@ if (have_posts()) {
                     <div class="row top-parent">
                         <div class="col-md-8 col-sm-8">
                             <div class="single-hotel-heading">
+                                <?php $review_count = (int) ct_get_review_count($post_id); ?>
+                                <?php if ($review_count > 0) : ?>
                                 <span class="rating">
-                                    <?php ct_rating_smiles($review) ?><small>(<?php echo esc_html(ct_get_review_count($post_id)) ?>)</small>
+                                    <?php ct_rating_smiles($review) ?><small>(<?php echo esc_html($review_count) ?>)</small>
                                 </span>
+                                <?php endif; ?>
                                 <h1><?php the_title() ?></h1>
                                 <span><?php echo esc_html($address, 'citytours'); ?></span>
                             </div>
@@ -409,8 +412,9 @@ if (have_posts()) {
                                     </div>
 
                                     <div class="col-md-9">
-                                        <div id="general_rating"><?php echo sprintf(esc_html__('%d Reviews', 'citytours'), ct_get_review_count($post_id)) ?>
-                                            <div class="rating"><?php echo ct_rating_smiles($review) ?></div>
+                                        <?php $review_count = isset($review_count) ? (int) $review_count : (int) ct_get_review_count($post_id); ?>
+                                        <div id="general_rating"><?php if ($review_count > 0) { echo sprintf(esc_html__('%d Reviews', 'citytours'), $review_count); } ?>
+                                            <?php if ($review_count > 0) : ?><div class="rating"><?php echo ct_rating_smiles($review) ?></div><?php endif; ?>
                                         </div>
 
                                         <div class="row" id="rating_summary">
@@ -490,7 +494,7 @@ if (have_posts()) {
 
                                                 <div class="form-group">
                                                     <label><?php esc_html_e('Things to do', 'citytours') ?></label>
-                                                    <?php $all_tour_types = get_terms('tour_type', array('hide_empty' => false, 'parent' => 0));
+                                                    <?php $all_tour_types = ct_unique_tour_types_by_name(get_terms('tour_type', array('hide_empty' => false, 'parent' => 0)));
                                                     if (!empty($all_tour_types)) :
                                                     ?>
                                                         <select class="form-control" name="type" id="tour_types">

@@ -343,3 +343,13 @@ function custom_captcha_check($errors, $sanitized_user_login, $user_email) {
     return $errors;
 }
 add_filter('registration_errors', 'custom_captcha_check', 10, 3);
+
+function ct_refresh_stale_visitor_copy($content) {
+    if (!is_string($content) || $content === '') {
+        return $content;
+    }
+
+    return str_replace(' وحتى أكتوبر 2019', '', $content);
+}
+add_filter('the_content', 'ct_refresh_stale_visitor_copy', 20);
+add_filter('elementor/widget/render_content', 'ct_refresh_stale_visitor_copy', 20);

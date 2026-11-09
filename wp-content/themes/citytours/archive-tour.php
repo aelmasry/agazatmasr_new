@@ -137,7 +137,7 @@ if (!empty($header_img_scr)) {
                                         <label for="tour_types"> <?php esc_html_e('tour search terms', 'citytours') ?></label>
                                         <?php
                                         $city_temp_array = array();
-                                        $all_tour_types = get_terms('tour_type', array('hide_empty' => false, 'parent' => 0));
+                                        $all_tour_types = ct_unique_tour_types_by_name(get_terms('tour_type', array('hide_empty' => false, 'parent' => 0)));
                                         if (!is_wp_error($all_tour_types) && !empty($all_tour_types)) :
                                         ?>
                                             <select class="form-control" name="type" id="tour_types">
@@ -158,35 +158,38 @@ if (!empty($header_img_scr)) {
                                     <div class="form-group">
                                         <label for="tour_city"><?php esc_html_e('Things to do', 'citytours') ?></label>
                                         <?php
-                                        $all_tour_city_arry = array();
+                                        $city_terms = array();
                                         if (count($tour_type) >= 1 && !empty($tour_type[0])) {
                                             $child_terms = get_terms('tour_type', array('hide_empty' => false, 'parent' => (int) $tour_type[0]));
                                             if (!is_wp_error($child_terms)) {
-                                                $all_tour_city_arry[0] = $child_terms;
+                                                $city_terms = $child_terms;
                                             }
                                         } else {
                                             foreach ($city_temp_array as $parent_id) {
                                                 $child_terms = get_terms('tour_type', array('hide_empty' => false, 'parent' => (int) $parent_id));
                                                 if (!is_wp_error($child_terms)) {
-                                                    $all_tour_city_arry[] = $child_terms;
+                                                    $city_terms = array_merge($city_terms, $child_terms);
                                                 }
+                                            }
+                                        }
+                                        $city_terms = ct_unique_tour_types_by_name($city_terms);
+                                        $selected_city_keys = array();
+                                        foreach ((array) $tour_city as $selected_city_id) {
+                                            $selected_city = get_term((int) $selected_city_id, 'tour_type');
+                                            if ($selected_city && !is_wp_error($selected_city)) {
+                                                $selected_city_keys[ct_tour_type_name_key($selected_city->name)] = true;
                                             }
                                         }
                                         ?>
                                         <select class="form-control" name="city" id="tour_city" <?php //echo (count($tour_type) >= 1) ? "" : "disabled"; ?>>
                                             <option value="" selected><?php esc_html_e('All tours', 'citytours') ?></option>
                                             <?php
-                                            //if (count($all_tour_city) >= 1) 
-                                            for($i=0;$i<count($all_tour_city_arry);$i++)
-                                            {
-                                                $all_tour_city = $all_tour_city_arry[$i];
-                                                foreach ($all_tour_city as $each_city) {
-                                                    $term_id = $each_city->term_id;
-                                                    $icon_class = get_tax_meta($term_id, 'ct_tax_icon_class');
+                                            foreach ($city_terms as $each_city) {
+                                                $term_id = $each_city->term_id;
+                                                $is_selected = isset($selected_city_keys[ct_tour_type_name_key($each_city->name)]);
                                             ?>
-                                                    <option value="<?php echo esc_attr($term_id) ?>" <?php echo (!empty($tour_city) && $tour_city[0] == $term_id) ? "selected='selected'" : ""; ?>><?php echo esc_html($each_city->name) ?></option>
-                                            <?php }
-                                            } ?>
+                                                    <option value="<?php echo esc_attr($term_id) ?>" <?php echo $is_selected ? "selected='selected'" : ""; ?>><?php echo esc_html($each_city->name) ?></option>
+                                            <?php } ?>
                                         </select>
                                     </div>
 

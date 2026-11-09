@@ -392,7 +392,8 @@ if (have_posts()) {
 
                                 <div class="col-sm-9 col-xs-12">
                                     <div id="score_detail">
-                                        <span><?php echo esc_html($doubled_review) ?></span><?php echo esc_html($review_content) ?> <small><?php echo sprintf(esc_html__('(Based on %d reviews)', 'citytours'), ct_get_review_count($post_id)) ?></small>
+                                        <?php $review_count = (int) ct_get_review_count($post_id); ?>
+                                        <span><?php echo esc_html($doubled_review) ?></span><?php echo esc_html($review_content) ?><?php if ($review_count > 0) : ?> <small><?php echo sprintf(esc_html__('(Based on %d reviews)', 'citytours'), $review_count) ?></small><?php endif; ?>
                                     </div>
 
                                     <div class="row" id="rating_summary">

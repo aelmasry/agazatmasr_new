@@ -65,7 +65,10 @@ $wishlist_link = ct_wishlist_page_url();
 
 		<div class="col-lg-6 col-md-6 col-sm-6">
 			<div class="tour_list_desc">
-				<div class="rating"><?php ct_rating_smiles($review) ?><small>(<?php echo esc_html(ct_get_review_count($post_id)) ?>)</small></div>
+				<?php $review_count = (int) ct_get_review_count($post_id); ?>
+				<?php if ($review_count > 0) : ?>
+				<div class="rating"><?php ct_rating_smiles($review) ?><small>(<?php echo esc_html($review_count) ?>)</small></div>
+				<?php endif; ?>
 
 				<h3>
 					<a href="<?php echo esc_url(get_permalink($post_id)); ?>"> <?php echo esc_html(get_the_title($post_id)); ?></a>

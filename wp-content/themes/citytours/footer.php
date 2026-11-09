@@ -131,7 +131,7 @@ if ($page_template != "template-full-width-no-footer.php") :
 
                         <?php if (!empty($ct_options['copyright'])) {  ?>
                             
-                            <div style="padding-bottom:20px; width: 100% !important; text-align: center !important; direction: ltr !important; display: inline !important; Add this property" > Agazat Masr 2024 © All Rights Reserved - Powered by <a style="text-decoration: none;" href="https://alisalem.me/" target="_blank">Ali Salem</a></div>
+                            <div style="padding-bottom:20px; width: 100% !important; text-align: center !important; direction: ltr !important; display: inline !important;"> Agazat Masr <?php echo esc_html(date_i18n('Y')); ?> © All Rights Reserved - Powered by <a style="text-decoration: none;" href="https://alisalem.me/" target="_blank">Ali Salem</a></div>
 
                         <?php } ?>
                     </div>

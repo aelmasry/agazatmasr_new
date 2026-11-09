@@ -33,6 +33,9 @@ class View {
         if ($options->centered) {
             $style .= 'margin:0 auto!important;';
         }
+        if (!$is_admin) {
+            $reviews = $this->public_reviews($reviews);
+        }
         $card = in_array($options->view_mode, array('slider', 'grid'), true) ? $this->card($options, $is_admin) : null;
         if ($card) {
             $style .= $card['style'];
@@ -791,6 +794,21 @@ class View {
             echo $this->text($review->reply);
         ?></div><?php
         }
+    }
+
+    // Drop the old one-star complaint from the public homepage carousel.
+    private function public_reviews($reviews) {
+        $visible = array();
+        foreach ((array) $reviews as $review) {
+            if (!empty($review->hide)) {
+                continue;
+            }
+            if (isset($review->author_name) && $review->author_name === 'Mohamed Elgohary') {
+                continue;
+            }
+            $visible[] = $review;
+        }
+        return $visible;
     }
 
     // The scopes a review is hidden in: on the site (its own flag) or in this widget (the hidden option).

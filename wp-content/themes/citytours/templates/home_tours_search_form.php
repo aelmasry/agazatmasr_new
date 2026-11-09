@@ -12,7 +12,7 @@
                     <?php esc_html_e('tour search terms', 'citytours') ?>
                 </label>
                 <?php
-                $all_tour_types = get_terms('tour_type', array('hide_empty' => 0, 'parent' => 0, 'orderby' => 'term_order', 'order' => 'ASC'));
+                $all_tour_types = ct_unique_tour_types_by_name(get_terms('tour_type', array('hide_empty' => 0, 'parent' => 0, 'orderby' => 'term_order', 'order' => 'ASC')));
                 if (!empty($all_tour_types)) :
                 ?>
                     <select class="form-control" name="type" id="tour_types">

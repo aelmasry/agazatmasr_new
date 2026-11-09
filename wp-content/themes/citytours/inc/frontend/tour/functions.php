@@ -428,6 +428,13 @@ if (!function_exists('ct_tour_get_search_result'))
         $per_page = ( isset($ct_options['tour_posts']) && is_numeric($ct_options['tour_posts']) ) ? $ct_options['tour_posts'] : 6;
         extract($args);
 
+        if (!empty($tour_type) && function_exists('ct_expand_tour_type_ids')) {
+            $tour_type = ct_expand_tour_type_ids($tour_type);
+        }
+        if (!empty($tour_city) && function_exists('ct_expand_tour_type_ids')) {
+            $tour_city = ct_expand_tour_type_ids($tour_city, $tour_type);
+        }
+
         $order_array = array('ASC', 'DESC');
         $order_by_array = array(
             '' => '',
