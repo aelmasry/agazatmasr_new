@@ -1250,13 +1250,46 @@ if (!function_exists('ct_google_map_url'))
     {
         global $ct_options;
 
-        if (!empty($ct_options['map_api_key']))
+        $key = ct_google_maps_api_key();
+        if ($key !== '')
         {
-            $map_url = '//maps.googleapis.com/maps/api/js?key=' . $ct_options['map_api_key'];
+            $map_url = 'https://maps.googleapis.com/maps/api/js?key=' . rawurlencode($key);
         }
         return $map_url;
     }
 
+}
+
+if (!function_exists('ct_google_maps_api_key')) {
+    function ct_google_maps_api_key() {
+        global $ct_options;
+        $key = '';
+        if (defined('CT_GOOGLE_MAPS_API_KEY') && CT_GOOGLE_MAPS_API_KEY) {
+            $key = CT_GOOGLE_MAPS_API_KEY;
+        } elseif (!empty($ct_options['map_api_key'])) {
+            $key = $ct_options['map_api_key'];
+        }
+        $key = preg_replace('/[^A-Za-z0-9_\-]/', '', (string) $key);
+        return $key;
+    }
+}
+
+if (!function_exists('ct_google_maps_script')) {
+    function ct_google_maps_script($args = array()) {
+        $key = ct_google_maps_api_key();
+        if ($key === '') {
+            return;
+        }
+        $query = array('key' => $key);
+        if (!empty($args['libraries'])) {
+            $query['libraries'] = $args['libraries'];
+        }
+        if (!empty($args['callback'])) {
+            $query['callback'] = $args['callback'];
+        }
+        $url = 'https://maps.googleapis.com/maps/api/js?' . http_build_query($query);
+        echo '<script async defer src="' . esc_url($url) . '"></script>';
+    }
 }
 
 /*

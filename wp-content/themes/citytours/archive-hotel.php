@@ -413,7 +413,7 @@ if (!empty($header_img_scr)) {
         wp_enqueue_script('ct_script_icheck');
         // wp_enqueue_script('icheck', CT_TEMPLATE_DIRECTORY_URI . '/js/icheck.js');
         ?>
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8ODJCdUgA8i2kcDOSL_SP3lMMSCwTtIk"></script>
+        <?php ct_google_maps_script(); ?>
         <script type="text/javascript">
             jQuery(function($) {
                 var lang = '<?php echo get_locale() ?>';

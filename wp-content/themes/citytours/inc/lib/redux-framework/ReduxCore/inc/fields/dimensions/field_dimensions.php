@@ -31,7 +31,7 @@
              * @param array $field Field configuration
              * @param mixed $value Field value
              */
-            public function __construct( $parent, $field = array(), $value = '' ) {
+            public function __construct( $field = array(), $value = '', $parent = null ) {
                 $this->parent = $parent;
                 $this->field  = $field;
                 $this->value  = $value;

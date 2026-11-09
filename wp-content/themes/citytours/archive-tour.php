@@ -367,7 +367,7 @@ if (!empty($header_img_scr)) {
             </div><!-- End row -->
         </div><!-- End container -->
 
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8ODJCdUgA8i2kcDOSL_SP3lMMSCwTtIk"></script>
+        <?php ct_google_maps_script(); ?>
         <script type="text/javascript">
             jQuery(document).ready(function($) {
                 var lang = '<?php echo get_locale() ?>';

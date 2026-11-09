@@ -920,12 +920,10 @@ if (!function_exists('ct_enqueue_scripts'))
         wp_register_script('ct_script_fixed_sidebar', CT_TEMPLATE_DIRECTORY_URI . '/js/theia-sticky-sidebar' . $suffix . '.js', array(), '', true);
 
         // map
-        if (!empty($ct_options['map_api_key']))
+        $map_key = function_exists('ct_google_maps_api_key') ? ct_google_maps_api_key() : '';
+        if ($map_key !== '')
         {
-            wp_register_script('ct_script_google_map', 'https://maps.googleapis.com/maps/api/js?key=' . $ct_options['map_api_key'], array(), '', true);
-        } else
-        {
-            wp_register_script('ct_script_google_map', 'https://maps.googleapis.com/maps/api/js', array(), '', true);
+            wp_register_script('ct_script_google_map', 'https://maps.googleapis.com/maps/api/js?key=' . rawurlencode($map_key), array(), '', true);
         }
         
         wp_register_script('ct_script_infobox', CT_TEMPLATE_DIRECTORY_URI . '/js/infobox' . $suffix . '.js', array(), '', true);

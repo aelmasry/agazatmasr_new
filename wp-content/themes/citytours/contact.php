@@ -185,7 +185,7 @@ global $ct_options;
     <!-- End row -->
 </div>
 <!-- End container -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8ODJCdUgA8i2kcDOSL_SP3lMMSCwTtIk" async defer></script>
+<?php ct_google_maps_script(); ?>
 
 <script type="text/javascript">
     $ = jQuery.noConflict();

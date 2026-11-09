@@ -680,7 +680,7 @@ if (have_posts()) {
                     color: #063d7d;
                 }
             </style>
-            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8ODJCdUgA8i2kcDOSL_SP3lMMSCwTtIk&libraries=marker&callback=initMap"></script>
+            <?php ct_google_maps_script(array('libraries' => 'marker', 'callback' => 'initMap')); ?>
             <script type="text/javascript">
 
                 $ = jQuery.noConflict();
