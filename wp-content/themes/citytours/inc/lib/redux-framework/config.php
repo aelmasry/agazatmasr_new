@@ -147,6 +147,7 @@ Redux::setSection( $opt_name, array(
             'type'     => 'text',
             'title'    => __( 'Copyright Text', 'citytours' ),
             'subtitle' => __( 'Set copyright text in footer', 'citytours' ),
+            'desc'     => __( 'A year written in this text, such as 2026, is replaced with the current year.', 'citytours' ),
             'default'  => 'Citytours 2015',
         ),
         array(

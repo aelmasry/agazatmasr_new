@@ -129,10 +129,13 @@ if ($page_template != "template-full-width-no-footer.php") :
                             <img src="<?php echo esc_url(CT_TEMPLATE_DIRECTORY_URI . '/imgs/payment-methods-min.png') ?> " alt="image" id="paymentmethods">
                         </div>
 
-                        <?php if (!empty($ct_options['copyright'])) {  ?>
-                            
-                            <div style="padding-bottom:20px; width: 100% !important; text-align: center !important; direction: ltr !important; display: inline !important;"> Agazat Masr <?php echo esc_html(date_i18n('Y')); ?> © All Rights Reserved - Powered by <a style="text-decoration: none;" href="https://alisalem.me/" target="_blank">Ali Salem</a></div>
-
+                        <?php if (!empty($ct_options['copyright'])) {
+                            $copyright = (string) $ct_options['copyright'];
+                            $year = date_i18n('Y');
+                            $copyright = str_replace('{year}', $year, $copyright);
+                            $copyright = preg_replace('/(?<!\d)20\d{2}(?!\d)/', $year, $copyright, 1);
+                            ?>
+                            <div style="padding-bottom:20px; width: 100% !important; text-align: center !important;"><?php echo esc_html($copyright); ?></div>
                         <?php } ?>
                     </div>
                 </div>
