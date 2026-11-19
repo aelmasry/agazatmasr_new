@@ -1,3 +1,7 @@
+/* AGZ-016: the Maps API is loaded async, so google.maps may not exist when this file runs.
+   InfoBox (which extends google.maps.OverlayView) is therefore defined on first use:
+   ctDefineInfoBox() runs now if Maps is ready, otherwise renderMap() calls it. */
+window.ctDefineInfoBox=function(){if(window.InfoBox&&window.InfoBox.ctReady)return true;if(!(window.google&&google.maps&&google.maps.OverlayView))return false;
 /**
  * @name InfoBox
  * @version 1.1.12 [December 11, 2012]
@@ -810,3 +814,6 @@ InfoBox.prototype.close = function () {
 
   this.setMap(null);
 };
+
+window.InfoBox=InfoBox;InfoBox.ctReady=true;return true;};
+window.ctDefineInfoBox();
