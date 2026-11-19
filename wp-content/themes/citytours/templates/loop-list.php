@@ -109,8 +109,10 @@ $url = esc_url(add_query_arg($query_args, get_permalink($post_id)));
                     foreach ( $hotel_facilities as $hotel_term ) :
                         $term_id = $hotel_term->term_id;
                         $icon_class = get_tax_meta($term_id, 'ct_tax_icon_class', true);
+                        if (empty($icon_class))
+                            continue;
                         echo '<li><button type="button" class="tooltip-1" data-placement="top" title="'.esc_html( $hotel_term->name ).'">';
-                        if ( ! empty( $icon_class ) ) echo '<i class="' . esc_attr( $icon_class ) . '"></i>';
+                        echo '<i class="' . esc_attr( $icon_class ) . '"></i>';
                         echo '</button></li>';
                     endforeach; 
                 ?>

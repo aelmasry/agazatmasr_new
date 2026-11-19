@@ -329,7 +329,7 @@ if (isset($_REQUEST['uid']))
             </div><!--End row -->
         </form>
 
-        <?php wp_enqueue_script('icheck', CT_TEMPLATE_DIRECTORY_URI . '/js/icheck.js'); ?>
+        <?php wp_enqueue_script('ct_script_icheck'); // same handle as ct_enqueue_scripts, avoids loading iCheck twice ?>
 
         <script type="text/javascript">
             var ajaxurl = '<?php echo esc_js(admin_url('admin-ajax.php')) ?>';

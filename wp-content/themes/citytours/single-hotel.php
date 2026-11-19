@@ -238,9 +238,10 @@ if (have_posts()) {
                                                     foreach ($hotel_facilities as $hotel_term) :
                                                         $term_id = $hotel_term->term_id;
                                                         $icon_class = get_tax_meta($term_id, 'ct_tax_icon_class', true);
+                                                        if (empty($icon_class))
+                                                            continue;
                                                         echo '<li><button type="button" class="tooltip-1" data-placement="top" title="' . esc_html($hotel_term->name) . '">';
-                                                        if (!empty($icon_class))
-                                                            echo '<i class="' . esc_attr($icon_class) . '"></i>';
+                                                        echo '<i class="' . esc_attr($icon_class) . '"></i>';
                                                         echo '</button></li>';
                                                     endforeach;
                                                     ?>
@@ -1122,5 +1123,5 @@ if (have_posts()) {
     ?>
     <?php
     wp_enqueue_script('validate', CT_TEMPLATE_DIRECTORY_URI . '/assets/validate.js');
-    wp_enqueue_script('icheck', CT_TEMPLATE_DIRECTORY_URI . '/js/icheck.js');
+    wp_enqueue_script('ct_script_icheck'); // same handle as ct_enqueue_scripts, avoids loading iCheck twice
     get_footer();

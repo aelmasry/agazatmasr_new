@@ -550,6 +550,10 @@ function selectThumb( $images_slider, $thumbs_slider, index ) {
 }
 
 function wooProductImageSlider( $slider_container ) { 
+    // Owl Carousel is only enqueued where a carousel exists (ct_page_asset_needs).
+    if ( ! jQuery.fn.owlCarousel ) {
+        return;
+    }
     if ( $slider_container == undefined ) { 
         $slider_container = jQuery('.product-images-slider');
     }

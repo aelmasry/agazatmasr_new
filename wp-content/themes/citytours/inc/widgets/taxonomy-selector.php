@@ -12,14 +12,21 @@ function register_taxonomy_selection_widget() {
 }
 add_action('widgets_init', 'register_taxonomy_selection_widget');
 
-// Enqueue necessary scripts and styles
+// Register scripts and styles; they are enqueued only when the widget renders
+// (AGZ-005: Slick used to load on every page, including where the widget is absent).
 function taxonomy_selection_widget_scripts() {
-    wp_enqueue_style('taxonomy-selection-style', get_template_directory_uri() . '/css/taxonomy_selection.css');
-    wp_enqueue_script('slick-js', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js', array('jquery'), '1.8.1', true);
-    wp_enqueue_style('slick-css', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css');
-    wp_enqueue_script('taxonomy-selection-js', get_template_directory_uri() . '/js/taxonomy_selection.js', array('jquery', 'slick-js'), '1.0.0', true);
+    wp_register_style('taxonomy-selection-style', get_template_directory_uri() . '/css/taxonomy_selection.css');
+    wp_register_script('slick-js', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js', array('jquery'), '1.8.1', true);
+    wp_register_style('slick-css', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css', array(), '1.8.1');
+    wp_register_script('taxonomy-selection-js', get_template_directory_uri() . '/js/taxonomy_selection.js', array('jquery', 'slick-js'), '1.0.0', true);
 }
 add_action('wp_enqueue_scripts', 'taxonomy_selection_widget_scripts');
+
+function taxonomy_selection_widget_enqueue_assets() {
+    wp_enqueue_style('taxonomy-selection-style');
+    wp_enqueue_style('slick-css');
+    wp_enqueue_script('taxonomy-selection-js');
+}
 
 class Taxonomy_Selection_Widget extends WP_Widget {
     
@@ -34,6 +41,7 @@ class Taxonomy_Selection_Widget extends WP_Widget {
     
     // Front-end display
     public function widget($args, $instance) {
+        taxonomy_selection_widget_enqueue_assets();
         echo $args['before_widget'];
         
         if (!empty($instance['title'])) {

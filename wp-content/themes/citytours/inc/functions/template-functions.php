@@ -759,6 +759,89 @@ if (!function_exists('ct_get_custom_css'))
 }
 
 /*
+ * Whether the current page renders a booking shortcode (cart, checkout, confirmation).
+ */
+if (!function_exists('ct_is_booking_page'))
+{
+
+    function ct_is_booking_page()
+    {
+        global $ct_options;
+
+        if (!is_page())
+        {
+            return false;
+        }
+
+        $page_id = get_queried_object_id();
+        foreach (array('hotel_cart_page', 'hotel_checkout_page', 'hotel_thankyou_page', 'tour_cart_page', 'tour_checkout_page', 'tour_thankyou_page') as $key)
+        {
+            if (!empty($ct_options[$key]) && (int) $ct_options[$key] === $page_id)
+            {
+                return true;
+            }
+        }
+
+        $post = get_post($page_id);
+        if ($post)
+        {
+            foreach (array('hotel_cart', 'hotel_checkout', 'hotel_booking_confirmation', 'tour_cart', 'tour_checkout', 'tour_booking_confirmation') as $shortcode)
+            {
+                if (has_shortcode($post->post_content, $shortcode))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+}
+
+/*
+ * Which optional front-end libraries the current page needs (AGZ-005 / AGZ-013).
+ *
+ * These used to load on every page. Each group is mapped to the templates
+ * that actually initialise it:
+ * - map:    hotel/tour singles and listings (archive, district, tour type, search), contact page
+ * - owl:    single hotel gallery (#single_hotel_desc .owl-carousel), WooCommerce product sliders
+ * - icheck: filter checkboxes on listings, single hotel, booking pages, wishlist
+ * - sticky: theia sticky sidebar on single hotel/tour and the FAQ template
+ * - switch: jquery.switch toggles on cart pages
+ *
+ * Filterable via 'ct_page_asset_needs' if Elementor content needs one elsewhere.
+ *
+ * @return array<string, bool>
+ */
+if (!function_exists('ct_page_asset_needs'))
+{
+
+    function ct_page_asset_needs()
+    {
+        global $ct_options;
+
+        $listing = is_post_type_archive(array('hotel', 'tour'))
+            || is_tax(array('district', 'tour_type'))
+            || (is_search() && in_array(get_query_var('post_type'), array('hotel', 'tour'), true));
+        $single_hotel = is_singular('hotel');
+        $single_tour  = is_singular('tour');
+        $booking      = ct_is_booking_page();
+        $wishlist     = is_page() && !empty($ct_options['wishlist']) && (int) $ct_options['wishlist'] === get_queried_object_id();
+        $woocommerce  = function_exists('is_woocommerce') && (is_woocommerce() || is_cart() || is_checkout());
+
+        return apply_filters('ct_page_asset_needs', array(
+            'map'    => $single_hotel || $single_tour || $listing || is_page_template('contact.php'),
+            'owl'    => $single_hotel || $woocommerce,
+            'icheck' => $listing || $single_hotel || $booking || $wishlist,
+            'sticky' => $single_hotel || $single_tour || is_page_template('templates/template-faq.php'),
+            'switch' => $booking,
+        ));
+    }
+
+}
+
+/*
  * enqueue script function
  */
 if (!function_exists('ct_enqueue_scripts'))
@@ -781,17 +864,23 @@ if (!function_exists('ct_enqueue_scripts'))
         $current_locale = get_locale();
         $current_locale = str_replace('_', '-', $current_locale);
 
+        $needs = ct_page_asset_needs();
+
+        $theme_dir = get_template_directory();
+        $custom_css_ver = file_exists($theme_dir . '/css/custom.css') ? filemtime($theme_dir . '/css/custom.css') : CT_VERSION;
+        $style_min_ver  = file_exists($theme_dir . '/css/style.min.css') ? filemtime($theme_dir . '/css/style.min.css') : CT_VERSION;
+
         // wp_register_style('ct_style_main', CT_TEMPLATE_DIRECTORY_URI . '/css/base.css');
         // wp_register_style('ct_style_main', CT_TEMPLATE_DIRECTORY_URI . '/css/mq_base.css');
         wp_register_style('ct_style_main', CT_TEMPLATE_DIRECTORY_URI . '/css/mq_base.css', array(), null, 'print');
         /* MQ Css Code */
         wp_register_style('mq_bootstrap_min', CT_TEMPLATE_DIRECTORY_URI . '/css/bootstrap.min.css');
-        wp_register_style('mq_style_min', CT_TEMPLATE_DIRECTORY_URI . '/css/style.min.css');
+        wp_register_style('mq_style_min', CT_TEMPLATE_DIRECTORY_URI . '/css/style.min.css', array(), $style_min_ver);
         wp_register_style('mq_menu_min', CT_TEMPLATE_DIRECTORY_URI . '/css/menu.min.css');
-        wp_register_style('mq_custom', CT_TEMPLATE_DIRECTORY_URI . '/css/custom.css');
+        wp_register_style('mq_custom', CT_TEMPLATE_DIRECTORY_URI . '/css/custom.css', array(), $custom_css_ver);
         /* HELLO */
         wp_register_style('ct_style_cus', CT_TEMPLATE_DIRECTORY_URI . '/css/cus.css');
-        wp_register_style('ct_style_lightslider', CT_TEMPLATE_DIRECTORY_URI . '/css/lightslider.css');
+        // lightslider.css removed: no template or script uses LightSlider.
         wp_register_style('ct_style_grey', CT_TEMPLATE_DIRECTORY_URI . '/css/skins/square/grey.css');
 
         wp_register_style('ct_style_date_time_picker', CT_TEMPLATE_DIRECTORY_URI . '/css/date_time_picker' . $suffix . '.css');
@@ -823,26 +912,34 @@ if (!function_exists('ct_enqueue_scripts'))
         wp_enqueue_style('mq_menu_min');
         wp_enqueue_style('mq_custom');
         wp_enqueue_style('ct_style_cus');
-        wp_enqueue_style('ct_style_lightslider');
-        wp_enqueue_style('ct_style_grey');
+        if ($needs['icheck'])
+        {
+            wp_enqueue_style('ct_style_grey');
+        }
 
         wp_enqueue_style('ct_style_date_time_picker');
 //        wp_enqueue_style('ct_style_timeline');
-        wp_enqueue_style('ct_style_jquery_switch');
-        add_filter('style_loader_tag', function($html, $handle) {
-            if ($handle === 'ct_style_jquery_switch') {
-                return str_replace("media='print'", "media='print' onload=\"this.media='all'\"", $html);
-            }
-            return $html;
-        }, 10, 2);
-        wp_enqueue_style('ct_style_owl_carousel');
-        add_filter('style_loader_tag', function($html, $handle) {
-            if ($handle === 'ct_style_owl_carousel') {
-                return str_replace("media='print'", "media='print' onload=\"this.media='all'\"", $html);
-            }
-            return $html;
-        }, 10, 2);
-        wp_enqueue_style('ct_style_owl_theme');
+        if ($needs['switch'])
+        {
+            wp_enqueue_style('ct_style_jquery_switch');
+            add_filter('style_loader_tag', function($html, $handle) {
+                if ($handle === 'ct_style_jquery_switch') {
+                    return str_replace("media='print'", "media='print' onload=\"this.media='all'\"", $html);
+                }
+                return $html;
+            }, 10, 2);
+        }
+        if ($needs['owl'])
+        {
+            wp_enqueue_style('ct_style_owl_carousel');
+            add_filter('style_loader_tag', function($html, $handle) {
+                if ($handle === 'ct_style_owl_carousel') {
+                    return str_replace("media='print'", "media='print' onload=\"this.media='all'\"", $html);
+                }
+                return $html;
+            }, 10, 2);
+            wp_enqueue_style('ct_style_owl_theme');
+        }
 
         wp_enqueue_style('ct_gootle_fonts');
 
@@ -957,9 +1054,11 @@ if (!function_exists('ct_enqueue_scripts'))
             wp_enqueue_script('ct_script_localization2');
         }
 
-        wp_enqueue_script('ct_script_owl');
-        $needs_map = is_singular(array('hotel', 'tour')) || is_post_type_archive(array('hotel', 'tour')) || is_page_template('contact.php');
-        if ($needs_map) {
+        if ($needs['owl'])
+        {
+            wp_enqueue_script('ct_script_owl');
+        }
+        if ($needs['map']) {
             wp_enqueue_script('ct_script_map');
             wp_enqueue_script('ct_script_infobox');
         }
@@ -973,8 +1072,14 @@ if (!function_exists('ct_enqueue_scripts'))
             wp_enqueue_script('ct_cat_nav_mobile');
         }
 
-        wp_enqueue_script('ct_script_fixed_sidebar');
-        wp_enqueue_script('ct_script_icheck');
+        if ($needs['sticky'])
+        {
+            wp_enqueue_script('ct_script_fixed_sidebar');
+        }
+        if ($needs['icheck'])
+        {
+            wp_enqueue_script('ct_script_icheck');
+        }
 
         wp_enqueue_script('ct_theme_script');
     }
@@ -1790,34 +1895,24 @@ if (!function_exists('ct_theme_slug_fonts_url'))
 {
     function ct_theme_slug_fonts_url()
     {
-        $fonts_url = '';
-        $montserrat = _x('on', 'Montserrat font: on or off', 'citytours');
-        $gochihand = _x('on', 'Gochi+Hand font: on or off', 'citytours');
-        $lato = _x('on', 'Lato font: on or off', 'citytours');
-
-        if ('off' !== $montserrat || 'off' !== $gochihand || 'lato' !== $gochihand)
+        /*
+         * AGZ-019: only Cairo is rendered on the site (measured on production,
+         * desktop + mobile). Montserrat, Gochi Hand, Lato and Roboto Condensed
+         * were requested but never used, so they are no longer loaded.
+         * display=swap shows fallback text while Cairo downloads.
+         */
+        $font_families = apply_filters('ct_google_font_families', array('Cairo:300,400,600,700,900'));
+        if (empty($font_families))
         {
-            $font_families = array();
-            if ('off' !== $montserrat)
-            {
-                $font_families[] = 'Montserrat:400,700';
-            }
-            if ('off' !== $gochihand)
-            {
-                $font_families[] = 'Gochi+Hand';
-            }
-            if ('off' !== $lato)
-            {
-                $font_families[] = 'Lato:300,400';
-            }
-            $font_families[] ='Cairo:300,400,600,700,900|Roboto+Condensed:300&amp;subset=arabic';
-            $query_args = array(
-                'family' => urlencode(implode('|', $font_families)),
-                'subset' => urlencode('latin,latin-ext'),
-            );
-            $fonts_url = add_query_arg($query_args, 'https://fonts.googleapis.com/css');
+            return '';
         }
 
-        return esc_url_raw($fonts_url);
+        $query_args = array(
+            'family'  => urlencode(implode('|', $font_families)),
+            'subset'  => urlencode('arabic,latin,latin-ext'),
+            'display' => 'swap',
+        );
+
+        return esc_url_raw(add_query_arg($query_args, 'https://fonts.googleapis.com/css'));
     }
 }
