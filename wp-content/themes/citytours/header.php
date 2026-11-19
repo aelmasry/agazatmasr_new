@@ -9,7 +9,6 @@ global $ct_options;
 <!--[if IE 7 ]>    <html class="ie7 oldie" <?php language_attributes(); ?>> <![endif]-->
 <!--[if IE 8 ]>    <html class="ie8 oldie" <?php language_attributes(); ?>> <![endif]-->
 <!--[if IE   ]>    <html class="ie" <?php language_attributes(); ?>> <![endif]-->
-<!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 <html <?php language_attributes(); ?>>
 
 <head>

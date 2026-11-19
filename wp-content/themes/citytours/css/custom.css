@@ -34,3 +34,23 @@
         width: 100%;
     }
 }
+
+/* NF-05: facility tooltips are <button>s; reset UA button styles to match the former <a>.
+   Flex + flex-start stops the browser from vertically centring button content,
+   so the icon keeps the anchor's position (offset by `ul.add_info li i { top: 6px }`). */
+ul.add_info li button {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: #555;
+    font: inherit;
+    line-height: inherit;
+    text-align: inherit;
+    cursor: pointer;
+}

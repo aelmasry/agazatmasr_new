@@ -117,10 +117,10 @@ if (!empty($date_from)) {
                     foreach ($hotel_facilities as $hotel_term) :
                         $term_id = $hotel_term->term_id;
                         $icon_class = get_tax_meta($term_id, 'ct_tax_icon_class', true);
-                        echo '<li><a href="javascript:void(0);" class="tooltip-1" data-placement="top" title="' . esc_html($hotel_term->name) . '">';
+                        echo '<li><button type="button" class="tooltip-1" data-placement="top" title="' . esc_html($hotel_term->name) . '">';
                         if (!empty($icon_class))
                             echo '<i class="' . esc_attr($icon_class) . '"></i>';
-                        echo '</a></li>';
+                        echo '</button></li>';
                     endforeach;
                     ?>
 

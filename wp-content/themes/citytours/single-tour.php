@@ -493,7 +493,7 @@ if (have_posts()) {
                                                 <input type="hidden" name="post_type" value="tour">
 
                                                 <div class="form-group">
-                                                    <label><?php esc_html_e('Things to do', 'citytours') ?></label>
+                                                    <label for="tour_types"><?php esc_html_e('Things to do', 'citytours') ?></label>
                                                     <?php $all_tour_types = ct_unique_tour_types_by_name(get_terms('tour_type', array('hide_empty' => false, 'parent' => 0)));
                                                     if (!empty($all_tour_types)) :
                                                     ?>
@@ -511,7 +511,7 @@ if (have_posts()) {
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label>
+                                                    <label for="tour_city">
                                                         <?php esc_html_e('tour search terms', 'citytours') ?>
                                                     </label>
                                                     <select class="form-control" name="city" id="tour_city" >

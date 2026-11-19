@@ -4,7 +4,7 @@
         <!-- End row -->
         <div class="row bottom-part">
             <div class="form-group">
-                <label>
+                <label for="tour_types">
                     <?php esc_html_e('tour search terms', 'citytours') ?>
                 </label>
                 <?php
@@ -39,7 +39,7 @@
             </div>
 
             <div class="form-group">
-            <label>
+            <label for="tour_city">
                     <?php esc_html_e('Things to do', 'citytours') ?>
                 </label>
                 
@@ -51,11 +51,11 @@
             </div>
 
             <div class="form-group">
-                <label>
+                <label for="tour_date">
                     <i class="icon-calendar-7"></i>
                     <?php esc_html_e('Date', 'citytours') ?>
                 </label>
-                <input class="date-pick form-control" data-date-format="<?php echo ct_get_date_format('html'); ?>" type="date" name="date" value="" autocomplete="off">
+                <input id="tour_date" class="date-pick form-control" data-date-format="<?php echo ct_get_date_format('html'); ?>" type="date" name="date" value="" autocomplete="off">
             </div>
  <button class="btn_1 green" style="width:20%;    height: 45px;
     margin-top: 20px;">

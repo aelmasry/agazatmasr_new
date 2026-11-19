@@ -199,8 +199,8 @@ if (!empty($header_img_scr)) {
                                     </div>
 
                                     <div class="form-group">
-                                        <label><i class="icon-calendar-7"></i> <?php esc_html_e('Date', 'citytours') ?></label>
-                                        <input class="date-pick form-control" data-date-format="<?php echo ct_get_date_format('html'); ?>" type="date" placeholder="yyyy-mm-dd" name="date" value="<?php echo esc_attr($date) ?>" autocomplete="off">
+                                        <label for="tour_date"><i class="icon-calendar-7"></i> <?php esc_html_e('Date', 'citytours') ?></label>
+                                        <input id="tour_date" class="date-pick form-control" data-date-format="<?php echo ct_get_date_format('html'); ?>" type="date" placeholder="yyyy-mm-dd" name="date" value="<?php echo esc_attr($date) ?>" autocomplete="off">
                                     </div>
 
                                     <button class="btn_1 green"><?php esc_html_e('Search again', 'citytours') ?></button>
