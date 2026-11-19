@@ -29,8 +29,8 @@ function search_container_shortcode($atts) {
                     <?php if (ct_is_tour_enabled()) : ?>
                         <li>
                             <a href="#tours" data-toggle="tab">
-                                <img src="<?php echo esc_url(get_template_directory_uri() . '/imgs/eiffel-icon-white.png'); ?>" class="wh-effile" alt="image">
-                                <img src="<?php echo esc_url(get_template_directory_uri() . '/imgs/eiffel-icon-black.png'); ?>" class="bl-effile" alt="image" style="display:none;">
+                                <img src="<?php echo esc_url(get_template_directory_uri() . '/imgs/eiffel-icon-white.png'); ?>" class="wh-effile" width="41" height="58" alt="">
+                                <img src="<?php echo esc_url(get_template_directory_uri() . '/imgs/eiffel-icon-black.png'); ?>" class="bl-effile" width="41" height="58" alt="" style="display:none;">
                                 <?php esc_html_e('Tours', 'citytours') ?>
                             </a>
                         </li>

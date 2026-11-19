@@ -111,7 +111,7 @@ $url = esc_url(add_query_arg($query_args, get_permalink($post_id)));
                         $icon_class = get_tax_meta($term_id, 'ct_tax_icon_class', true);
                         if (empty($icon_class))
                             continue;
-                        echo '<li><button type="button" class="tooltip-1" data-placement="top" title="'.esc_html( $hotel_term->name ).'">';
+                        echo '<li><button type="button" class="tooltip-1" data-placement="top" title="'.esc_attr( $hotel_term->name ).'">';
                         echo '<i class="' . esc_attr( $icon_class ) . '"></i>';
                         echo '</button></li>';
                     endforeach; 

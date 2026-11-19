@@ -58,7 +58,7 @@ if ($page_template != "template-full-width-no-footer.php") :
 
                 <div class="col-md-3 col-sm-3 col-xs-12 block">
                     <p>
-                        <img src="<?php echo esc_url(CT_TEMPLATE_DIRECTORY_URI . '/imgs/logo.png') ?> " width="160" alt="Agazat Masr" data-retina="true" id="logo">
+                        <img src="<?php echo esc_url(CT_TEMPLATE_DIRECTORY_URI . '/imgs/logo.png') ?>" width="160" height="56" alt="Agazat Masr" data-retina="true" id="logo">
                     </p>
 
                     <ul class="social-links">
@@ -123,10 +123,7 @@ if ($page_template != "template-full-width-no-footer.php") :
                     <div id="social_footer" style="padding-bottom:20px;">
 
                         <div class="payment-" style="margin-bottom:15px;">
-                            <!--<img src="<?php echo esc_url(CT_TEMPLATE_DIRECTORY_URI . '/imgs/bank.png') ?> " alt="image" id="bank">-->
-                            <!--<img src="<?php echo esc_url(CT_TEMPLATE_DIRECTORY_URI . '/imgs/mastercard.png') ?> " alt="image">-->
-                            <!--<img src="<?php echo esc_url(CT_TEMPLATE_DIRECTORY_URI . '/imgs/visa.jpg') ?> " alt="image" id="visa">-->
-                            <img src="<?php echo esc_url(CT_TEMPLATE_DIRECTORY_URI . '/imgs/payment-methods-min.png') ?> " alt="image" id="paymentmethods">
+                            <img src="<?php echo esc_url(CT_TEMPLATE_DIRECTORY_URI . '/imgs/payment-methods-min.png') ?>" width="180" height="35" alt="طرق الدفع المتاحة" id="paymentmethods" loading="lazy" decoding="async">
                         </div>
 
                         <?php if (!empty($ct_options['copyright'])) {
@@ -166,12 +163,21 @@ wp_enqueue_script(
 );
 
 
+// Search forms, validation and date pickers. Enqueued (instead of a hard-coded <script>)
+// so it gets a cache-busting version and loads after the libraries it calls.
+wp_enqueue_script(
+    'ct_footer_script',
+    CT_TEMPLATE_DIRECTORY_URI . '/js/footer.min.js',
+    array('jquery', 'ct_script_jquery_validate', 'ct_script_datepicker', 'jquery-auto-complete', 'ct_theme_script'),
+    filemtime(get_template_directory() . '/js/footer.min.js'),
+    true
+);
+
 if (is_tag() || is_category() || is_archive()) {
     wp_enqueue_style('blog', CT_TEMPLATE_DIRECTORY_URI . '/css/blog.css');
 }
 wp_footer();
 ?>
-<script src="<?php echo get_template_directory_uri();?>/js/footer.min.js"></script>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};

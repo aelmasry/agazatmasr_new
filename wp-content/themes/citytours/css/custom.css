@@ -71,3 +71,67 @@ ul.add_info li button {
 ul.add_info li button:focus {
     outline: none;
 }
+
+/* Keep a visible ring for keyboard users only (WCAG 2.4.7); mouse clicks still show none. */
+ul.add_info li button:focus-visible {
+    outline: 2px solid #0b73a8;
+    outline-offset: 2px;
+}
+
+/* AGZ-010: width/height attributes reserve the box; height:auto keeps the
+   aspect ratio when CSS only sets a width (footer logo, Eiffel tab icons). */
+#logo,
+.wh-effile,
+.bl-effile {
+    height: auto;
+}
+
+/* AGZ-025: search button contrast. White on #429e3f was 3.4:1 (fails AA for
+   18px bold); #2e7d32 is 5.1:1. */
+.btn_1.green,
+a.btn_1.green {
+    background: #2e7d32;
+}
+
+/* AGZ-029 / AGZ-034: Smart Slider bullets. The dot stays 10px; spacing gives a
+   24px pitch and ::before a 24x24 hit area. No background-color transition
+   (it is not compositor-friendly). */
+.n2-ss-control-bullet .n2-bullet {
+    position: relative;
+    margin: 0 7px !important;
+    transition: none !important;
+}
+
+.n2-ss-control-bullet .n2-bullet::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 24px;
+    height: 24px;
+    transform: translate(-50%, -50%);
+}
+
+/* AGZ-029: Google Reviews widget dots (5-8px). The plugin sizes them through
+   CSS variables and forces margin/padding to 0, so widen the gap variable and
+   pad the scroller so the 24x24 ::before hit area is not clipped by its
+   overflow-x: scroll. */
+.rpi-dots {
+    --slider-dot-gap: 18px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.rpi-dots .rpi-dot {
+    position: relative;
+}
+
+.rpi-dots .rpi-dot::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 24px;
+    height: 24px;
+    transform: translate(-50%, -50%);
+}
