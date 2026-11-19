@@ -8,3 +8,9 @@ wp-content/plugins/**
 wp-content/themes/**
 
 !wp-content/themes/citytours/
+
+# Optimised hero images shipped with the theme (inc/frontend/hero-slider.php)
+!wp-content/themes/citytours/assets/
+!wp-content/themes/citytours/assets/img/
+!wp-content/themes/citytours/assets/img/hero/
+!wp-content/themes/citytours/assets/img/hero/**

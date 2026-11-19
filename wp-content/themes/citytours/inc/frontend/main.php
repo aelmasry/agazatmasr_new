@@ -6,6 +6,7 @@ if (!defined('ABSPATH'))
 require_once( CT_INC_DIR . '/frontend/hotel/main.php');
 require_once( CT_INC_DIR . '/frontend/tour/main.php');
 require_once( CT_INC_DIR . '/frontend/custom_style.php');
+require_once( CT_INC_DIR . '/frontend/hero-slider.php');
 
 add_action('ct_order_conf_mail_not_sent', 'ct_order_conf_send_mail');
 add_action('ct_order_deposit_payment_not_paid', 'ct_order_deposit_payment_not_paid');
