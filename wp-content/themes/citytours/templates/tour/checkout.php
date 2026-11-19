@@ -226,7 +226,7 @@ if ( ! ct_get_tour_thankyou_page() ) {
 
 						<?php // endif;  ?>
 
-					<button type="submit" class="btn_1 green medium book-now-btn book-now-btn1">تاكيد الحجز</button>
+					<button type="submit" class="btn_1 green medium book-now-btn book-now-btn1">طلب تاكيد الحجز</button>
 				</div>
 
 				<?php do_action( 'tour_checkout_main_after' ); ?>
@@ -289,7 +289,7 @@ if ( ! ct_get_tour_thankyou_page() ) {
 						</tbody>
 					</table>
 
-					<button type="submit" class="btn_full book-now-btn">تاكيد الحجز</button>
+					<button type="submit" class="btn_full book-now-btn">طلب تاكيد الحجز</button>
 
 					<a class="btn_full_outline" href="<?php echo esc_url( get_permalink( $tour_id ) ) ?>">
 						<i class="icon-right"></i> <?php echo esc_html__( 'Modify your search', 'citytours' ) ?>
