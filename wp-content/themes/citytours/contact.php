@@ -28,7 +28,13 @@ global $ct_options;
             $postMessage = esc_textarea($_POST["message"]);
             $phone = sanitize_text_field($_POST["phone"]);
 
-            if ($_POST['captcha'] != $_SESSION['captcha']['code']) {
+            // Strict check: a missing session code (no cookie / expired) must fail, and a
+            // code is single-use. The old loose != let an empty answer pass without a session.
+            $expected_captcha = isset($_SESSION['captcha']['code']) ? strtolower((string) $_SESSION['captcha']['code']) : '';
+            $given_captcha    = isset($_POST['captcha']) ? strtolower(trim(sanitize_text_field(wp_unslash($_POST['captcha'])))) : '';
+            unset($_SESSION['captcha']);
+
+            if ($expected_captcha === '' || !hash_equals($expected_captcha, $given_captcha)) {
                 $check = false;
                 echo '<div class="error_message"><p> كود التحقق غير صحيح </p></div>';
             }
@@ -137,10 +143,20 @@ global $ct_options;
                         <div class="col-md-6">
                             <div class="form-group">
                                 <?php
-                                    @include('simple-php-captcha.php');
-                                    $_SESSION['captcha'] = simple_php_captcha();
-                                ?>
+                                    include_once __DIR__ . '/simple-php-captcha.php';
+                                    try {
+                                        $_SESSION['captcha'] = simple_php_captcha();
+                                        ?>
                                  <img src="<?php echo esc_url(home_url($_SESSION['captcha']['image_src'])); ?>" alt="CAPTCHA code">
+                                        <?php
+                                    } catch (Exception $e) {
+                                        // Image captcha needs GD; fall back to a text code (same as the registration form).
+                                        $_SESSION['captcha'] = array('code' => substr(str_shuffle('ABCDEFGHJKLMNPQRSTUVWXYZ23456789'), 0, 4));
+                                        ?>
+                                 <div class="captcha-text" style="background:#f0f0f0;padding:15px;margin:10px 0;border:1px solid #ddd;border-radius:4px;font-weight:bold;text-align:center;font-size:18px;letter-spacing:3px;" dir="ltr"><?php echo esc_html($_SESSION['captcha']['code']); ?></div>
+                                        <?php
+                                    }
+                                ?>
                                 <input type="text" name="captcha" id="captcha" class="form-control" required>
                             </div>
                         </div>
