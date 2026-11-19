@@ -70,7 +70,7 @@ if (!empty($header_img_scr)) {
                                     <input type="hidden" name="post_type" value="visa">
 
                                     <div class="form-group">
-                                        <label>اسم القارة</label>
+                                        <label for="category">اسم القارة</label>
                                         <?php $categories = get_terms('visa-category', array('hide_empty' => false, 'parent' => 0));
                                         if (!empty($categories)) :
                                         ?>
@@ -90,7 +90,7 @@ if (!empty($header_img_scr)) {
                                         $countries = get_terms('visa-category', array('hide_empty' => false, 'parent' => $category[0]));
                                     ?>
                                     <div class="form-group">
-                                        <label>
+                                        <label for="countries">
                                             <?php esc_html_e('tour search terms', 'citytours') ?>
                                         </label>
                                         
@@ -108,7 +108,7 @@ if (!empty($header_img_scr)) {
                                     </div>
                                     <?php endif; ?>
                                     <div class="form-group">
-                                        <label>للبحـث</label>
+                                        <label for="search_terms">للبحـث</label>
                                         <input type="text" class="form-control" id="search_terms" name="s" placeholder="<?php echo esc_html_e('Type your search terms', 'citytours') ?>" value="<?php echo esc_attr($s) ?>">
                                     </div>
 
@@ -248,7 +248,7 @@ if (!empty($header_img_scr)) {
         ?>
 
         <script type="text/javascript">
-            jQuery.noConflict();
+            // No jQuery.noConflict() here: it reset the global $ that js/functions.min.js relies on.
             jQuery(document).ready(function($) {
 
                 const queryString = window.location.search;

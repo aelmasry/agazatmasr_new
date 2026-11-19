@@ -50,7 +50,7 @@ if (have_posts()) {
 												<input type="hidden" name="post_type" value="visa">
 
 												<div class="form-group">
-													<label>اسم القارة</label>
+													<label for="category">اسم القارة</label>
 													<?php $categories = get_terms('visa-category', array('hide_empty' => false, 'parent' => 0));
 													if (!isset($categories)) :
 													?>
@@ -68,7 +68,7 @@ if (have_posts()) {
 												</div>
 												
 												<div class="form-group">
-													<label>
+													<label for="countries">
 														<?php esc_html_e('tour search terms', 'citytours') ?>
 													</label>
 													<?php if (!empty($category) &&  count($category) >= 1) {
@@ -88,7 +88,7 @@ if (have_posts()) {
 												</div>
 														
 												<div class="form-group">
-													<label>للبحـث</label>
+													<label for="search_terms">للبحـث</label>
 													<input type="text" class="form-control" id="search_terms" name="s" placeholder="<?php echo esc_html_e('Type your search terms', 'citytours') ?>" value="<?php echo esc_attr($s) ?>">
 												</div>
 
