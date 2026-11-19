@@ -1338,10 +1338,12 @@ if (!function_exists('get_districts_byparent'))
             die;
         }
 
-        $country_id = esc_sql($_POST['country_id']);
+        // Security: the id used to be interpolated unquoted into SQL (esc_sql does not protect that
+        // context), which allowed UNION-based SQL injection from anonymous AJAX requests.
+        $country_id = absint($_POST['country_id']);
 
 //		$districts = get_terms('district', array('hide_empty' => 0, 'parent' => $country_id, 'cache_domain' => $country_id));
-        $districts = $wpdb->get_results(" SELECT t.term_id, t.name, tt.taxonomy FROM " . $wpdb->prefix . "terms AS t INNER JOIN " . $wpdb->prefix . "term_taxonomy AS tt ON t.term_id = tt.term_id WHERE tt.taxonomy IN ('district') AND tt.parent = {$country_id} ORDER BY t.term_order ASC ");
+        $districts = $wpdb->get_results($wpdb->prepare(" SELECT t.term_id, t.name, tt.taxonomy FROM " . $wpdb->prefix . "terms AS t INNER JOIN " . $wpdb->prefix . "term_taxonomy AS tt ON t.term_id = tt.term_id WHERE tt.taxonomy IN ('district') AND tt.parent = %d ORDER BY t.term_order ASC ", $country_id));
 
         if (!empty($districts))
         {
@@ -1375,9 +1377,9 @@ if (!function_exists('filterByCountryId'))
             die;
         }
 
-        $country_id = esc_sql($_POST['id']);
+        $country_id = absint($_POST['id']); // was unquoted in SQL: SQL injection (see get_districts_byparent)
 
-        $cities = $wpdb->get_results(" SELECT t.term_id, t.name, tt.taxonomy FROM " . $wpdb->prefix . "terms AS t INNER JOIN " . $wpdb->prefix . "term_taxonomy AS tt ON t.term_id = tt.term_id WHERE tt.taxonomy IN ('state') AND tt.parent = {$country_id} ORDER BY t.term_order ASC ");
+        $cities = $wpdb->get_results($wpdb->prepare(" SELECT t.term_id, t.name, tt.taxonomy FROM " . $wpdb->prefix . "terms AS t INNER JOIN " . $wpdb->prefix . "term_taxonomy AS tt ON t.term_id = tt.term_id WHERE tt.taxonomy IN ('state') AND tt.parent = %d ORDER BY t.term_order ASC ", $country_id));
 
         if (!empty($cities))
         {
@@ -1410,7 +1412,7 @@ if (!function_exists('get_tour_type_cities'))
             die;
         }
 
-        $tour_type = esc_sql($_POST['tour_type']);
+        $tour_type = absint($_POST['tour_type']);
         
         $districts = get_terms('tour_type', array('hide_empty' => 0, 'parent' => $tour_type, 'cache_domain' => $tour_type));
         $districts = ct_unique_tour_types_by_name($districts);
@@ -1437,12 +1439,17 @@ if (!function_exists('ct_airports_search'))
     {
         global $wpdb;
 
-        $term = esc_sql(trim($_POST['term']));
-
-        $term = trim($term);
+        $term = isset($_POST['term']) ? trim(sanitize_text_field(wp_unslash($_POST['term']))) : '';
+        $like = $wpdb->esc_like($term);
+        $results = array();
 
 //        $airports = $wpdb->get_results('SELECT * FROM ' . $wpdb->prefix . 'airports WHERE city REGEXP "' . $term . '" OR airport REGEXP "' . $term . '" order by airport DESC');
-        $airports = $wpdb->get_results('SELECT * FROM ' .$wpdb->prefix.'airports WHERE city like "'.$term.'%" OR airport like "%'.$term.'%" OR normalise like "%'.$term.'%" order by airport DESC');
+        $airports = $wpdb->get_results($wpdb->prepare(
+            'SELECT * FROM ' . $wpdb->prefix . 'airports WHERE city LIKE %s OR airport LIKE %s OR normalise LIKE %s ORDER BY airport DESC',
+            $like . '%',
+            '%' . $like . '%',
+            '%' . $like . '%'
+        ));
 
         foreach ($airports as $airport)
         {
@@ -1475,9 +1482,9 @@ if (!function_exists('get_visa_cities'))
             die;
         }
 
-        $parent = esc_sql($_POST['category']);
+        $parent = absint($_POST['category']);
 
-        $categories = get_terms('visa-category', array('hide_empty' => 0, 'parent' => $parent, 'cache_domain' => $tour_type));
+        $categories = get_terms('visa-category', array('hide_empty' => 0, 'parent' => $parent, 'cache_domain' => $parent));
 
         if (!empty($categories))
         {
