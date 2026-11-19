@@ -179,26 +179,7 @@ wp_footer();
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "o5p6vaxi11");
 </script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-49084486-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-49084486-1');
-</script>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-61H36E3748"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-61H36E3748');
-</script>
-<!-- Google tag (gtag.js) -->
+<?php /* AGZ-006: retired UA-49084486-1 removed; GA4 is loaded via GTM-54SHNR28 only. */ ?>
 </body>
 
 </html>

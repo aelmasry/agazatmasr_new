@@ -38,17 +38,7 @@ global $ct_options;
     <meta name="theme-color" content="#ffffff">
     <meta name="google-site-verification" content="BPAUEH2UUSIzUPTMxkTdK2ErhZwqUqi-X4x9gYsko_E" />
     <?php wp_head(); ?>
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-61H36E3748"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-    
-        // ضبط Google Analytics
-        gtag('config', 'G-61H36E3748');
-    </script>
-    <!-- End Google Analytics 4 -->
+    <?php /* AGZ-006: GA4 (G-61H36E3748) is loaded by the Google tag inside GTM-54SHNR28 (agazat-code plugin). Do not hard-code it here. */ ?>
 </head>
 
 <?php $body_class = ct_get_extra_body_class(); ?>
