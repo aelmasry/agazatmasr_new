@@ -1,8 +1,6 @@
 <?php
-if (!session_id()) {
-    @ob_start();
-    @session_start();
-}
+// Sessions are started lazily, only where needed: see inc/functions/session.php (AGZ-020 / AGZ-035).
+@ob_start();
 global $wpdb;
 //constants
 define('CT_VERSION', '2.5.4');
@@ -42,6 +40,7 @@ if (!defined('RWMB_URL')) {
 
 require_once(CT_INC_DIR . '/admin/main.php');
 require_once(CT_INC_DIR . '/lib/multiple_sidebars.php');
+require_once(CT_INC_DIR . '/functions/session.php');
 require_once(CT_INC_DIR . '/functions/main.php');
 require_once(CT_INC_DIR . '/shortcode/init.php');
 require_once(CT_INC_DIR . '/js_composer/init.php');
@@ -194,14 +193,9 @@ function enqueue_hotel_js()
 
 
 function _action_fw_flash_message_backend_prepare() {
-    // Start output buffering before starting the session
+    // Output buffering only. The session is started on demand by
+    // inc/functions/session.php, not on every request.
     ob_start();
-
-    // Check if session has been started
-    if (!session_id()) {
-        // Start a new session
-        session_start();    
-    }
 }
 add_action( 'plugins_loaded', '_action_fw_flash_message_backend_prepare' );
 function add_noindex_to_all_pagination_pages() {
