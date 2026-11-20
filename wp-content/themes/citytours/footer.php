@@ -134,7 +134,7 @@ if ($page_template != "template-full-width-no-footer.php") :
                                 $copyright = preg_replace('/(?<!\d)20\d{2}(?!\d)/', $year, $copyright, 1);
                                 echo esc_html($copyright) . ' - ';
                             } ?>
-                            <span dir="ltr">Powered by <a style="text-decoration: none;" href="https://alisalem.me/" target="_blank" rel="noopener noreferrer">Ali Salem</a></span>
+                            <span dir="ltr">Developed by <a style="text-decoration: none;" href="https://alisalem.me/" target="_blank" rel="noopener noreferrer">Ali Salem</a></span>
                         </div>
                     </div>
                 </div>

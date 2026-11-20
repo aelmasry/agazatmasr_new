@@ -52,6 +52,7 @@ if (have_posts()) {
                             $active_class = '';
                         endif;
                         ?>
+                        <?php if (apply_filters('ct_enable_flights_search', false)) : // Flights tab disabled; add_filter('ct_enable_flights_search', '__return_true') to restore. ?>
                         <li>
                        
                         <!-- <a href="#flights" data-toggle="tab"> -->    
@@ -61,6 +62,7 @@ if (have_posts()) {
                             </a>
                         </li>
                         <?php $active_class = ''; ?>
+                        <?php endif; ?>
                     </ul>
 
                     <?php $active_class = 'active'; ?>
@@ -74,7 +76,9 @@ if (have_posts()) {
                             include_once 'home_tours_search_form.php';
                             $active_class = '';
                         endif;
+                        if (apply_filters('ct_enable_flights_search', false)) :
                             include_once 'home_flights_search_form.php';
+                        endif;
                         ?>
                         <!-- end of container -->
                     </div>

@@ -135,3 +135,55 @@ a.btn_1.green {
     height: 24px;
     transform: translate(-50%, -50%);
 }
+/* Header navigation (desktop): one flex row. Logo on the right, menu + search pushed to
+   the far left (RTL), with even spacing so a short menu doesn't look bunched next to the
+   logo with an empty bar beside it. Mobile (<992px) keeps the hamburger + slide-in panel. */
+@media only screen and (min-width: 992px) {
+    header .header-links {
+        display: flex;
+        align-items: center;
+    }
+
+    header .header-links::before,
+    header .header-links::after {
+        display: none; /* Bootstrap clearfix pseudo-elements would become flex items */
+    }
+
+    header .header-links > .mobile-block {
+        float: none;
+    }
+
+    header .header-links > nav {
+        display: flex;
+        flex: 1 1 auto;
+        align-items: center;
+        justify-content: flex-end; /* RTL: end = left edge */
+    }
+
+    header .main-menu > ul {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    header .main-menu > ul > li > a {
+        margin: 0;
+        padding: 0 16px 2px;
+        background: transparent;
+    }
+
+    header .main-menu > ul > li > a::before {
+        left: 16px;
+        right: 16px; /* underline matches the text, not the padded hit area */
+    }
+
+    /* style.css pins this absolutely (left:15px) and menu.css offsets it with a negative
+       margin; in the flex row it becomes a normal item after the menu. */
+    header .header-links ul#top_tools {
+        position: static;
+        display: flex;
+        align-items: center;
+        flex: 0 0 auto;
+        margin: 0 24px 0 0; /* gap between the last menu item and the search icon */
+    }
+}

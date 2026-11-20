@@ -1357,6 +1357,7 @@ if (!class_exists('CTShortcodes')) :
                                     $active_class = '';
                                 endif;
                                 ?>
+                                <?php if (apply_filters('ct_enable_flights_search', false)) : // Flights tab disabled; add_filter('ct_enable_flights_search', '__return_true') to restore. ?>
                                 <li>
                                     <a href="https://tourico.amadeusonlinesuite.com/flights?lc=AR" target="_blank">
                                         <span class="fa icon-flight"></span>
@@ -1364,6 +1365,7 @@ if (!class_exists('CTShortcodes')) :
                                     </a>
                                 </li>
                                 <?php $active_class = ''; ?>
+                                <?php endif; ?>
                             </ul>
 
                             <?php $active_class = 'active'; ?>
@@ -1377,7 +1379,9 @@ if (!class_exists('CTShortcodes')) :
                                     include_once 'home_tours_search_form.php';
                                     $active_class = '';
                                 endif;
+                                if (apply_filters('ct_enable_flights_search', false)) :
                                     include_once 'home_flights_search_form.php';
+                                endif;
                                 ?>
                             </div>
                         </div>

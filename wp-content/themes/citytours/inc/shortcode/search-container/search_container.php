@@ -37,12 +37,14 @@ function search_container_shortcode($atts) {
                         <?php $active_class = ''; ?>
                     <?php endif; ?>
                     
+                    <?php if (apply_filters('ct_enable_flights_search', false)) : // Flights tab disabled; add_filter('ct_enable_flights_search', '__return_true') to restore. ?>
                     <li>
                         <a href="https://tourico.amadeusonlinesuite.com/flights?lc=AR" target="_blank">
                             <span class="fa icon-flight"></span>
                             <?php esc_html_e('flights', 'citytours') ?>
                         </a>
                     </li>
+                    <?php endif; ?>
                 </ul>
 
                 <?php $active_class = 'active'; ?>
@@ -56,7 +58,9 @@ function search_container_shortcode($atts) {
                         include_once 'home_tours_search_form.php';
                         $active_class = '';
                     endif;
-                    include_once 'home_flights_search_form.php';
+                    if (apply_filters('ct_enable_flights_search', false)) :
+                        include_once 'home_flights_search_form.php';
+                    endif;
                     ?>
                 </div>
             </div>
