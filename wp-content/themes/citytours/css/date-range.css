@@ -1,0 +1,48 @@
+/* Selected period on paired date pickers (see js/date-range.js). */
+.datepicker.ct-range-picker table tr td.day.in-range,
+.datepicker.ct-range-picker table tr td.day.in-range:hover {
+    background: #fde4e9;
+    border-color: #f6c6d0;
+    color: #333;
+    border-radius: 0;
+}
+
+.datepicker.ct-range-picker table tr td.day.range-preview,
+.datepicker.ct-range-picker table tr td.day.range-preview:hover {
+    background: #fef2f4;
+    border-style: dashed;
+}
+
+.datepicker.ct-range-picker table tr td.day.range-start,
+.datepicker.ct-range-picker table tr td.day.range-start:hover,
+.datepicker.ct-range-picker table tr td.day.range-end,
+.datepicker.ct-range-picker table tr td.day.range-end:hover {
+    background: #333;
+    border-color: #333;
+    color: #fff;
+    text-shadow: none;
+}
+
+.datepicker.ct-range-picker table tr td.day.range-end.range-preview {
+    background: #666;
+    border-color: #666;
+}
+
+/* Rounded outer corners (the day grid is always laid out left-to-right). */
+.datepicker.ct-range-picker table tr td.day.range-start {
+    border-radius: 6px 0 0 6px;
+}
+.datepicker.ct-range-picker table tr td.day.range-end {
+    border-radius: 0 6px 6px 0;
+}
+
+.datepicker.ct-range-picker .ct-range-summary {
+    padding: 6px 4px 2px;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    direction: rtl;
+    color: #333;
+    border-top: 1px solid #eee;
+    margin-top: 4px;
+}

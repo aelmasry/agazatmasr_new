@@ -126,14 +126,16 @@ if ($page_template != "template-full-width-no-footer.php") :
                             <img src="<?php echo esc_url(CT_TEMPLATE_DIRECTORY_URI . '/imgs/payment-methods-min.png') ?>" width="180" height="35" alt="طرق الدفع المتاحة" id="paymentmethods" loading="lazy" decoding="async">
                         </div>
 
-                        <?php if (!empty($ct_options['copyright'])) {
-                            $copyright = (string) $ct_options['copyright'];
-                            $year = date_i18n('Y');
-                            $copyright = str_replace('{year}', $year, $copyright);
-                            $copyright = preg_replace('/(?<!\d)20\d{2}(?!\d)/', $year, $copyright, 1);
-                            ?>
-                            <div style="padding-bottom:20px; width: 100% !important; text-align: center !important;"><?php echo esc_html($copyright); ?></div>
-                        <?php } ?>
+                        <div style="padding-bottom:20px; width: 100% !important; text-align: center !important;">
+                            <?php if (!empty($ct_options['copyright'])) {
+                                $copyright = (string) $ct_options['copyright'];
+                                $year = date_i18n('Y');
+                                $copyright = str_replace('{year}', $year, $copyright);
+                                $copyright = preg_replace('/(?<!\d)20\d{2}(?!\d)/', $year, $copyright, 1);
+                                echo esc_html($copyright) . ' - ';
+                            } ?>
+                            <span dir="ltr">Powered by <a style="text-decoration: none;" href="https://alisalem.me/" target="_blank" rel="noopener noreferrer">Ali Salem</a></span>
+                        </div>
                     </div>
                 </div>
             </div><!-- End row -->

@@ -204,33 +204,12 @@
 
         });
 
-        var $homeIn = $('#hotel-check-in');
-        var $homeOut = $('#hotel-check-out');
-        if ($homeIn.length && $.fn.datepicker) {
-            function homeNextDay(date) {
-                var next = new Date(date.getTime());
-                next.setDate(next.getDate() + 1);
-                return next;
-            }
-
-            $homeIn.datepicker({
+        // Check-in/check-out pairing and range highlighting live in date-range.js.
+        var $homeDates = $('#hotel-check-in, #hotel-check-out');
+        if ($homeDates.length && $.fn.datepicker) {
+            $homeDates.datepicker({
                 format: 'yyyy-mm-dd',
                 startDate: 'today',
-                language: 'ar',
-                autoclose: true,
-                todayHighlight: true
-            }).on('changeDate', function (event) {
-                var earliest = homeNextDay(event.date);
-                $homeOut.datepicker('setStartDate', earliest);
-                var current = $homeOut.datepicker('getDate');
-                if (current && current < earliest) {
-                    $homeOut.datepicker('clearDates');
-                }
-            });
-
-            $homeOut.datepicker({
-                format: 'yyyy-mm-dd',
-                startDate: '+1d',
                 language: 'ar',
                 autoclose: true,
                 todayHighlight: true

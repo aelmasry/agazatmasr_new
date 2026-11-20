@@ -33,8 +33,22 @@ if (have_posts()) {
 
         $is_fixed_sidebar = get_post_meta($post_id, '_hotel_fixed_sidebar', true);
 
-        $date_from = (!empty($_GET['date_from']) ) ? ct_get_phptime($_GET['date_from']) : date("Y-m-d", strtotime('+1 day'));
-        $date_to = (!empty($_GET['date_to']) ) ? ct_get_phptime($_GET['date_to']) : date("Y-m-d", strtotime($date_from . ' + 1day'));
+        // Unparseable or past dates (stale links, back button) fall back to tomorrow, and
+        // check-out must follow check-in; otherwise the datepicker drops the date and the
+        // booking form ends up with an empty / NaN date.
+        $today_ts = strtotime(current_time('Y-m-d'));
+        $from_ts = !empty($_GET['date_from']) ? ct_strtotime(sanitize_text_field(wp_unslash($_GET['date_from']))) : false;
+        $to_ts = !empty($_GET['date_to']) ? ct_strtotime(sanitize_text_field(wp_unslash($_GET['date_to']))) : false;
+        $from_valid = $from_ts && $from_ts >= $today_ts;
+        if (!$from_valid) {
+            $from_ts = strtotime('+1 day', $today_ts);
+        }
+        $to_valid = $from_valid && $to_ts && $to_ts > $from_ts;
+        if (!$to_valid) {
+            $to_ts = strtotime('+1 day', $from_ts);
+        }
+        $date_from = $from_valid ? date(ct_get_date_format('php'), $from_ts) : date('Y-m-d', $from_ts);
+        $date_to = $to_valid ? date(ct_get_date_format('php'), $to_ts) : date('Y-m-d', $to_ts);
         // var_dump($date_from);
 //        $date_to = (!empty($_GET['date_to']) ) ? ct_get_phptime($_GET['date_to']) : date("Y-m-d", strtotime($date_from . ' +' . $minimum_stay . 'day'));
 
@@ -676,10 +690,6 @@ if (have_posts()) {
                     cursor: not-allowed;
                     background: transparent;
                 }
-                .datepicker table tr td.in-stay {
-                    background: #d9ebff;
-                    color: #063d7d;
-                }
             </style>
             <?php ct_google_maps_script(array('libraries' => 'marker', 'callback' => 'initMap')); ?>
             <script type="text/javascript">
@@ -746,9 +756,14 @@ if (have_posts()) {
                         return hotelYmd(date);
                     }
 
+                    function validDate(date) {
+                        return date instanceof Date && !isNaN(date.getTime());
+                    }
+
                     function pickerYmd($input) {
+                        // An empty picker returns an Invalid Date (truthy), not null.
                         var picked = $input.data('datepicker') ? $input.datepicker('getDate') : null;
-                        if (picked) {
+                        if (validDate(picked)) {
                             return hotelYmd(picked);
                         }
                         var value = $input.val();
@@ -780,15 +795,6 @@ if (have_posts()) {
                         return night;
                     }
 
-                    function stayClass(ymd) {
-                        var fromYmd = pickerYmd($checkIn);
-                        var toYmd = pickerYmd($checkOut);
-                        if (fromYmd && toYmd && ymd > fromYmd && ymd < toYmd) {
-                            return 'in-stay';
-                        }
-                        return '';
-                    }
-
                     $checkIn.attr('type', 'text').datepicker({
                         startDate: "today",
                         language: lang,
@@ -802,7 +808,7 @@ if (have_posts()) {
                             if (limit && addDaysYmd(ymd, hotelMinNights) > limit) {
                                 return {enabled: false};
                             }
-                            return {enabled: true, classes: stayClass(ymd)};
+                            return {enabled: true};
                         }
                     });
                     $checkOut.attr('type', 'text').datepicker({
@@ -823,7 +829,7 @@ if (have_posts()) {
                             if (limit && ymd > limit) {
                                 return {enabled: false};
                             }
-                            return {enabled: true, classes: stayClass(ymd)};
+                            return {enabled: true};
                         }
                     });
 
@@ -841,6 +847,8 @@ if (have_posts()) {
                     function syncCheckout() {
                         var fromYmd = pickerYmd($checkIn);
                         if (!fromYmd) {
+                            // No check-in: check-out cannot be valid, so leave it empty.
+                            $checkOut.val('').datepicker('update');
                             return;
                         }
                         var earliest = addDaysYmd(fromYmd, hotelMinNights);
@@ -859,6 +867,15 @@ if (have_posts()) {
                     }
 
                     syncCheckout();
+                    // Range highlight + nights summary; availability rules above stay in charge.
+                    if (window.CTDateRange) {
+                        CTDateRange.attach($checkIn, $checkOut, {
+                            constrain: false,
+                            autoOpenEnd: false,
+                            minNights: hotelMinNights,
+                            nightsLabel: CTDateRange.nightsText
+                        });
+                    }
                     initialFrom = $checkIn.val();
                     initialTo = $checkOut.val();
                     setTimeout(function () {
@@ -911,7 +928,7 @@ if (have_posts()) {
                     function hotelDateMs($input) {
                         if ($input.data('datepicker')) {
                             var picked = $input.datepicker('getDate');
-                            if (picked) {
+                            if (validDate(picked)) {
                                 return picked.getTime();
                             }
                         }

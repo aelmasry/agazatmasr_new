@@ -918,6 +918,7 @@ if (!function_exists('ct_enqueue_scripts'))
         }
 
         wp_enqueue_style('ct_style_date_time_picker');
+        wp_enqueue_style('ct_style_date_range', CT_TEMPLATE_DIRECTORY_URI . '/css/date-range.css', array('ct_style_date_time_picker'), filemtime(get_template_directory() . '/css/date-range.css'));
 //        wp_enqueue_style('ct_style_timeline');
         if ($needs['switch'])
         {
@@ -1044,6 +1045,8 @@ if (!function_exists('ct_enqueue_scripts'))
         wp_enqueue_script('ct_script_common');
         wp_enqueue_script('ct_script_jquery_validate');
         wp_enqueue_script('ct_script_datepicker');
+        // Check-in/check-out range highlighting for every paired date form.
+        wp_enqueue_script('ct_script_date_range', CT_TEMPLATE_DIRECTORY_URI . '/js/date-range' . $suffix . '.js', array('jquery', 'ct_script_datepicker'), filemtime(get_template_directory() . '/js/date-range' . $suffix . '.js'), true);
 
         if ($current_locale != 'en' && $file_exists)
         {
